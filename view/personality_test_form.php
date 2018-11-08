@@ -14,6 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle. If not, see <http://www.gnu.org/licenses/>.
 require_once ("{$CFG->libdir}/formslib.php");
+use block_task_oriented_groups\PersonalityQuestionnaire;
 
 /**
  * Form to fill in the personality test.
@@ -27,16 +28,26 @@ class personality_test_form extends moodleform {
 
     function definition() {
         $mform = & $this->_form;
-        $radioarray = array();
-        $radioarray[] = $mform->createElement('radio', 'yesno', '',
-                get_string('yes', 'block_task_oriented_groups'), 1, '');
-        $radioarray[] = $mform->createElement('radio', 'yesno', '',
-                get_string('no', 'block_task_oriented_groups'), 0, '');
-        $mform->addGroup($radioarray, 'radioar',
-                get_string('question1', 'block_task_oriented_groups'), array(' '
-                ), false);
-        $mform->addGroup($radioarray, 'radioar2',
-                get_string('question2', 'block_task_oriented_groups'), array(' '
-                ), false);
+
+        for ($i = 0; $i < PersonalityQuestionnaire::countQuestions(); $i++) {
+
+            $answers = array();
+            for ($j = 0; $j < PersonalityQuestionnaire::MAX_QUESTION_ANSWERS; $j++) {
+
+                $answers[] = $mform->createElement('radio', 'answersOfPersonalityQuestion_' . $i, '',
+                        PersonalityQuestionnaire::getAnswerQuestionTextOf($i, $j),
+                        PersonalityQuestionnaire::getAnswerQuestionValuetOf($i, $j), '');
+            }
+            $questionId = 'personalityQuestion_' . $i;
+            $mform->addGroup($answers, $questionId, PersonalityQuestionnaire::getQuestionTextOf($i),
+                    array(' '
+                    ), false);
+            if (PersonalityQuestionnaire::hasQuestionHelp($i)) {
+
+                $mform->addHelpButton($questionId,
+                        PersonalityQuestionnaire::getQuestionHelpIdentifier($i),
+                        'block_task_oriented_groups');
+            }
+        }
     }
 }
