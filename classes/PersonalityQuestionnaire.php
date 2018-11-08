@@ -56,13 +56,16 @@ class PersonalityQuestionnaire {
      */
     const QUESTION_FACTORS = [self::JUDGMENT_FACTOR, self::ATTITUDE_FACTOR, self::PERCEPTION_FACTOR,
         self::EXTROVERT_FACTOR, self::JUDGMENT_FACTOR, self::ATTITUDE_FACTOR, self::ATTITUDE_FACTOR,
-        self::PERCEPTION_FACTOR, self::EXTROVERT_FACTOR, self::JUDGMENT_FACTOR, self::EXTROVERT
+        self::PERCEPTION_FACTOR, self::EXTROVERT_FACTOR, self::JUDGMENT_FACTOR,
+        self::EXTROVERT_FACTOR, self::JUDGMENT_FACTOR, self::PERCEPTION_FACTOR,
+        self::EXTROVERT_FACTOR, self::EXTROVERT_FACTOR, self::PERCEPTION_FACTOR,
+        self::JUDGMENT_FACTOR, self::PERCEPTION_FACTOR, self::ATTITUDE_FACTOR, self::ATTITUDE_FACTOR
     ];
 
     /**
      * The index of the questions that have help.
      */
-    const QUESTIONS_WITH_HELP = [0, 1, 4, 6, 7, 8, 9
+    const QUESTIONS_WITH_HELP = [0, 1, 4, 6, 7, 8, 9, 11, 12, 15, 16, 17, 18, 19
     ];
 
     /**

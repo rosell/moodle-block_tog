@@ -98,8 +98,54 @@ $string['personality_question_10_answer_0'] = 'Content';
 $string['personality_question_10_answer_1'] = 'Expressive';
 $string['personality_question_10_answer_2'] = 'Indifferent';
 
-$string['personality_question_11'] = '';
-$string['personality_question_11_help'] = '';
-$string['personality_question_11_answer_0'] = '';
-$string['personality_question_11_answer_1'] = '';
-$string['personality_question_11_answer_2'] = '';
+$string['personality_question_11'] = 'You are more';
+$string['personality_question_11_help'] = 'Example: I say things as they are (honest) or I prefer to omit words that may hurt.';
+$string['personality_question_11_answer_0'] = 'Diplomatic';
+$string['personality_question_11_answer_1'] = 'Honest';
+$string['personality_question_11_answer_2'] = 'Indifferent';
+
+$string['personality_question_12'] = 'You prefer';
+$string['personality_question_12_help'] = 'Example: You prefer to make maps (the concrete) or solve mathematical problems (the abstract).';
+$string['personality_question_12_answer_0'] = 'The specific';
+$string['personality_question_12_answer_1'] = 'The abstract';
+$string['personality_question_12_answer_2'] = 'Indifferent';
+
+$string['personality_question_13'] = 'You are more';
+$string['personality_question_13_answer_0'] = 'Silent';
+$string['personality_question_13_answer_1'] = 'Talkative';
+$string['personality_question_13_answer_2'] = 'Indifferent';
+
+$string['personality_question_14'] = 'You learn better';
+$string['personality_question_14_answer_0'] = 'Reading';
+$string['personality_question_14_answer_1'] = 'Listening';
+$string['personality_question_14_answer_2'] = 'Indifferent';
+
+$string['personality_question_15'] = 'You are more';
+$string['personality_question_15_help'] = 'Example: You like to think about why airplanes fly (conceptual) or make a model of an airplane (practical)';
+$string['personality_question_15_answer_0'] = 'Practical';
+$string['personality_question_15_answer_1'] = 'Conceptual';
+$string['personality_question_15_answer_2'] = 'Indifferent';
+
+$string['personality_question_16'] = 'You prefer';
+$string['personality_question_16_help'] = 'Example: If your friend arrives 20 minutes late, you want to know why (empathy) or you get angry regardless of the reason (logic).';
+$string['personality_question_16_answer_0'] = 'Empathy';
+$string['personality_question_16_answer_1'] = 'Logic';
+$string['personality_question_16_answer_2'] = 'Indifferent';
+
+$string['personality_question_17'] = 'You prefer';
+$string['personality_question_17_help'] = 'Example: When there is a robbery I prefer to investigate the facts or imagine what could have happened.';
+$string['personality_question_17_answer_0'] = 'Investigate';
+$string['personality_question_17_answer_1'] = 'Speculate';
+$string['personality_question_17_answer_2'] = 'Indifferent';
+
+$string['personality_question_18'] = 'You are more';
+$string['personality_question_18_help'] = 'Example: When I prepare to go to sleep, I always follow the same order (wash teeth, put on pajamas etc).';
+$string['personality_question_18_answer_0'] = 'Systematic';
+$string['personality_question_18_answer_1'] = 'Informal';
+$string['personality_question_18_answer_2'] = 'Indifferent';
+
+$string['personality_question_19'] = 'You prefer';
+$string['personality_question_19_help'] = 'Example: I like to eat different things (variety) or I prefer to always eat pizza (routine).';
+$string['personality_question_19_answer_0'] = 'Routine';
+$string['personality_question_19_answer_1'] = 'Variety';
+$string['personality_question_19_answer_2'] = 'Indifferent';
