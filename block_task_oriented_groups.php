@@ -14,7 +14,6 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle. If not, see <http://www.gnu.org/licenses/>.
 defined('MOODLE_INTERNAL') || die();
-global $COURSE;
 
 /**
  * Block task_oriented_groups is defined here.
@@ -48,15 +47,16 @@ class block_task_oriented_groups extends block_base {
      * @return stdClass block content info
      */
     public function get_content() {
+        global $CFG, $OUTPUT;
         if (!is_null($this->content)) {
             return $this->content;
         }
         $this->content = new stdClass();
         $this->content->text = 'Text: Hello world';
 
-        $url = new moodle_url('/blocks/task_oriented_groups/view/personality_test.php');
-        $this->content->footer = html_writer::link($url,
-                get_string('fill_personality_test', 'block_task_oriented_groups'));
+        $this->content->footer = $OUTPUT->render_from_template('block_task_oriented_groups/footer',
+                (object) array('wwwroot' => $CFG->wwwroot
+                ));
 
         return $this->content;
     }

@@ -16,7 +16,7 @@
 namespace block_task_oriented_groups;
 
 /**
- * Class that represents teh personality questionnaire.
+ * Class that represents the personality questionnaire.
  *
  * @package block_task_oriented_groups
  * @copyright 2018 UDT-IA, IIIA-CSIC
@@ -63,9 +63,9 @@ class PersonalityQuestionnaire {
     ];
 
     /**
-     * The index of the questions that have help.
+     * The index of the questions that does not have help.
      */
-    const QUESTIONS_WITH_HELP = [0, 1, 4, 6, 7, 8, 9, 11, 12, 15, 16, 17, 18, 19
+    const QUESTIONS_WITHOUT_HELP = [2, 3, 5, 10, 13, 14
     ];
 
     /**
@@ -92,7 +92,7 @@ class PersonalityQuestionnaire {
      * Check if the specified question has help.
      */
     public static function hasQuestionHelp($index) {
-        return array_search($index, self::QUESTIONS_WITH_HELP) !== FALSE;
+        return array_search($index, self::QUESTIONS_WITHOUT_HELP) === FALSE;
     }
 
     /**
@@ -119,7 +119,6 @@ class PersonalityQuestionnaire {
                 return -1;
             case 1:
                 return 1;
-                break;
             default:
                 return 0;
         }
