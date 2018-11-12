@@ -21,12 +21,30 @@
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 require_once ($CFG->libdir . "/externallib.php");
-class local_task_oriented_groups_external extends external_api {
+class block_task_oriented_groups_external extends external_api {
+
+    /**
+     * The function called to get the informatiomn of the parameter to store the answer.
+     */
+    public static function store_answer_parameters() {
+        return new external_function_parameters(array());
+    }
 
     /**
      * The function called to store an answer for a question.
      */
     public static function store_answer() {
-        return '{result:\'OK\'}';
+        $result = array();
+        $result['code'] = 'OK';
+        return $result;
+    }
+
+    /**
+     * The function called to get the informatiomn of the parameter to store the answer.
+     */
+    public static function store_answer_returns() {
+        return new external_single_structure(
+                array('code' => new external_value(PARAM_TEXT, 'Result text')
+                ));
     }
 }

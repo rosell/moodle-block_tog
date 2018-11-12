@@ -23,7 +23,7 @@ define([ 'jquery', 'core/ajax' ], function($, ajax) {
 			$('input:radio').click(function(event) {
 				event.stopPropagation();
 				var promises = ajax.call([ {
-				  methodname : 'local_task_oriented_groups_store_answer',
+				  methodname : 'block_task_oriented_groups_store_answer',
 				  args : {}
 				} ]);
 				promises[0].done(function(response) {
