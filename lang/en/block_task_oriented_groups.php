@@ -37,7 +37,7 @@ $string['personality_question_0_answer_0'] = 'Compassionate';
 $string['personality_question_0_answer_1'] = 'Impartial';
 $string['personality_question_0_answer_2'] = 'It depends on each case';
 
-$string['personality_question_1'] = 'You prefer things:';
+$string['personality_question_1'] = 'You prefer things';
 $string['personality_question_1_help'] = 'Example: I like to plan my day to day or I prefer to improvise.';
 $string['personality_question_1_answer_0'] = 'open-ended';
 $string['personality_question_1_answer_1'] = 'Planned';

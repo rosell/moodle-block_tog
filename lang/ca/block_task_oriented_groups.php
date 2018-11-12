@@ -37,7 +37,7 @@ $string['personality_question_0_answer_0'] = 'Compasius';
 $string['personality_question_0_answer_1'] = 'Imparcials';
 $string['personality_question_0_answer_2'] = 'Depèn del cas';
 
-$string['personality_question_1'] = 'Prefereixes les coses:';
+$string['personality_question_1'] = 'Prefereixes les coses';
 $string['personality_question_1_help'] = 'Exemple: M\'agrada planejar el meu dia a dia o prefereixo improvisar.';
 $string['personality_question_1_answer_0'] = 'Obertes';
 $string['personality_question_1_answer_1'] = 'Planificades';

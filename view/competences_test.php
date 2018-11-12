@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle. If not, see <http://www.gnu.org/licenses/>.
 require_once ('../../../config.php');
-require_once ('competences_test_form.php');
+use block_task_oriented_groups\CompetencesQuestionnaire;
 
 $PAGE->set_pagelayout('standard');
 $PAGE->set_context(context_system::instance());
@@ -23,8 +23,57 @@ $PAGE->set_heading(get_string('competences_test_heading', 'block_task_oriented_g
 $PAGE->set_url($CFG->wwwroot . '/blocks/task_oriented_groups/view/competences_test.php');
 
 require_login();
-$simplehtml = new competences_test_form();
 
 echo $OUTPUT->header();
-$simplehtml->display();
+?>
+<div class="container competences-questions">
+	<?php
+for ($i = 0; $i < CompetencesQuestionnaire::countQuestions(); $i++) {
+    $questionId = 'competencesQuestion_' . $i;
+    ?>
+		<div class="row competences-question<?php
+
+    if ($i % 2 != 0) {
+        echo ' bg-light';
+    }
+    ?>">
+		<div class="container">
+			<div class="row">
+				<h4><?=CompetencesQuestionnaire::getQuestionTextOf($i)?><?php
+
+    if (CompetencesQuestionnaire::hasQuestionHelp($i)) {
+        echo '&nbsp;&nbsp;';
+        echo $OUTPUT->help_icon(CompetencesQuestionnaire::getQuestionHelpIdentifier($i),
+                'block_task_oriented_groups', '');
+    }
+    ?></h4>
+			</div>
+			<div class="row justify-content-center">
+		<?php
+    for ($j = 0; $j < CompetencesQuestionnaire::MAX_QUESTION_ANSWERS; $j++) {
+        ?>
+			<div class="form-check-inline col-md">
+					<input
+						class="form-check-input"
+						type="radio"
+						id="answers_<?=$j?>_for_competences_question_<?=$i?>"
+						name="<?=$questionId?>"
+						value="<?=CompetencesQuestionnaire::getAnswerQuestionValuetOf($j)?>"
+					><label
+						class="form-check-label"
+						for="answers_<?=$j?>_for_competences_question_<?=$i?>"
+					><?=CompetencesQuestionnaire::getAnswerQuestionTextOf($j)?></label>
+				</div>
+		<?php
+    }
+    ?>
+			</div>
+		</div>
+	</div>
+		<?php
+}
+?>
+
+</div>
+<?php
 echo $OUTPUT->footer();
