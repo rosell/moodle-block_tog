@@ -9,6 +9,21 @@ This plugin is written by UDT-IA, as part of the IIIA-CSIC.
 
  To do
  
+## Development
+
+You have to intall the **node.js** and its tool **npm**. After that you need to intall the dependencies and the the grunt command. For this go to the directory where you have the source code of this block and run:
+
+~~~
+npm install
+npm install -g grunt-cli
+~~~
+
+After that you can use grunt to compile the javascript files.
+
+~~~
+grunt amd
+~~~
+ 
 ## License ##
 
 2018 UDT-IA, IIIA-CSIC

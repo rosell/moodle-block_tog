@@ -16,6 +16,7 @@ do
 done
 sed -i '' -e "s/version = $OLD_VERSION/version = $VERSION/g" version.php
 
+grunt amd
 PLUGIN_FILE="block_task_oriented_groups_moodle35_$VERSION.zip"
 DOWNLOAD_DIR="$HOME/Downloads"
 if [ -d "$DOWNLOAD_DIR" ]; then
@@ -28,9 +29,14 @@ PLUGIN_FILE="$PLUGIN_DIR/$PLUGIN_FILE"
 
 TMP_DIR=$(mktemp -d)
 mkdir $TMP_DIR/moodle-block_task_oriented_groups
-shopt -s extglob 
-cp -r !(*sh) $TMP_DIR/moodle-block_task_oriented_groups
-shopt -u extglob
+cp *.md $TMP_DIR/moodle-block_task_oriented_groups/.
+cp *.php $TMP_DIR/moodle-block_task_oriented_groups/.
+cp -r amd $TMP_DIR/moodle-block_task_oriented_groups/.
+cp -r classes $TMP_DIR/moodle-block_task_oriented_groups/.
+cp -r db $TMP_DIR/moodle-block_task_oriented_groups/.
+cp -r lang $TMP_DIR/moodle-block_task_oriented_groups/.
+cp -r templates $TMP_DIR/moodle-block_task_oriented_groups/.
+cp -r view $TMP_DIR/moodle-block_task_oriented_groups/.
 pushd $TMP_DIR >/dev/null
 zip -r $PLUGIN_FILE  moodle-block_task_oriented_groups >/dev/null
 popd >/dev/null

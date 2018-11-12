@@ -76,4 +76,5 @@ for ($i = 0; $i < PersonalityQuestionnaire::countQuestions(); $i++) {
 
 </div>
 <?php
+$PAGE->requires->js_call_amd('block_task_oriented_groups/personality_test', 'initialise');
 echo $OUTPUT->footer();

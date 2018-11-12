@@ -1,6 +1,3 @@
-<?php
-// This file is part of Moodle - http://moodle.org/
-//
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
@@ -13,18 +10,28 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle. If not, see <http://www.gnu.org/licenses/>.
-
 /**
- * Plugin version and other meta-data are defined here.
- *
+ * Javascript components used to manage the personality quesions answers.
+ * 
  * @package block_task_oriented_groups
  * @copyright 2018 UDT-IA, IIIA-CSIC
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-defined('MOODLE_INTERNAL') || die();
-
-$plugin->component = 'block_task_oriented_groups';
-$plugin->release = '0.1.1';
-$plugin->version = 2018111207;
-$plugin->requires = 2018051700;
-$plugin->maturity = MATURITY_ALPHA;
+define([ 'jquery', 'core/ajax' ], function($, ajax) {
+	return {
+		initialise : function($params) {
+			$('input:radio').click(function(event) {
+				event.stopPropagation();
+				var promises = ajax.call([ {
+				  methodname : 'local_task_oriented_groups_store_answer',
+				  args : {}
+				} ]);
+				promises[0].done(function(response) {
+					console.log('success' + response);
+				}).fail(function(ex) {
+					console.log('fail' + ex);
+				});
+			});
+		}
+	};
+});
