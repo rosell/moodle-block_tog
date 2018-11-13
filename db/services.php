@@ -20,10 +20,18 @@
  */
 // We defined the web service functions to install.
 $functions = array(
-    'block_task_oriented_groups_store_answer' => array(
-        'classname' => 'block_task_oriented_groups_external', 'methodname' => 'store_answer',
+    'block_task_oriented_groups_store_personality_answer' => array(
+        'classname' => 'block_task_oriented_groups_external',
+        'methodname' => 'store_personality_answer',
         'classpath' => 'blocks/task_oriented_groups/externallib.php',
         'description' => 'Allow to store the user answer to a question of the personality test',
+        'type' => 'write', 'ajax' => true
+    ),
+    'block_task_oriented_groups_store_competences_answer' => array(
+        'classname' => 'block_task_oriented_groups_external',
+        'methodname' => 'store_competences_answer',
+        'classpath' => 'blocks/task_oriented_groups/externallib.php',
+        'description' => 'Allow to store the user answer to a question of the competences test',
         'type' => 'write', 'ajax' => true
     )
 );
@@ -31,7 +39,8 @@ $functions = array(
 // administrator.
 $services = array(
     'task_oriented_groups' => array(
-        'functions' => array('block_task_oriented_groups_store_answer'
+        'functions' => array('block_task_oriented_groups_store_personality_answer',
+            'block_task_oriented_groups_store_competences_answer'
         ), 'restrictedusers' => 0, 'enabled' => 1
     )
 );

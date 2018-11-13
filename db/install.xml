@@ -2,7 +2,7 @@
 <XMLDB
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	PATH="blocks/task_oriented_groups/db"
-	VERSION="20181112"
+	VERSION="20181113"
 	COMMENT="XMLDB file for Moodle blocks/task_oriented_groups"
 	xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd"
 >
@@ -10,6 +10,52 @@
 		<TABLE
 			NAME="btog_personality_answers"
 			COMMENT="Contains the answers to the personality test."
+		>
+			<FIELDS>
+				<FIELD
+					NAME="id"
+					TYPE="int"
+					LENGTH="10"
+					NOTNULL="true"
+					SEQUENCE="true"
+					NEXT="userid" />
+				<FIELD
+					NAME="userid"
+					TYPE="int"
+					LENGTH="10"
+					NOTNULL="true"
+					UNSIGNED="true"
+					SEQUENCE="false"
+					PREVIOUS="id"
+					NEXT="question" />
+				<FIELD
+					NAME="question"
+					TYPE="int"
+					LENGTH="2"
+					NOTNULL="true"
+					UNSIGNED="true"
+					SEQUENCE="false"
+					PREVIOUS="userid"
+					NEXT="answer" />
+				<FIELD
+					NAME="answer"
+					TYPE="int"
+					LENGTH="1"
+					NOTNULL="true"
+					UNSIGNED="true"
+					SEQUENCE="false"
+					PREVIOUS="question" />
+			</FIELDS>
+			<KEYS>
+				<KEY
+					NAME="primary"
+					TYPE="primary"
+					FIELDS="id" />
+			</KEYS>
+		</TABLE>
+		<TABLE
+			NAME="btog_competences_answers"
+			COMMENT="Contains the answers to the competences test."
 		>
 			<FIELDS>
 				<FIELD

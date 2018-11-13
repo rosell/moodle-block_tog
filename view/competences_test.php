@@ -23,7 +23,8 @@ $PAGE->set_heading(get_string('competences_test_heading', 'block_task_oriented_g
 $PAGE->set_url($CFG->wwwroot . '/blocks/task_oriented_groups/view/competences_test.php');
 
 require_login();
-
+$answers = $DB->get_records('btog_competences_answers', array('userid' => $USER->id
+), 'question', 'question,answer');
 echo $OUTPUT->header();
 ?>
 <div class="container competences-questions">
@@ -50,6 +51,15 @@ for ($i = 0; $i < CompetencesQuestionnaire::countQuestions(); $i++) {
 			</div>
 			<div class="row justify-content-center">
 		<?php
+    $selected = -1;
+    foreach ($answers as $k => $answer) {
+        if ($answer->question == $i) {
+            $selected = $answer->answer;
+            unset($answers[$k]);
+            break;
+        }
+    }
+
     for ($j = 0; $j < CompetencesQuestionnaire::MAX_QUESTION_ANSWERS; $j++) {
         ?>
 			<div class="form-check-inline col-md">
@@ -59,6 +69,12 @@ for ($i = 0; $i < CompetencesQuestionnaire::countQuestions(); $i++) {
 						id="answer_<?=$j?>_for_competences_question_<?=$i?>"
 						name="<?=$questionId?>"
 						value="<?=CompetencesQuestionnaire::getAnswerQuestionValuetOf($j)?>"
+						<?php
+
+        if ($selected == $j) {
+            echo 'checked="checked"';
+        }
+        ?>
 					><label
 						class="form-check-label"
 						for="answer_<?=$j?>_for_competences_question_<?=$i?>"
@@ -76,4 +92,5 @@ for ($i = 0; $i < CompetencesQuestionnaire::countQuestions(); $i++) {
 
 </div>
 <?php
+$PAGE->requires->js_call_amd('block_task_oriented_groups/competences_test', 'initialise');
 echo $OUTPUT->footer();

@@ -11,7 +11,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle. If not, see <http://www.gnu.org/licenses/>.
 /**
- * Javascript components used to manage the personality quesions answers.
+ * Javascript components used to manage the competences quesions answers.
  * 
  * @package block_task_oriented_groups
  * @copyright 2018 UDT-IA, IIIA-CSIC
@@ -29,7 +29,7 @@ define([ 'jquery', 'core/ajax', 'core/str', 'core/notification' ], function($, a
 				start = inputId.lastIndexOf('_') + 1;
 				var question = inputId.substring(start);
 				var promises = ajax.call([ {
-				  methodname : 'block_task_oriented_groups_store_personality_answer',
+				  methodname : 'block_task_oriented_groups_store_competences_answer',
 				  args : {
 				    'answer' : answer,
 				    'question' : question
@@ -40,13 +40,13 @@ define([ 'jquery', 'core/ajax', 'core/str', 'core/notification' ], function($, a
 					if (!response || (typeof response === 'object' && response.success !== true)) {
 
 						str.get_strings([ {
-						  key : 'store_personality_answer_error_title',
+						  key : 'store_competences_answer_error_title',
 						  component : 'block_task_oriented_groups'
 						}, {
-						  key : 'store_personality_answer_error_text',
+						  key : 'store_competences_answer_error_text',
 						  component : 'block_task_oriented_groups'
 						}, {
-						  key : 'store_personality_answer_error_continue',
+						  key : 'store_competences_answer_error_continue',
 						  component : 'block_task_oriented_groups'
 						} ]).done(function(s) {
 							notification.alert(s[0], s[1], s[2]);
