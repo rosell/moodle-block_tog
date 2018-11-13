@@ -17,20 +17,44 @@
  * @copyright 2018 UDT-IA, IIIA-CSIC
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-define([ 'jquery', 'core/ajax' ], function($, ajax) {
+define([ 'jquery', 'core/ajax', 'core/str', 'core/notification' ], function($, ajax, str, notification) {
 	return {
 		initialise : function($params) {
 			$('input:radio').click(function(event) {
 				event.stopPropagation();
+				var inputId = $(this).attr('id');
+				var start = inputId.indexOf('_') + 1;
+				var end = inputId.indexOf('_', start);
+				var answer = inputId.substring(start, end);
+				start = inputId.lastIndexOf('_') + 1;
+				var question = inputId.substring(start);
 				var promises = ajax.call([ {
 				  methodname : 'block_task_oriented_groups_store_answer',
-				  args : {}
+				  args : {
+				    'answer' : answer,
+				    'question' : question
+				  }
 				} ]);
 				promises[0].done(function(response) {
-					console.log('success' + response);
-				}).fail(function(ex) {
-					console.log('fail' + ex);
-				});
+
+					if (!response || (typeof response === 'object' && response.success !== true)) {
+
+						str.get_strings([ {
+						  key : 'store_answer_error_title',
+						  component : 'block_task_oriented_groups'
+						}, {
+						  key : 'store_answer_error_text',
+						  component : 'block_task_oriented_groups'
+						}, {
+						  key : 'store_answer_error_continue',
+						  component : 'block_task_oriented_groups'
+						} ]).done(function(s) {
+							notification.alert(s[0], s[1], s[2]);
+						}).fail(notification.exception);
+
+					}
+
+				}).fail(notification.exception);
 			});
 		}
 	};

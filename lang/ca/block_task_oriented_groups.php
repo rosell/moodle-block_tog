@@ -261,3 +261,7 @@ $string['competence_question_37_help'] = 'Exemple: M\'adono quan la meva mare es
 $string['competence_question_38'] = 'M\'adono força bé del que altres pensen de mi';
 
 $string['competence_question_39'] = 'Em sento a casa a l\'aire lliure i en un entorn natural';
+
+$string['store_answer_error_title'] = 'Error';
+$string['store_answer_error_text'] = 'No hem pogut emmagatzemar la vostra resposta.';
+$string['store_answer_error_continue'] = 'D\'acord';

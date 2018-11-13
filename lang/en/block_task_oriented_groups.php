@@ -262,3 +262,6 @@ $string['competence_question_38'] = 'I have a good sense of what other people th
 
 $string['competence_question_39'] = 'I feel at home outdoors and in natural surroundings';
 
+$string['store_answer_error_title'] = 'Error';
+$string['store_answer_error_text'] = 'Could not store your answer.';
+$string['store_answer_error_continue'] = 'ok';

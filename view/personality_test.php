@@ -23,7 +23,8 @@ $PAGE->set_heading(get_string('personality_test_heading', 'block_task_oriented_g
 $PAGE->set_url($CFG->wwwroot . '/blocks/task_oriented_groups/view/personality_test.php');
 
 require_login();
-
+$answers = $DB->get_records('btog_personality_answers', array('userid' => $USER->id
+), 'question', 'question,answer');
 echo $OUTPUT->header();
 ?>
 <div class="container personality-questions">
@@ -50,18 +51,33 @@ for ($i = 0; $i < PersonalityQuestionnaire::countQuestions(); $i++) {
 			</div>
 			<div class="row justify-content-center">
 		<?php
+    $selected = -1;
+    foreach ($answers as $k => $answer) {
+        if ($answer->question == $i) {
+            $selected = $answer->answer;
+            unset($answers[$k]);
+            break;
+        }
+    }
+
     for ($j = 0; $j < PersonalityQuestionnaire::MAX_QUESTION_ANSWERS; $j++) {
         ?>
 			<div class="form-check-inline col-md">
 					<input
 						class="form-check-input"
 						type="radio"
-						id="answers_<?=$j?>_for_personality_question_<?=$i?>"
+						id="answer_<?=$j?>_for_personality_question_<?=$i?>"
 						name="<?=$questionId?>"
 						value="<?=PersonalityQuestionnaire::getAnswerQuestionValuetOf($i,$j)?>"
+						<?php
+
+        if ($selected == $j) {
+            echo 'checked="checked"';
+        }
+        ?>
 					><label
 						class="form-check-label"
-						for="answers_<?=$j?>_for_personality_question_<?=$i?>"
+						for="answer_<?=$j?>_for_personality_question_<?=$i?>"
 					><?=PersonalityQuestionnaire::getAnswerQuestionTextOf($i,$j)?></label>
 				</div>
 		<?php

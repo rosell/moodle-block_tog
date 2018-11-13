@@ -56,12 +56,12 @@ for ($i = 0; $i < CompetencesQuestionnaire::countQuestions(); $i++) {
 					<input
 						class="form-check-input"
 						type="radio"
-						id="answers_<?=$j?>_for_competences_question_<?=$i?>"
+						id="answer_<?=$j?>_for_competences_question_<?=$i?>"
 						name="<?=$questionId?>"
 						value="<?=CompetencesQuestionnaire::getAnswerQuestionValuetOf($j)?>"
 					><label
 						class="form-check-label"
-						for="answers_<?=$j?>_for_competences_question_<?=$i?>"
+						for="answer_<?=$j?>_for_competences_question_<?=$i?>"
 					><?=CompetencesQuestionnaire::getAnswerQuestionTextOf($j)?></label>
 				</div>
 		<?php

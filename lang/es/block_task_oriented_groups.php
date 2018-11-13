@@ -262,3 +262,6 @@ $string['competence_question_38'] = 'Me doy cuenta bastante bien de lo que otros
 
 $string['competence_question_39'] = 'Me siento en casa al aire libre y en un entorno natural';
 
+$string['store_answer_error_title'] = 'Error';
+$string['store_answer_error_text'] = 'No se ha podido almacenar tu respuesta.';
+$string['store_answer_error_continue'] = 'De acuerdo';
