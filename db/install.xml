@@ -99,5 +99,33 @@
 					FIELDS="id" />
 			</KEYS>
 		</TABLE>
+		<TABLE
+			NAME="btog_personality_answers"
+			COMMENT="Contains the answers to the personality test."
+		>
+			<FIELDS>
+				<FIELD
+					NAME="id"
+					TYPE="int"
+					LENGTH="10"
+					NOTNULL="true"
+					SEQUENCE="true"
+					NEXT="userid" />
+				<FIELD
+					NAME="userid"
+					TYPE="int"
+					LENGTH="10"
+					NOTNULL="true"
+					UNSIGNED="true"
+					SEQUENCE="false"
+					PREVIOUS="id"
+			</FIELDS>
+			<KEYS>
+				<KEY
+					NAME="primary"
+					TYPE="primary"
+					FIELDS="id" />
+			</KEYS>
+		</TABLE>
 	</TABLES>
 </XMLDB>

@@ -269,3 +269,16 @@ $string['store_personality_answer_error_continue'] = 'ok';
 $string['store_competences_answer_error_title'] = 'Error';
 $string['store_competences_answer_error_text'] = 'Could not store your competences answer.';
 $string['store_competences_answer_error_continue'] = 'ok';
+
+$string['privacy:metadata:btog_personality_answers'] = 'Information about the answers of the user to the personality test questions.';
+$string['privacy:metadata:btog_personality_answers:userid'] = 'The ID of the user that answer the question.';
+$string['privacy:metadata:btog_personality_answers:question'] = 'The identifier of the question.';
+$string['privacy:metadata:btog_personality_answers:answer'] = 'The identifier of the answer in the question.';
+
+$string['privacy:metadata:btog_competences_answers'] = 'Information about the answers of the user to the competences test questions.';
+$string['privacy:metadata:btog_competences_answers:userid'] = 'The ID of the user that answer the question.';
+$string['privacy:metadata:btog_competences_answers:question'] = 'The identifier of the question.';
+$string['privacy:metadata:btog_competences_answers:answer'] = 'The identifier of the answer in the question.';
+
+$string['privacy:export:btog_personality_answers'] = 'Personality test';
+$string['privacy:export:btog_competences_answers'] = 'Competences test';
