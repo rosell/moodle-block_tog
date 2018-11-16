@@ -12,7 +12,7 @@ VERSION="$(date '+%Y%m%d')00"
 OLD_VERSION=$(cat version.php|grep "version = "| grep -o -E '[0-9]+')
 while [ $VERSION -le $OLD_VERSION ]
 do
-	VERSION=$((VERSION+1))
+ VERSION=$((VERSION+1))
 done
 sed -i '' -e "s/version = $OLD_VERSION/version = $VERSION/g" version.php
 
@@ -22,7 +22,7 @@ DOWNLOAD_DIR="$HOME/Downloads"
 if [ -d "$DOWNLOAD_DIR" ]; then
   PLUGIN_DIR="$DOWNLOAD_DIR"
 else
-	PLUGIN_DIR="/tmp"
+ PLUGIN_DIR="/tmp"
 fi
 
 PLUGIN_FILE="$PLUGIN_DIR/$PLUGIN_FILE"
@@ -43,7 +43,7 @@ popd >/dev/null
 rm -rf $TMP_DIR
 OLD_PLUGIN_FILE="$PLUGIN_DIR/block_task_oriented_groups_moodle35_$OLD_VERSION.zip"
 if [ -f "$OLD_PLUGIN_FILE" ]; then
-	rm $OLD_PLUGIN_FILE
+ rm $OLD_PLUGIN_FILE
 fi
 
 echo "Generated plugin file at: $PLUGIN_FILE"

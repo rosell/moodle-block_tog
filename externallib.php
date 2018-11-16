@@ -43,14 +43,14 @@ class block_task_oriented_groups_external extends external_api {
         $params = self::validate_parameters(self::store_personality_answer_parameters(),
                 array('question' => $question, 'answer' => $answer
                 ));
-        $updated = FALSE;
+        $updated = false;
         try {
 
             $previousAnswer = $DB->get_record('btog_personality_answers',
                     array('userid' => $USER->id, 'question' => $question
                     ), '*', IGNORE_MISSING);
 
-            if ($previousAnswer !== FALSE && isset($previousAnswer)) {
+            if ($previousAnswer !== false && isset($previousAnswer)) {
 
                 $previousAnswer->answer = $answer;
                 $updated = $DB->update_record('btog_personality_answers', $previousAnswer);
@@ -60,7 +60,7 @@ class block_task_oriented_groups_external extends external_api {
                 $record->userid = $USER->id;
                 $record->question = $question;
                 $record->answer = $answer;
-                $updated = $DB->insert_record('btog_personality_answers', $record, FALSE) === TRUE;
+                $updated = $DB->insert_record('btog_personality_answers', $record, false) === true;
             }
         } catch (Exception $ex) {
         }
@@ -101,14 +101,14 @@ class block_task_oriented_groups_external extends external_api {
         $params = self::validate_parameters(self::store_competences_answer_parameters(),
                 array('question' => $question, 'answer' => $answer
                 ));
-        $updated = FALSE;
+        $updated = false;
         try {
 
             $previousAnswer = $DB->get_record('btog_competences_answers',
                     array('userid' => $USER->id, 'question' => $question
                     ), '*', IGNORE_MISSING);
 
-            if ($previousAnswer !== FALSE && isset($previousAnswer)) {
+            if ($previousAnswer !== false && isset($previousAnswer)) {
 
                 $previousAnswer->answer = $answer;
                 $updated = $DB->update_record('btog_competences_answers', $previousAnswer);
@@ -118,7 +118,7 @@ class block_task_oriented_groups_external extends external_api {
                 $record->userid = $USER->id;
                 $record->question = $question;
                 $record->answer = $answer;
-                $updated = $DB->insert_record('btog_competences_answers', $record, FALSE) === TRUE;
+                $updated = $DB->insert_record('btog_competences_answers', $record, false) === true;
             }
         } catch (Exception $ex) {
         }

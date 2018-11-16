@@ -28,11 +28,11 @@ $answers = $DB->get_records('btog_competences_answers', array('userid' => $USER-
 echo $OUTPUT->header();
 ?>
 <div class="container competences-questions">
-	<?php
+ <?php
 for ($i = 0; $i < CompetencesQuestionnaire::countQuestions(); $i++) {
     $questionId = 'competencesQuestion_' . $i;
     ?>
-		<div class="row competences-question<?php
+  <div class="row competences-question<?php
 
     if ($i % 2 != 0) {
         echo ' bg-light';
@@ -50,7 +50,7 @@ for ($i = 0; $i < CompetencesQuestionnaire::countQuestions(); $i++) {
     ?></h4>
 			</div>
 			<div class="row justify-content-center">
-		<?php
+  <?php
     $selected = -1;
     foreach ($answers as $k => $answer) {
         if ($answer->question == $i) {
@@ -62,7 +62,7 @@ for ($i = 0; $i < CompetencesQuestionnaire::countQuestions(); $i++) {
 
     for ($j = 0; $j < CompetencesQuestionnaire::MAX_QUESTION_ANSWERS; $j++) {
         ?>
-			<div class="form-check-inline col-md">
+   <div class="form-check-inline col-md">
 					<input
 						class="form-check-input"
 						type="radio"
@@ -80,13 +80,13 @@ for ($i = 0; $i < CompetencesQuestionnaire::countQuestions(); $i++) {
 						for="answer_<?=$j?>_for_competences_question_<?=$i?>"
 					><?=CompetencesQuestionnaire::getAnswerQuestionTextOf($j)?></label>
 				</div>
-		<?php
+  <?php
     }
     ?>
-			</div>
+   </div>
 		</div>
 	</div>
-		<?php
+  <?php
 }
 ?>
 

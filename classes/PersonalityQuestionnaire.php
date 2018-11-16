@@ -92,7 +92,7 @@ class PersonalityQuestionnaire {
      * Check if the specified question has help.
      */
     public static function hasQuestionHelp($index) {
-        return array_search($index, self::QUESTIONS_WITHOUT_HELP) === FALSE;
+        return array_search($index, self::QUESTIONS_WITHOUT_HELP) === false;
     }
 
     /**

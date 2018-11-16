@@ -28,11 +28,11 @@ $answers = $DB->get_records('btog_personality_answers', array('userid' => $USER-
 echo $OUTPUT->header();
 ?>
 <div class="container personality-questions">
-	<?php
+ <?php
 for ($i = 0; $i < PersonalityQuestionnaire::countQuestions(); $i++) {
     $questionId = 'personalityQuestion_' . $i;
     ?>
-		<div class="row personality-question<?php
+  <div class="row personality-question<?php
 
     if ($i % 2 != 0) {
         echo ' bg-light';
@@ -50,7 +50,7 @@ for ($i = 0; $i < PersonalityQuestionnaire::countQuestions(); $i++) {
     ?></h4>
 			</div>
 			<div class="row justify-content-center">
-		<?php
+  <?php
     $selected = -1;
     foreach ($answers as $k => $answer) {
         if ($answer->question == $i) {
@@ -62,7 +62,7 @@ for ($i = 0; $i < PersonalityQuestionnaire::countQuestions(); $i++) {
 
     for ($j = 0; $j < PersonalityQuestionnaire::MAX_QUESTION_ANSWERS; $j++) {
         ?>
-			<div class="form-check-inline col-md">
+   <div class="form-check-inline col-md">
 					<input
 						class="form-check-input"
 						type="radio"
@@ -80,13 +80,13 @@ for ($i = 0; $i < PersonalityQuestionnaire::countQuestions(); $i++) {
 						for="answer_<?=$j?>_for_personality_question_<?=$i?>"
 					><?=PersonalityQuestionnaire::getAnswerQuestionTextOf($i,$j)?></label>
 				</div>
-		<?php
+  <?php
     }
     ?>
-			</div>
+   </div>
 		</div>
 	</div>
-		<?php
+  <?php
 }
 ?>
 
