@@ -15,6 +15,8 @@
 // along with Moodle. If not, see <http://www.gnu.org/licenses/>.
 namespace block_task_oriented_groups;
 
+defined('MOODLE_INTERNAL') || die();
+
 /**
  * Class that represents the personality questionnaire.
  *
@@ -52,11 +54,16 @@ class PersonalityQuestionnaire {
     const EXTROVERT_FACTOR = 3;
 
     /**
+     * Factor used to evaluate the gender of a person.
+     */
+    const GENDER_FACTOR = 4;
+
+    /**
      * The types assocaited to each question.
      */
-    const QUESTION_FACTORS = [self::JUDGMENT_FACTOR, self::ATTITUDE_FACTOR, self::PERCEPTION_FACTOR,
-        self::EXTROVERT_FACTOR, self::JUDGMENT_FACTOR, self::ATTITUDE_FACTOR, self::ATTITUDE_FACTOR,
-        self::PERCEPTION_FACTOR, self::EXTROVERT_FACTOR, self::JUDGMENT_FACTOR,
+    const QUESTION_FACTORS = [self::GENDER_FACTOR, self::JUDGMENT_FACTOR, self::ATTITUDE_FACTOR,
+        self::PERCEPTION_FACTOR, self::EXTROVERT_FACTOR, self::JUDGMENT_FACTOR, self::ATTITUDE_FACTOR,
+        self::ATTITUDE_FACTOR, self::PERCEPTION_FACTOR, self::EXTROVERT_FACTOR, self::JUDGMENT_FACTOR,
         self::EXTROVERT_FACTOR, self::JUDGMENT_FACTOR, self::PERCEPTION_FACTOR,
         self::EXTROVERT_FACTOR, self::EXTROVERT_FACTOR, self::PERCEPTION_FACTOR,
         self::JUDGMENT_FACTOR, self::PERCEPTION_FACTOR, self::ATTITUDE_FACTOR, self::ATTITUDE_FACTOR
@@ -65,7 +72,7 @@ class PersonalityQuestionnaire {
     /**
      * The index of the questions that does not have help.
      */
-    const QUESTIONS_WITHOUT_HELP = [2, 3, 5, 10, 13, 14
+    const QUESTIONS_WITHOUT_HELP = [0, 3, 4, 6, 11, 14, 15
     ];
 
     /**

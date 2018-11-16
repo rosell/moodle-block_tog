@@ -32,12 +32,12 @@ echo $OUTPUT->header();
 for ($i = 0; $i < PersonalityQuestionnaire::countQuestions(); $i++) {
     $questionId = 'personalityQuestion_' . $i;
     ?>
-  <div class="row personality-question<?php
+  <div class="row<?php
 
     if ($i % 2 != 0) {
         echo ' bg-light';
     }
-    ?>">
+    ?> personality-question">
 		<div class="container">
 			<div class="row">
 				<h4><?=PersonalityQuestionnaire::getQuestionTextOf($i)?><?php

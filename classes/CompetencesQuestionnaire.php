@@ -15,6 +15,8 @@
 // along with Moodle. If not, see <http://www.gnu.org/licenses/>.
 namespace block_task_oriented_groups;
 
+defined('MOODLE_INTERNAL') || die();
+
 /**
  * Class that represents the competence questionnaire.
  *

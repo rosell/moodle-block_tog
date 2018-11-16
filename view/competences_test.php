@@ -32,12 +32,12 @@ echo $OUTPUT->header();
 for ($i = 0; $i < CompetencesQuestionnaire::countQuestions(); $i++) {
     $questionId = 'competencesQuestion_' . $i;
     ?>
-  <div class="row competences-question<?php
+  <div class="row<?php
 
     if ($i % 2 != 0) {
         echo ' bg-light';
     }
-    ?>">
+    ?> competences-question">
 		<div class="container">
 			<div class="row">
 				<h4><?=CompetencesQuestionnaire::getQuestionTextOf($i)?><?php
