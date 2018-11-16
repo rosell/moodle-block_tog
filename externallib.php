@@ -13,6 +13,13 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle. If not, see <http://www.gnu.org/licenses/>.
+require_once ($CFG->libdir . "/externallib.php");
+
+use block_task_oriented_groups\PersonalityQuestionnaire;
+use block_task_oriented_groups\Personality;
+use block_task_oriented_groups\CompetencesQuestionnaire;
+use block_task_oriented_groups\Competences;
+
 /**
  * External methods necessary to do ajax interaction.
  *
@@ -20,7 +27,6 @@
  * @copyright 2018 UDT-IA, IIIA-CSIC
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-require_once ($CFG->libdir . "/externallib.php");
 class block_task_oriented_groups_external extends external_api {
 
     /**
@@ -39,32 +45,16 @@ class block_task_oriented_groups_external extends external_api {
      * The function called to store an answer for a personality question.
      */
     public static function store_personality_answer($question, $answer) {
-        global $DB, $USER;
+        global $USER;
         $params = self::validate_parameters(self::store_personality_answer_parameters(),
                 array('question' => $question, 'answer' => $answer
                 ));
-        $updated = false;
-        try {
+        $userid = $USER->id;
+        $updated = PersonalityQuestionnaire::setPersonalityAnswerFor($question, $answer, $userid);
+        if ($updated) {
 
-            $previousAnswer = $DB->get_record('btog_personality_answers',
-                    array('userid' => $USER->id, 'question' => $question
-                    ), '*', IGNORE_MISSING);
-
-            if ($previousAnswer !== false && isset($previousAnswer)) {
-
-                $previousAnswer->answer = $answer;
-                $updated = $DB->update_record('btog_personality_answers', $previousAnswer);
-            } else {
-
-                $record = new stdClass();
-                $record->userid = $USER->id;
-                $record->question = $question;
-                $record->answer = $answer;
-                $updated = $DB->insert_record('btog_personality_answers', $record, false) === true;
-            }
-        } catch (Exception $ex) {
+            Personality::calculatePersonalityOf($userid);
         }
-
         $result = array();
         $result['success'] = $updated;
         return $result;
@@ -97,31 +87,11 @@ class block_task_oriented_groups_external extends external_api {
      * The function called to store an answer for a competences question.
      */
     public static function store_competences_answer($question, $answer) {
-        global $DB, $USER;
+        global $USER;
         $params = self::validate_parameters(self::store_competences_answer_parameters(),
                 array('question' => $question, 'answer' => $answer
                 ));
-        $updated = false;
-        try {
-
-            $previousAnswer = $DB->get_record('btog_competences_answers',
-                    array('userid' => $USER->id, 'question' => $question
-                    ), '*', IGNORE_MISSING);
-
-            if ($previousAnswer !== false && isset($previousAnswer)) {
-
-                $previousAnswer->answer = $answer;
-                $updated = $DB->update_record('btog_competences_answers', $previousAnswer);
-            } else {
-
-                $record = new stdClass();
-                $record->userid = $USER->id;
-                $record->question = $question;
-                $record->answer = $answer;
-                $updated = $DB->insert_record('btog_competences_answers', $record, false) === true;
-            }
-        } catch (Exception $ex) {
-        }
+        $updated = CompetencesQuestionnaire::setCompetencesAnswerFor($question, $answer, $USER->id);
 
         $result = array();
         $result['success'] = $updated;

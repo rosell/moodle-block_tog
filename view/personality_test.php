@@ -23,8 +23,7 @@ $PAGE->set_heading(get_string('personality_test_heading', 'block_task_oriented_g
 $PAGE->set_url($CFG->wwwroot . '/blocks/task_oriented_groups/view/personality_test.php');
 
 require_login();
-$answers = $DB->get_records('btog_personality_answers', array('userid' => $USER->id
-), 'question', 'question,answer');
+$answers = PersonalityQuestionnaire::getAnswersOfCurrentUser();
 echo $OUTPUT->header();
 ?>
 <div class="container personality-questions">
@@ -68,7 +67,7 @@ for ($i = 0; $i < PersonalityQuestionnaire::countQuestions(); $i++) {
 						type="radio"
 						id="answer_<?=$j?>_for_personality_question_<?=$i?>"
 						name="<?=$questionId?>"
-						value="<?=PersonalityQuestionnaire::getAnswerQuestionValuetOf($i,$j)?>"
+						value="<?=PersonalityQuestionnaire::getAnswerQuestionValueOf($i,$j)?>"
 						<?php
 
         if ($selected == $j) {

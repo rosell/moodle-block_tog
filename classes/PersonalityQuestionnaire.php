@@ -103,6 +103,16 @@ class PersonalityQuestionnaire {
     }
 
     /**
+     * Return the facor associated to the question.
+     *
+     * @param int $index
+     * @return int the factor associated to the question.
+     */
+    public static function getQuestionFactor($index) {
+        return self::QUESTION_FACTORS[$index];
+    }
+
+    /**
      * Return the identifier of the help string associated to the question.
      */
     public static function getQuestionHelpIdentifier($index) {
@@ -120,7 +130,7 @@ class PersonalityQuestionnaire {
     /**
      * Return the value associated to the specified answers in the question.
      */
-    public static function getAnswerQuestionValuetOf($question, $index) {
+    public static function getAnswerQuestionValueOf($question, $index) {
         switch ($index) {
             case 0:
                 return -1;
@@ -129,5 +139,70 @@ class PersonalityQuestionnaire {
             default:
                 return 0;
         }
+    }
+
+    /**
+     * Check if it is calculated the personality for the current user.
+     */
+    public static function isPersonalityCalculatedForCurrentUser() {
+        global $USER;
+        return self::isPersonalityCalculatedFor($USER->id);
+    }
+
+    /**
+     * Check if for an user has calculated its personality.
+     */
+    public static function isPersonalityCalculatedFor($userid) {
+        global $DB;
+        return $DB->record_exists('btog_personality', array('userid' => $userid
+        ));
+    }
+
+    /**
+     * Get the answers done by the current user for the personality questions.
+     */
+    public static function getAnswersOfCurrentUser() {
+        global $USER;
+        return self::getAnswersOf($USER->id);
+    }
+
+    /**
+     * Get the answers done by spoecified user for the personality questions.
+     */
+    public static function getAnswersOf($userid) {
+        global $DB;
+        return $DB->get_records('btog_personality_answers', array('userid' => $userid
+        ), 'question', 'question,answer');
+    }
+
+    /**
+     * Store the answer of an user to a personality question.
+     *
+     * @param int $question
+     * @param int $answer
+     * @param int $userid
+     * @return boolean true if the answer has been stored.
+     */
+    public static function setPersonalityAnswerFor($question, $answer, $userid) {
+        global $DB;
+        $updated = false;
+        $previousAnswer = $DB->get_record('btog_personality_answers',
+                array('userid' => $userid, 'question' => $question
+                ), '*', IGNORE_MISSING);
+
+        if ($previousAnswer !== false && isset($previousAnswer)) {
+
+            $previousAnswer->answer = $answer;
+            $updated = $DB->update_record('btog_personality_answers', $previousAnswer);
+        } else {
+
+            $record = new \stdClass();
+            $record->userid = $userid;
+            $record->question = $question;
+            $record->answer = $answer;
+            $updated = $DB->insert_record('btog_personality_answers', $record, false) === true;
+        }
+
+        return $updated;
     }
 }

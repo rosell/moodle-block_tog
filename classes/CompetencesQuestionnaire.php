@@ -143,7 +143,7 @@ class CompetencesQuestionnaire {
     /**
      * Return the value associated to the specified answers in the question.
      */
-    public static function getAnswerQuestionValuetOf($index) {
+    public static function getAnswerQuestionValueOf($index) {
         switch ($index) {
             case 0:
                 return 0.0;
@@ -156,5 +156,70 @@ class CompetencesQuestionnaire {
             default:
                 return 1.0;
         }
+    }
+
+    /**
+     * Check if it is calculated the competences for the current user.
+     */
+    public static function isCompetencesCalculatedForCurrentUser() {
+        global $USER;
+        return self::isCompetencesCalculatedFor($USER->id);
+    }
+
+    /**
+     * Check if for an user has calculated its competences.
+     */
+    public static function isCompetencesCalculatedFor($userid) {
+        global $DB;
+        return $DB->record_exists('btog_competences', array('userid' => $userid
+        ));
+    }
+
+    /**
+     * Get the answers done by the current user for the competences questions.
+     */
+    public static function getAnswersOfCurrentUser() {
+        global $USER;
+        return self::getAnswersOf($USER->id);
+    }
+
+    /**
+     * Get the answers done by spoecified user for the competences questions.
+     */
+    public static function getAnswersOf($userid) {
+        global $DB;
+        return $DB->get_records('btog_competences_answers', array('userid' => $userid
+        ), 'question', 'question,answer');
+    }
+
+    /**
+     * Store the answer of an user to a competences question.
+     *
+     * @param int $question
+     * @param int $answer
+     * @param int $userid
+     * @return boolean true if the answer has been stored.
+     */
+    public static function setCompetencesAnswerFor($question, $answer, $userid) {
+        global $DB;
+        $updated = false;
+        $previousAnswer = $DB->get_record('btog_competences_answers',
+                array('userid' => $userid, 'question' => $question
+                ), '*', IGNORE_MISSING);
+
+        if ($previousAnswer !== false && isset($previousAnswer)) {
+
+            $previousAnswer->answer = $answer;
+            $updated = $DB->update_record('btog_competences_answers', $previousAnswer);
+        } else {
+
+            $record = new \stdClass();
+            $record->userid = $userid;
+            $record->question = $question;
+            $record->answer = $answer;
+            $updated = $DB->insert_record('btog_competences_answers', $record, false) === true;
+        }
+
+        return $updated;
     }
 }

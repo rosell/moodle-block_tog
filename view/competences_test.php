@@ -23,8 +23,7 @@ $PAGE->set_heading(get_string('competences_test_heading', 'block_task_oriented_g
 $PAGE->set_url($CFG->wwwroot . '/blocks/task_oriented_groups/view/competences_test.php');
 
 require_login();
-$answers = $DB->get_records('btog_competences_answers', array('userid' => $USER->id
-), 'question', 'question,answer');
+$answers = CompetencesQuestionnaire::getAnswersOfCurrentUser();
 echo $OUTPUT->header();
 ?>
 <div class="container competences-questions">
@@ -68,7 +67,7 @@ for ($i = 0; $i < CompetencesQuestionnaire::countQuestions(); $i++) {
 						type="radio"
 						id="answer_<?=$j?>_for_competences_question_<?=$i?>"
 						name="<?=$questionId?>"
-						value="<?=CompetencesQuestionnaire::getAnswerQuestionValuetOf($j)?>"
+						value="<?=CompetencesQuestionnaire::getAnswerQuestionValueOf($j)?>"
 						<?php
 
         if ($selected == $j) {

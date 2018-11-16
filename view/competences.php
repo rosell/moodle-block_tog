@@ -13,18 +13,18 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle. If not, see <http://www.gnu.org/licenses/>.
+require_once ('../../../config.php');
+use block_task_oriented_groups\CompetencesQuestionnaire;
 
-/**
- * Plugin version and other meta-data are defined here.
- *
- * @package block_task_oriented_groups
- * @copyright 2018 UDT-IA, IIIA-CSIC
- * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- */
-defined('MOODLE_INTERNAL') || die();
+$PAGE->set_pagelayout('standard');
+$PAGE->set_context(context_system::instance());
+$PAGE->set_title(get_string('competences_title', 'block_task_oriented_groups'));
+$PAGE->set_heading(get_string('competences_heading', 'block_task_oriented_groups'));
+$PAGE->set_url($CFG->wwwroot . '/blocks/task_oriented_groups/view/competences.php');
 
-$plugin->component = 'block_task_oriented_groups';
-$plugin->release = '0.1.1';
-$plugin->version = 2018111614;
-$plugin->requires = 2018051700;
-$plugin->maturity = MATURITY_ALPHA;
+require_login();
+echo $OUTPUT->header();
+?>
+COMPETENCES TO DO IT
+<?php
+echo $OUTPUT->footer();

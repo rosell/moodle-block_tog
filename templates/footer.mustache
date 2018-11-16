@@ -15,8 +15,25 @@
     along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
   }}
 
- <div>
+ <div class="row">
+ {{#personalityDefined}}
+ 	<div class="col">
+    <a href="{{wwwroot}}/blocks/task_oriented_groups/view/personality.php">{{#str}} my_personality, block_task_oriented_groups {{/str}}</a>
+	</div>
+{{/personalityDefined}}
+{{^personalityDefined}}
+ 	<div class="col">
     <a href="{{wwwroot}}/blocks/task_oriented_groups/view/personality_test.php">{{#str}} fill_personality_test, block_task_oriented_groups {{/str}}</a>
-    |
+	</div>
+{{/personalityDefined}}
+{{#competencesDefined}}
+ 	<div class="col">
+    <a href="{{wwwroot}}/blocks/task_oriented_groups/view/competences.php">{{#str}} my_competences, block_task_oriented_groups {{/str}}</a>
+	</div>
+{{/competencesDefined}}
+{{^competencesDefined}}
+ 	<div class="col">
     <a href="{{wwwroot}}/blocks/task_oriented_groups/view/competences_test.php">{{#str}} fill_competences_test, block_task_oriented_groups {{/str}}</a>
+	</div>
+{{/competencesDefined}}
 </div>

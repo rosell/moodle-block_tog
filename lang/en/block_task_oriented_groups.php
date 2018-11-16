@@ -287,3 +287,13 @@ $string['privacy:metadata:btog_competences_answers:answer'] = 'The identifier of
 
 $string['privacy:export:btog_personality_answers'] = 'Personality test';
 $string['privacy:export:btog_competences_answers'] = 'Competences test';
+$string['privacy:export:btog_personality'] = 'Personality';
+$string['privacy:export:btog_competences'] = 'Competences';
+
+$string['my_personality'] = 'My personality';
+$string['personality_title'] = 'Personality';
+$string['personality_heading'] = 'Personality';
+
+$string['my_competences'] = 'My competences';
+$string['competences_title'] = 'Competences';
+$string['competences_heading'] = 'Competences';
