@@ -1,6 +1,15 @@
-.personality-question {
- padding: 10px;
+.personality-questions {
+	padding: 5px;
 }
+
+.personality-question {
+	padding: 10px;
+}
+
+.competences-questions {
+	padding: 5px;
+}
+
 .competences-question {
- padding: 10px;
+	padding: 10px;
 }

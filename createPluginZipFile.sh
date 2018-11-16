@@ -1,9 +1,9 @@
 #!/bin/bash
 SOURCE="${BASH_SOURCE[0]}"
-while [ -h "$SOURCE" ]; do 
+while [ -h "$SOURCE" ]; do
   DIR="$( cd -P "$( dirname "$SOURCE" )" >/dev/null && pwd )"
   SOURCE="$(readlink "$SOURCE")"
-  [[ $SOURCE != /* ]] && SOURCE="$DIR/$SOURCE" 
+  [[ $SOURCE != /* ]] && SOURCE="$DIR/$SOURCE"
 done
 DIR="$( cd -P "$( dirname "$SOURCE" )" >/dev/null && pwd )"
 pushd $DIR >/dev/null
@@ -31,6 +31,7 @@ TMP_DIR=$(mktemp -d)
 mkdir $TMP_DIR/moodle-block_task_oriented_groups
 cp *.md $TMP_DIR/moodle-block_task_oriented_groups/.
 cp *.php $TMP_DIR/moodle-block_task_oriented_groups/.
+cp *.css $TMP_DIR/moodle-block_task_oriented_groups/.
 cp -r amd $TMP_DIR/moodle-block_task_oriented_groups/.
 cp -r classes $TMP_DIR/moodle-block_task_oriented_groups/.
 cp -r db $TMP_DIR/moodle-block_task_oriented_groups/.
