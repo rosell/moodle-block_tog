@@ -132,6 +132,14 @@ class Personality {
     }
 
     /**
+     * Return the coimpetences of teh current user.
+     */
+    public static function getPersonalityOfCurrentUser() {
+        global $USER;
+        return self::getPersonalityOf($USER->id);
+    }
+
+    /**
      * Return the the personality of an user.
      *
      * @param int $userid

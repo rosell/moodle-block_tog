@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle. If not, see <http://www.gnu.org/licenses/>.
 require_once ('../../../config.php');
-use block_task_oriented_groups\PersonalityQuestionnaire;
+use block_task_oriented_groups\Personality;
 
 $PAGE->set_pagelayout('standard');
 $PAGE->set_context(context_system::instance());
@@ -23,8 +23,30 @@ $PAGE->set_heading(get_string('personality_heading', 'block_task_oriented_groups
 $PAGE->set_url($CFG->wwwroot . '/blocks/task_oriented_groups/view/personality.php');
 
 require_login();
+$personality = Personality::getPersonalityOfCurrentUser();
+$l10npersonality = new \stdClass();
+$l10npersonality->type = $personality->type;
+$l10npersonality->name = get_string('personality_' . $personality->type . '_name',
+        'block_task_oriented_groups');
+$l10npersonality->description = get_string('personality_' . $personality->type . '_description',
+        'block_task_oriented_groups');
 echo $OUTPUT->header();
 ?>
-PERSONALITY TO DO IT
+<div class="container">
+	<div class="row">
+		<p><?=get_string('personality_msg','block_task_oriented_groups',$l10npersonality)?></p>
+	</div>
+	<div class="row justify-content-md-center">
+		<a
+			class="btn btn-secondary"
+			href="<?=get_string('personality_' .$personality->type .'_more','block_task_oriented_groups')?>"
+			role="button"
+		><?=get_string('personality_read_more','block_task_oriented_groups')?></a> <a
+			class="btn btn-primary"
+			href="<?=$CFG->wwwroot .'/blocks/task_oriented_groups/view/personality_test.php'?>"
+			role="button"
+		><?=get_string('personality_go_to_test','block_task_oriented_groups')?></a>
+	</div>
+</div>
 <?php
 echo $OUTPUT->footer();

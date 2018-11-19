@@ -29,6 +29,14 @@ use block_task_oriented_groups\CompetencesQuestionnaire;
 class Competences {
 
     /**
+     * Return the coimpetences of teh current user.
+     */
+    public static function getCompetencesOfCurrentUser() {
+        global $USER;
+        return self::getCompetencesOf($USER->id);
+    }
+
+    /**
      * Return the the competences of an user.
      *
      * @param int $userid
@@ -152,5 +160,17 @@ class Competences {
         global $DB;
         return $DB->record_exists('btog_competences', array('userid' => $userid
         ));
+    }
+
+    /**
+     * Convert a competence value to a human readable value.
+     *
+     * @param number $value to obtain the
+     * @return string
+     */
+    public static function valueToString($value) {
+        $index = floor($value / 0.2);
+        $index = min(4, $index);
+        return get_string('competences_value_' . $index, 'block_task_oriented_groups');
     }
 }

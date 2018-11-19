@@ -24,6 +24,7 @@ $PAGE->set_url($CFG->wwwroot . '/blocks/task_oriented_groups/view/personality_te
 
 require_login();
 $answers = PersonalityQuestionnaire::getAnswersOfCurrentUser();
+$numanswers = count($answers);
 echo $OUTPUT->header();
 ?>
 <div class="container personality-questions">
@@ -87,8 +88,21 @@ for ($i = 0; $i < PersonalityQuestionnaire::countQuestions(); $i++) {
 	</div>
   <?php
 }
-?>
+if ($numanswers == PersonalityQuestionnaire::countQuestions()) {
 
+    $linkstr = get_string('personality_test_go_to_personality', 'block_task_oriented_groups');
+    $linkaddr = $CFG->wwwroot . '/blocks/task_oriented_groups/view/personality.php';
+    ?>
+    	<div class="row justify-content-md-center">
+		<a
+			class="btn btn-primary"
+			href="<?=$linkaddr?>"
+			role="button"
+		><?=$linkstr?></a>
+	</div>
+    <?php
+}
+?>
 </div>
 <?php
 $PAGE->requires->js_call_amd('block_task_oriented_groups/personality_test', 'initialise');

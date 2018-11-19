@@ -24,6 +24,7 @@ $PAGE->set_url($CFG->wwwroot . '/blocks/task_oriented_groups/view/competences_te
 
 require_login();
 $answers = CompetencesQuestionnaire::getAnswersOfCurrentUser();
+$numanswers = count($answers);
 echo $OUTPUT->header();
 ?>
 <div class="container competences-questions">
@@ -87,8 +88,21 @@ for ($i = 0; $i < CompetencesQuestionnaire::countQuestions(); $i++) {
 	</div>
   <?php
 }
-?>
+if ($numanswers == CompetencesQuestionnaire::countQuestions()) {
 
+    $linkstr = get_string('competences_test_go_to_competences', 'block_task_oriented_groups');
+    $linkaddr = $CFG->wwwroot . '/blocks/task_oriented_groups/view/competences.php';
+    ?>
+    	<div class="row justify-content-md-center">
+		<a
+			class="btn btn-primary"
+			href="<?=$linkaddr?>"
+			role="button"
+		><?=$linkstr?></a>
+	</div>
+    <?php
+}
+?>
 </div>
 <?php
 $PAGE->requires->js_call_amd('block_task_oriented_groups/competences_test', 'initialise');
