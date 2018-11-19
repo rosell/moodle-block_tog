@@ -27,7 +27,12 @@ defined('MOODLE_INTERNAL') || die();
 $string['pluginname'] = 'Task oriented groups block';
 $string['task_oriented_groups'] = 'Task oriented groups';
 
-$string['fill_personality_test'] = 'Fill in your personality test';
+$string['main:composite'] = 'Create a new groups by task';
+$string['main:fill_personality_test'] = 'Fill in your personality test';
+$string['main:my_personality'] = 'My personality';
+$string['main:my_competences'] = 'My competences';
+$string['main:fill_competences_test'] = 'Fill in your competences test';
+
 $string['personality_test_title'] = 'Personality test';
 $string['personality_test_heading'] = 'Personality test';
 $string['personality_test_go_to_personality'] = 'Show my personality';
@@ -151,7 +156,6 @@ $string['personality_question_20_answer_0'] = 'Routine';
 $string['personality_question_20_answer_1'] = 'Variety';
 $string['personality_question_20_answer_2'] = 'Indifferent';
 
-$string['fill_competences_test'] = 'Fill in your competences test';
 $string['competences_test_title'] = 'Competences test';
 $string['competences_test_heading'] = 'Competences test';
 $string['competences_test_go_to_competences'] = 'Show my competences';
@@ -311,7 +315,6 @@ $string['privacy:metadata:btog_competences:interpersonal'] = 'The interpersonal 
 $string['privacy:metadata:btog_competences:naturalist_environmental'] = 'The naturalist/environmental competence factor of the user.';
 $string['privacy:export:btog_competences'] = 'Competences';
 
-$string['my_personality'] = 'My personality';
 $string['personality_title'] = 'Personality';
 $string['personality_heading'] = 'Personality';
 $string['personality_go_to_test'] = 'Modify personality test';
@@ -366,7 +369,6 @@ $string['personality_ISTP_description'] = 'Bold and practical experimenters, mas
 $string['personality_ISTP_more'] = 'https://www.16personalities.com/istp-personality';
 $string['personality_ISTP_name'] = 'The virtuoso';
 
-$string['my_competences'] = 'My competences';
 $string['competences_title'] = 'Competences';
 $string['competences_heading'] = 'Competences';
 $string['competences_msg'] = 'Your competences are';

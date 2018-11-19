@@ -50,18 +50,54 @@ class block_task_oriented_groups extends block_base {
      * @return stdClass block content info
      */
     public function get_content() {
-        global $CFG, $OUTPUT, $USER;
         if (!is_null($this->content)) {
             return $this->content;
         }
-        $this->content = new stdClass();
-        $this->content->text = 'Text: Hello world';
 
-        $this->content->footer = $OUTPUT->render_from_template('block_task_oriented_groups/footer',
-                (object) array('wwwroot' => $CFG->wwwroot,
-                    'personalityDefined' => Personality::isPersonalityCalculatedForCurrentUser(),
-                    'competencesDefined' => Competences::isCompetencesCalculatedForCurrentUser()
+        // create the links to the option of the block
+        $this->content = new stdClass();
+        $contents = array();
+
+        if (has_capability('moodle/course:managegroups', $this->page->context)) {
+
+            $contenturl = new moodle_url('/blocks/task_oriented_groups/view/composite.php');
+            $contentlink = html_writer::link($contenturl,
+                    get_string('main:composite', 'block_task_oriented_groups'));
+            $contents[] = html_writer::tag('li', $contentlink);
+        }
+
+        if (Personality::isPersonalityCalculatedForCurrentUser()) {
+
+            $contenturl = new moodle_url('/blocks/task_oriented_groups/view/personality.php');
+            $contentlink = html_writer::link($contenturl,
+                    get_string('main:my_personality', 'block_task_oriented_groups'));
+            $contents[] = html_writer::tag('li', $contentlink);
+        } else {
+
+            $contenturl = new moodle_url('/blocks/task_oriented_groups/view/personality_test.php');
+            $contentlink = html_writer::link($contenturl,
+                    get_string('main:fill_personality_test', 'block_task_oriented_groups'));
+            $contents[] = html_writer::tag('li', $contentlink);
+        }
+
+        if (Competences::isCompetencesCalculatedForCurrentUser()) {
+
+            $contenturl = new moodle_url('/blocks/task_oriented_groups/view/competences.php');
+            $contentlink = html_writer::link($contenturl,
+                    get_string('main:my_competences', 'block_task_oriented_groups'));
+            $contents[] = html_writer::tag('li', $contentlink);
+        } else {
+
+            $contenturl = new moodle_url('/blocks/task_oriented_groups/view/competences_test.php');
+            $contentlink = html_writer::link($contenturl,
+                    get_string('main:fill_competences_test', 'block_task_oriented_groups'));
+            $contents[] = html_writer::tag('li', $contentlink);
+        }
+        $this->content->text = html_writer::tag('ol', implode('', $contents),
+                array('class' => 'list'
                 ));
+
+        $this->content->footer = '';
 
         return $this->content;
     }
