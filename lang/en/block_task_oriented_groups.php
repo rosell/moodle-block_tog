@@ -279,15 +279,34 @@ $string['privacy:metadata:btog_personality_answers'] = 'Information about the an
 $string['privacy:metadata:btog_personality_answers:userid'] = 'The ID of the user that answer the question.';
 $string['privacy:metadata:btog_personality_answers:question'] = 'The identifier of the question.';
 $string['privacy:metadata:btog_personality_answers:answer'] = 'The identifier of the answer in the question.';
+$string['privacy:export:btog_personality_answers'] = 'Personality test';
 
 $string['privacy:metadata:btog_competences_answers'] = 'Information about the answers of the user to the competences test questions.';
 $string['privacy:metadata:btog_competences_answers:userid'] = 'The ID of the user that answer the question.';
 $string['privacy:metadata:btog_competences_answers:question'] = 'The identifier of the question.';
 $string['privacy:metadata:btog_competences_answers:answer'] = 'The identifier of the answer in the question.';
-
-$string['privacy:export:btog_personality_answers'] = 'Personality test';
 $string['privacy:export:btog_competences_answers'] = 'Competences test';
+
+$string['privacy:metadata:btog_personality'] = 'Information about the personality of an user.';
+$string['privacy:metadata:btog_personality:userid'] = 'The ID of the user that the personality refers.';
+$string['privacy:metadata:btog_personality:type'] = 'The type of personality.';
+$string['privacy:metadata:btog_personality:gender'] = 'The gender of the user.';
+$string['privacy:metadata:btog_personality:judgment'] = 'The judgment personality factor of the user.';
+$string['privacy:metadata:btog_personality:attitude'] = 'The attitude personality factor of the user.';
+$string['privacy:metadata:btog_personality:perception'] = 'The perception personality factor of the user.';
+$string['privacy:metadata:btog_personality:gender'] = 'The extrovert personality factor of the user.';
 $string['privacy:export:btog_personality'] = 'Personality';
+
+$string['privacy:metadata:btog_competences'] = 'Information about the competences of an user.';
+$string['privacy:metadata:btog_competences:userid'] = 'The ID of the user that the competences refers.';
+$string['privacy:metadata:btog_competences:verbal'] = 'The verbal competence factor of the user.';
+$string['privacy:metadata:btog_competences:logic_mathematics'] = 'The logic/mathematics competence factor of the user.';
+$string['privacy:metadata:btog_competences:visual_spatial'] = 'The visual/spatial competence factor of the user.';
+$string['privacy:metadata:btog_competences:kinestesica_corporal'] = 'The kinestesica/corporal competence factor of the user.';
+$string['privacy:metadata:btog_competences:musical_rhythmic'] = 'The musical/rhythmic competence factor of the user.';
+$string['privacy:metadata:btog_competences:intrapersonal'] = 'The intrapersonal competence factor of the user.';
+$string['privacy:metadata:btog_competences:interpersonal'] = 'The interpersonal competence factor of the user.';
+$string['privacy:metadata:btog_competences:naturalist_environmental'] = 'The naturalist/environmental competence factor of the user.';
 $string['privacy:export:btog_competences'] = 'Competences';
 
 $string['my_personality'] = 'My personality';

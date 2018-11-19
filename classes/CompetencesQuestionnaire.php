@@ -113,6 +113,16 @@ class CompetencesQuestionnaire {
     }
 
     /**
+     * Return the facor associated to the question.
+     *
+     * @param int $index
+     * @return int the factor associated to the question.
+     */
+    public static function getQuestionFactor($index) {
+        return self::QUESTION_FACTORS[$index];
+    }
+
+    /**
      * Return the text associated to the question.
      */
     public static function getQuestionTextOf($index) {
@@ -156,23 +166,6 @@ class CompetencesQuestionnaire {
             default:
                 return 1.0;
         }
-    }
-
-    /**
-     * Check if it is calculated the competences for the current user.
-     */
-    public static function isCompetencesCalculatedForCurrentUser() {
-        global $USER;
-        return self::isCompetencesCalculatedFor($USER->id);
-    }
-
-    /**
-     * Check if for an user has calculated its competences.
-     */
-    public static function isCompetencesCalculatedFor($userid) {
-        global $DB;
-        return $DB->record_exists('btog_competences', array('userid' => $userid
-        ));
     }
 
     /**

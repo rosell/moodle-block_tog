@@ -92,6 +92,10 @@ class block_task_oriented_groups_external extends external_api {
                 array('question' => $question, 'answer' => $answer
                 ));
         $updated = CompetencesQuestionnaire::setCompetencesAnswerFor($question, $answer, $USER->id);
+        if ($updated) {
+
+            Competences::calculateCompetencesOf($userid);
+        }
 
         $result = array();
         $result['success'] = $updated;

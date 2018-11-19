@@ -117,9 +117,8 @@ class Personality {
                 $record->type .= 'P';
             }
 
-            $previousAnswer = $DB->get_record('btog_personality', array('userid' => $userid
-            ), '*', IGNORE_MISSING);
-            if ($previousAnswer !== false && isset($previousAnswer)) {
+            $previousAnswer = self::getPersonalityOf($userid);
+            if ($previousAnswer !== false) {
 
                 $record->id = $previousAnswer->id;
                 $calculated = $DB->update_record('btog_personality', $record);
@@ -130,5 +129,43 @@ class Personality {
         }
 
         return $calculated;
+    }
+
+    /**
+     * Return the the personality of an user.
+     *
+     * @param int $userid
+     * @return stdObject/boolean the personality associated to the user or false if the user does
+     *         not have a personality.
+     */
+    public static function getPersonalityOf($userid) {
+        global $DB;
+
+        $personality = $DB->get_record('btog_personality', array('userid' => $userid
+        ), '*', IGNORE_MISSING);
+        if ($personality !== false && isset($personality)) {
+
+            return $personality;
+        } else {
+
+            return false;
+        }
+    }
+
+    /**
+     * Check if it is calculated the personality for the current user.
+     */
+    public static function isPersonalityCalculatedForCurrentUser() {
+        global $USER;
+        return self::isPersonalityCalculatedFor($USER->id);
+    }
+
+    /**
+     * Check if for an user has calculated its personality.
+     */
+    public static function isPersonalityCalculatedFor($userid) {
+        global $DB;
+        return $DB->record_exists('btog_personality', array('userid' => $userid
+        ));
     }
 }

@@ -142,23 +142,6 @@ class PersonalityQuestionnaire {
     }
 
     /**
-     * Check if it is calculated the personality for the current user.
-     */
-    public static function isPersonalityCalculatedForCurrentUser() {
-        global $USER;
-        return self::isPersonalityCalculatedFor($USER->id);
-    }
-
-    /**
-     * Check if for an user has calculated its personality.
-     */
-    public static function isPersonalityCalculatedFor($userid) {
-        global $DB;
-        return $DB->record_exists('btog_personality', array('userid' => $userid
-        ));
-    }
-
-    /**
      * Get the answers done by the current user for the personality questions.
      */
     public static function getAnswersOfCurrentUser() {

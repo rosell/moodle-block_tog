@@ -15,8 +15,8 @@
 // along with Moodle. If not, see <http://www.gnu.org/licenses/>.
 defined('MOODLE_INTERNAL') || die();
 
-use block_task_oriented_groups\PersonalityQuestionnaire;
-use block_task_oriented_groups\CompetencesQuestionnaire;
+use block_task_oriented_groups\Personality;
+use block_task_oriented_groups\Competences;
 
 /**
  * Block task_oriented_groups is defined here.
@@ -59,8 +59,8 @@ class block_task_oriented_groups extends block_base {
 
         $this->content->footer = $OUTPUT->render_from_template('block_task_oriented_groups/footer',
                 (object) array('wwwroot' => $CFG->wwwroot,
-                    'personalityDefined' => PersonalityQuestionnaire::isPersonalityCalculatedForCurrentUser(),
-                    'competencesDefined' => CompetencesQuestionnaire::isCompetencesCalculatedForCurrentUser()
+                    'personalityDefined' => Personality::isPersonalityCalculatedForCurrentUser(),
+                    'competencesDefined' => Competences::isCompetencesCalculatedForCurrentUser()
                 ));
 
         return $this->content;

@@ -24,6 +24,8 @@ use core_privacy\local\request\userlist;
 use core_privacy\local\request\writer;
 use block_task_oriented_groups\PersonalityQuestionnaire;
 use block_task_oriented_groups\CompetencesQuestionnaire;
+use block_task_oriented_groups\Personality;
+use block_task_oriented_groups\Competences;
 
 defined('MOODLE_INTERNAL') || die();
 
@@ -55,6 +57,26 @@ class provider implements \core_privacy\local\metadata\provider,
                 ['userid' => 'privacy:metadata:btog_competences_answers:userid',
                     'question' => 'privacy:metadata:btog_competences_answers:discussionid',
                     'answer' => 'privacy:metadata:btog_competences_answers:preference'
+                ], 'privacy:metadata:btog_competences_answers');
+        $collection->add_database_table('btog_personality',
+                ['userid' => 'privacy:metadata:btog_personality:userid',
+                    'type' => 'privacy:metadata:btog_personality:type',
+                    'gender' => 'privacy:metadata:btog_personality:gender',
+                    'judgment' => 'privacy:metadata:btog_personality:judgment',
+                    'attitude' => 'privacy:metadata:btog_personality:attitude',
+                    'perception' => 'privacy:metadata:btog_personality:perception',
+                    'extrovert' => 'privacy:metadata:btog_personality:extrovert'
+                ], 'privacy:metadata:btog_competences_answers');
+        $collection->add_database_table('btog_competences',
+                ['userid' => 'privacy:metadata:btog_competences:userid',
+                    'verbal' => 'privacy:metadata:btog_competences:verbal',
+                    'logic_mathematics' => 'privacy:metadata:btog_competences:logic_mathematics',
+                    'visual_spatial' => 'privacy:metadata:btog_competences:visual_spatial',
+                    'kinestesica_corporal' => 'privacy:metadata:btog_competences:kinestesica_corporal',
+                    'musical_rhythmic' => 'privacy:metadata:btog_competences:musical_rhythmic',
+                    'intrapersonal' => 'privacy:metadata:btog_competences:intrapersonal',
+                    'interpersonal' => 'privacy:metadata:btog_competences:interpersonal',
+                    'naturalist_environmental' => 'privacy:metadata:btog_competences:naturalist_environmental'
                 ], 'privacy:metadata:btog_competences_answers');
 
         return $collection;
@@ -164,6 +186,10 @@ class provider implements \core_privacy\local\metadata\provider,
         $hasdata = $hasdata || $DB->record_exists('btog_competences_answers', [
             'userid' => $userid
         ]);
+        $hasdata = $hasdata || $DB->record_exists('btog_personality', ['userid' => $userid
+        ]);
+        $hasdata = $hasdata || $DB->record_exists('btog_competences', ['userid' => $userid
+        ]);
         return $hasdata;
     }
 
@@ -177,6 +203,10 @@ class provider implements \core_privacy\local\metadata\provider,
         $DB->delete_records('btog_personality_answers', ['userid' => $userid
         ]);
         $DB->delete_records('btog_competences_answers', ['userid' => $userid
+        ]);
+        $DB->delete_records('btog_personality', ['userid' => $userid
+        ]);
+        $DB->delete_records('btog_competences', ['userid' => $userid
         ]);
     }
 
@@ -199,6 +229,8 @@ class provider implements \core_privacy\local\metadata\provider,
         }
         self::export_user_data_personality_answers($userid);
         self::export_user_data_competences_answers($userid);
+        self::export_user_data_personality($userid);
+        self::export_user_data_competences($userid);
     }
 
     /**
@@ -223,7 +255,9 @@ class provider implements \core_privacy\local\metadata\provider,
         }
         $answers->close();
         writer::with_context($context)->export_data(
-                [get_string('privacy:export:btog_personality_answers', 'btog_personality_answers')
+                [
+                    get_string('privacy:export:btog_personality_answers',
+                            'block_task_oriented_groups')
                 ], (object) $answersdata);
     }
 
@@ -249,7 +283,60 @@ class provider implements \core_privacy\local\metadata\provider,
         }
         $answers->close();
         writer::with_context($context)->export_data(
-                [get_string('privacy:export:btog_competences_answers', 'btog_competences_answers')
+                [
+                    get_string('privacy:export:btog_competences_answers',
+                            'block_task_oriented_groups')
                 ], (object) $answersdata);
+    }
+
+    /**
+     * Export the personality of an user.
+     *
+     * @param int $userid
+     */
+    protected static function export_user_data_personality(int $userid) {
+        global $DB;
+        $context = \context_user::instance($userid);
+        $personalitydata = [];
+        $personality = Personality::getPersonalityOf($userid);
+        if ($personality !== false) {
+
+            $personalitydata = ['type' => $personality->type,
+                'gender' => PersonalityQuestionnaire::getAnswerQuestionTextOf(0,
+                        $personality->gender), 'judgment' => $personality->judgment,
+                'attitude' => $personality->attitude, 'perception' => $personality->perception,
+                'extrovert' => $personality->extrovert
+            ];
+        }
+        writer::with_context($context)->export_data(
+                [get_string('privacy:export:btog_personality', 'block_task_oriented_groups')
+                ], (object) $personalitydata);
+    }
+
+    /**
+     * Export the competences of an user.
+     *
+     * @param int $userid
+     */
+    protected static function export_user_data_competences(int $userid) {
+        global $DB;
+        $context = \context_user::instance($userid);
+        $competencesdata = [];
+        $competences = Competences::getCompetencesOf($userid);
+        if ($competences !== false) {
+
+            $competencesdata = ['verbal' => $competences->verbal,
+                'logic_mathematics' => $competences->logic_mathematics,
+                'visual_spatial' => $competences->visual_spatial,
+                'kinestesica_corporal' => $competences->kinestesica_corporal,
+                'musical_rhythmic' => $competences->musical_rhythmic,
+                'intrapersonal' => $competences->intrapersonal,
+                'interpersonal' => $competences->interpersonal,
+                'naturalist_environmental' => $competences->naturalist_environmental
+            ];
+        }
+        writer::with_context($context)->export_data(
+                [get_string('privacy:export:btog_competences', 'block_task_oriented_groups')
+                ], (object) $competencesdata);
     }
 }
