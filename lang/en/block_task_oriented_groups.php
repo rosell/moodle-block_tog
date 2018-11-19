@@ -387,3 +387,6 @@ $string['competences_verbal_factor'] = 'Linguistic competence';
 $string['competences_visual_spatial_factor'] = 'Visual-Spatial competence';
 $string['competences_go_to_test'] = 'Modify competences test';
 
+$string['composite_title'] = 'Composite groups';
+$string['composite_heading'] = 'Composite groups by task';
+$string['composite_alert_no_capanility'] = 'Yopu do not have the capability to composite groups. Ask to the administrator the required privileges to do it.';

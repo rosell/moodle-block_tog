@@ -50,6 +50,8 @@ class block_task_oriented_groups extends block_base {
      * @return stdClass block content info
      */
     public function get_content() {
+        global $COURSE;
+
         if (!is_null($this->content)) {
             return $this->content;
         }
@@ -60,7 +62,9 @@ class block_task_oriented_groups extends block_base {
 
         if (has_capability('moodle/course:managegroups', $this->page->context)) {
 
-            $contenturl = new moodle_url('/blocks/task_oriented_groups/view/composite.php');
+            $contenturl = new moodle_url('/blocks/task_oriented_groups/view/composite.php',
+                    array('courseid' => $COURSE->id
+                    ));
             $contentlink = html_writer::link($contenturl,
                     get_string('main:composite', 'block_task_oriented_groups'));
             $contents[] = html_writer::tag('li', $contentlink);
