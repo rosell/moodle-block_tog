@@ -49,14 +49,19 @@ class block_task_oriented_groups_external extends external_api {
         $params = self::validate_parameters(self::store_personality_answer_parameters(),
                 array('question' => $question, 'answer' => $answer
                 ));
+        $question = $params['question'];
+        $answer = $params['answer'];
         $userid = $USER->id;
+
         $updated = PersonalityQuestionnaire::setPersonalityAnswerFor($question, $answer, $userid);
+        $calculated = false;
         if ($updated) {
 
-            Personality::calculatePersonalityOf($userid);
+            $calculated = Personality::calculatePersonalityOf($userid);
         }
         $result = array();
         $result['success'] = $updated;
+        $result['calculated'] = $calculated;
         return $result;
     }
 
@@ -67,7 +72,9 @@ class block_task_oriented_groups_external extends external_api {
         return new external_single_structure(
                 array(
                     'success' => new external_value(PARAM_BOOL,
-                            'This is true if the answers has been stored')
+                            'This is true if the answers has been stored'),
+                    'calculated' => new external_value(PARAM_BOOL,
+                            'This is true if it is calculated the user personality')
                 ));
     }
 
@@ -91,14 +98,20 @@ class block_task_oriented_groups_external extends external_api {
         $params = self::validate_parameters(self::store_competences_answer_parameters(),
                 array('question' => $question, 'answer' => $answer
                 ));
-        $updated = CompetencesQuestionnaire::setCompetencesAnswerFor($question, $answer, $USER->id);
+        $question = $params['question'];
+        $answer = $params['answer'];
+        $userid = $USER->id;
+
+        $updated = CompetencesQuestionnaire::setCompetencesAnswerFor($question, $answer, $userid);
+        $calculated = false;
         if ($updated) {
 
-            Competences::calculateCompetencesOf($userid);
+            $calculated = Competences::calculateCompetencesOf($userid);
         }
 
         $result = array();
         $result['success'] = $updated;
+        $result['calculated'] = $calculated;
         return $result;
     }
 
@@ -109,7 +122,9 @@ class block_task_oriented_groups_external extends external_api {
         return new external_single_structure(
                 array(
                     'success' => new external_value(PARAM_BOOL,
-                            'This is true if the answers has been stored')
+                            'This is true if the answers has been stored'),
+                    'calculated' => new external_value(PARAM_BOOL,
+                            'This is true if it is calculated the user competences')
                 ));
     }
 }
