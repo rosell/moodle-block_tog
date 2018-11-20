@@ -29,15 +29,17 @@ PLUGIN_FILE="$PLUGIN_DIR/$PLUGIN_FILE"
 
 TMP_DIR=$(mktemp -d)
 mkdir $TMP_DIR/moodle-block_task_oriented_groups
-cp *.md $TMP_DIR/moodle-block_task_oriented_groups/.
-cp *.php $TMP_DIR/moodle-block_task_oriented_groups/.
-cp *.css $TMP_DIR/moodle-block_task_oriented_groups/.
-cp -r amd $TMP_DIR/moodle-block_task_oriented_groups/.
-cp -r classes $TMP_DIR/moodle-block_task_oriented_groups/.
-cp -r db $TMP_DIR/moodle-block_task_oriented_groups/.
-cp -r lang $TMP_DIR/moodle-block_task_oriented_groups/.
-cp -r templates $TMP_DIR/moodle-block_task_oriented_groups/.
-cp -r view $TMP_DIR/moodle-block_task_oriented_groups/.
+
+for file in *.md *.php *.css;
+do
+	cp $file $TMP_DIR/moodle-block_task_oriented_groups/.
+done
+for dir in amd classes db lang templates view;
+do
+	if [ -d "$dir" ]; then
+		cp -r $dir $TMP_DIR/moodle-block_task_oriented_groups/.
+	fi
+done
 pushd $TMP_DIR >/dev/null
 zip -r $PLUGIN_FILE  moodle-block_task_oriented_groups >/dev/null
 popd >/dev/null
