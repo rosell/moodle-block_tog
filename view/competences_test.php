@@ -15,6 +15,7 @@
 // along with Moodle. If not, see <http://www.gnu.org/licenses/>.
 require_once ('../../../config.php');
 use block_task_oriented_groups\CompetencesQuestionnaire;
+use block_task_oriented_groups\Competences;
 
 $PAGE->set_pagelayout('standard');
 $PAGE->set_context(context_system::instance());
@@ -24,7 +25,6 @@ $PAGE->set_url($CFG->wwwroot . '/blocks/task_oriented_groups/view/competences_te
 
 require_login();
 $answers = CompetencesQuestionnaire::getAnswersOfCurrentUser();
-$numanswers = count($answers);
 echo $OUTPUT->header();
 ?>
 <div class="container competences-questions">
@@ -88,7 +88,7 @@ for ($i = 0; $i < CompetencesQuestionnaire::countQuestions(); $i++) {
 	</div>
   <?php
 }
-if ($numanswers == CompetencesQuestionnaire::countQuestions()) {
+if (Competences::getCompetencesOfCurrentUser()) {
 
     $linkstr = get_string('competences_test_go_to_competences', 'block_task_oriented_groups');
     $linkaddr = $CFG->wwwroot . '/blocks/task_oriented_groups/view/competences.php';

@@ -15,6 +15,7 @@
 // along with Moodle. If not, see <http://www.gnu.org/licenses/>.
 require_once ('../../../config.php');
 use block_task_oriented_groups\PersonalityQuestionnaire;
+use block_task_oriented_groups\Personality;
 
 $PAGE->set_pagelayout('standard');
 $PAGE->set_context(context_system::instance());
@@ -24,7 +25,6 @@ $PAGE->set_url($CFG->wwwroot . '/blocks/task_oriented_groups/view/personality_te
 
 require_login();
 $answers = PersonalityQuestionnaire::getAnswersOfCurrentUser();
-$numanswers = count($answers);
 echo $OUTPUT->header();
 ?>
 <div class="container personality-questions">
@@ -88,7 +88,7 @@ for ($i = 0; $i < PersonalityQuestionnaire::countQuestions(); $i++) {
 	</div>
   <?php
 }
-if ($numanswers == PersonalityQuestionnaire::countQuestions()) {
+if (Personality::getPersonalityOfCurrentUser()) {
 
     $linkstr = get_string('personality_test_go_to_personality', 'block_task_oriented_groups');
     $linkaddr = $CFG->wwwroot . '/blocks/task_oriented_groups/view/personality.php';
