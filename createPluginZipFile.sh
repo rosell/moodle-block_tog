@@ -39,6 +39,8 @@ for file in *.md *.php *.css;
 do
 	cp $file $TMP_DIR/moodle-block_task_oriented_groups/.
 done
+sed -i '' -e "s/version = $CURRENT_VERSION/version = $VERSION/g" $TMP_DIR/moodle-block_task_oriented_groups/version.php
+
 for dir in amd classes db lang templates view;
 do
 	if [ -d "$dir" ]; then
@@ -46,14 +48,10 @@ do
 	fi
 done
 pushd $TMP_DIR >/dev/null
-sed -i '' -e "s/version = $CURRENT_VERSION/version = $VERSION/g" $TMP_DIR/moodle-block_task_oriented_groups/version.php
+find $PLUGIN_DIR -iname "block_task_oriented_groups_moodle35_*.zip" -exec rm {} \;
 zip -r $PLUGIN_FILE  moodle-block_task_oriented_groups >/dev/null
 popd >/dev/null
 rm -rf $TMP_DIR
-OLD_PLUGIN_FILE="$PLUGIN_DIR/block_task_oriented_groups_moodle35_$CURRENT_VERSION.zip"
-if [ -f "$OLD_PLUGIN_FILE" ]; then
- rm $OLD_PLUGIN_FILE
-fi
 echo $VERSION > $PREVIOUS_VERSION_FILE
 
 echo "Generated plugin file at: $PLUGIN_FILE"
