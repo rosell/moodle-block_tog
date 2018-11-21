@@ -9,12 +9,18 @@ DIR="$( cd -P "$( dirname "$SOURCE" )" >/dev/null && pwd )"
 pushd $DIR >/dev/null
 
 VERSION="$(date '+%Y%m%d')00"
-OLD_VERSION=$(cat version.php|grep "version = "| grep -o -E '[0-9]+')
-while [ $VERSION -le $OLD_VERSION ]
+CURRENT_VERSION=$(cat version.php|grep "version = "| grep -o -E '[0-9]+')
+PREVIOUS_VERSION=$CURRENT_VERSION
+PREVIOUS_VERSION_FILE=".previousPluginZipFileVersion"
+if [ -f $PREVIOUS_VERSION_FILE ];
+then
+	PREVIOUS_VERSION=$(cat $PREVIOUS_VERSION_FILE)
+fi
+echo $PREVIOUS_VERSION
+while [ $VERSION -le $PREVIOUS_VERSION ]
 do
  VERSION=$((VERSION+1))
 done
-sed -i '' -e "s/version = $OLD_VERSION/version = $VERSION/g" version.php
 
 grunt amd
 PLUGIN_FILE="block_task_oriented_groups_moodle35_$VERSION.zip"
@@ -41,13 +47,15 @@ do
 	fi
 done
 pushd $TMP_DIR >/dev/null
+sed -i '' -e "s/version = $CURRENT_VERSION/version = $VERSION/g" $TMP_DIR/moodle-block_task_oriented_groups/version.php
 zip -r $PLUGIN_FILE  moodle-block_task_oriented_groups >/dev/null
 popd >/dev/null
 rm -rf $TMP_DIR
-OLD_PLUGIN_FILE="$PLUGIN_DIR/block_task_oriented_groups_moodle35_$OLD_VERSION.zip"
+OLD_PLUGIN_FILE="$PLUGIN_DIR/block_task_oriented_groups_moodle35_$CURRENT_VERSION.zip"
 if [ -f "$OLD_PLUGIN_FILE" ]; then
  rm $OLD_PLUGIN_FILE
 fi
+echo $VERSION > $PREVIOUS_VERSION_FILE
 
 echo "Generated plugin file at: $PLUGIN_FILE"
 popd >/dev/null
