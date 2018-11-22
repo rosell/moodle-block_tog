@@ -44,7 +44,7 @@ define([ 'jquery', 'core/ajax', 'core/str', 'core/notification', 'core_user/part
 
 		event.stopPropagation();
 
-		var userid = $(this).attr('userid');
+		var userid = $(this).attr('data-userid');
 		var users = [ userid ];
 		var options = {
 			courseid : getUrlParameter('courseid')
@@ -66,7 +66,7 @@ define([ 'jquery', 'core/ajax', 'core/str', 'core/notification', 'core_user/part
 		var users = $(".send-select:checked").map(function() {
 
 			var checkbox = $(this);
-			var userid = checkbox.attr('userid');
+			var userid = checkbox.attr('data-userid');
 			checkbox.prop('checked', false);
 			return userid;
 		}).toArray();
@@ -89,7 +89,7 @@ define([ 'jquery', 'core/ajax', 'core/str', 'core/notification', 'core_user/part
 		event.stopPropagation();
 		var users = $(".send-select").map(function() {
 
-			return $(this).attr('userid');
+			return $(this).attr('data-userid');
 		}).toArray();
 
 		var options = {

@@ -135,11 +135,11 @@ if (has_capability('moodle/course:managegroups', $context)) {
             $rowPage = floor((count($table->data)) / 5) + 1;
             $send = html_writer::empty_tag('input',
                     array('class' => 'form-check-input send-select', 'type' => 'checkbox',
-                        'userid' => $enrolledUser->id
+                        'data-userid' => $enrolledUser->id
                     )) . html_writer::span(
                     $OUTPUT->pix_icon('t/message',
                             get_string('composite_column_send_alt', 'block_task_oriented_groups')),
-                    'send-icon', array('userid' => $enrolledUser->id
+                    'send-icon', array('data-userid' => $enrolledUser->id
                     ));
             $row = new html_table_row(
                     array(fullname($enrolledUser), $personalityFilled, $competencesFilled, $send
