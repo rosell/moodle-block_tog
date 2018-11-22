@@ -59,7 +59,7 @@ if (has_capability('moodle/course:managegroups', $context)) {
             array('for' => 'selectedRoleForUsers'
             ));
     $form .= html_writer::start_tag('select',
-            array('class' => 'form-control', 'id' => 'composite-selectedRoleForUsers'
+            array('class' => 'form-control', 'id' => 'composite__selected_role_for_users'
             ));
     foreach ($roles as $fixedroleid => $fixedrolename) {
 
@@ -176,11 +176,11 @@ if (has_capability('moodle/course:managegroups', $context)) {
                 html_writer::tag('button',
                         get_string('composite_send_selected', 'block_task_oriented_groups'),
                         array('type' => 'button', 'class' => 'btn btn-primary',
-                            'id' => 'composite-send-selected'
+                            'id' => 'composite__send_selected'
                         )) . '&nbsp;&nbsp;' . html_writer::tag('button',
                         get_string('composite_send_all', 'block_task_oriented_groups'),
                         array('type' => 'button', 'class' => 'btn btn-primary',
-                            'id' => 'composite-send-all'
+                            'id' => 'composite__send_all'
                         )), 'text-center');
         $form .= html_writer::end_div();
     }
@@ -194,8 +194,10 @@ if (has_capability('moodle/course:managegroups', $context)) {
     } else {
 
         $form .= html_writer::div(
-                html_writer::empty_tag('input',
-                        array('id' => 'composite-students', 'value' => json_encode($students)
+                html_writer::tag('textarea', json_encode($students),
+                        array('id' => 'composite__students'
+                        )) . html_writer::empty_tag('input',
+                        array('id' => 'composite__students_size', 'value' => $studentsSize
                         )), '', array('hidden' => 'hidden'
                 ));
         // -- enter the grouping name --
@@ -203,10 +205,11 @@ if (has_capability('moodle/course:managegroups', $context)) {
         $form .= html_writer::tag('label',
                 get_string('composite_grouping_name', 'block_task_oriented_groups') . '&nbsp;&nbsp' .
                 $OUTPUT->help_icon('composite_grouping_name', 'block_task_oriented_groups', ''),
-                array('for' => 'groupingName'
+                array('for' => 'composite__grouping_name'
                 ));
         $form .= html_writer::empty_tag('input',
-                array('id' => 'composite-groupingName', 'type' => 'text', 'class' => 'form-control',
+                array('id' => 'composite__grouping_name', 'type' => 'text',
+                    'class' => 'form-control',
                     'placeholder' => get_string('composite_grouping_name_placeholder',
                             'block_task_oriented_groups')
                 ));
@@ -216,28 +219,58 @@ if (has_capability('moodle/course:managegroups', $context)) {
         $form .= html_writer::tag('label',
                 get_string('composite_groups_pattern', 'block_task_oriented_groups') . '&nbsp;&nbsp' .
                 $OUTPUT->help_icon('composite_groups_pattern', 'block_task_oriented_groups', ''),
-                array('for' => 'groupsPattern'
+                array('for' => 'composite__groups_pattern'
                 ));
         $form .= html_writer::empty_tag('input',
-                array('id' => 'composite-groupsPattern', 'type' => 'text', 'class' => 'form-control',
+                array('id' => 'composite__groups_pattern', 'type' => 'text',
+                    'class' => 'form-control',
                     'value' => get_string('composite_groups_pattern_default',
                             'block_task_oriented_groups')
                 ));
         $form .= html_writer::end_div();
         // -- select the task requirements --
         $form .= html_writer::div('requirements');
-        // -- enter members per team the task requirements
+        // -- enter members per group
         $form .= html_writer::start_div('form-group');
         $form .= html_writer::tag('label',
                 get_string('composite_students_per_group', 'block_task_oriented_groups') .
                 '&nbsp;&nbsp' .
                 $OUTPUT->help_icon('composite_students_per_group', 'block_task_oriented_groups', ''),
-                array('for' => 'studentsPerGroup'
+                array('for' => 'composite__students_per_group'
                 ));
         $form .= html_writer::empty_tag('input',
-                array('id' => 'composite-studentsPerGroup', 'type' => 'number',
+                array('id' => 'composite__students_per_group', 'type' => 'number',
                     'class' => 'form-control', 'value' => '2', 'min' => '2'
                 ));
+        $form .= html_writer::tag('small', '',
+                array('class' => 'form-text text-muted',
+                    'id' => 'composite__students_per_group_help'
+                ));
+        $form .= html_writer::end_div();
+        $form .= html_writer::start_div(null, array('id' => 'composite__at_most'
+        ));
+        $form .= html_writer::start_div('form-check');
+        $form .= html_writer::empty_tag('input',
+                array('id' => 'composite__students_per_group_at_most_true', 'type' => 'radio',
+                    'class' => 'form-check-input', 'value' => 'true',
+                    'name' => 'composite_students_per_group_at_most'
+                ));
+        $form .= html_writer::tag('label', '',
+                array('class' => 'form-check-label',
+                    'for' => 'composite__students_per_group_at_most_true'
+                ));
+        $form .= html_writer::end_div();
+        $form .= html_writer::start_div('form-check');
+        $form .= html_writer::empty_tag('input',
+                array('id' => 'composite__students_per_group_at_most_false', 'type' => 'radio',
+                    'class' => 'form-check-input', 'value' => 'false',
+                    'name' => 'composite_students_per_group_at_most'
+                ));
+        $form .= html_writer::tag('label', '',
+                array('class' => 'form-check-label',
+                    'for' => 'composite__students_per_group_at_most_false'
+                ));
+        $form .= html_writer::end_div();
         $form .= html_writer::end_div();
         /*
          * <div class="form-check">

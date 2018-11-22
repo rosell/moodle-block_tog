@@ -17,8 +17,7 @@
  * @copyright 2018 UDT-IA, IIIA-CSIC
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-define([ 'jquery', 'core/ajax', 'core/str', 'core/notification', 'core_user/participants' ], function($, ajax, str, notification,
-    participants) {
+define([ 'jquery', 'core/str', 'core_user/participants' ], function($, Str, Participants) {
 
 	/**
 	 * Called when a page item has been clicked.
@@ -49,7 +48,7 @@ define([ 'jquery', 'core/ajax', 'core/str', 'core/notification', 'core_user/part
 		var options = {
 			courseid : getUrlParameter('courseid')
 		};
-		participants.init(options).showSendMessage(users);
+		Participants.init(options).showSendMessage(users);
 
 	}
 
@@ -74,7 +73,7 @@ define([ 'jquery', 'core/ajax', 'core/str', 'core/notification', 'core_user/part
 		var options = {
 			courseid : getUrlParameter('courseid')
 		};
-		participants.init(options).showSendMessage(users);
+		Participants.init(options).showSendMessage(users);
 
 	}
 
@@ -95,7 +94,7 @@ define([ 'jquery', 'core/ajax', 'core/str', 'core/notification', 'core_user/part
 		var options = {
 			courseid : getUrlParameter('courseid')
 		};
-		participants.init(options).showSendMessage(users);
+		Participants.init(options).showSendMessage(users);
 
 	}
 
@@ -104,9 +103,77 @@ define([ 'jquery', 'core/ajax', 'core/str', 'core/notification', 'core_user/part
 	 */
 	function studentsPerGroupChanged() {
 
-		var studentsPerGroup = $('#studentsPerGroup').value;
-		var students = $('#numberOfStudents').value;
-		var teams = calculateTeamsDistribution(students, studentsPerGroup);
+		var smallText = $('#composite__students_per_group_help');
+		smallText.text('');
+		var atMost = $('#composite__at_most');
+		atMost.hide();
+		var atMostTrue = $('[for=composite__students_per_group_at_most_true]');
+		atMostTrue.text('');
+		var atMostFalse = $('[for=composite__students_per_group_at_most_false]');
+		atMostFalse.text('');
+		var stringkeys = [ {
+		  key : 'composite_students_per_group_how_many_pattern',
+		  component : 'block_task_oriented_groups'
+		}, {
+		  key : 'composite_students_per_group_how_many_pattern_2',
+		  component : 'block_task_oriented_groups'
+		} ];
+		Str.get_strings(stringkeys).then(function(patterns) {
+
+			var smallText = $('#composite__students_per_group_help');
+			var atMost = $('#composite__at_most');
+			var atMostTrue = $('[for=composite__students_per_group_at_most_true]');
+			var atMostFalse = $('[for=composite__students_per_group_at_most_false]');
+			var studentsPerGroup = Number($('#composite__students_per_group').val());
+			var studentsSize = Number($('#composite__students_size').val());
+			var teams = calculateTeamsDistribution(studentsSize, studentsPerGroup);
+			var teamsAtMost = calculateTeamsDistributionAtMost(studentsSize, studentsPerGroup);
+			var text = '';
+			if (teams.length == 0 && teamsAtMost.length > 0) {
+
+				text = localizeDistribution(teamsAtMost, patterns);
+				smallText.text(text);
+
+			} else if (teams.length > 0 && teamsAtMost.length == 0) {
+
+				text = localizeDistribution(teams, patterns);
+				smallText.text(text);
+
+			} else {
+
+				text = localizeDistribution(teams, patterns);
+				atMostFalse.text(text);
+				text = localizeDistribution(teamsAtMost, patterns);
+				atMostTrue.text(text);
+			}
+
+		});
+
+	}
+
+	/**
+	 * Create the localization of a distribution.
+	 *
+	 * @param array
+	 *          distribution
+	 * @param array
+	 *          patterns
+	 */
+	function localizeDistribution(distribution, patterns) {
+
+		if (distribution.length == 2) {
+
+			return patterns[0].replace(/\{\{teams\}\}/g, distribution[0]).replace(/\{\{size\}\}/g, distribution[1]);
+
+		} else if (distribution.length == 4) {
+
+			return patterns[1].replace(/\{\{teams1\}\}/g, distribution[0]).replace(/\{\{size1\}\}/g, distribution[1]).replace(/\{\{teams2\}\}/g,
+			    distribution[2]).replace(/\{\{size2}}/g, distribution[3]);
+
+		} else {
+
+			return '';
+		}
 
 	}
 
@@ -116,7 +183,7 @@ define([ 'jquery', 'core/ajax', 'core/str', 'core/notification', 'core_user/part
 	function selectedRoleForUsersChanged() {
 
 		var courseid = getUrlParameter('courseid');
-		var roleid = $('#selectedRoleForUsers').val();
+		var roleid = $('#composite__selected_role_for_users').val();
 		var url = window.location.href;
 		var end = url.lastIndexOf('.php') + 4;
 		url = url.substring(0, end);
@@ -212,14 +279,15 @@ define([ 'jquery', 'core/ajax', 'core/str', 'core/notification', 'core_user/part
 	  sendAllClicked : sendAllClicked,
 	  initialise : function($params) {
 
-		  $('#composite-selectedRoleForUsers').change(selectedRoleForUsersChanged);
-		  $('#composite-studentsPerGroup').change(studentsPerGroupChanged);
-		  $('#composite-send-selected').click(sendSelectedClicked);
-		  $('#composite-send-all').click(sendAllClicked);
+		  $('#composite__selected_role_for_users').change(selectedRoleForUsersChanged);
+		  $('#composite__students_per_group').change(studentsPerGroupChanged);
+		  $('#composite__send_selected').click(sendSelectedClicked);
+		  $('#composite__send_all').click(sendAllClicked);
 		  $('.fill-in-row').hide();
 		  $('.page-1').show();
 		  $('.page-item').click(pageItemClicked);
 		  $('.send-icon').click(sendIconClicked);
+		  studentsPerGroupChanged();
 	  }
 	};
 

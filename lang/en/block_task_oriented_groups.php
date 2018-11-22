@@ -413,3 +413,5 @@ $string['composite_select_role_for_users'] = 'Select members with role';
 $string['composite_select_role_for_users_help'] = 'Select the role for the memebers that has to be used to form the groups';
 $string['composite_send_selected'] = 'Send message to selected ones';
 $string['composite_send_all'] = 'Send message to all';
+$string['composite_students_per_group_how_many_pattern'] = 'You can form {{teams}} teams with {{size}} member in each one';
+$string['composite_students_per_group_how_many_pattern_2'] = 'You can form {{teams1}} teams with {{size1}} member in each one and {{teams2}} teams with {{size2}} member in each one';
