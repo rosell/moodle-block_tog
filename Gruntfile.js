@@ -2,32 +2,50 @@
 
 module.exports = function(grunt) {
 
- var path = require("path");
- var PWD = process.cwd();
+	var path = require("path");
+	var PWD = process.cwd();
 
- grunt.initConfig({
-   jshint : {
-     options : {
-      jshintrc : true
-     },
-     files : [ "**/amd/src/*.js" ]
-   },
-   uglify : {
-    dynamic_mappings : {
-     files : grunt.file.expandMapping([ "**/src/*.js", "!**/node_modules/**" ], "", {
-       cwd : PWD,
-       rename : function(destBase, destPath) {
-        destPath = destPath.replace("src", "build");
-        destPath = destPath.replace(".js", ".min.js");
-        destPath = path.resolve(PWD, destPath);
-        return destPath;
-       }
-     })
-    }
-   },
- });
+	grunt.initConfig({
+	  jshint : {
+	    options : {
+		    jshintrc : true
+	    },
+	    files : [ "**/amd/src/*.js" ]
+	  },
+	  uglify : {
+	    deploy : {
+	      files : [ {
+	        expand : true,
+	        cwd : 'amd/src',
+	        src : '**/*.js',
+	        dest : 'amd/build',
+	        rename : function(dst, src) {
+		        return dst + '/' + src.replace('.js', '.min.js');
+	        }
+	      } ]
+	    },
+	    debug : {
+	      options : {
+	        sourceMap : true,
+	        beautify : true
+	      },
+	      files : [ {
+	        expand : true,
+	        cwd : 'amd/src',
+	        src : '**/*.js',
+	        dest : 'amd/build',
+	        rename : function(dst, src) {
+		        return dst + '/' + src.replace('.js', '.min.js');
+	        }
+	      } ]
+	    }
+	  },
+	  clean : [ 'amd/build' ]
+	});
 
- grunt.loadNpmTasks("grunt-contrib-uglify");
- grunt.loadNpmTasks("grunt-contrib-jshint");
- grunt.registerTask("amd", [ "jshint", "uglify" ]);
+	grunt.loadNpmTasks("grunt-contrib-uglify");
+	grunt.loadNpmTasks("grunt-contrib-jshint");
+	grunt.loadNpmTasks('grunt-contrib-clean');
+	grunt.registerTask("amd", [ "clean", "jshint", "uglify:deploy" ]);
+	grunt.registerTask("amddebug", [ "clean", "jshint", "uglify:debug" ]);
 };

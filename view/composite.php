@@ -1,7 +1,4 @@
 <?php
-use block_task_oriented_groups\Personality;
-use block_task_oriented_groups\Competences;
-
 // This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -19,6 +16,9 @@ use block_task_oriented_groups\Competences;
 require_once ('../../../config.php');
 require_once ($CFG->dirroot . '/group/lib.php');
 require_once ($CFG->libdir . '/tablelib.php');
+
+use block_task_oriented_groups\Personality;
+use block_task_oriented_groups\Competences;
 
 $courseid = optional_param('courseid', 0, PARAM_INT);
 $roleid = optional_param('roleid', -1, PARAM_INT);
@@ -59,7 +59,7 @@ if (has_capability('moodle/course:managegroups', $context)) {
             array('for' => 'selectedRoleForUsers'
             ));
     $form .= html_writer::start_tag('select',
-            array('class' => 'form-control', 'id' => 'selectedRoleForUsers'
+            array('class' => 'form-control', 'id' => 'composite-selectedRoleForUsers'
             ));
     foreach ($roles as $fixedroleid => $fixedrolename) {
 
@@ -75,11 +75,17 @@ if (has_capability('moodle/course:managegroups', $context)) {
     $form .= html_writer::end_div();
     // --- selected users table ----
     $table = new html_table();
-    $table->head = array(get_string('composite_column_name', 'block_task_oriented_groups'),
-        get_string('composite_column_personality', 'block_task_oriented_groups'),
-        get_string('composite_column_competences', 'block_task_oriented_groups'),
-        get_string('composite_column_actions', 'block_task_oriented_groups')
+    $table->head = array(
+        new html_table_cell(get_string('composite_column_name', 'block_task_oriented_groups')),
+        new html_table_cell(get_string('composite_column_personality', 'block_task_oriented_groups')),
+        new html_table_cell(get_string('composite_column_competences', 'block_task_oriented_groups')),
+        new html_table_cell(get_string('composite_column_send', 'block_task_oriented_groups'))
     );
+    $table->head[0]->attributes['class'] = 'col-6';
+    $table->head[1]->attributes['class'] = 'col-2 text-center';
+    $table->head[2]->attributes['class'] = 'col-2 text-center';
+    $table->head[3]->attributes['class'] = 'col-2 text-center';
+
     $pageItems = array();
     $pageIndex = 1;
     $students = array();
@@ -127,9 +133,21 @@ if (has_capability('moodle/course:managegroups', $context)) {
                                 'block_task_oriented_groups'));
             }
             $rowPage = floor((count($table->data)) / 5) + 1;
-            $row = new html_table_row(
-                    array(fullname($enrolledUser), $personalityFilled, $competencesFilled, 'action'
+            $send = html_writer::empty_tag('input',
+                    array('class' => 'form-check-input send-select', 'type' => 'checkbox',
+                        'userid' => $enrolledUser->id
+                    )) . html_writer::span(
+                    $OUTPUT->pix_icon('t/message',
+                            get_string('composite_column_send_alt', 'block_task_oriented_groups')),
+                    'send-icon', array('userid' => $enrolledUser->id
                     ));
+            $row = new html_table_row(
+                    array(fullname($enrolledUser), $personalityFilled, $competencesFilled, $send
+                    ));
+            $row->cells[0]->attributes['class'] = 'col-6';
+            $row->cells[1]->attributes['class'] = 'col-2 text-center';
+            $row->cells[2]->attributes['class'] = 'col-2 text-center';
+            $row->cells[3]->attributes['class'] = 'col-2 text-center';
             $row->attributes['class'] = 'page-' . $rowPage . ' fill-in-row';
             $table->data[] = $row;
             if ($pageIndex != $rowPage) {
@@ -154,6 +172,16 @@ if (has_capability('moodle/course:managegroups', $context)) {
                 html_writer::tag('ul', implode($pageItems),
                         array('class' => 'pagination flex-wrap'
                         )), 'row justify-content-md-center');
+        $form .= html_writer::div(
+                html_writer::tag('button',
+                        get_string('composite_send_selected', 'block_task_oriented_groups'),
+                        array('type' => 'button', 'class' => 'btn btn-primary',
+                            'id' => 'composite-send-selected'
+                        )) . '&nbsp;&nbsp;' . html_writer::tag('button',
+                        get_string('composite_send_all', 'block_task_oriented_groups'),
+                        array('type' => 'button', 'class' => 'btn btn-primary',
+                            'id' => 'composite-send-all'
+                        )), 'text-center');
         $form .= html_writer::end_div();
     }
     $studentsSize = count($students);
@@ -167,7 +195,7 @@ if (has_capability('moodle/course:managegroups', $context)) {
 
         $form .= html_writer::div(
                 html_writer::empty_tag('input',
-                        array('id' => 'students', 'value' => json_encode($students)
+                        array('id' => 'composite-students', 'value' => json_encode($students)
                         )), '', array('hidden' => 'hidden'
                 ));
         // -- enter the grouping name --
@@ -178,7 +206,7 @@ if (has_capability('moodle/course:managegroups', $context)) {
                 array('for' => 'groupingName'
                 ));
         $form .= html_writer::empty_tag('input',
-                array('id' => 'groupingName', 'type' => 'text', 'class' => 'form-control',
+                array('id' => 'composite-groupingName', 'type' => 'text', 'class' => 'form-control',
                     'placeholder' => get_string('composite_grouping_name_placeholder',
                             'block_task_oriented_groups')
                 ));
@@ -191,7 +219,7 @@ if (has_capability('moodle/course:managegroups', $context)) {
                 array('for' => 'groupsPattern'
                 ));
         $form .= html_writer::empty_tag('input',
-                array('id' => 'groupsPattern', 'type' => 'text', 'class' => 'form-control',
+                array('id' => 'composite-groupsPattern', 'type' => 'text', 'class' => 'form-control',
                     'value' => get_string('composite_groups_pattern_default',
                             'block_task_oriented_groups')
                 ));
@@ -207,8 +235,8 @@ if (has_capability('moodle/course:managegroups', $context)) {
                 array('for' => 'studentsPerGroup'
                 ));
         $form .= html_writer::empty_tag('input',
-                array('id' => 'studentsPerGroup', 'type' => 'number', 'class' => 'form-control',
-                    'value' => '2', 'min' => '2'
+                array('id' => 'composite-studentsPerGroup', 'type' => 'number',
+                    'class' => 'form-control', 'value' => '2', 'min' => '2'
                 ));
         $form .= html_writer::end_div();
         /*
