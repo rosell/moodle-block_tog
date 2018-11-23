@@ -258,6 +258,33 @@ define([ 'jquery', 'core/str', 'core_user/participants' ], function($, Str, Part
 		}
 	}
 
+	/**
+	 * Called when want use the at most memebers per group.
+	 *
+	 * @param event
+	 *          with the clicked information.
+	 */
+	function studentsPerGroupAtMostTrue(event) {
+
+		event.stopPropagation();
+		$('#composite__at_most').val('true');
+
+	}
+
+	/**
+	 * Called when want not use the at most memebers per group.
+	 *
+	 * @param event
+	 *          with the clicked information.
+	 */
+	function studentsPerGroupAtMostFalse(event) {
+
+		event.stopPropagation();
+		$('#composite__at_most').val('false');
+
+	}
+
+
 	return {
 	  pageItemClicked : pageItemClicked,
 	  sendIconClicked : sendIconClicked,
@@ -267,12 +294,16 @@ define([ 'jquery', 'core/str', 'core_user/participants' ], function($, Str, Part
 	  calculateTeamsDistribution : calculateTeamsDistribution,
 	  sendSelectedClicked : sendSelectedClicked,
 	  sendAllClicked : sendAllClicked,
+	  studentsPerGroupAtMostTrue:studentsPerGroupAtMostTrue,
+	  studentsPerGroupAtMostFalse:studentsPerGroupAtMostFalse,
 	  initialise : function($params) {
 
 		  $('#composite__selected_role_for_users').change(selectedRoleForUsersChanged);
 		  $('#composite__students_per_group').change(studentsPerGroupChanged);
 		  $('#composite__send_selected').click(sendSelectedClicked);
 		  $('#composite__send_all').click(sendAllClicked);
+		  $('#composite__students_per_group_at_most_true').click(studentsPerGroupAtMostTrue);
+		  $('#composite__students_per_group_at_most_false').click(studentsPerGroupAtMostFalse);
 		  $('.fill-in-row').hide();
 		  $('.page-1').show();
 		  $('.page-item').click(pageItemClicked);
