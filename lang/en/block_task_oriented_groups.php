@@ -444,5 +444,8 @@ $string['composite_requirements_level_3'] = 'Advanced';
 $string['composite_requirements_level_4'] = 'Expert';
 $string['composite_requirements_none'] = 'At the moment the task does not have competence requirements. The members are grouped based on gender and personality.';
 $string['composite_requirements_pattern'] = 'For the competence {$a->factor} is {$a->importance} a minimum {$a->level} level';
-
-
+$string['composite_performance'] = 'Performance';
+$string['composite_performance_help'] = 'Define if you want over performance or under performance teams';
+$string['composite_performance_over'] = 'Over performance';
+$string['composite_performance_under'] = 'Under performance';
+$string['composite_submit'] = 'Composite groups';

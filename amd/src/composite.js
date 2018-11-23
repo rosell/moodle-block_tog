@@ -407,6 +407,19 @@ define([ 'jquery', 'core/str', 'core_user/participants' ], function($, Str, Part
 
 	}
 
+	/**
+	 * Called when want to composite the groups.
+	 *
+	 * @param event
+	 *          with the clicked information.
+	 */
+	function compositeSubmitClicked(event) {
+
+		event.stopPropagation();
+		alert("Composite them");
+	}
+
+
 	return {
 	  pageItemClicked : pageItemClicked,
 	  sendIconClicked : sendIconClicked,
@@ -419,6 +432,7 @@ define([ 'jquery', 'core/str', 'core_user/participants' ], function($, Str, Part
 	  studentsPerGroupAtMostTrueClicked : studentsPerGroupAtMostTrueClicked,
 	  studentsPerGroupAtMostFalseClicked : studentsPerGroupAtMostFalseClicked,
 	  requirementsAddClicked : requirementsAddClicked,
+	  compositeSubmitClicked:compositeSubmitClicked,
 	  initialise : function($params) {
 
 		  $('#composite__selected_role_for_users').change(selectedRoleForUsersChanged);
@@ -428,6 +442,7 @@ define([ 'jquery', 'core/str', 'core_user/participants' ], function($, Str, Part
 		  $('#composite__students_per_group_at_most_true').click(studentsPerGroupAtMostTrueClicked);
 		  $('#composite__students_per_group_at_most_false').click(studentsPerGroupAtMostFalseClicked);
 		  $('#composite__requirements_add').click(requirementsAddClicked);
+		  $('#composite__submit').click(compositeSubmitClicked);
 		  $('.fill-in-row').hide();
 		  $('.page-1').show();
 		  $('.page-item').click(pageItemClicked);

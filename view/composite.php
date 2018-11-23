@@ -358,21 +358,33 @@ if (has_capability('moodle/course:managegroups', $context)) {
                 ));
         $form .= html_writer::end_div();
         $form .= html_writer::end_div();
-        /*
-         * <div class="form-group">
-         * <label for="overperformance">overperformance</label> <input
-         * type="range"
-         * class="form-control-range"
-         * id="overperformance"
-         * >
-         * </div>
-         * <div class="row justify-content-md-center">
-         * <button
-         * type="submit"
-         * class="btn btn-primary"
-         * >Submit</button>
-         * </div>
-         */
+        // -- overperformance ---
+        $form .= html_writer::start_div('form-group');
+        $form .= html_writer::tag('label',
+                get_string('composite_performance', 'block_task_oriented_groups') . '&nbsp;&nbsp' .
+                $OUTPUT->help_icon('composite_performance', 'block_task_oriented_groups', ''),
+                array('for' => 'composite__performance'
+                ));
+        $form .= html_writer::start_div('row');
+        $form .= html_writer::div(
+                get_string('composite_performance_over', 'block_task_oriented_groups'), 'col-md-3');
+        $form .= html_writer::div(
+                html_writer::empty_tag('input',
+                        array('id' => 'composite__students_per_group_at_most_false',
+                            'type' => 'range', 'class' => 'form-control-range', 'value' => 'false',
+                            'name' => 'composite_students_per_group_at_most', 'min' => '0',
+                            'max' => '1', 'step' => '0.01'
+                        )), 'col');
+        $form .= html_writer::div(
+                get_string('composite_performance_under', 'block_task_oriented_groups'), 'col-md-3');
+        $form .= html_writer::end_div();
+        $form .= html_writer::end_div();
+        $form .= html_writer::start_div('row align-items-center');
+        $form .= html_writer::tag('button',
+                get_string('composite_submit', 'block_task_oriented_groups'),
+                array('type' => 'button', 'class' => 'btn btn-primary', 'id' => 'composite__submit'
+                ));
+        $form .= html_writer::end_div();
     }
     $form .= html_writer::end_tag('form');
     echo $form;
