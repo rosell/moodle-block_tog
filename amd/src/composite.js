@@ -103,14 +103,8 @@ define([ 'jquery', 'core/str', 'core_user/participants' ], function($, Str, Part
 	 */
 	function studentsPerGroupChanged() {
 
-		var smallText = $('#composite__students_per_group_help');
-		smallText.text('');
-		var atMost = $('#composite__at_most');
-		atMost.hide();
-		var atMostTrue = $('[for=composite__students_per_group_at_most_true]');
-		atMostTrue.text('');
-		var atMostFalse = $('[for=composite__students_per_group_at_most_false]');
-		atMostFalse.text('');
+		$('#composite__students_per_group_help').text('');
+		$('#composite__at_most_selection').hide();
 		var stringkeys = [ {
 		  key : 'composite_students_per_group_how_many_pattern',
 		  component : 'block_task_oriented_groups'
@@ -120,31 +114,27 @@ define([ 'jquery', 'core/str', 'core_user/participants' ], function($, Str, Part
 		} ];
 		Str.get_strings(stringkeys).then(function(patterns) {
 
-			var smallText = $('#composite__students_per_group_help');
-			var atMost = $('#composite__at_most');
-			var atMostTrue = $('[for=composite__students_per_group_at_most_true]');
-			var atMostFalse = $('[for=composite__students_per_group_at_most_false]');
 			var studentsPerGroup = Number($('#composite__students_per_group').val());
 			var studentsSize = Number($('#composite__students_size').val());
 			var teams = calculateTeamsDistribution(studentsSize, studentsPerGroup);
 			var teamsAtMost = calculateTeamsDistributionAtMost(studentsSize, studentsPerGroup);
-			var text = '';
 			if (teams.length == 0 && teamsAtMost.length > 0) {
 
-				text = localizeDistribution(teamsAtMost, patterns);
-				smallText.text(text);
+				$('#composite__students_per_group_help').text(localizeDistribution(teamsAtMost, patterns));
+				$('#composite__at_most').val('true');
 
-			} else if (teams.length > 0 && teamsAtMost.length == 0) {
+			} else if (teams.length > 0 && teamsAtMost.length == 0 || teams.toString() == teamsAtMost.toString()) {
 
-				text = localizeDistribution(teams, patterns);
-				smallText.text(text);
+				$('#composite__students_per_group_help').text(localizeDistribution(teams, patterns));
+				$('#composite__at_most').val('false');
 
 			} else {
 
-				text = localizeDistribution(teams, patterns);
-				atMostFalse.text(text);
-				text = localizeDistribution(teamsAtMost, patterns);
-				atMostTrue.text(text);
+				$('[for=composite__students_per_group_at_most_false]').text(localizeDistribution(teams, patterns));
+				$('[for=composite__students_per_group_at_most_true]').text(localizeDistribution(teamsAtMost, patterns));
+				$('#composite__at_most').val('true');
+				$('#composite__students_per_group_at_most_true').prop('checked', true);
+				$('#composite__at_most_selection').show();
 			}
 
 		});

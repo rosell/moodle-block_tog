@@ -198,6 +198,8 @@ if (has_capability('moodle/course:managegroups', $context)) {
                         array('id' => 'composite__students'
                         )) . html_writer::empty_tag('input',
                         array('id' => 'composite__students_size', 'value' => $studentsSize
+                        )) . html_writer::empty_tag('input',
+                        array('id' => 'composite__at_most', 'value' => 'false'
                         )), '', array('hidden' => 'hidden'
                 ));
         // -- enter the grouping name --
@@ -240,15 +242,17 @@ if (has_capability('moodle/course:managegroups', $context)) {
                 ));
         $form .= html_writer::empty_tag('input',
                 array('id' => 'composite__students_per_group', 'type' => 'number',
-                    'class' => 'form-control', 'value' => '2', 'min' => '2'
+                    'class' => 'form-control', 'value' => '2', 'min' => '2',
+                    'max' => ceil($studentsSize / 2)
                 ));
         $form .= html_writer::tag('small', '',
                 array('class' => 'form-text text-muted',
                     'id' => 'composite__students_per_group_help'
                 ));
         $form .= html_writer::end_div();
-        $form .= html_writer::start_div(null, array('id' => 'composite__at_most'
+        $form .= html_writer::start_div(null, array('id' => 'composite__at_most_selection'
         ));
+
         $form .= html_writer::start_div('form-check');
         $form .= html_writer::empty_tag('input',
                 array('id' => 'composite__students_per_group_at_most_true', 'type' => 'radio',
@@ -273,31 +277,6 @@ if (has_capability('moodle/course:managegroups', $context)) {
         $form .= html_writer::end_div();
         $form .= html_writer::end_div();
         /*
-         * <div class="form-check">
-         * <input
-         * class="form-check-input"
-         * type="radio"
-         * name="atMostSelection"
-         * id="atMostSelectionFalse"
-         * value="false"
-         * checked
-         * > <label
-         * class="form-check-label"
-         * for="atMostSelectionFalse"
-         * > Default radio </label>
-         * </div>
-         * <div class="form-check">
-         * <input
-         * class="form-check-input"
-         * type="radio"
-         * name="atMostSelection"
-         * id="atMostSelectionTrue"
-         * value="true"
-         * > <label
-         * class="form-check-label"
-         * for="atMostSelectionTrue"
-         * > Second default radio </label>
-         * </div>
          * <div class="form-group">
          * <label for="overperformance">overperformance</label> <input
          * type="range"
