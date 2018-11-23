@@ -13,3 +13,7 @@
 .competences-question {
 	padding: 10px;
 }
+
+.composite-requirements-select-max {
+	max-width: 280px !important;
+}

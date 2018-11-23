@@ -264,7 +264,7 @@ define([ 'jquery', 'core/str', 'core_user/participants' ], function($, Str, Part
 	 * @param event
 	 *          with the clicked information.
 	 */
-	function studentsPerGroupAtMostTrue(event) {
+	function studentsPerGroupAtMostTrueClicked(event) {
 
 		event.stopPropagation();
 		$('#composite__at_most').val('true');
@@ -277,13 +277,135 @@ define([ 'jquery', 'core/str', 'core_user/participants' ], function($, Str, Part
 	 * @param event
 	 *          with the clicked information.
 	 */
-	function studentsPerGroupAtMostFalse(event) {
+	function studentsPerGroupAtMostFalseClicked(event) {
 
 		event.stopPropagation();
 		$('#composite__at_most').val('false');
 
 	}
 
+	/**
+	 * Called when want to remove a requirement.
+	 *
+	 * @param event
+	 *          with the clicked information.
+	 */
+	function requirementsRemoveClicked(event) {
+
+		event.stopPropagation();
+
+		var requirement = $(this).parent();
+		var requirements = JSON.parse($('#composite__requirements').val());
+		var factor = Number(requirement.attr('data-factor'));
+		switch (factor) {
+		case 0:
+			delete requirements.verbal;
+			break;
+		case 1:
+			delete requirements.logic_mathematics;
+			break;
+		case 2:
+			delete requirements.visual_spatial;
+			break;
+		case 3:
+			delete requirements.kinestesica_corporal;
+			break;
+		case 4:
+			delete requirements.musical_rhythmic;
+			break;
+		case 5:
+			delete requirements.intrapersonal;
+			break;
+		case 6:
+			delete requirements.interpersonal;
+			break;
+		default:
+			delete requirements.naturalist_environmental;
+		}
+		$('#composite__requirements_factor_' + factor).show();
+		$('#composite__requirements_factor').val(factor);
+		$('#composite__requirements_add').prop('disabled', false);
+		$('#composite__requirements').val(JSON.stringify(requirements));
+		requirement.remove();
+		if ($('#composite__requirements_list').children('li').length == 0) {
+
+			$('#composite__requirements_none').show();
+		}
+	}
+
+	/**
+	 * Called when want to add a requirement.
+	 *
+	 * @param event
+	 *          with the clicked information.
+	 */
+	function requirementsAddClicked(event) {
+
+		event.stopPropagation();
+		var factorSelector = $('#composite__requirements_factor');
+		var factor = Number(factorSelector.val());
+		var level = Number($('#composite__requirements_level').val());
+		var importance = Number($('#composite__requirements_importance').val());
+		var requirements = JSON.parse($('#composite__requirements').val());
+		var requirement = {
+		  'level' : level * 0.2,
+		  'importance' : importance * 0.2
+		};
+		switch (factor) {
+		case 0:
+			requirements.verbal = requirement;
+			break;
+		case 1:
+			requirements.logic_mathematics = requirement;
+			break;
+		case 2:
+			requirements.visual_spatial = requirement;
+			break;
+		case 3:
+			requirements.kinestesica_corporal = requirement;
+			break;
+		case 4:
+			requirements.musical_rhythmic = requirement;
+			break;
+		case 5:
+			requirements.intrapersonal = requirement;
+			break;
+		case 6:
+			requirements.interpersonal = requirement;
+			break;
+		default:
+			requirements.naturalist_environmental = requirement;
+		}
+
+		$('#composite__requirements_factor_' + factor).hide();
+		factorSelector.val('');
+		$(factorSelector.children('option').get().reverse()).each(function() {
+			if ($(this).css('display') != 'none') {
+				factorSelector.val($(this).val());
+			}
+		});
+		if (factorSelector.val() == '' || factorSelector.val() == null) {
+			// no more values
+			$('#composite__requirements_add').prop('disabled', true);
+		}
+		$('#composite__requirements').val(JSON.stringify(requirements));
+		$('#composite__requirements_none').hide();
+		var requirementElement = $('<li class="list-group-item" data-factor="' + factor + '"></li>');
+		var values = {
+		  factor : $('#composite__requirements_factor_' + factor).text().trim().toLowerCase(),
+		  level : $('#composite__requirements_level_' + level).text().trim().toLowerCase(),
+		  importance : $('#composite__requirements_importance_' + importance).text().trim().toLowerCase()
+		};
+		Str.get_string('composite_requirements_pattern', 'block_task_oriented_groups', values).then(function(pattern) {
+			requirementElement.append('<span>' + pattern + '</span>');
+			requirementElement.append('&nbsp;&nbsp;');
+			var removeAction = $('<i class="fa fa-trash"></i>');
+			requirementElement.append(removeAction);
+			removeAction.click(requirementsRemoveClicked);
+		});
+		$('#composite__requirements_list').append(requirementElement);
+
+	}
 
 	return {
 	  pageItemClicked : pageItemClicked,
@@ -294,16 +416,18 @@ define([ 'jquery', 'core/str', 'core_user/participants' ], function($, Str, Part
 	  calculateTeamsDistribution : calculateTeamsDistribution,
 	  sendSelectedClicked : sendSelectedClicked,
 	  sendAllClicked : sendAllClicked,
-	  studentsPerGroupAtMostTrue:studentsPerGroupAtMostTrue,
-	  studentsPerGroupAtMostFalse:studentsPerGroupAtMostFalse,
+	  studentsPerGroupAtMostTrueClicked : studentsPerGroupAtMostTrueClicked,
+	  studentsPerGroupAtMostFalseClicked : studentsPerGroupAtMostFalseClicked,
+	  requirementsAddClicked : requirementsAddClicked,
 	  initialise : function($params) {
 
 		  $('#composite__selected_role_for_users').change(selectedRoleForUsersChanged);
 		  $('#composite__students_per_group').change(studentsPerGroupChanged);
 		  $('#composite__send_selected').click(sendSelectedClicked);
 		  $('#composite__send_all').click(sendAllClicked);
-		  $('#composite__students_per_group_at_most_true').click(studentsPerGroupAtMostTrue);
-		  $('#composite__students_per_group_at_most_false').click(studentsPerGroupAtMostFalse);
+		  $('#composite__students_per_group_at_most_true').click(studentsPerGroupAtMostTrueClicked);
+		  $('#composite__students_per_group_at_most_false').click(studentsPerGroupAtMostFalseClicked);
+		  $('#composite__requirements_add').click(requirementsAddClicked);
 		  $('.fill-in-row').hide();
 		  $('.page-1').show();
 		  $('.page-item').click(pageItemClicked);

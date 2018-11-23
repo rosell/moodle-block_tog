@@ -200,8 +200,92 @@ if (has_capability('moodle/course:managegroups', $context)) {
                         array('id' => 'composite__students_size', 'value' => $studentsSize
                         )) . html_writer::empty_tag('input',
                         array('id' => 'composite__at_most', 'value' => 'false'
+                        )) . html_writer::tag('textarea', '{}',
+                        array('id' => 'composite__requirements'
                         )), '', array('hidden' => 'hidden'
                 ));
+        // -- select the task requirements --
+        $form .= html_writer::start_tag('fieldset', array('class' => 'border p-2'
+        ));
+        $form .= html_writer::tag('legend',
+                get_string('composite_requirements', 'block_task_oriented_groups') . '&nbsp;&nbsp' .
+                $OUTPUT->help_icon('composite_requirements', 'block_task_oriented_groups', ''),
+                array('class' => 'w-auto'
+                ));
+        $form .= html_writer::start_div('form-row');
+        $form .= html_writer::start_div('form-group col-md-4 composite-requirements-select-max');
+        $form .= html_writer::tag('label',
+                get_string('composite_requirements_factor', 'block_task_oriented_groups') .
+                '&nbsp;&nbsp' .
+                $OUTPUT->help_icon('composite_requirements_factor', 'block_task_oriented_groups', ''),
+                array('for' => 'composite__requirements_factor'
+                ));
+        $form .= html_writer::start_tag('select',
+                array('class' => 'form-control', 'id' => 'composite__requirements_factor'
+                ));
+        for ($i = 0; $i < 8; $i++) {
+
+            $form .= html_writer::tag('option',
+                    get_string('composite_requirements_factor_' . $i, 'block_task_oriented_groups'),
+                    array('value' => $i, 'id' => 'composite__requirements_factor_' . $i
+                    ));
+        }
+        $form .= html_writer::end_tag('select');
+        $form .= html_writer::end_div();
+        $form .= html_writer::start_div('form-group col-md-4 composite-requirements-select-max');
+        $form .= html_writer::tag('label',
+                get_string('composite_requirements_level', 'block_task_oriented_groups') .
+                '&nbsp;&nbsp' .
+                $OUTPUT->help_icon('composite_requirements_level', 'block_task_oriented_groups', ''),
+                array('for' => 'composite__requirements_level'
+                ));
+        $form .= html_writer::start_tag('select',
+                array('class' => 'form-control', 'id' => 'composite__requirements_level'
+                ));
+        for ($i = 0; $i < 5; $i++) {
+
+            $form .= html_writer::tag('option',
+                    get_string('composite_requirements_level_' . $i, 'block_task_oriented_groups'),
+                    array('value' => $i, 'id' => 'composite__requirements_level_' . $i
+                    ));
+        }
+        $form .= html_writer::end_tag('select');
+        $form .= html_writer::end_div();
+        $form .= html_writer::start_div('form-group col-md-3 composite-requirements-select-max');
+        $form .= html_writer::tag('label',
+                get_string('composite_requirements_importance', 'block_task_oriented_groups') .
+                '&nbsp;&nbsp' . $OUTPUT->help_icon('composite_requirements_importance',
+                        'block_task_oriented_groups', ''),
+                array('for' => 'composite__requirements_importance'
+                ));
+        $form .= html_writer::start_tag('select',
+                array('class' => 'form-control', 'id' => 'composite__requirements_importance'
+                ));
+        for ($i = 0; $i < 5; $i++) {
+
+            $form .= html_writer::tag('option',
+                    get_string('composite_requirements_importance_' . $i,
+                            'block_task_oriented_groups'),
+                    array('value' => $i, 'id' => 'composite__requirements_importance_' . $i
+                    ));
+        }
+        $form .= html_writer::end_tag('select');
+        $form .= html_writer::end_div();
+        $form .= html_writer::div(
+                html_writer::tag('button',
+                        get_string('composite_requirements_add', 'block_task_oriented_groups'),
+                        array('class' => 'btn btn-primary', 'type' => 'button',
+                            'id' => 'composite__requirements_add'
+                        )), 'form-group col-md align-self-center');
+        $form .= html_writer::end_div();
+        $form .= html_writer::div(
+                get_string('composite_requirements_none', 'block_task_oriented_groups'),
+                'alert alert-info', array('id' => 'composite__requirements_none', 'role' => 'alert'
+                ));
+        $form .= html_writer::div('<ul class="list-group"></ul>', '',
+                array('id' => 'composite__requirements_list'
+                ));
+        $form .= html_writer::end_tag('fieldset');
         // -- enter the grouping name --
         $form .= html_writer::start_div('form-group');
         $form .= html_writer::tag('label',
@@ -230,8 +314,6 @@ if (has_capability('moodle/course:managegroups', $context)) {
                             'block_task_oriented_groups')
                 ));
         $form .= html_writer::end_div();
-        // -- select the task requirements --
-        $form .= html_writer::div('requirements');
         // -- enter members per group
         $form .= html_writer::start_div('form-group');
         $form .= html_writer::tag('label',
