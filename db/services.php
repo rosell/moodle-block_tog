@@ -33,6 +33,11 @@ $functions = array(
         'classpath' => 'blocks/task_oriented_groups/externallib.php',
         'description' => 'Allow to store the user answer to a question of the competences test',
         'type' => 'write', 'ajax' => true
+    ),
+    'block_task_oriented_groups_composite_groups' => array(
+        'classname' => 'block_task_oriented_groups_external', 'methodname' => 'composite_groups',
+        'classpath' => 'blocks/task_oriented_groups/externallib.php',
+        'description' => 'Allow to composite the groups', 'type' => 'write', 'ajax' => true
     )
 );
 // We define the services to install as pre-build services. A pre-build service is not editable by
@@ -40,7 +45,8 @@ $functions = array(
 $services = array(
     'task_oriented_groups' => array(
         'functions' => array('block_task_oriented_groups_store_personality_answer',
-            'block_task_oriented_groups_store_competences_answer'
+            'block_task_oriented_groups_store_competences_answer',
+            'block_task_oriented_groups_composite_groups'
         ), 'restrictedusers' => 0, 'enabled' => 1
     )
 );

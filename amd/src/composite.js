@@ -17,7 +17,8 @@
  * @copyright 2018 UDT-IA, IIIA-CSIC
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-define([ 'jquery', 'core/str', 'core_user/participants' ], function($, Str, Participants) {
+define([ 'jquery', 'core/str', 'core_user/participants', 'core/ajax', 'core/config', 'core/notification' ], function($, Str, Participants,
+    ajax, config, notification) {
 
 	/**
 	 * Called when a page item has been clicked.
@@ -99,41 +100,41 @@ define([ 'jquery', 'core/str', 'core_user/participants' ], function($, Str, Part
 	}
 
 	/**
-	 * Called when teh number of students per group has been changed.
+	 * Called when teh number of members per group has been changed.
 	 */
-	function studentsPerGroupChanged() {
+	function membersPerGroupChanged() {
 
-		$('#composite__students_per_group_help').text('');
+		$('#composite__members_per_group_help').text('');
 		$('#composite__at_most_selection').hide();
 		var stringkeys = [ {
-		  key : 'composite_students_per_group_how_many_pattern',
+		  key : 'composite_members_per_group_how_many_pattern',
 		  component : 'block_task_oriented_groups'
 		}, {
-		  key : 'composite_students_per_group_how_many_pattern_2',
+		  key : 'composite_members_per_group_how_many_pattern_2',
 		  component : 'block_task_oriented_groups'
 		} ];
 		Str.get_strings(stringkeys).then(function(patterns) {
 
-			var studentsPerGroup = Number($('#composite__students_per_group').val());
-			var studentsSize = Number($('#composite__students_size').val());
-			var teams = calculateTeamsDistribution(studentsSize, studentsPerGroup);
-			var teamsAtMost = calculateTeamsDistributionAtMost(studentsSize, studentsPerGroup);
-			if (teams.length == 0 && teamsAtMost.length > 0) {
+			var membersPerGroup = Number($('#composite__members_per_group').val());
+			var membersSize = Number($('#composite__members_size').val());
+			var groups = calculateGroupsDistribution(membersSize, membersPerGroup);
+			var groupsAtMost = calculateGroupsDistributionAtMost(membersSize, membersPerGroup);
+			if (groups.length == 0 && groupsAtMost.length > 0) {
 
-				$('#composite__students_per_group_help').text(localizeDistribution(teamsAtMost, patterns));
+				$('#composite__members_per_group_help').text(localizeDistribution(groupsAtMost, patterns));
 				$('#composite__at_most').val('true');
 
-			} else if (teams.length > 0 && teamsAtMost.length == 0 || teams.toString() == teamsAtMost.toString()) {
+			} else if (groups.length > 0 && groupsAtMost.length == 0 || groups.toString() == groupsAtMost.toString()) {
 
-				$('#composite__students_per_group_help').text(localizeDistribution(teams, patterns));
+				$('#composite__members_per_group_help').text(localizeDistribution(groups, patterns));
 				$('#composite__at_most').val('false');
 
 			} else {
 
-				$('[for=composite__students_per_group_at_most_false]').text(localizeDistribution(teams, patterns));
-				$('[for=composite__students_per_group_at_most_true]').text(localizeDistribution(teamsAtMost, patterns));
+				$('[for=composite__members_per_group_at_most_false]').text(localizeDistribution(groups, patterns));
+				$('[for=composite__members_per_group_at_most_true]').text(localizeDistribution(groupsAtMost, patterns));
 				$('#composite__at_most').val('true');
-				$('#composite__students_per_group_at_most_true').prop('checked', true);
+				$('#composite__members_per_group_at_most_true').prop('checked', true);
 				$('#composite__at_most_selection').show();
 			}
 
@@ -153,12 +154,12 @@ define([ 'jquery', 'core/str', 'core_user/participants' ], function($, Str, Part
 
 		if (distribution.length == 2) {
 
-			return patterns[0].replace(/\{\{teams\}\}/g, distribution[0]).replace(/\{\{size\}\}/g, distribution[1]);
+			return patterns[0].replace(/\{\{groups\}\}/g, distribution[0]).replace(/\{\{size\}\}/g, distribution[1]);
 
 		} else if (distribution.length == 4) {
 
-			return patterns[1].replace(/\{\{teams1\}\}/g, distribution[0]).replace(/\{\{size1\}\}/g, distribution[1]).replace(/\{\{teams2\}\}/g,
-			    distribution[2]).replace(/\{\{size2}}/g, distribution[3]);
+			return patterns[1].replace(/\{\{groups1\}\}/g, distribution[0]).replace(/\{\{size1\}\}/g, distribution[1]).replace(
+			    /\{\{groups2\}\}/g, distribution[2]).replace(/\{\{size2}}/g, distribution[3]);
 
 		} else {
 
@@ -168,7 +169,7 @@ define([ 'jquery', 'core/str', 'core_user/participants' ], function($, Str, Part
 	}
 
 	/**
-	 * Called when teh number of students per group has been changed.
+	 * Called when teh number of members per group has been changed.
 	 */
 	function selectedRoleForUsersChanged() {
 
@@ -192,14 +193,14 @@ define([ 'jquery', 'core/str', 'core_user/participants' ], function($, Str, Part
 	}
 
 	/**
-	 * Calculate the teams distributions.
+	 * Calculate the groups distributions.
 	 *
 	 * @param int
-	 *          n number of students.
+	 *          n number of members.
 	 * @param int
-	 *          m number of students per teams.
+	 *          m number of members per groups.
 	 */
-	function calculateTeamsDistribution(n, m) {
+	function calculateGroupsDistribution(n, m) {
 
 		if (m < 2) {
 
@@ -226,14 +227,14 @@ define([ 'jquery', 'core/str', 'core_user/participants' ], function($, Str, Part
 	}
 
 	/**
-	 * Calculate the teams distributions at most.
+	 * Calculate the groups distributions at most.
 	 *
 	 * @param int
-	 *          n number of students.
+	 *          n number of members.
 	 * @param int
-	 *          m number of students per teams.
+	 *          m number of members per groups.
 	 */
-	function calculateTeamsDistributionAtMost(n, m) {
+	function calculateGroupsDistributionAtMost(n, m) {
 
 		if (m < 3) {
 
@@ -264,7 +265,7 @@ define([ 'jquery', 'core/str', 'core_user/participants' ], function($, Str, Part
 	 * @param event
 	 *          with the clicked information.
 	 */
-	function studentsPerGroupAtMostTrueClicked(event) {
+	function membersPerGroupAtMostTrueClicked(event) {
 
 		event.stopPropagation();
 		$('#composite__at_most').val('true');
@@ -277,7 +278,7 @@ define([ 'jquery', 'core/str', 'core_user/participants' ], function($, Str, Part
 	 * @param event
 	 *          with the clicked information.
 	 */
-	function studentsPerGroupAtMostFalseClicked(event) {
+	function membersPerGroupAtMostFalseClicked(event) {
 
 		event.stopPropagation();
 		$('#composite__at_most').val('false');
@@ -416,38 +417,85 @@ define([ 'jquery', 'core/str', 'core_user/participants' ], function($, Str, Part
 	function compositeSubmitClicked(event) {
 
 		event.stopPropagation();
-		alert("Composite them");
-	}
+		$('#composite__submit').hide();
+		$('#composite__progress').show();
 
+		var exceptionhandler = function(error) {
+
+			$('#composite__submit').show();
+			$('#composite__progress').hide();
+			notification.exception(error);
+		};
+		var promises = ajax.call([ {
+		  methodname : 'block_task_oriented_groups_composite_groups',
+		  args : {
+		    membersPerGroups : Number($('#composite__members_per_group').val()),
+		    atMost : Boolean($('#composite__at_most').val()),
+		    groupingName : $('#composite__grouping_name').val().trim(),
+		    namePattern : $('#composite__groups_pattern').val().trim(),
+		    performance : Number($('#composite__performance').val()),
+		    members : JSON.parse($('#composite__members').val()),
+		    requirements : JSON.parse($('#composite__requirements').val()),
+		  }
+		} ]);
+		promises[0].done(function(response) {
+
+			if (!response || (typeof response === 'object' && response.success !== true)) {
+
+				Str.get_strings([ {
+				  key : 'composite_groups_error_title',
+				  component : 'block_task_oriented_groups'
+				}, {
+				  key : 'composite_groups_error_text',
+				  component : 'block_task_oriented_groups'
+				}, {
+				  key : 'composite_groups_error_continue',
+				  component : 'block_task_oriented_groups'
+				} ]).done(function(s) {
+					$('#composite__submit').show();
+					$('#composite__progress').hide();
+					notification.alert(s[0], s[1], s[2]);
+				}).fail(exceptionhandler);
+
+			} else {
+
+				window.location.href = config.wwwroot + '/group/groupings.php?id=' + getUrlParameter('courseid');
+
+			}
+
+		}).fail(exceptionhandler);
+
+	}
 
 	return {
 	  pageItemClicked : pageItemClicked,
 	  sendIconClicked : sendIconClicked,
 	  selectedRoleForUsersChanged : selectedRoleForUsersChanged,
-	  studentsPerGroupChanged : studentsPerGroupChanged,
-	  calculateTeamsDistributionAtMost : calculateTeamsDistributionAtMost,
-	  calculateTeamsDistribution : calculateTeamsDistribution,
+	  membersPerGroupChanged : membersPerGroupChanged,
+	  calculateGroupsDistributionAtMost : calculateGroupsDistributionAtMost,
+	  calculateGroupsDistribution : calculateGroupsDistribution,
 	  sendSelectedClicked : sendSelectedClicked,
 	  sendAllClicked : sendAllClicked,
-	  studentsPerGroupAtMostTrueClicked : studentsPerGroupAtMostTrueClicked,
-	  studentsPerGroupAtMostFalseClicked : studentsPerGroupAtMostFalseClicked,
+	  membersPerGroupAtMostTrueClicked : membersPerGroupAtMostTrueClicked,
+	  membersPerGroupAtMostFalseClicked : membersPerGroupAtMostFalseClicked,
 	  requirementsAddClicked : requirementsAddClicked,
-	  compositeSubmitClicked:compositeSubmitClicked,
+	  compositeSubmitClicked : compositeSubmitClicked,
 	  initialise : function($params) {
 
 		  $('#composite__selected_role_for_users').change(selectedRoleForUsersChanged);
-		  $('#composite__students_per_group').change(studentsPerGroupChanged);
+		  $('#composite__members_per_group').change(membersPerGroupChanged);
 		  $('#composite__send_selected').click(sendSelectedClicked);
 		  $('#composite__send_all').click(sendAllClicked);
-		  $('#composite__students_per_group_at_most_true').click(studentsPerGroupAtMostTrueClicked);
-		  $('#composite__students_per_group_at_most_false').click(studentsPerGroupAtMostFalseClicked);
+		  $('#composite__members_per_group_at_most_true').click(membersPerGroupAtMostTrueClicked);
+		  $('#composite__members_per_group_at_most_false').click(membersPerGroupAtMostFalseClicked);
 		  $('#composite__requirements_add').click(requirementsAddClicked);
 		  $('#composite__submit').click(compositeSubmitClicked);
 		  $('.fill-in-row').hide();
 		  $('.page-1').show();
 		  $('.page-item').click(pageItemClicked);
 		  $('.send-icon').click(sendIconClicked);
-		  studentsPerGroupChanged();
+		  $('#composite__progress').hide();
+		  membersPerGroupChanged();
 	  }
 	};
 
