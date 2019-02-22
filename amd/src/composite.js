@@ -430,7 +430,7 @@ define([ 'jquery', 'core/str', 'core_user/participants', 'core/ajax', 'core/conf
 		  methodname : 'block_task_oriented_groups_composite_groups',
 		  args : {
 		    membersPerGroups : Number($('#composite__members_per_group').val()),
-		    atMost : Boolean($('#composite__at_most').val()),
+		    atMost : $('#composite__at_most').val() == 'true',
 		    groupingName : $('#composite__grouping_name').val().trim(),
 		    namePattern : $('#composite__groups_pattern').val().trim(),
 		    performance : Number($('#composite__performance').val()),
