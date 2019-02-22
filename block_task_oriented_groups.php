@@ -105,4 +105,13 @@ class block_task_oriented_groups extends block_base {
 
         return $this->content;
     }
+
+    /**
+     * Inform that the block is configurable.
+     *
+     * @return boolean return {@code true} in any case.
+     */
+    function has_config() {
+        return true;
+    }
 }

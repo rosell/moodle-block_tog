@@ -27,6 +27,10 @@ defined('MOODLE_INTERNAL') || die();
 $string['pluginname'] = 'Task oriented groups block';
 $string['task_oriented_groups'] = 'Task oriented groups';
 
+$string['settings:heading'] = 'This block uses an external service to generate the groups to realize a task.';
+$string['settings:base_api_url_title'] = 'Base API URL';
+$string['settings:base_api_url_description'] = 'The URL to the server that provide the services to generate the groups for a task.';
+
 $string['main:composite'] = 'Create a new groups by task';
 $string['main:fill_personality_test'] = 'Fill in your personality test';
 $string['main:my_personality'] = 'My personality';

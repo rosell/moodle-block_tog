@@ -27,6 +27,10 @@ defined('MOODLE_INTERNAL') || die();
 $string['pluginname'] = 'Bloc per fer groups orientatas a tasques';
 $string['task_oriented_groups'] = 'Groups orientats a tasques';
 
+$string['settings:heading'] = 'Aquest bloc utilitza un servei extern per generar els grups per realitzar una tasca.';
+$string['settings:base_api_url_title'] = 'Base API URL';
+$string['settings:base_api_url_description'] = 'L\'URL del servidor que proporciona els serveis per generar grups per a una tasca.';
+
 $string['fill_personality_test'] = 'Emplenar el test de personalitat';
 $string['personality_test_title'] = 'Test de personalitat';
 $string['personality_test_heading'] = 'Test de personalitat';
