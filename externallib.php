@@ -236,68 +236,69 @@ class block_task_oriented_groups_external extends external_api {
         foreach ($members as $member) {
 
             $person = new \stdClass();
-            $person->id = $member->id;
-            $person->gender = $member->gender;
+            $person->id = $member[id];
+            $person->gender = $member[gender];
             $person->personality = array();
             $perception = new \stdClass();
             $perception->factor = 'PERCEPTION';
-            $perception->value = floatVal($member->personality->perception);
+            $perception->value = floatVal($member[personality][perception]);
             $person->personality[] = $perception;
             $judgment = new \stdClass();
             $judgment->factor = 'JUDGMENT';
-            $judgment->value = floatVal($member->personality->judgment);
+            $judgment->value = floatVal($member[personality][judgment]);
             $person->personality[] = $judgment;
             $extrovert = new \stdClass();
             $extrovert->factor = 'EXTROVERT';
-            $extrovert->value = floatVal($member->personality->extrovert);
+            $extrovert->value = floatVal($member[personality][extrovert]);
             $person->personality[] = $extrovert;
             $attitude = new \stdClass();
             $attitude->factor = 'ATTITUDE';
-            $attitude->value = floatVal($member->personality->attitude);
+            $attitude->value = floatVal($member[personality][attitude]);
             $person->personality[] = $attitude;
             $person->competences = array();
             $verbal = new \stdClass();
             $verbal->factor = 'VERBAL';
-            $verbal->value = floatVal($member->competences->verbal);
+            $verbal->value = floatVal($member[competences][verbal]);
             $person->competences[] = $verbal;
             $logic_mathematics = new \stdClass();
             $logic_mathematics->factor = 'LOGIC_MATHEMATICS';
-            $logic_mathematics->value = floatVal($member->competences->logic_mathematics);
+            $logic_mathematics->value = floatVal($member[competences][logic_mathematics]);
             $person->competences[] = $logic_mathematics;
             $visual_spatial = new \stdClass();
             $visual_spatial->factor = 'VISUAL_SPATIAL';
-            $visual_spatial->value = floatVal($member->competences->visual_spatial);
+            $visual_spatial->value = floatVal($member[competences][visual_spatial]);
             $person->competences[] = $visual_spatial;
-            $kinestisica_corporal = new \stdClass();
-            $kinestisica_corporal->factor = 'KINESTISICA_CORPORAL';
-            $kinestisica_corporal->value = floatVal($member->competences->kinestisica_corporal);
-            $person->competences[] = $kinestisica_corporal;
+            $kinestesica_corporal = new \stdClass();
+            $kinestesica_corporal->factor = 'KINESTESICA_CORPORAL';
+            $kinestesica_corporal->value = floatVal($member[competences][kinestesica_corporal]);
+            $person->competences[] = $kinestesica_corporal;
             $musical_rhythmic = new \stdClass();
             $musical_rhythmic->factor = 'MUSICAL_RHYTHMIC';
-            $musical_rhythmic->value = floatVal($member->competences->musical_rhythmic);
+            $musical_rhythmic->value = floatVal($member[competences][musical_rhythmic]);
             $person->competences[] = $musical_rhythmic;
             $intrapersonal = new \stdClass();
             $intrapersonal->factor = 'INTRAPERSONAL';
-            $intrapersonal->value = floatVal($member->competences->intrapersonal);
+            $intrapersonal->value = floatVal($member[competences][intrapersonal]);
             $person->competences[] = $intrapersonal;
             $interpersonal = new \stdClass();
             $interpersonal->factor = 'INTERPERSONAL';
-            $interpersonal->value = floatVal($member->competences->interpersonal);
+            $interpersonal->value = floatVal($member[competences][interpersonal]);
             $person->competences[] = $interpersonal;
             $naturalist_environmental = new \stdClass();
             $naturalist_environmental->factor = 'NATURALIST_ENVIRONMENTAL';
             $naturalist_environmental->value = floatVal(
-                    $member->competences->naturalist_environmental);
+                    $member[competences][naturalist_environmental]);
             $person->competences[] = $naturalist_environmental;
             $data->people[] = $person;
         }
+
         $data->requirements = array();
         foreach ($requirements as $factor => $requirement) {
 
             $requirementData = new \stdClass();
             $requirementData->factor = strtoupper($factor);
-            $requirementData->level = floatVal($requirement->level);
-            $requirementData->importance = floatVal($requirement->importance);
+            $requirementData->level = floatVal($requirement[level]);
+            $requirementData->importance = floatVal($requirement[importance]);
             $data->requirements[] = $requirementData;
         }
         $payload = json_encode($data);
@@ -315,7 +316,7 @@ class block_task_oriented_groups_external extends external_api {
                 ));
 
         $response = curl_exec($curl);
-        if (!curl_errno($curl)) {
+        if (!$response) {
 
             $calculated = true;
             // $groups = json_decode($result, true);
