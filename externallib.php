@@ -13,6 +13,7 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle. If not, see <http://www.gnu.org/licenses/>.
+global $CFG;
 require_once ($CFG->libdir . "/externallib.php");
 
 use block_task_oriented_groups\PersonalityQuestionnaire;
@@ -226,9 +227,106 @@ class block_task_oriented_groups_external extends external_api {
         $requirements = $params['requirements'];
 
         $updated = false;
+        $calculated = false;
+        $data = new \stdClass();
+        $data->peoplePerTeam = intval($membersPerGroups);
+        $data->atMost = boolval($atMost);
+        $data->performance = floatVal($performance);
+        $data->people = array();
+        foreach ($members as $member) {
+
+            $person = new \stdClass();
+            $person->id = $member->id;
+            $person->gender = $member->gender;
+            $person->personality = array();
+            $perception = new \stdClass();
+            $perception->factor = 'PERCEPTION';
+            $perception->value = floatVal($member->personality->perception);
+            $person->personality[] = $perception;
+            $judgment = new \stdClass();
+            $judgment->factor = 'JUDGMENT';
+            $judgment->value = floatVal($member->personality->judgment);
+            $person->personality[] = $judgment;
+            $extrovert = new \stdClass();
+            $extrovert->factor = 'EXTROVERT';
+            $extrovert->value = floatVal($member->personality->extrovert);
+            $person->personality[] = $extrovert;
+            $attitude = new \stdClass();
+            $attitude->factor = 'ATTITUDE';
+            $attitude->value = floatVal($member->personality->attitude);
+            $person->personality[] = $attitude;
+            $person->competences = array();
+            $verbal = new \stdClass();
+            $verbal->factor = 'VERBAL';
+            $verbal->value = floatVal($member->competences->verbal);
+            $person->competences[] = $verbal;
+            $logic_mathematics = new \stdClass();
+            $logic_mathematics->factor = 'LOGIC_MATHEMATICS';
+            $logic_mathematics->value = floatVal($member->competences->logic_mathematics);
+            $person->competences[] = $logic_mathematics;
+            $visual_spatial = new \stdClass();
+            $visual_spatial->factor = 'VISUAL_SPATIAL';
+            $visual_spatial->value = floatVal($member->competences->visual_spatial);
+            $person->competences[] = $visual_spatial;
+            $kinestisica_corporal = new \stdClass();
+            $kinestisica_corporal->factor = 'KINESTISICA_CORPORAL';
+            $kinestisica_corporal->value = floatVal($member->competences->kinestisica_corporal);
+            $person->competences[] = $kinestisica_corporal;
+            $musical_rhythmic = new \stdClass();
+            $musical_rhythmic->factor = 'MUSICAL_RHYTHMIC';
+            $musical_rhythmic->value = floatVal($member->competences->musical_rhythmic);
+            $person->competences[] = $musical_rhythmic;
+            $intrapersonal = new \stdClass();
+            $intrapersonal->factor = 'INTRAPERSONAL';
+            $intrapersonal->value = floatVal($member->competences->intrapersonal);
+            $person->competences[] = $intrapersonal;
+            $interpersonal = new \stdClass();
+            $interpersonal->factor = 'INTERPERSONAL';
+            $interpersonal->value = floatVal($member->competences->interpersonal);
+            $person->competences[] = $interpersonal;
+            $naturalist_environmental = new \stdClass();
+            $naturalist_environmental->factor = 'NATURALIST_ENVIRONMENTAL';
+            $naturalist_environmental->value = floatVal(
+                    $member->competences->naturalist_environmental);
+            $person->competences[] = $naturalist_environmental;
+            $data->people[] = $person;
+        }
+        $data->requirements = array();
+        foreach ($requirements as $factor => $requirement) {
+
+            $requirementData = new \stdClass();
+            $requirementData->factor = strtoupper($factor);
+            $requirementData->level = floatVal($requirement->level);
+            $requirementData->importance = floatVal($requirement->importance);
+            $data->requirements[] = $requirementData;
+        }
+        $payload = json_encode($data);
+        $config = get_config('task_oriented_groups');
+        $composite_url = str_replace('//composite', '/composite',
+                $config->base_api_url . '/composite');
+        $curl = curl_init($composite_url);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curl, CURLINFO_HEADER_OUT, true);
+        curl_setopt($curl, CURLOPT_POST, true);
+        curl_setopt($curl, CURLOPT_POSTFIELDS, $payload);
+        curl_setopt($curl, CURLOPT_HTTPHEADER,
+                array('Content-Type: application/json', 'Content-Length: ' . strlen($payload),
+                    'Accept: application/json'
+                ));
+
+        $response = curl_exec($curl);
+        if (!curl_errno($curl)) {
+
+            $calculated = true;
+            // $groups = json_decode($result, true);
+            // // json_encode($response);
+            // $result['response'] = strval($result);
+        }
+        curl_close($curl);
 
         $result = array();
         $result['success'] = $updated;
+        $result['calculated'] = $calculated;
         return $result;
     }
 
@@ -239,7 +337,9 @@ class block_task_oriented_groups_external extends external_api {
         return new external_single_structure(
                 array(
                     'success' => new external_value(PARAM_BOOL,
-                            'This is true if the groups has been created')
+                            'This is true if the grouping has been stored'),
+                    'calculated' => new external_value(PARAM_BOOL,
+                            'This is true if the groups has been calculated')
                 ));
     }
 }
