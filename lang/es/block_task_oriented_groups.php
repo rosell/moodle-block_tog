@@ -278,3 +278,15 @@ $string['store_personality_answer_error_continue'] = 'De acuerdo';
 $string['store_competences_answer_error_title'] = 'Error';
 $string['store_competences_answer_error_text'] = 'No se pudo almacenar la respuesta de tu competencia.';
 $string['store_competences_answer_error_continue'] = 'De acuerdo';
+
+$string['externallib:group_description_reponsable_of'] = 'is responsible for';
+$string['externallib:group_description_no_responsibility'] = 'has no responsibility for the group';
+$string['externallib:group_description_last_competence_and'] = 'and';
+$string['externallib:group_description_competence_interpersonal'] = 'Interpersonal competence';
+$string['externallib:group_description_competence_intrapersonal'] = 'Intrapersonal competence';
+$string['externallib:group_description_competence_kinestesica_corporal'] = 'Bodily-kinesthetic competence';
+$string['externallib:group_description_competence_logic_mathematics'] = 'Logic-mathematics competence';
+$string['externallib:group_description_competence_musical_rhythmic'] = 'Musical competence';
+$string['externallib:group_description_competence_naturalist_environmental'] = 'Naturalist-environmental competence';
+$string['externallib:group_description_competence_verbal'] = 'Linguistic competence';
+$string['externallib:group_description_competence_visual_spatial'] = 'Visual-Spatial competence';

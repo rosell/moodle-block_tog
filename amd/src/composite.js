@@ -429,6 +429,7 @@ define([ 'jquery', 'core/str', 'core_user/participants', 'core/ajax', 'core/conf
 		var promises = ajax.call([ {
 		  methodname : 'block_task_oriented_groups_composite_groups',
 		  args : {
+		  	courseid:$('#composite__courseid').val(),
 		    membersPerGroups : Number($('#composite__members_per_group').val()),
 		    atMost : $('#composite__at_most').val() == 'true',
 		    groupingName : $('#composite__grouping_name').val().trim(),

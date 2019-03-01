@@ -13,8 +13,10 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle. If not, see <http://www.gnu.org/licenses/>.
+defined('MOODLE_INTERNAL') || die();
 global $CFG;
 require_once ($CFG->libdir . "/externallib.php");
+require_once ($CFG->dirroot . '/group/lib.php');
 
 use block_task_oriented_groups\PersonalityQuestionnaire;
 use block_task_oriented_groups\Personality;
@@ -140,6 +142,8 @@ class block_task_oriented_groups_external extends external_api {
                 ], 'Requirement values', VALUE_OPTIONAL);
         return new external_function_parameters(
                 array(
+                    'courseid' => new external_value(PARAM_INT,
+                            'The identifier of the course to add the groups'),
                     'membersPerGroups' => new external_value(PARAM_INT,
                             'Number of memebrs per each group'),
                     'atMost' => new external_value(PARAM_BOOL,
@@ -210,124 +214,227 @@ class block_task_oriented_groups_external extends external_api {
     /**
      * The function called to composite the new groups.
      */
-    public static function composite_groups($membersPerGroups, $atMost, $groupingName, $namePattern,
-            $performance, $members, $requirements) {
-        $params = self::validate_parameters(self::composite_groups_parameters(),
-                array('membersPerGroups' => $membersPerGroups, 'atMost' => $atMost,
-                    'groupingName' => $groupingName, 'namePattern' => $namePattern,
-                    'performance' => $performance, 'members' => $members,
-                    'requirements' => $requirements
-                ));
-        $membersPerGroups = $params['membersPerGroups'];
-        $atMost = $params['atMost'];
-        $groupingName = $params['groupingName'];
-        $namePattern = $params['namePattern'];
-        $performance = $params['performance'];
-        $members = $params['members'];
-        $requirements = $params['requirements'];
-
+    public static function composite_groups($courseid, $membersPerGroups, $atMost, $groupingName,
+            $namePattern, $performance, $members, $requirements) {
+        // default return values
+        global $DB;
         $updated = false;
         $calculated = false;
-        $data = new \stdClass();
-        $data->peoplePerTeam = intval($membersPerGroups);
-        $data->atMost = boolval($atMost);
-        $data->performance = floatVal($performance);
-        $data->people = array();
-        foreach ($members as $member) {
+        $message = '';
 
-            $person = new \stdClass();
-            $person->id = $member[id];
-            $person->gender = $member[gender];
-            $person->personality = array();
-            $perception = new \stdClass();
-            $perception->factor = 'PERCEPTION';
-            $perception->value = floatVal($member[personality][perception]);
-            $person->personality[] = $perception;
-            $judgment = new \stdClass();
-            $judgment->factor = 'JUDGMENT';
-            $judgment->value = floatVal($member[personality][judgment]);
-            $person->personality[] = $judgment;
-            $extrovert = new \stdClass();
-            $extrovert->factor = 'EXTROVERT';
-            $extrovert->value = floatVal($member[personality][extrovert]);
-            $person->personality[] = $extrovert;
-            $attitude = new \stdClass();
-            $attitude->factor = 'ATTITUDE';
-            $attitude->value = floatVal($member[personality][attitude]);
-            $person->personality[] = $attitude;
-            $person->competences = array();
-            $verbal = new \stdClass();
-            $verbal->factor = 'VERBAL';
-            $verbal->value = floatVal($member[competences][verbal]);
-            $person->competences[] = $verbal;
-            $logic_mathematics = new \stdClass();
-            $logic_mathematics->factor = 'LOGIC_MATHEMATICS';
-            $logic_mathematics->value = floatVal($member[competences][logic_mathematics]);
-            $person->competences[] = $logic_mathematics;
-            $visual_spatial = new \stdClass();
-            $visual_spatial->factor = 'VISUAL_SPATIAL';
-            $visual_spatial->value = floatVal($member[competences][visual_spatial]);
-            $person->competences[] = $visual_spatial;
-            $kinestesica_corporal = new \stdClass();
-            $kinestesica_corporal->factor = 'KINESTESICA_CORPORAL';
-            $kinestesica_corporal->value = floatVal($member[competences][kinestesica_corporal]);
-            $person->competences[] = $kinestesica_corporal;
-            $musical_rhythmic = new \stdClass();
-            $musical_rhythmic->factor = 'MUSICAL_RHYTHMIC';
-            $musical_rhythmic->value = floatVal($member[competences][musical_rhythmic]);
-            $person->competences[] = $musical_rhythmic;
-            $intrapersonal = new \stdClass();
-            $intrapersonal->factor = 'INTRAPERSONAL';
-            $intrapersonal->value = floatVal($member[competences][intrapersonal]);
-            $person->competences[] = $intrapersonal;
-            $interpersonal = new \stdClass();
-            $interpersonal->factor = 'INTERPERSONAL';
-            $interpersonal->value = floatVal($member[competences][interpersonal]);
-            $person->competences[] = $interpersonal;
-            $naturalist_environmental = new \stdClass();
-            $naturalist_environmental->factor = 'NATURALIST_ENVIRONMENTAL';
-            $naturalist_environmental->value = floatVal(
-                    $member[competences][naturalist_environmental]);
-            $person->competences[] = $naturalist_environmental;
-            $data->people[] = $person;
+        try {
+            $params = self::validate_parameters(self::composite_groups_parameters(),
+                    array('courseid' => $courseid, 'membersPerGroups' => $membersPerGroups,
+                        'atMost' => $atMost, 'groupingName' => $groupingName,
+                        'namePattern' => $namePattern, 'performance' => $performance,
+                        'members' => $members, 'requirements' => $requirements
+                    ));
+
+            $courseid = $params['courseid'];
+            $membersPerGroups = $params['membersPerGroups'];
+            $atMost = $params['atMost'];
+            $groupingName = $params['groupingName'];
+            $namePattern = $params['namePattern'];
+            $performance = $params['performance'];
+            $members = $params['members'];
+            $requirements = $params['requirements'];
+
+            $data = new \stdClass();
+            $data->peoplePerTeam = intval($membersPerGroups);
+            $data->atMost = boolval($atMost);
+            $data->performance = floatVal($performance);
+            $data->people = array();
+            foreach ($members as $member) {
+
+                $person = new \stdClass();
+                $person->id = $member[id];
+                $person->gender = $member[gender];
+                $person->personality = array();
+                $perception = new \stdClass();
+                $perception->factor = 'PERCEPTION';
+                $perception->value = floatVal($member[personality][perception]);
+                $person->personality[] = $perception;
+                $judgment = new \stdClass();
+                $judgment->factor = 'JUDGMENT';
+                $judgment->value = floatVal($member[personality][judgment]);
+                $person->personality[] = $judgment;
+                $extrovert = new \stdClass();
+                $extrovert->factor = 'EXTROVERT';
+                $extrovert->value = floatVal($member[personality][extrovert]);
+                $person->personality[] = $extrovert;
+                $attitude = new \stdClass();
+                $attitude->factor = 'ATTITUDE';
+                $attitude->value = floatVal($member[personality][attitude]);
+                $person->personality[] = $attitude;
+                $person->competences = array();
+                $verbal = new \stdClass();
+                $verbal->factor = 'VERBAL';
+                $verbal->value = floatVal($member[competences][verbal]);
+                $person->competences[] = $verbal;
+                $logic_mathematics = new \stdClass();
+                $logic_mathematics->factor = 'LOGIC_MATHEMATICS';
+                $logic_mathematics->value = floatVal($member[competences][logic_mathematics]);
+                $person->competences[] = $logic_mathematics;
+                $visual_spatial = new \stdClass();
+                $visual_spatial->factor = 'VISUAL_SPATIAL';
+                $visual_spatial->value = floatVal($member[competences][visual_spatial]);
+                $person->competences[] = $visual_spatial;
+                $kinestesica_corporal = new \stdClass();
+                $kinestesica_corporal->factor = 'KINESTESICA_CORPORAL';
+                $kinestesica_corporal->value = floatVal($member[competences][kinestesica_corporal]);
+                $person->competences[] = $kinestesica_corporal;
+                $musical_rhythmic = new \stdClass();
+                $musical_rhythmic->factor = 'MUSICAL_RHYTHMIC';
+                $musical_rhythmic->value = floatVal($member[competences][musical_rhythmic]);
+                $person->competences[] = $musical_rhythmic;
+                $intrapersonal = new \stdClass();
+                $intrapersonal->factor = 'INTRAPERSONAL';
+                $intrapersonal->value = floatVal($member[competences][intrapersonal]);
+                $person->competences[] = $intrapersonal;
+                $interpersonal = new \stdClass();
+                $interpersonal->factor = 'INTERPERSONAL';
+                $interpersonal->value = floatVal($member[competences][interpersonal]);
+                $person->competences[] = $interpersonal;
+                $naturalist_environmental = new \stdClass();
+                $naturalist_environmental->factor = 'NATURALIST_ENVIRONMENTAL';
+                $naturalist_environmental->value = floatVal(
+                        $member[competences][naturalist_environmental]);
+                $person->competences[] = $naturalist_environmental;
+                $data->people[] = $person;
+            }
+
+            $data->requirements = array();
+            foreach ($requirements as $factor => $requirement) {
+
+                $requirementData = new \stdClass();
+                $requirementData->factor = strtoupper($factor);
+                $requirementData->level = floatVal($requirement[level]);
+                $requirementData->importance = floatVal($requirement[importance]);
+                $data->requirements[] = $requirementData;
+            }
+            $payload = json_encode($data);
+            $config = get_config('task_oriented_groups');
+            $composite_url = str_replace('//composite', '/composite',
+                    $config->base_api_url . '/composite');
+            $options = array(CURLOPT_POST => 1, CURLOPT_HEADER => 0, CURLOPT_URL => $composite_url,
+                CURLOPT_FRESH_CONNECT => 1, CURLOPT_RETURNTRANSFER => 1, CURLOPT_FORBID_REUSE => 1,
+                CURLOPT_TIMEOUT => 4, CURLOPT_POSTFIELDS => $payload,
+                CURLOPT_HTTPHEADER => array('Content-Type: application/json',
+                    'Content-Length: ' . strlen($payload), 'Accept: application/json'
+                )
+            );
+
+            $ch = curl_init();
+            curl_setopt_array($ch, $options);
+            if (!$response = curl_exec($ch)) {
+
+                $message = print_r(curl_error($ch), TRUE);
+            } else {
+
+                $calculated = true;
+                $teamsComposition = json_decode($response);
+                if (count($teamsComposition->teams) > 0) {
+
+                    $groupingData = new \stdClass();
+                    $groupingData->name = $groupingName;
+                    $groupingData->courseid = $courseid;
+                    $groupingid = groups_create_grouping($groupingData);
+                    if (!$groupingid) {
+
+                        $message = "Could not create the grouping";
+                    } else {
+
+                        $index = 1;
+                        foreach ($teamsComposition->teams as $team) {
+
+                            $groupData = new \stdClass();
+                            $groupData->courseid = $courseid;
+                            $groupData->name = str_replace('{}', strval($index), $namePattern);
+                            $groupData->description = '<ul>';
+                            foreach ($team->people as $person) {
+
+                                $groupData->description .= '<li><b>';
+                                $user = $DB->get_record('user', array('id' => $person->id
+                                ), '*', MUST_EXIST);
+                                $groupData->description .= $user->firstname . ' ' . $user->lastname .
+                                        '</b>';
+                                $maxCompetences = count($person->competences);
+                                if ($maxCompetences > 0) {
+                                    $groupData->description .= ' ' . get_string(
+                                            'externallib:group_description_reponsable_of',
+                                            'block_task_oriented_groups');
+                                    $competenceIndex = 1;
+                                    foreach ($person->competences as $competence) {
+
+                                        if ($competenceIndex == 1) {
+
+                                            $groupData->description .= ' ';
+                                        } else if ($competenceIndex == $maxCompetences) {
+
+                                            $groupData->description .= ' ' . get_string(
+                                                    'externallib:group_description_last_competence_and',
+                                                    'block_task_oriented_groups') . ' ';
+                                        } else {
+
+                                            $groupData->description .= ', ';
+                                        }
+
+                                        $groupData->description .= get_string(
+                                                'externallib:group_description_competence_' .
+                                                strtolower($competence), 'block_task_oriented_groups');
+                                        $competenceIndex++;
+                                    }
+                                } else {
+                                    $groupData->description .= ' ' . get_string(
+                                            'externallib:group_description_no_responsibility',
+                                            'block_task_oriented_groups');
+                                }
+                                $groupData->description .= '</li>';
+                            }
+                            $groupData->description .= '</ul>';
+                            $groupData->descriptionformat = FORMAT_HTML;
+                            $groupid = groups_create_group($groupData);
+                            if (!$groupid) {
+
+                                $message .= "Could not create the group with " .
+                                        print_r($groupData, TRUE);
+                            } else {
+
+                                if (!groups_assign_grouping($groupingid, $groupid)) {
+
+                                    $message .= "Could not assign the group " . $groupid .
+                                            " to the grouping " . $groupingid;
+                                }
+                                foreach ($team->people as $person) {
+
+                                    if (!groups_add_member($groupid, $person->id)) {
+
+                                        $message .= "\nCould not add the user " . $person->id .
+                                                " to the group " . $groupid;
+                                    }
+                                }
+                            }
+                            $index++;
+                        }
+
+                        if (strlen($message) == 0) {
+                            $updated = TRUE;
+                        }
+                    }
+                } else {
+
+                    $message = "No teams composed";
+                }
+            }
+            curl_close($ch);
+        } catch (\Throwable $e) {
+
+            $message = $e->getMessage() . '\n' . $e->getTraceAsString();
         }
-
-        $data->requirements = array();
-        foreach ($requirements as $factor => $requirement) {
-
-            $requirementData = new \stdClass();
-            $requirementData->factor = strtoupper($factor);
-            $requirementData->level = floatVal($requirement[level]);
-            $requirementData->importance = floatVal($requirement[importance]);
-            $data->requirements[] = $requirementData;
-        }
-        $payload = json_encode($data);
-        $config = get_config('task_oriented_groups');
-        $composite_url = str_replace('//composite', '/composite',
-                $config->base_api_url . '/composite');
-        $curl = curl_init($composite_url);
-        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($curl, CURLINFO_HEADER_OUT, true);
-        curl_setopt($curl, CURLOPT_POST, true);
-        curl_setopt($curl, CURLOPT_POSTFIELDS, $payload);
-        curl_setopt($curl, CURLOPT_HTTPHEADER,
-                array('Content-Type: application/json', 'Content-Length: ' . strlen($payload),
-                    'Accept: application/json'
-                ));
-
-        $response = curl_exec($curl);
-        if (!$response) {
-
-            $calculated = true;
-            // $groups = json_decode($result, true);
-            // // json_encode($response);
-            // $result['response'] = strval($result);
-        }
-        curl_close($curl);
-
         $result = array();
         $result['success'] = $updated;
         $result['calculated'] = $calculated;
+        $result['message'] = $message;
         return $result;
     }
 
@@ -340,7 +447,9 @@ class block_task_oriented_groups_external extends external_api {
                     'success' => new external_value(PARAM_BOOL,
                             'This is true if the grouping has been stored'),
                     'calculated' => new external_value(PARAM_BOOL,
-                            'This is true if the groups has been calculated')
+                            'This is true if the groups has been calculated'),
+                    'message' => new external_value(PARAM_TEXT,
+                            'This contains a message that explains why is not calculated or stored')
                 ));
     }
 }

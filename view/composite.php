@@ -50,6 +50,9 @@ if (has_capability('moodle/course:managegroups', $context)) {
     }
     $roles = role_fix_names($profileroles, $context, ROLENAME_ALIAS, true);
     $form = html_writer::start_tag('form');
+    $form .= html_writer::start_tag('input',
+            array('id' => 'composite__courseid', 'type' => 'hidden', 'value' => $courseid
+            ));
     // --- select role input ----
     $form .= html_writer::start_div('form-group');
     $form .= html_writer::tag('label',
