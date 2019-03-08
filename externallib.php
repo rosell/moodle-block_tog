@@ -20,8 +20,8 @@ require_once ($CFG->dirroot . '/group/lib.php');
 
 use block_task_oriented_groups\PersonalityQuestionnaire;
 use block_task_oriented_groups\Personality;
-use block_task_oriented_groups\CompetencesQuestionnaire;
-use block_task_oriented_groups\Competences;
+use block_task_oriented_groups\IntelligencesQuestionnaire;
+use block_task_oriented_groups\Intelligences;
 
 /**
  * External methods necessary to do ajax interaction.
@@ -82,9 +82,10 @@ class block_task_oriented_groups_external extends external_api {
     }
 
     /**
-     * The function called to get the informatiomn of the parameter to store the competences answer.
+     * The function called to get the informatiomn of the parameter to store the intelligences
+     * answer.
      */
-    public static function store_competences_answer_parameters() {
+    public static function store_intelligences_answer_parameters() {
         return new external_function_parameters(
                 array(
                     'question' => new external_value(PARAM_INT,
@@ -94,22 +95,22 @@ class block_task_oriented_groups_external extends external_api {
     }
 
     /**
-     * The function called to store an answer for a competences question.
+     * The function called to store an answer for a intelligences question.
      */
-    public static function store_competences_answer($question, $answer) {
+    public static function store_intelligences_answer($question, $answer) {
         global $USER;
-        $params = self::validate_parameters(self::store_competences_answer_parameters(),
+        $params = self::validate_parameters(self::store_intelligences_answer_parameters(),
                 array('question' => $question, 'answer' => $answer
                 ));
         $question = $params['question'];
         $answer = $params['answer'];
         $userid = $USER->id;
 
-        $updated = CompetencesQuestionnaire::setCompetencesAnswerFor($question, $answer, $userid);
+        $updated = IntelligencesQuestionnaire::setIntelligencesAnswerFor($question, $answer, $userid);
         $calculated = false;
         if ($updated) {
 
-            $calculated = Competences::calculateCompetencesOf($userid);
+            $calculated = Intelligences::calculateIntelligencesOf($userid);
         }
 
         $result = array();
@@ -119,15 +120,16 @@ class block_task_oriented_groups_external extends external_api {
     }
 
     /**
-     * The function called to get the informatiomn of the parameter to store the competences answer.
+     * The function called to get the informatiomn of the parameter to store the intelligences
+     * answer.
      */
-    public static function store_competences_answer_returns() {
+    public static function store_intelligences_answer_returns() {
         return new external_single_structure(
                 array(
                     'success' => new external_value(PARAM_BOOL,
                             'This is true if the answers has been stored'),
                     'calculated' => new external_value(PARAM_BOOL,
-                            'This is true if it is calculated the user competences')
+                            'This is true if it is calculated the user intelligences')
                 ));
     }
 
@@ -173,31 +175,31 @@ class block_task_oriented_groups_external extends external_api {
                                                     'extrovert' => new external_value(PARAM_FLOAT,
                                                             'The value for the personality extrovert')
                                                 ], 'Contains the member personality'),
-                                        'competences' => new external_single_structure(
+                                        'intelligences' => new external_single_structure(
                                                 [
                                                     'verbal' => new external_value(PARAM_FLOAT,
-                                                            'The value for the competences verbal'),
+                                                            'The value for the intelligences verbal'),
                                                     'logic_mathematics' => new external_value(
                                                             PARAM_FLOAT,
-                                                            'The value for the competences logic mathematics'),
+                                                            'The value for the intelligences logic mathematics'),
                                                     'visual_spatial' => new external_value(
                                                             PARAM_FLOAT,
-                                                            'The value for the competences visual_spatial'),
+                                                            'The value for the intelligences visual_spatial'),
                                                     'kinestesica_corporal' => new external_value(
                                                             PARAM_FLOAT,
-                                                            'The value for the competences kinestesica corporal'),
+                                                            'The value for the intelligences kinestesica corporal'),
                                                     'musical_rhythmic' => new external_value(
                                                             PARAM_FLOAT,
-                                                            'The value for the competences musical rhythmic'),
+                                                            'The value for the intelligences musical rhythmic'),
                                                     'intrapersonal' => new external_value(
                                                             PARAM_FLOAT,
-                                                            'The value for the competences intrapersonal'),
+                                                            'The value for the intelligences intrapersonal'),
                                                     'interpersonal' => new external_value(
                                                             PARAM_FLOAT,
-                                                            'The value for the competences interpersonal'),
+                                                            'The value for the intelligences interpersonal'),
                                                     'naturalist_environmental' => new external_value(
                                                             PARAM_FLOAT,
-                                                            'The value for the competences naturalist environmental')
+                                                            'The value for the intelligences naturalist environmental')
                                                 ], 'Contains the member personality')
                                     ]), 'The members that can be form part of a group'),
                     'requirements' => new external_single_structure(
@@ -266,40 +268,40 @@ class block_task_oriented_groups_external extends external_api {
                 $attitude->factor = 'ATTITUDE';
                 $attitude->value = floatVal($member[personality][attitude]);
                 $person->personality[] = $attitude;
-                $person->competences = array();
+                $person->intelligences = array();
                 $verbal = new \stdClass();
                 $verbal->factor = 'VERBAL';
-                $verbal->value = floatVal($member[competences][verbal]);
-                $person->competences[] = $verbal;
+                $verbal->value = floatVal($member[intelligences][verbal]);
+                $person->intelligences[] = $verbal;
                 $logic_mathematics = new \stdClass();
                 $logic_mathematics->factor = 'LOGIC_MATHEMATICS';
-                $logic_mathematics->value = floatVal($member[competences][logic_mathematics]);
-                $person->competences[] = $logic_mathematics;
+                $logic_mathematics->value = floatVal($member[intelligences][logic_mathematics]);
+                $person->intelligences[] = $logic_mathematics;
                 $visual_spatial = new \stdClass();
                 $visual_spatial->factor = 'VISUAL_SPATIAL';
-                $visual_spatial->value = floatVal($member[competences][visual_spatial]);
-                $person->competences[] = $visual_spatial;
+                $visual_spatial->value = floatVal($member[intelligences][visual_spatial]);
+                $person->intelligences[] = $visual_spatial;
                 $kinestesica_corporal = new \stdClass();
                 $kinestesica_corporal->factor = 'KINESTESICA_CORPORAL';
-                $kinestesica_corporal->value = floatVal($member[competences][kinestesica_corporal]);
-                $person->competences[] = $kinestesica_corporal;
+                $kinestesica_corporal->value = floatVal($member[intelligences][kinestesica_corporal]);
+                $person->intelligences[] = $kinestesica_corporal;
                 $musical_rhythmic = new \stdClass();
                 $musical_rhythmic->factor = 'MUSICAL_RHYTHMIC';
-                $musical_rhythmic->value = floatVal($member[competences][musical_rhythmic]);
-                $person->competences[] = $musical_rhythmic;
+                $musical_rhythmic->value = floatVal($member[intelligences][musical_rhythmic]);
+                $person->intelligences[] = $musical_rhythmic;
                 $intrapersonal = new \stdClass();
                 $intrapersonal->factor = 'INTRAPERSONAL';
-                $intrapersonal->value = floatVal($member[competences][intrapersonal]);
-                $person->competences[] = $intrapersonal;
+                $intrapersonal->value = floatVal($member[intelligences][intrapersonal]);
+                $person->intelligences[] = $intrapersonal;
                 $interpersonal = new \stdClass();
                 $interpersonal->factor = 'INTERPERSONAL';
-                $interpersonal->value = floatVal($member[competences][interpersonal]);
-                $person->competences[] = $interpersonal;
+                $interpersonal->value = floatVal($member[intelligences][interpersonal]);
+                $person->intelligences[] = $interpersonal;
                 $naturalist_environmental = new \stdClass();
                 $naturalist_environmental->factor = 'NATURALIST_ENVIRONMENTAL';
                 $naturalist_environmental->value = floatVal(
-                        $member[competences][naturalist_environmental]);
-                $person->competences[] = $naturalist_environmental;
+                        $member[intelligences][naturalist_environmental]);
+                $person->intelligences[] = $naturalist_environmental;
                 $data->people[] = $person;
             }
 
@@ -358,21 +360,21 @@ class block_task_oriented_groups_external extends external_api {
                                 ), '*', MUST_EXIST);
                                 $groupData->description .= $user->firstname . ' ' . $user->lastname .
                                         '</b>';
-                                $maxCompetences = count($person->competences);
-                                if ($maxCompetences > 0) {
+                                $maxIntelligences = count($person->intelligences);
+                                if ($maxIntelligences > 0) {
                                     $groupData->description .= ' ' . get_string(
                                             'externallib:group_description_reponsable_of',
                                             'block_task_oriented_groups');
-                                    $competenceIndex = 1;
-                                    foreach ($person->competences as $competence) {
+                                    $intelligenceIndex = 1;
+                                    foreach ($person->intelligences as $intelligence) {
 
-                                        if ($competenceIndex == 1) {
+                                        if ($intelligenceIndex == 1) {
 
                                             $groupData->description .= ' ';
-                                        } else if ($competenceIndex == $maxCompetences) {
+                                        } else if ($intelligenceIndex == $maxIntelligences) {
 
                                             $groupData->description .= ' ' . get_string(
-                                                    'externallib:group_description_last_competence_and',
+                                                    'externallib:group_description_last_intelligence_and',
                                                     'block_task_oriented_groups') . ' ';
                                         } else {
 
@@ -380,9 +382,9 @@ class block_task_oriented_groups_external extends external_api {
                                         }
 
                                         $groupData->description .= get_string(
-                                                'externallib:group_description_competence_' .
-                                                strtolower($competence), 'block_task_oriented_groups');
-                                        $competenceIndex++;
+                                                'externallib:group_description_intelligence_' .
+                                                strtolower($intelligence), 'block_task_oriented_groups');
+                                        $intelligenceIndex++;
                                     }
                                 } else {
                                     $groupData->description .= ' ' . get_string(

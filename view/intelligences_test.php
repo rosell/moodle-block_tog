@@ -14,37 +14,37 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle. If not, see <http://www.gnu.org/licenses/>.
 require_once ('../../../config.php');
-use block_task_oriented_groups\CompetencesQuestionnaire;
-use block_task_oriented_groups\Competences;
+use block_task_oriented_groups\IntelligencesQuestionnaire;
+use block_task_oriented_groups\Intelligences;
 
 $PAGE->set_pagelayout('standard');
 $PAGE->set_context(context_system::instance());
-$PAGE->set_title(get_string('competences_test_title', 'block_task_oriented_groups'));
-$PAGE->set_heading(get_string('competences_test_heading', 'block_task_oriented_groups'));
-$PAGE->set_url($CFG->wwwroot . '/blocks/task_oriented_groups/view/competences_test.php');
+$PAGE->set_title(get_string('intelligences_test_title', 'block_task_oriented_groups'));
+$PAGE->set_heading(get_string('intelligences_test_heading', 'block_task_oriented_groups'));
+$PAGE->set_url($CFG->wwwroot . '/blocks/task_oriented_groups/view/intelligences_test.php');
 
 require_login();
-$answers = CompetencesQuestionnaire::getAnswersOfCurrentUser();
+$answers = IntelligencesQuestionnaire::getAnswersOfCurrentUser();
 echo $OUTPUT->header();
 ?>
-<div class="container competences-questions">
+<div class="container intelligences-questions">
  <?php
-for ($i = 0; $i < CompetencesQuestionnaire::countQuestions(); $i++) {
-    $questionId = 'competencesQuestion_' . $i;
+for ($i = 0; $i < IntelligencesQuestionnaire::countQuestions(); $i++) {
+    $questionId = 'intelligencesQuestion_' . $i;
     ?>
   <div class="row<?php
 
     if ($i % 2 != 0) {
         echo ' bg-light';
     }
-    ?> competences-question">
+    ?> intelligences-question">
 		<div class="container">
 			<div class="row">
-				<h4><?=CompetencesQuestionnaire::getQuestionTextOf($i)?><?php
+				<h4><?=IntelligencesQuestionnaire::getQuestionTextOf($i)?><?php
 
-    if (CompetencesQuestionnaire::hasQuestionHelp($i)) {
+    if (IntelligencesQuestionnaire::hasQuestionHelp($i)) {
         echo '&nbsp;&nbsp;';
-        echo $OUTPUT->help_icon(CompetencesQuestionnaire::getQuestionHelpIdentifier($i),
+        echo $OUTPUT->help_icon(IntelligencesQuestionnaire::getQuestionHelpIdentifier($i),
                 'block_task_oriented_groups', '');
     }
     ?></h4>
@@ -60,15 +60,15 @@ for ($i = 0; $i < CompetencesQuestionnaire::countQuestions(); $i++) {
         }
     }
 
-    for ($j = 0; $j < CompetencesQuestionnaire::MAX_QUESTION_ANSWERS; $j++) {
+    for ($j = 0; $j < IntelligencesQuestionnaire::MAX_QUESTION_ANSWERS; $j++) {
         ?>
    <div class="form-check-inline col-md">
 					<input
 						class="form-check-input"
 						type="radio"
-						id="answer_<?=$j?>_for_competences_question_<?=$i?>"
+						id="answer_<?=$j?>_for_intelligences_question_<?=$i?>"
 						name="<?=$questionId?>"
-						value="<?=CompetencesQuestionnaire::getAnswerQuestionValueOf($j)?>"
+						value="<?=IntelligencesQuestionnaire::getAnswerQuestionValueOf($j)?>"
 						<?php
 
         if ($selected == $j) {
@@ -77,8 +77,8 @@ for ($i = 0; $i < CompetencesQuestionnaire::countQuestions(); $i++) {
         ?>
 					><label
 						class="form-check-label"
-						for="answer_<?=$j?>_for_competences_question_<?=$i?>"
-					><?=CompetencesQuestionnaire::getAnswerQuestionTextOf($j)?></label>
+						for="answer_<?=$j?>_for_intelligences_question_<?=$i?>"
+					><?=IntelligencesQuestionnaire::getAnswerQuestionTextOf($j)?></label>
 				</div>
   <?php
     }
@@ -88,10 +88,10 @@ for ($i = 0; $i < CompetencesQuestionnaire::countQuestions(); $i++) {
 	</div>
   <?php
 }
-if (Competences::getCompetencesOfCurrentUser()) {
+if (Intelligences::getIntelligencesOfCurrentUser()) {
 
-    $linkstr = get_string('competences_test_go_to_competences', 'block_task_oriented_groups');
-    $linkaddr = $CFG->wwwroot . '/blocks/task_oriented_groups/view/competences.php';
+    $linkstr = get_string('intelligences_test_go_to_intelligences', 'block_task_oriented_groups');
+    $linkaddr = $CFG->wwwroot . '/blocks/task_oriented_groups/view/intelligences.php';
     ?>
     	<div class="row justify-content-md-center">
 		<a
@@ -105,5 +105,5 @@ if (Competences::getCompetencesOfCurrentUser()) {
 ?>
 </div>
 <?php
-$PAGE->requires->js_call_amd('block_task_oriented_groups/competences_test', 'initialise');
+$PAGE->requires->js_call_amd('block_task_oriented_groups/intelligences_test', 'initialise');
 echo $OUTPUT->footer();

@@ -12,7 +12,7 @@
             <KEY NAME="primary" TYPE="primary" FIELDS="id" />
          </KEYS>
       </TABLE>
-      <TABLE NAME="btog_competences_answers" COMMENT="Contains the answers to the competences test.">
+      <TABLE NAME="btog_intelligences_answers" COMMENT="Contains the answers to the intelligences test.">
          <FIELDS>
             <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true" NEXT="userid" />
             <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" PREVIOUS="id" NEXT="question" />
@@ -38,7 +38,7 @@
             <KEY NAME="primary" TYPE="primary" FIELDS="id" />
          </KEYS>
       </TABLE>
-      <TABLE NAME="btog_competences" COMMENT="Stores the competences of an user.">
+      <TABLE NAME="btog_intelligences" COMMENT="Stores the intelligences of an user.">
          <FIELDS>
             <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true" NEXT="userid" />
             <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" PREVIOUS="id"  NEXT="verbal" />

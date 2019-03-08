@@ -17,40 +17,40 @@ namespace block_task_oriented_groups;
 
 defined('MOODLE_INTERNAL') || die();
 
-use block_task_oriented_groups\CompetencesQuestionnaire;
+use block_task_oriented_groups\IntelligencesQuestionnaire;
 
 /**
- * Class that represents the competences questionnaire.
+ * Class that represents the intelligences questionnaire.
  *
  * @package block_task_oriented_groups
  * @copyright 2018 UDT-IA, IIIA-CSIC
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class Competences {
+class Intelligences {
 
     /**
      * Return the coimpetences of teh current user.
      */
-    public static function getCompetencesOfCurrentUser() {
+    public static function getIntelligencesOfCurrentUser() {
         global $USER;
-        return self::getCompetencesOf($USER->id);
+        return self::getIntelligencesOf($USER->id);
     }
 
     /**
-     * Return the the competences of an user.
+     * Return the the intelligences of an user.
      *
      * @param int $userid
-     * @return stdObject/boolean the competences associated to the user or false if the user does
-     *         not have a competences.
+     * @return stdObject/boolean the intelligences associated to the user or false if the user does
+     *         not have a intelligences.
      */
-    public static function getCompetencesOf($userid) {
+    public static function getIntelligencesOf($userid) {
         global $DB;
 
-        $competences = $DB->get_record('btog_competences', array('userid' => $userid
+        $intelligences = $DB->get_record('btog_intelligences', array('userid' => $userid
         ), '*', IGNORE_MISSING);
-        if ($competences !== false && isset($competences)) {
+        if ($intelligences !== false && isset($intelligences)) {
 
-            return $competences;
+            return $intelligences;
         } else {
 
             return false;
@@ -58,18 +58,18 @@ class Competences {
     }
 
     /**
-     * Calculate the competences of the specified user.
+     * Calculate the intelligences of the specified user.
      *
      * @param int $userid
-     * @return boolean true if the competences has been calculated.
+     * @return boolean true if the intelligences has been calculated.
      */
-    public static function calculateCompetencesOf($userid) {
+    public static function calculateIntelligencesOf($userid) {
         global $DB;
 
         $calculated = false;
 
-        $answers = CompetencesQuestionnaire::getAnswersOf($userid);
-        if (count($answers) == CompetencesQuestionnaire::countQuestions()) {
+        $answers = IntelligencesQuestionnaire::getAnswersOf($userid);
+        if (count($answers) == IntelligencesQuestionnaire::countQuestions()) {
 
             $record = new \stdClass();
             $record->userid = $userid;
@@ -85,39 +85,39 @@ class Competences {
             ];
             foreach ($answers as $answer) {
 
-                $factor = CompetencesQuestionnaire::getQuestionFactor($answer->question);
-                $value = CompetencesQuestionnaire::getAnswerQuestionValueOf($answer->answer);
+                $factor = IntelligencesQuestionnaire::getQuestionFactor($answer->question);
+                $value = IntelligencesQuestionnaire::getAnswerQuestionValueOf($answer->answer);
                 switch ($factor) {
-                    case CompetencesQuestionnaire::VERBAL_FACTOR:
+                    case IntelligencesQuestionnaire::VERBAL_FACTOR:
                         $record->verbal += $value;
                         $total[0]++;
                         break;
-                    case CompetencesQuestionnaire::LOGIC_MATHEMATICS_FACTOR:
+                    case IntelligencesQuestionnaire::LOGIC_MATHEMATICS_FACTOR:
                         $record->logic_mathematics += $value;
                         $total[1]++;
                         break;
-                    case CompetencesQuestionnaire::VISUAL_SPATIAL_FACTOR:
+                    case IntelligencesQuestionnaire::VISUAL_SPATIAL_FACTOR:
                         $record->visual_spatial += $value;
                         $total[2]++;
                         break;
-                    case CompetencesQuestionnaire::KINESTESICA_CORPORAL_FACTOR:
+                    case IntelligencesQuestionnaire::KINESTESICA_CORPORAL_FACTOR:
                         $record->kinestesica_corporal += $value;
                         $total[3]++;
                         break;
-                    case CompetencesQuestionnaire::MUSICAL_RHYTHMIC_FACTOR:
+                    case IntelligencesQuestionnaire::MUSICAL_RHYTHMIC_FACTOR:
                         $record->musical_rhythmic += $value;
                         $total[4]++;
                         break;
-                    case CompetencesQuestionnaire::INTRAPERSONAL_FACTOR:
+                    case IntelligencesQuestionnaire::INTRAPERSONAL_FACTOR:
                         $record->intrapersonal += $value;
                         $total[5]++;
                         break;
-                    case CompetencesQuestionnaire::INTERPERSONAL_FACTOR:
+                    case IntelligencesQuestionnaire::INTERPERSONAL_FACTOR:
                         $record->interpersonal += $value;
                         $total[6]++;
                         break;
                     default:
-                        // CompetencesQuestionnaire::NATURALIST_ENVIRONMENTAL_FACTOR:
+                        // IntelligencesQuestionnaire::NATURALIST_ENVIRONMENTAL_FACTOR:
                         $record->naturalist_environmental += $value;
                         $total[7]++;
                 }
@@ -131,14 +131,14 @@ class Competences {
             $record->interpersonal = $record->visual_spatial / $total[6];
             $record->naturalist_environmental = $record->kinestesica_corporal / $total[7];
 
-            $previousAnswer = self::getCompetencesOf($userid);
+            $previousAnswer = self::getIntelligencesOf($userid);
             if ($previousAnswer !== false) {
 
                 $record->id = $previousAnswer->id;
-                $calculated = $DB->update_record('btog_competences', $record);
+                $calculated = $DB->update_record('btog_intelligences', $record);
             } else {
 
-                $calculated = $DB->insert_record('btog_competences', $record, false) === true;
+                $calculated = $DB->insert_record('btog_intelligences', $record, false) === true;
             }
         }
 
@@ -146,24 +146,24 @@ class Competences {
     }
 
     /**
-     * Check if it is calculated the competences for the current user.
+     * Check if it is calculated the intelligences for the current user.
      */
-    public static function isCompetencesCalculatedForCurrentUser() {
+    public static function isIntelligencesCalculatedForCurrentUser() {
         global $USER;
-        return self::isCompetencesCalculatedFor($USER->id);
+        return self::isIntelligencesCalculatedFor($USER->id);
     }
 
     /**
-     * Check if for an user has calculated its competences.
+     * Check if for an user has calculated its intelligences.
      */
-    public static function isCompetencesCalculatedFor($userid) {
+    public static function isIntelligencesCalculatedFor($userid) {
         global $DB;
-        return $DB->record_exists('btog_competences', array('userid' => $userid
+        return $DB->record_exists('btog_intelligences', array('userid' => $userid
         ));
     }
 
     /**
-     * Convert a competence value to a human readable value.
+     * Convert a intelligence value to a human readable value.
      *
      * @param number $value to obtain the
      * @return string
@@ -171,6 +171,6 @@ class Competences {
     public static function valueToString($value) {
         $index = floor($value / 0.2);
         $index = min(4, $index);
-        return get_string('competences_value_' . $index, 'block_task_oriented_groups');
+        return get_string('intelligences_value_' . $index, 'block_task_oriented_groups');
     }
 }

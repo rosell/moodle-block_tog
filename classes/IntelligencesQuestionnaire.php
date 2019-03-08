@@ -18,13 +18,13 @@ namespace block_task_oriented_groups;
 defined('MOODLE_INTERNAL') || die();
 
 /**
- * Class that represents the competence questionnaire.
+ * Class that represents the intelligence questionnaire.
  *
  * @package block_task_oriented_groups
  * @copyright 2018 UDT-IA, IIIA-CSIC
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class CompetencesQuestionnaire {
+class IntelligencesQuestionnaire {
 
     /**
      * The number maximum of posible answers for each question.
@@ -34,42 +34,42 @@ class CompetencesQuestionnaire {
     const MAX_QUESTION_ANSWERS = 5;
 
     /**
-     * Factor used to evaluate the verbal competence.
+     * Factor used to evaluate the verbal intelligence.
      */
     const VERBAL_FACTOR = 0;
 
     /**
-     * Factor used to evaluate the logic/mathematics competence.
+     * Factor used to evaluate the logic/mathematics intelligence.
      */
     const LOGIC_MATHEMATICS_FACTOR = 1;
 
     /**
-     * Factor used to evaluate the visual/spatial competence.
+     * Factor used to evaluate the visual/spatial intelligence.
      */
     const VISUAL_SPATIAL_FACTOR = 2;
 
     /**
-     * Factor used to evaluate the kinestesica/corporal competence.
+     * Factor used to evaluate the kinestesica/corporal intelligence.
      */
     const KINESTESICA_CORPORAL_FACTOR = 3;
 
     /**
-     * Factor used to evaluate the musical/rhythmic competence.
+     * Factor used to evaluate the musical/rhythmic intelligence.
      */
     const MUSICAL_RHYTHMIC_FACTOR = 4;
 
     /**
-     * Factor used to evaluate the intrapersonal competence.
+     * Factor used to evaluate the intrapersonal intelligence.
      */
     const INTRAPERSONAL_FACTOR = 5;
 
     /**
-     * Factor used to evaluate the interpersonal competence.
+     * Factor used to evaluate the interpersonal intelligence.
      */
     const INTERPERSONAL_FACTOR = 6;
 
     /**
-     * Factor used to evaluate the naturalist/environmental competence.
+     * Factor used to evaluate the naturalist/environmental intelligence.
      */
     const NATURALIST_ENVIRONMENTAL_FACTOR = 7;
 
@@ -126,7 +126,7 @@ class CompetencesQuestionnaire {
      * Return the text associated to the question.
      */
     public static function getQuestionTextOf($index) {
-        return get_string('competence_question_' . $index, 'block_task_oriented_groups');
+        return get_string('intelligence_question_' . $index, 'block_task_oriented_groups');
     }
 
     /**
@@ -140,14 +140,14 @@ class CompetencesQuestionnaire {
      * Return the identifier of the help string associated to the question.
      */
     public static function getQuestionHelpIdentifier($index) {
-        return 'competence_question_' . $index;
+        return 'intelligence_question_' . $index;
     }
 
     /**
      * Return the text associated to the specified answers in the question.
      */
     public static function getAnswerQuestionTextOf($index) {
-        return get_string('competence_question_answer_' . $index, 'block_task_oriented_groups');
+        return get_string('intelligence_question_answer_' . $index, 'block_task_oriented_groups');
     }
 
     /**
@@ -169,7 +169,7 @@ class CompetencesQuestionnaire {
     }
 
     /**
-     * Get the answers done by the current user for the competences questions.
+     * Get the answers done by the current user for the intelligences questions.
      */
     public static function getAnswersOfCurrentUser() {
         global $USER;
@@ -177,40 +177,40 @@ class CompetencesQuestionnaire {
     }
 
     /**
-     * Get the answers done by spoecified user for the competences questions.
+     * Get the answers done by spoecified user for the intelligences questions.
      */
     public static function getAnswersOf($userid) {
         global $DB;
-        return $DB->get_records('btog_competences_answers', array('userid' => $userid
+        return $DB->get_records('btog_intelligences_answers', array('userid' => $userid
         ), 'question', 'question,answer');
     }
 
     /**
-     * Store the answer of an user to a competences question.
+     * Store the answer of an user to a intelligences question.
      *
      * @param int $question
      * @param int $answer
      * @param int $userid
      * @return boolean true if the answer has been stored.
      */
-    public static function setCompetencesAnswerFor($question, $answer, $userid) {
+    public static function setIntelligencesAnswerFor($question, $answer, $userid) {
         global $DB;
         $updated = false;
-        $previousAnswer = $DB->get_record('btog_competences_answers',
+        $previousAnswer = $DB->get_record('btog_intelligences_answers',
                 array('userid' => $userid, 'question' => $question
                 ), '*', IGNORE_MISSING);
 
         if ($previousAnswer !== false && isset($previousAnswer)) {
 
             $previousAnswer->answer = $answer;
-            $updated = $DB->update_record('btog_competences_answers', $previousAnswer);
+            $updated = $DB->update_record('btog_intelligences_answers', $previousAnswer);
         } else {
 
             $record = new \stdClass();
             $record->userid = $userid;
             $record->question = $question;
             $record->answer = $answer;
-            $updated = $DB->insert_record('btog_competences_answers', $record, false) === true;
+            $updated = $DB->insert_record('btog_intelligences_answers', $record, false) === true;
         }
 
         return $updated;

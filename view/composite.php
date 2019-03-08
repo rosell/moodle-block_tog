@@ -18,7 +18,7 @@ require_once ($CFG->dirroot . '/group/lib.php');
 require_once ($CFG->libdir . '/tablelib.php');
 
 use block_task_oriented_groups\Personality;
-use block_task_oriented_groups\Competences;
+use block_task_oriented_groups\Intelligences;
 
 $courseid = optional_param('courseid', 0, PARAM_INT);
 $roleid = optional_param('roleid', -1, PARAM_INT);
@@ -81,7 +81,8 @@ if (has_capability('moodle/course:managegroups', $context)) {
     $table->head = array(
         new html_table_cell(get_string('composite_column_name', 'block_task_oriented_groups')),
         new html_table_cell(get_string('composite_column_personality', 'block_task_oriented_groups')),
-        new html_table_cell(get_string('composite_column_competences', 'block_task_oriented_groups')),
+        new html_table_cell(
+                get_string('composite_column_intelligences', 'block_task_oriented_groups')),
         new html_table_cell(get_string('composite_column_send', 'block_task_oriented_groups'))
     );
     $table->head[0]->attributes['class'] = 'col-6';
@@ -94,8 +95,8 @@ if (has_capability('moodle/course:managegroups', $context)) {
     $members = array();
     foreach (groups_get_potential_members($course->id, $roleid) as $enrolledUser) {
         $personality = Personality::getPersonalityOf($enrolledUser->id);
-        $competences = Competences::getCompetencesOf($enrolledUser->id);
-        if ($personality && $competences) {
+        $intelligences = Intelligences::getIntelligencesOf($enrolledUser->id);
+        if ($personality && $intelligences) {
             $member = new \stdClass();
             $member->id = $enrolledUser->id;
             $member->gender = 'FEMALE';
@@ -108,15 +109,15 @@ if (has_capability('moodle/course:managegroups', $context)) {
             $member->personality->attitude = $personality->attitude;
             $member->personality->perception = $personality->perception;
             $member->personality->extrovert = $personality->extrovert;
-            $member->competences = new \stdClass();
-            $member->competences->verbal = $competences->verbal;
-            $member->competences->logic_mathematics = $competences->logic_mathematics;
-            $member->competences->visual_spatial = $competences->visual_spatial;
-            $member->competences->kinestesica_corporal = $competences->kinestesica_corporal;
-            $member->competences->musical_rhythmic = $competences->musical_rhythmic;
-            $member->competences->intrapersonal = $competences->intrapersonal;
-            $member->competences->interpersonal = $competences->interpersonal;
-            $member->competences->naturalist_environmental = $competences->naturalist_environmental;
+            $member->intelligences = new \stdClass();
+            $member->intelligences->verbal = $intelligences->verbal;
+            $member->intelligences->logic_mathematics = $intelligences->logic_mathematics;
+            $member->intelligences->visual_spatial = $intelligences->visual_spatial;
+            $member->intelligences->kinestesica_corporal = $intelligences->kinestesica_corporal;
+            $member->intelligences->musical_rhythmic = $intelligences->musical_rhythmic;
+            $member->intelligences->intrapersonal = $intelligences->intrapersonal;
+            $member->intelligences->interpersonal = $intelligences->interpersonal;
+            $member->intelligences->naturalist_environmental = $intelligences->naturalist_environmental;
             $members[] = $member;
         } else {
             $personalityFilled = null;
@@ -129,14 +130,14 @@ if (has_capability('moodle/course:managegroups', $context)) {
                         get_string('composite_column_personality_not_filled',
                                 'block_task_oriented_groups'));
             }
-            $competencesFilled = null;
-            if ($competences) {
-                $competencesFilled = $OUTPUT->pix_icon('i/grade_correct',
-                        get_string('composite_column_competences_filled',
+            $intelligencesFilled = null;
+            if ($intelligences) {
+                $intelligencesFilled = $OUTPUT->pix_icon('i/grade_correct',
+                        get_string('composite_column_intelligences_filled',
                                 'block_task_oriented_groups'));
             } else {
-                $competencesFilled = $OUTPUT->pix_icon('i/grade_incorrect',
-                        get_string('composite_column_competences_not_filled',
+                $intelligencesFilled = $OUTPUT->pix_icon('i/grade_incorrect',
+                        get_string('composite_column_intelligences_not_filled',
                                 'block_task_oriented_groups'));
             }
             $rowPage = floor((count($table->data)) / 5) + 1;
@@ -149,7 +150,7 @@ if (has_capability('moodle/course:managegroups', $context)) {
                     'send-icon', array('data-userid' => $enrolledUser->id
                     ));
             $row = new html_table_row(
-                    array(fullname($enrolledUser), $personalityFilled, $competencesFilled, $send
+                    array(fullname($enrolledUser), $personalityFilled, $intelligencesFilled, $send
                     ));
             $row->cells[0]->attributes['class'] = 'col-6';
             $row->cells[1]->attributes['class'] = 'col-2 text-center';

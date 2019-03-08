@@ -16,7 +16,7 @@
 defined('MOODLE_INTERNAL') || die();
 
 use block_task_oriented_groups\Personality;
-use block_task_oriented_groups\Competences;
+use block_task_oriented_groups\Intelligences;
 
 /**
  * Block task_oriented_groups is defined here.
@@ -84,17 +84,17 @@ class block_task_oriented_groups extends block_base {
             $contents[] = html_writer::tag('li', $contentlink);
         }
 
-        if (Competences::isCompetencesCalculatedForCurrentUser()) {
+        if (Intelligences::isIntelligencesCalculatedForCurrentUser()) {
 
-            $contenturl = new moodle_url('/blocks/task_oriented_groups/view/competences.php');
+            $contenturl = new moodle_url('/blocks/task_oriented_groups/view/intelligences.php');
             $contentlink = html_writer::link($contenturl,
-                    get_string('main:my_competences', 'block_task_oriented_groups'));
+                    get_string('main:my_intelligences', 'block_task_oriented_groups'));
             $contents[] = html_writer::tag('li', $contentlink);
         } else {
 
-            $contenturl = new moodle_url('/blocks/task_oriented_groups/view/competences_test.php');
+            $contenturl = new moodle_url('/blocks/task_oriented_groups/view/intelligences_test.php');
             $contentlink = html_writer::link($contenturl,
-                    get_string('main:fill_competences_test', 'block_task_oriented_groups'));
+                    get_string('main:fill_intelligences_test', 'block_task_oriented_groups'));
             $contents[] = html_writer::tag('li', $contentlink);
         }
         $this->content->text = html_writer::tag('ol', implode('', $contents),

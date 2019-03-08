@@ -27,11 +27,11 @@ $functions = array(
         'description' => 'Allow to store the user answer to a question of the personality test',
         'type' => 'write', 'ajax' => true
     ),
-    'block_task_oriented_groups_store_competences_answer' => array(
+    'block_task_oriented_groups_store_intelligences_answer' => array(
         'classname' => 'block_task_oriented_groups_external',
-        'methodname' => 'store_competences_answer',
+        'methodname' => 'store_intelligences_answer',
         'classpath' => 'blocks/task_oriented_groups/externallib.php',
-        'description' => 'Allow to store the user answer to a question of the competences test',
+        'description' => 'Allow to store the user answer to a question of the intelligences test',
         'type' => 'write', 'ajax' => true
     ),
     'block_task_oriented_groups_composite_groups' => array(
@@ -45,7 +45,7 @@ $functions = array(
 $services = array(
     'task_oriented_groups' => array(
         'functions' => array('block_task_oriented_groups_store_personality_answer',
-            'block_task_oriented_groups_store_competences_answer',
+            'block_task_oriented_groups_store_intelligences_answer',
             'block_task_oriented_groups_composite_groups'
         ), 'restrictedusers' => 0, 'enabled' => 1
     )
