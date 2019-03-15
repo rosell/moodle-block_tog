@@ -60,6 +60,16 @@ class block_task_oriented_groups extends block_base {
         $this->content = new stdClass();
         $contents = array();
 
+        if (has_capability('moodle/site:config', $this->page->context)) {
+
+            $contenturl = new moodle_url('/blocks/task_oriented_groups/view/auto_fill_in.php',
+                    array('courseid' => $COURSE->id
+                    ));
+            $contentlink = html_writer::link($contenturl,
+                    get_string('main:auto_fill_in', 'block_task_oriented_groups'));
+            $contents[] = html_writer::tag('li', $contentlink);
+        }
+
         if (has_capability('moodle/course:managegroups', $this->page->context)) {
 
             $contenturl = new moodle_url('/blocks/task_oriented_groups/view/composite.php',
