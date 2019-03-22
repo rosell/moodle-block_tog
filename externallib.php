@@ -324,14 +324,14 @@ class block_task_oriented_groups_external extends external_api {
                 CURLOPT_TIMEOUT => 3600, CURLOPT_POSTFIELDS => $payload,
                 CURLOPT_HTTPHEADER => array('Content-Type: application/json',
                     'Content-Length: ' . strlen($payload), 'Accept: application/json'
-                )
+                ), CURLOPT_FAILONERROR => true
             );
 
             $ch = curl_init();
             curl_setopt_array($ch, $options);
             if (!$response = curl_exec($ch)) {
 
-                $message = print_r(curl_error($ch), TRUE);
+                $message = "SAAS server connection failed, because " . curl_error($ch);
             } else {
 
                 $calculated = true;
