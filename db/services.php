@@ -38,6 +38,20 @@ $functions = array(
         'classname' => 'block_task_oriented_groups_external', 'methodname' => 'composite_groups',
         'classpath' => 'blocks/task_oriented_groups/externallib.php',
         'description' => 'Allow to composite the groups', 'type' => 'write', 'ajax' => true
+    ),
+    'block_task_oriented_groups_auto_fill_in_personality' => array(
+        'classname' => 'block_task_oriented_groups_external',
+        'methodname' => 'auto_fill_in_personality',
+        'classpath' => 'blocks/task_oriented_groups/externallib.php',
+        'description' => 'Allow to auti fill in the personality test of an user', 'type' => 'write',
+        'ajax' => true
+    ),
+    'block_task_oriented_groups_auto_fill_in_intelligences' => array(
+        'classname' => 'block_task_oriented_groups_external',
+        'methodname' => 'auto_fill_in_intelligences',
+        'classpath' => 'blocks/task_oriented_groups/externallib.php',
+        'description' => 'Allow to auti fill in the intelligences test of an user',
+        'type' => 'write', 'ajax' => true
     )
 );
 // We define the services to install as pre-build services. A pre-build service is not editable by

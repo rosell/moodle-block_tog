@@ -283,7 +283,8 @@ class block_task_oriented_groups_external extends external_api {
                 $person->intelligences[] = $visual_spatial;
                 $kinestesica_corporal = new \stdClass();
                 $kinestesica_corporal->factor = 'KINESTESICA_CORPORAL';
-                $kinestesica_corporal->value = floatVal($member[intelligences][kinestesica_corporal]);
+                $kinestesica_corporal->value = floatVal(
+                        $member[intelligences][kinestesica_corporal]);
                 $person->intelligences[] = $kinestesica_corporal;
                 $musical_rhythmic = new \stdClass();
                 $musical_rhythmic->factor = 'MUSICAL_RHYTHMIC';
@@ -320,7 +321,7 @@ class block_task_oriented_groups_external extends external_api {
                     $config->base_api_url . '/composite');
             $options = array(CURLOPT_POST => 1, CURLOPT_HEADER => 0, CURLOPT_URL => $composite_url,
                 CURLOPT_FRESH_CONNECT => 1, CURLOPT_RETURNTRANSFER => 1, CURLOPT_FORBID_REUSE => 1,
-                CURLOPT_TIMEOUT => 4, CURLOPT_POSTFIELDS => $payload,
+                CURLOPT_TIMEOUT => 3600, CURLOPT_POSTFIELDS => $payload,
                 CURLOPT_HTTPHEADER => array('Content-Type: application/json',
                     'Content-Length: ' . strlen($payload), 'Accept: application/json'
                 )
@@ -362,9 +363,10 @@ class block_task_oriented_groups_external extends external_api {
                                         '</b>';
                                 $maxIntelligences = count($person->intelligences);
                                 if ($maxIntelligences > 0) {
-                                    $groupData->description .= ' ' . get_string(
-                                            'externallib:group_description_reponsable_of',
-                                            'block_task_oriented_groups');
+                                    $groupData->description .= ' ' .
+                                            get_string(
+                                                    'externallib:group_description_reponsable_of',
+                                                    'block_task_oriented_groups');
                                     $intelligenceIndex = 1;
                                     foreach ($person->intelligences as $intelligence) {
 
@@ -373,9 +375,10 @@ class block_task_oriented_groups_external extends external_api {
                                             $groupData->description .= ' ';
                                         } else if ($intelligenceIndex == $maxIntelligences) {
 
-                                            $groupData->description .= ' ' . get_string(
-                                                    'externallib:group_description_last_intelligence_and',
-                                                    'block_task_oriented_groups') . ' ';
+                                            $groupData->description .= ' ' .
+                                                    get_string(
+                                                            'externallib:group_description_last_intelligence_and',
+                                                            'block_task_oriented_groups') . ' ';
                                         } else {
 
                                             $groupData->description .= ', ';
@@ -383,13 +386,15 @@ class block_task_oriented_groups_external extends external_api {
 
                                         $groupData->description .= get_string(
                                                 'externallib:group_description_intelligence_' .
-                                                strtolower($intelligence), 'block_task_oriented_groups');
+                                                strtolower($intelligence),
+                                                'block_task_oriented_groups');
                                         $intelligenceIndex++;
                                     }
                                 } else {
-                                    $groupData->description .= ' ' . get_string(
-                                            'externallib:group_description_no_responsibility',
-                                            'block_task_oriented_groups');
+                                    $groupData->description .= ' ' .
+                                            get_string(
+                                                    'externallib:group_description_no_responsibility',
+                                                    'block_task_oriented_groups');
                                 }
                                 $groupData->description .= '</li>';
                             }
@@ -452,6 +457,133 @@ class block_task_oriented_groups_external extends external_api {
                             'This is true if the groups has been calculated'),
                     'message' => new external_value(PARAM_TEXT,
                             'This contains a message that explains why is not calculated or stored')
+                ));
+    }
+
+    /**
+     * The function called to get the informatiomn of the parameter to auto fill in personality.
+     */
+    public static function auto_fill_in_personality_parameters() {
+        return new external_function_parameters(
+                array(
+                    'userid' => new external_value(PARAM_INT,
+                            'The user to auti fill in the personality test')
+                ));
+    }
+
+    /**
+     * The function called to auto fill in personality of an user.
+     */
+    public static function auto_fill_in_personality($userid) {
+        $success = true;
+        $message = '';
+        try {
+
+            $params = self::validate_parameters(self::auto_fill_in_personality_parameters(),
+                    array('userid' => $userid
+                    ));
+
+            $userid = $params['userid'];
+            $maxQuestions = PersonalityQuestionnaire::countQuestions();
+            for ($question = 0; $question < $maxQuestions; $question++) {
+
+                $answer = rand(0, PersonalityQuestionnaire::MAX_QUESTION_ANSWERS - 1);
+                if (!PersonalityQuestionnaire::setPersonalityAnswerFor($question, $answer, $userid)) {
+
+                    $success = false;
+                    $message = 'Can not store the personality answer for a question';
+                }
+            }
+
+            if (!Personality::calculatePersonalityOf($userid)) {
+
+                $success = false;
+                $message = 'Can not calculate the personality of the user.';
+            }
+        } catch (\Throwable $e) {
+
+            $message = $e->getMessage() . '\n' . $e->getTraceAsString();
+        }
+        $result = array();
+        $result['success'] = $success;
+        $result['message'] = $message;
+        return $result;
+    }
+
+    /**
+     * The function called to get the informatiomn of the parameter to auto fill in personality.
+     */
+    public static function auto_fill_in_personality_returns() {
+        return new external_single_structure(
+                array(
+                    'success' => new external_value(PARAM_BOOL,
+                            'This is true if the personality test has been filled in'),
+                    'message' => new external_value(PARAM_TEXT,
+                            'This contains a message that explains why is not filled in the personality test')
+                ));
+    }
+
+    /**
+     * The function called to get the informatiomn of the parameter to auto fill in intelligences.
+     */
+    public static function auto_fill_in_intelligences_parameters() {
+        return new external_function_parameters(
+                array(
+                    'userid' => new external_value(PARAM_INT,
+                            'The user to auti fill in the intelligences test')
+                ));
+    }
+
+    /**
+     * The function called to auto fill in intelligences of an user.
+     */
+    public static function auto_fill_in_intelligences($userid) {
+        $success = true;
+        $message = '';
+        try {
+
+            $params = self::validate_parameters(self::auto_fill_in_intelligences_parameters(),
+                    array('userid' => $userid
+                    ));
+
+            $userid = $params['userid'];
+            $maxQuestions = IntelligencesQuestionnaire::countQuestions();
+            for ($question = 0; $question < $maxQuestions; $question++) {
+
+                $answer = rand(0, IntelligencesQuestionnaire::MAX_QUESTION_ANSWERS - 1);
+                if (!IntelligencesQuestionnaire::setIntelligencesAnswerFor($question, $answer,
+                        $userid)) {
+
+                    $success = false;
+                    $message = 'Can not store the intelligences answer for a question';
+                }
+            }
+
+            if (!Intelligences::calculateIntelligencesOf($userid)) {
+
+                $success = false;
+                $message = 'Can not calculate the intelligences of the user.';
+            }
+        } catch (\Throwable $e) {
+
+            $message = $e->getMessage() . '\n' . $e->getTraceAsString();
+        }
+        $result = array();
+        $result['success'] = $success;
+        $result['message'] = $message;
+        return $result;
+    }
+
+    /**
+     * The function called to get the informatiomn of the parameter to auto fill in intelligences.
+     */
+    public static function auto_fill_in_intelligences_returns() {
+        return new external_single_structure(
+                array(
+                    'success' => new external_value(PARAM_BOOL,
+                            'This is true if the intelligences test has been filled in'),
+                    'message' => new external_value(PARAM_TEXT,
+                            'This contains a message that explains why is not filled in the intelligences test')
                 ));
     }
 }
