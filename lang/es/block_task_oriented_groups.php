@@ -36,7 +36,8 @@ $string['main:fill_personality_test'] = 'Completa tu test de personalidad';
 $string['main:my_personality'] = 'Mi personalidad';
 $string['main:my_intelligences'] = 'Mis inteligencias';
 $string['main:fill_intelligences_test'] = 'Completa tu test de inteligencias.';
-$string['main:auto_fill_in'] = 'Auto completa els tests';
+$string['main:auto_fill_in'] = 'Auto completa los tests';
+$string['main:feedback_test'] = 'Proporcionar retroalimentación de los grupos creados';
 
 $string['personality_test_title'] = 'Test de personalidad';
 $string['personality_test_heading'] = 'Test de personalidad';
@@ -470,3 +471,29 @@ $string['externallib:group_description_intelligence_musical_rhythmic'] = 'Inteli
 $string['externallib:group_description_intelligence_naturalist_environmental'] = 'Inteligencia naturalista-ambiental.';
 $string['externallib:group_description_intelligence_verbal'] = 'Inteligencia lingüística';
 $string['externallib:group_description_intelligence_visual_spatial'] = 'Inteligencia visual-espacial';
+
+$string['auto_fill_in_title'] = 'Auto rellenar los questionarios';
+$string['auto_fill_in_heading'] = 'Auto rellenar los questionarios de los usuarios';
+$string['auto_fill_in_column_name'] = 'Nombre usuario';
+$string['auto_fill_in_column_personality'] = 'Rellenar el test de personlidad';
+$string['auto_fill_in_submit_personality'] = 'Autorellenar';
+$string['auto_fill_in_column_personality_filled'] = 'El usuario ya ha rellenado el questionario de personalidad';
+$string['auto_fill_in_column_intelligences'] = 'Rellenar el test de inteligencias';
+$string['auto_fill_in_submit_intelligences'] = 'Autorellenar';
+$string['auto_fill_in_column_intelligences_filled'] = 'El usuario ya ha rellenado el questionario de inteligencias';
+
+$string['feedback_test_title'] = 'Proporcionar retroalimentación sobre el desempeño de un equipo compuesto';
+$string['feedback_test_heading'] = 'Proporcionar retroalimentación sobre el desempeño de un equipo compuesto';
+$string['feedback_question_0'] = 'El grupo se ha organizado y ha colaborado, todo el mundo se ha implicado en las tareas a realizar';
+$string['feedback_question_1'] = 'Todo el grupo ha hablado con el fin de tomar acuerdos y planificar las tareas';
+$string['feedback_question_2'] = 'El grupo ha trabajado de manera autónoma: los problemas han sido solucionados dentro del grupo, y las soluciones se han encontrado entre todos';
+$string['feedback_question_3'] = 'El grupo ha hecho una coevaluación de manera crítica y responsable';
+$string['feedback_question_answer_0'] = 'Poco';
+$string['feedback_question_answer_1'] = 'Ni mucho ni poco';
+$string['feedback_question_answer_2'] = 'Mucho';
+$string['feedback_test_submit'] = 'Informar de los comentarios';
+$string['feedback_test_progress'] = 'Informando';
+$string['feedback_test_groups_error_title'] = 'Error';
+$string['feedback_test_groups_error_text'] = 'No se pudo informar del desenpeño del grupo.';
+$string['feedback_test_groups_error_continue'] = 'De acuerdo';
+

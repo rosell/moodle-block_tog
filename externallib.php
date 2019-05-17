@@ -467,7 +467,7 @@ class block_task_oriented_groups_external extends external_api {
         return new external_function_parameters(
                 array(
                     'userid' => new external_value(PARAM_INT,
-                            'The user to auti fill in the personality test')
+                            'The user to auto fill in the personality test')
                 ));
     }
 
@@ -530,7 +530,7 @@ class block_task_oriented_groups_external extends external_api {
         return new external_function_parameters(
                 array(
                     'userid' => new external_value(PARAM_INT,
-                            'The user to auti fill in the intelligences test')
+                            'The user to auto fill in the intelligences test')
                 ));
     }
 
@@ -584,6 +584,84 @@ class block_task_oriented_groups_external extends external_api {
                             'This is true if the intelligences test has been filled in'),
                     'message' => new external_value(PARAM_TEXT,
                             'This contains a message that explains why is not filled in the intelligences test')
+                ));
+    }
+
+    /**
+     * The function called to get the informatiomn of the parameter to feedback a group.
+     */
+    public static function feedback_group_parameters() {
+        return new external_function_parameters(
+                array(
+                    'feedbackid' => new external_value(PARAM_TEXT,
+                            'Contains the identifier of the feedback to provide'),
+                    'answervalues' => new external_multiple_structure(
+                            new external_value(PARAM_INT, 'Contains the answers of the user'))
+                ));
+    }
+
+    /**
+     * The function called to composite the new groups.
+     */
+    public static function feedback_group($feedbackid, $answervalues) {
+        // default return values
+        $updated = false;
+        $message = "";
+        try {
+            $params = self::validate_parameters(self::feedback_group_parameters(),
+                    array('feedbackid' => $feedbackid, 'answervalues' => $answervalues
+                    ));
+
+            $feedbackid = $params['feedbackid'];
+            $answervalues = $params['answervalues'];
+
+            $data = new \stdClass();
+            $data->feedbackId = $feedbackid;
+            $data->answers = array();
+            // $data->people[] = $person;
+
+            $payload = json_encode($data);
+            $config = get_config('task_oriented_groups');
+            $composite_url = str_replace('//composite', '/composite',
+                    $config->base_api_url . '/composite/feedback');
+            $options = array(CURLOPT_POST => 1, CURLOPT_HEADER => 0, CURLOPT_URL => $composite_url,
+                CURLOPT_FRESH_CONNECT => 1, CURLOPT_RETURNTRANSFER => 1, CURLOPT_FORBID_REUSE => 1,
+                CURLOPT_TIMEOUT => 3600, CURLOPT_POSTFIELDS => $payload,
+                CURLOPT_HTTPHEADER => array('Content-Type: application/json',
+                    'Content-Length: ' . strlen($payload), 'Accept: application/json'
+                ), CURLOPT_FAILONERROR => true
+            );
+
+            $ch = curl_init();
+            curl_setopt_array($ch, $options);
+            if (!$response = curl_exec($ch)) {
+
+                $message = "SAAS server connection failed, because " . curl_error($ch);
+            } else {
+
+                $updated = true;
+            }
+            curl_close($ch);
+        } catch (\Throwable $e) {
+
+            $message = $e->getMessage() . '\n' . $e->getTraceAsString();
+        }
+        $result = array();
+        $result['success'] = $updated;
+        $result['message'] = $message;
+        return $result;
+    }
+
+    /**
+     * The function called to get the informatiomn of the parameter to feedback a group.
+     */
+    public static function feedback_group_returns() {
+        return new external_single_structure(
+                array(
+                    'success' => new external_value(PARAM_BOOL,
+                            'This is true if the grouping has been stored'),
+                    'message' => new external_value(PARAM_TEXT,
+                            'This contains a message that explains why is not calculated or stored')
                 ));
     }
 }

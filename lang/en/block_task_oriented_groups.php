@@ -37,6 +37,7 @@ $string['main:my_personality'] = 'My personality';
 $string['main:my_intelligences'] = 'My intelligences';
 $string['main:fill_intelligences_test'] = 'Fill in your intelligences test';
 $string['main:auto_fill_in'] = 'Auto fill in tests';
+$string['main:feedback_test'] = 'Provide feedback of the created groups';
 
 $string['personality_test_title'] = 'Personality test';
 $string['personality_test_heading'] = 'Personality test';
@@ -480,3 +481,19 @@ $string['auto_fill_in_column_personality_filled'] = 'The user has filled in the 
 $string['auto_fill_in_column_intelligences'] = 'Fill in intelligences test';
 $string['auto_fill_in_submit_intelligences'] = 'Auto fill in';
 $string['auto_fill_in_column_intelligences_filled'] = 'The user has filled in the intelligences test';
+
+$string['feedback_test_title'] = 'Provide feedback about the performance of a composed team';
+$string['feedback_test_heading'] = 'Provide feedback about the performance of a composed team';
+$string['feedback_question_0'] = 'The group has been organized and collaborated, everyone has been involved in the tasks to be done';
+$string['feedback_question_1'] = 'The whole group has spoken in order to make agreements and plan tasks';
+$string['feedback_question_2'] = 'The group has worked autonomously: the problems have been solved within the group, and the solutions have been found among all';
+$string['feedback_question_3'] = 'The group has made a co-evaluation in a critical and responsible way';
+$string['feedback_question_answer_0'] = 'Little bit';
+$string['feedback_question_answer_1'] = 'Neither much nor little';
+$string['feedback_question_answer_2'] = 'A lot';
+$string['feedback_test_submit'] = 'Report feedback';
+$string['feedback_test_progress'] = 'Reporting';
+$string['feedback_test_groups_error_title'] = 'Error';
+$string['feedback_test_groups_error_text'] = 'Cannot report the feedback for the group.';
+$string['feedback_test_groups_error_continue'] = 'Ok';
+

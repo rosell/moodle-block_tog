@@ -11,7 +11,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle. If not, see <http://www.gnu.org/licenses/>.
 /**
- * Javascript components used to manage the intelligences quesions answers.
+ * Javascript components used to manage the composite view.
  *
  * @package block_task_oriented_groups
  * @copyright 2018 UDT-IA, IIIA-CSIC

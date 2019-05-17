@@ -43,15 +43,21 @@ $functions = array(
         'classname' => 'block_task_oriented_groups_external',
         'methodname' => 'auto_fill_in_personality',
         'classpath' => 'blocks/task_oriented_groups/externallib.php',
-        'description' => 'Allow to auti fill in the personality test of an user', 'type' => 'write',
+        'description' => 'Allow to auto fill in the personality test of an user', 'type' => 'write',
         'ajax' => true
     ),
     'block_task_oriented_groups_auto_fill_in_intelligences' => array(
         'classname' => 'block_task_oriented_groups_external',
         'methodname' => 'auto_fill_in_intelligences',
         'classpath' => 'blocks/task_oriented_groups/externallib.php',
-        'description' => 'Allow to auti fill in the intelligences test of an user',
+        'description' => 'Allow to auto fill in the intelligences test of an user',
         'type' => 'write', 'ajax' => true
+    ),
+    'block_task_oriented_groups_feedback_group' => array(
+        'classname' => 'block_task_oriented_groups_external', 'methodname' => 'feedback_group',
+        'classpath' => 'blocks/task_oriented_groups/externallib.php',
+        'description' => 'Allow to prodice feedback of a composed group', 'type' => 'write',
+        'ajax' => true
     )
 );
 // We define the services to install as pre-build services. A pre-build service is not editable by
@@ -60,7 +66,8 @@ $services = array(
     'task_oriented_groups' => array(
         'functions' => array('block_task_oriented_groups_store_personality_answer',
             'block_task_oriented_groups_store_intelligences_answer',
-            'block_task_oriented_groups_composite_groups'
+            'block_task_oriented_groups_composite_groups',
+            'block_task_oriented_groups_feedback_group'
         ), 'restrictedusers' => 0, 'enabled' => 1
     )
 );

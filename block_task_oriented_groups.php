@@ -78,6 +78,12 @@ class block_task_oriented_groups extends block_base {
             $contentlink = html_writer::link($contenturl,
                     get_string('main:composite', 'block_task_oriented_groups'));
             $contents[] = html_writer::tag('li', $contentlink);
+            $contenturl = new moodle_url('/blocks/task_oriented_groups/view/feedback_test.php',
+                    array('courseid' => $COURSE->id
+                    ));
+            $contentlink = html_writer::link($contenturl,
+                    get_string('main:feedback_test', 'block_task_oriented_groups'));
+            $contents[] = html_writer::tag('li', $contentlink);
         }
 
         if (Personality::isPersonalityCalculatedForCurrentUser()) {
