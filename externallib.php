@@ -420,6 +420,15 @@ class block_task_oriented_groups_external extends external_api {
                                                 " to the group " . $groupid;
                                     }
                                 }
+                                $feedbackRecord = new \stdClass();
+                                $feedbackRecord->groupingid = $groupingid;
+                                $feedbackRecord->groupid = $groupid;
+                                $feedbackRecord->feedbackid = $team->feedbackId;
+                                if (!$DB->insert_record('btog_composed', $feedbackRecord, false)) {
+
+                                    $message .= "\nCould not store the feedback identifier to the group " .
+                                            $groupid;
+                                }
                             }
                             $index++;
                         }
@@ -617,8 +626,7 @@ class block_task_oriented_groups_external extends external_api {
 
             $data = new \stdClass();
             $data->feedbackId = $feedbackid;
-            $data->answers = array();
-            // $data->people[] = $person;
+            $data->answerValues = $answervalues;
 
             $payload = json_encode($data);
             $config = get_config('task_oriented_groups');
