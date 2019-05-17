@@ -24,7 +24,7 @@ $PAGE->set_url($CFG->wwwroot . '/blocks/task_oriented_groups/view/feedback_test.
 
 require_login();
 echo $OUTPUT->header();
-$content = html_writer::start_div('container feedback-questions');
+$content = html_writer::start_tag('form');
 // add component to select the grouping
 $content .= html_writer::start_div('row');
 $content .= html_writer::tag('label', 'select the group to provide feedback');
@@ -36,6 +36,7 @@ $content .= html_writer::start_tag('input',
         ));
 
 // add the questionaire
+$content .= html_writer::start_div('container feedback-questions');
 $content .= html_writer::start_tag('input',
         array('id' => 'feedback_test__max_questions', 'type' => 'hidden',
             'value' => FeedbackQuestionnaire::MAX_QUESTIONS
@@ -43,9 +44,6 @@ $content .= html_writer::start_tag('input',
 for ($i = 0; $i < FeedbackQuestionnaire::MAX_QUESTIONS; $i++) {
 
     $questionId = 'feedback_test__question_' . $i;
-    $content .= html_writer::start_tag('input',
-            array('id' => $questionId, 'type' => 'hidden', 'value' => '-2'
-            ));
     if ($i % 2 != 0) {
 
         $content .= html_writer::start_div('row bg-light feedback-question');
@@ -53,10 +51,15 @@ for ($i = 0; $i < FeedbackQuestionnaire::MAX_QUESTIONS; $i++) {
 
         $content .= html_writer::start_div('row feedback-question');
     }
+    $content .= html_writer::start_tag('input',
+            array('id' => $questionId, 'type' => 'hidden', 'value' => '-2'
+            ));
     $content .= html_writer::start_div('container');
+
     $content .= html_writer::start_div('row');
     $content .= html_writer::tag('h4', FeedbackQuestionnaire::getQuestionTextOf($i));
     $content .= html_writer::end_div();
+
     $content .= html_writer::start_div('row justify-content-center');
     for ($j = 0; $j < FeedbackQuestionnaire::MAX_QUESTION_ANSWERS; $j++) {
 
@@ -73,14 +76,20 @@ for ($i = 0; $i < FeedbackQuestionnaire::MAX_QUESTIONS; $i++) {
         $content .= html_writer::end_div();
     }
     $content .= html_writer::end_div();
+
+    // end question row
     $content .= html_writer::end_div();
     $content .= html_writer::end_div();
 }
-$content .= html_writer::start_div('row justify-content-md-center');
+$content .= html_writer::start_div('row feedback-question');
+$content .= html_writer::start_div('container');
+$content .= html_writer::start_div('row justify-content-center');
 $content .= html_writer::tag('button',
         get_string('feedback_test_submit', 'block_task_oriented_groups'),
         array('type' => 'button', 'class' => 'btn btn-primary', 'id' => 'feedback_test__submit'
         ));
+$content .= html_writer::end_div();
+$content .= html_writer::end_div();
 $content .= html_writer::end_div();
 $content .= html_writer::div(
         html_writer::div(
@@ -94,7 +103,7 @@ $content .= html_writer::div(
         ));
 
 // FINISh the content
-$content .= html_writer::end_div();
+$content .= html_writer::end_tag('form');
 
 echo $content;
 $PAGE->requires->js_call_amd('block_task_oriented_groups/feedback_test', 'initialise');

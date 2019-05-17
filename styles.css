@@ -42,3 +42,20 @@
 .composite-progress .progress-bar {
 	width: 100%;
 }
+
+.feedback_test-progress {
+	max-width: 300px;
+	margin:auto;
+}
+
+.feedback_test-progress .progress-bar {
+	width: 100%;
+}
+
+.feedback-questions {
+	padding: 5px;
+}
+
+.feedback-question {
+	padding: 10px;
+}
