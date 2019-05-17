@@ -496,4 +496,4 @@ $string['feedback_test_progress'] = 'Reporting';
 $string['feedback_test_groups_error_title'] = 'Error';
 $string['feedback_test_groups_error_text'] = 'Cannot report the feedback for the group.';
 $string['feedback_test_groups_error_continue'] = 'Ok';
-
+$string['feedback_test_alert_no_capability'] = 'You do not have the capability to provide feedback of a group. Ask to the administrator the required privileges to do it.';

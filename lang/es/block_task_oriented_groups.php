@@ -496,4 +496,6 @@ $string['feedback_test_progress'] = 'Informando';
 $string['feedback_test_groups_error_title'] = 'Error';
 $string['feedback_test_groups_error_text'] = 'No se pudo informar del desenpeño del grupo.';
 $string['feedback_test_groups_error_continue'] = 'De acuerdo';
+$string['feedback_test_alert_no_capability'] = 'No tienes la capacidad de informar del desenpeño de de un grupo. Pedir al administrador los privilegios necesarios para hacerlo.';
+
 

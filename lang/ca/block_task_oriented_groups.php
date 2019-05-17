@@ -496,3 +496,4 @@ $string['feedback_test_progress'] = 'Informant';
 $string['feedback_test_groups_error_title'] = 'Error';
 $string['feedback_test_groups_error_text'] = 'No es pot informar del rendiment del grup.';
 $string['feedback_test_groups_error_continue'] = 'D\'acord';
+$string['feedback_test_alert_no_capability'] = 'No teniu la capacitat per a informar del rendiment d\'un grup. Demaneu a l\'administrador els privilegis necessaris per fer-ho.';
