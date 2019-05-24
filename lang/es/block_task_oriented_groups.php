@@ -497,5 +497,11 @@ $string['feedback_test_groups_error_title'] = 'Error';
 $string['feedback_test_groups_error_text'] = 'No se pudo informar del desenpeño del grupo.';
 $string['feedback_test_groups_error_continue'] = 'De acuerdo';
 $string['feedback_test_alert_no_capability'] = 'No tienes la capacidad de informar del desenpeño de de un grupo. Pedir al administrador los privilegios necesarios para hacerlo.';
-
-
+$string['feedback_test_alert_empty'] = 'No hay grupos para informar del desenpeño de sus integrantes.';
+$string['feedback_test_grouping_selector'] = 'Selecciona un conjunto de grupos';
+$string['feedback_test_grouping_selector_help'] = 'Debes selecionar el conjunto donde esta definido el grupo que quieres informar del desenpeño de sus integrantes.';
+$string['feedback_test_group_selector'] = 'Selecciona un grupo';
+$string['feedback_test_group_selector_help'] = 'Debes selecionar el grupo que quieres informar del desenpeño de sus integrantes.';
+$string['feedback_test_group'] = 'Grupo';
+$string['feedback_test_group_help'] = 'Debes selecionar el grupo que quieres informar del desenpeño de sus integrantes.';
+$string['feedback_test_alert_submit_success'] = 'Sus comentarios han sido almacenados.';

@@ -614,6 +614,7 @@ class block_task_oriented_groups_external extends external_api {
      */
     public static function feedback_group($feedbackid, $answervalues) {
         // default return values
+        global $DB;
         $updated = false;
         $message = "";
         try {
@@ -624,32 +625,43 @@ class block_task_oriented_groups_external extends external_api {
             $feedbackid = $params['feedbackid'];
             $answervalues = $params['answervalues'];
 
-            $data = new \stdClass();
-            $data->feedbackId = $feedbackid;
-            $data->answerValues = $answervalues;
+            $composed = $DB->get_record('btog_composed', array('feedbackid' => $feedbackid
+            ), '*', IGNORE_MISSING);
+            if ($composed !== false && isset($composed)) {
 
-            $payload = json_encode($data);
-            $config = get_config('task_oriented_groups');
-            $composite_url = str_replace('//composite', '/composite',
-                    $config->base_api_url . '/composite/feedback');
-            $options = array(CURLOPT_POST => 1, CURLOPT_HEADER => 0, CURLOPT_URL => $composite_url,
-                CURLOPT_FRESH_CONNECT => 1, CURLOPT_RETURNTRANSFER => 1, CURLOPT_FORBID_REUSE => 1,
-                CURLOPT_TIMEOUT => 3600, CURLOPT_POSTFIELDS => $payload,
-                CURLOPT_HTTPHEADER => array('Content-Type: application/json',
-                    'Content-Length: ' . strlen($payload), 'Accept: application/json'
-                ), CURLOPT_FAILONERROR => true
-            );
+                $data = new \stdClass();
+                $data->feedbackId = $feedbackid;
+                $data->answerValues = $answervalues;
 
-            $ch = curl_init();
-            curl_setopt_array($ch, $options);
-            if (!$response = curl_exec($ch)) {
+                $payload = json_encode($data);
+                $config = get_config('task_oriented_groups');
+                $composite_url = str_replace('//composite', '/composite',
+                        $config->base_api_url . '/composite/feedback');
+                $options = array(CURLOPT_POST => 1, CURLOPT_HEADER => 0,
+                    CURLOPT_URL => $composite_url, CURLOPT_FRESH_CONNECT => 1,
+                    CURLOPT_RETURNTRANSFER => 0, CURLOPT_FORBID_REUSE => 1, CURLOPT_TIMEOUT => 3600,
+                    CURLOPT_POSTFIELDS => $payload,
+                    CURLOPT_HTTPHEADER => array('Content-Type: application/json',
+                        'Content-Length: ' . strlen($payload), 'Accept: application/json'
+                    ), CURLOPT_FAILONERROR => true
+                );
 
-                $message = "SAAS server connection failed, because " . curl_error($ch);
+                $ch = curl_init();
+                curl_setopt_array($ch, $options);
+                if (!curl_exec($ch)) {
+
+                    $message = "SAAS server connection failed, because " . curl_error($ch);
+                } else {
+
+                    $updated = true;
+                    $DB->delete_records('btog_composed', array('id' => $composed->id
+                    ));
+                }
+                curl_close($ch);
             } else {
 
-                $updated = true;
+                $message = "Undefined feedback identifier";
             }
-            curl_close($ch);
         } catch (\Throwable $e) {
 
             $message = $e->getMessage() . '\n' . $e->getTraceAsString();

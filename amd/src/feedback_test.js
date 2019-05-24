@@ -22,7 +22,7 @@ define([ 'jquery', 'core/ajax', 'core/str', 'core/notification' ], function($, a
 	/**
 	 * Return the number maximum of questions.
 	 */
-	function getFeedbackQuestionnaireMaxQuestions(){
+	function getFeedbackQuestionnaireMaxQuestions() {
 
 		return Number($('#feedback_test__max_questions').val());
 	}
@@ -45,17 +45,17 @@ define([ 'jquery', 'core/ajax', 'core/str', 'core/notification' ], function($, a
 			$('#feedback_test__progress').hide();
 			notification.exception(error);
 		};
-		$('.hidden-feedback_test-question-input').each(function(){
+		$('.hidden-feedback_test-question-input').each(function() {
 			var value = Number($(this).val());
-			answerValues.push( value);
+			answerValues.push(value);
 		});
 
 		var feedbackId = $('#feedback_test__feedbackid').val();
 		var answerValues = [];
 		var max = getFeedbackQuestionnaireMaxQuestions();
 		for (var i = 0; i < max; i++) {
-			var value = Number($('#feedback_test__question_'+i).val());
-			answerValues.push( value);
+			var value = Number($('#feedback_test__question_' + i).val());
+			answerValues.push(value);
 		}
 		var promises = ajax.call([ {
 		  methodname : 'block_task_oriented_groups_feedback_group',
@@ -85,14 +85,49 @@ define([ 'jquery', 'core/ajax', 'core/str', 'core/notification' ], function($, a
 
 			} else {
 
-				// window.location.href = config.wwwroot + '/group/groupings.php?id=' +
-				// getUrlParameter('courseid');
-
-				$('#feedback_test__submit').prop( "disabled", true );
+				$('#feedback_test__submit').show();
+				$('#feedback_test__progress').hide();
+				$('#feedback_test__submit').prop("disabled", true);
 				var max = getFeedbackQuestionnaireMaxQuestions();
 				for (var i = 0; i < max; i++) {
-					$('#feedback_test__question_'+i).val(-2);
+
+					$('#feedback_test__question_' + i).val(-2);
 				}
+				$('.feedback_test-answer-input').prop('checked', false);
+				$('#feedback_test__alert_submit_success').show();
+				setTimeout(function() {
+					$('#feedback_test__alert_submit_success').hide();
+				}, 3000);
+
+				var option = $('.feedback_test-group_option[value="' + feedbackId + '"]');
+				var selection = option.parent();
+				option.remove();
+				var options = selection.children();
+				if (options.length > 0) {
+
+					var newFeedbackId = options.first().val();
+					$('#feedback_test__feedbackid').val(newFeedbackId);
+
+				} else {
+
+					var groupingId = $('#feedback_test__grouping_selector').val();
+					$('#feedback_test__group_row_for_' + groupingId).remove();
+					var groupingSelector = $('#feedback_test__grouping_selector');
+					$('.feedback_test-grouping_option[value="'+groupingId+'"]').remove();
+					if( groupingSelector.children().length == 0 ){
+
+						// If not more groups posibles
+						$('#feedback_test__alert_empty').show();
+						$('#feedback_test__form').hide();
+
+					}else{
+
+						var newGroupingId = groupingSelector.children().first().val();
+						$('#feedback_test__grouping_selector').val(newGroupingId);
+						groupingChanged();
+					}
+				}
+
 			}
 
 		}).fail(exceptionhandler);
@@ -117,27 +152,85 @@ define([ 'jquery', 'core/ajax', 'core/str', 'core/notification' ], function($, a
 		var max = getFeedbackQuestionnaireMaxQuestions();
 		for (var i = 0; i < max; i++) {
 
-			value = Number($('#feedback_test__question_'+i).val());
-			if( value < -1 ){
+			value = Number($('#feedback_test__question_' + i).val());
+			if (value < -1) {
 				disableSubmit = true;
 				break;
 			}
 		}
-		$('#feedback_test__submit').prop( "disabled", disableSubmit );
+		$('#feedback_test__submit').prop("disabled", disableSubmit);
 
+	}
+
+	/**
+	 * Called when changed the grouping.
+	 */
+	function groupingChanged() {
+
+		$('.feedback_test__group_row').hide();
+		var groupingId = $('#feedback_test__grouping_selector').val();
+		$('#feedback_test__group_row_for_' + groupingId).show();
+		var feedbackId = $('#feedback_test__group_selector_for_' + groupingId).val();
+		$('#feedback_test__feedbackid').val(feedbackId);
+
+	}
+
+	/**
+	 * Called when changed the group.
+	 */
+	function groupChanged(event) {
+
+		var feedbackId = $(event.target).val();
+		$('#feedback_test__feedbackid').val(feedbackId);
+
+	}
+
+	/**
+	 * Called when changed an answer.
+	 */
+	function answerChanged(event) {
+
+		var answerInput = $(event.target);
+		var id = answerInput.attr('id');
+		var index = id.lastIndexOf('_') + 1;
+		var questionId = id.substring(index);
+		var value = answerInput.val();
+		$('#feedback_test__question_' + questionId).val(value);
+
+		var answered = 0;
+		var max = getFeedbackQuestionnaireMaxQuestions();
+		for (var i = 0; i < max; i++) {
+
+			var answer = Number($('#feedback_test__question_' + i).val());
+			if (answer > -2) {
+
+				answered++;
+			}
+
+		}
+
+		var disable = (answered != max);
+		$('#feedback_test__submit').prop("disabled", disable);
 
 	}
 
 	return {
-		getFeedbackQuestionnaireMaxQuestions:getFeedbackQuestionnaireMaxQuestions,
+	  getFeedbackQuestionnaireMaxQuestions : getFeedbackQuestionnaireMaxQuestions,
 	  selectedAnswer : selectedAnswer,
 	  feedbackSubmitClicked : feedbackSubmitClicked,
+	  groupingChanged : groupingChanged,
+	  answerChanged : answerChanged,
 	  initialise : function($params) {
 
 		  $('#feedback_test__submit').click(feedbackSubmitClicked);
-		  $('#feedback_test__submit').prop( "disabled", true );
+		  $('#feedback_test__submit').prop("disabled", true);
 		  $('#feedback_test__progress').hide();
-		  $('input:radio').click(selectedAnswer);
+		  $('#feedback_test__alert_empty').hide();
+		  groupingChanged();
+		  $('.feedback_test__group_selector').change(groupChanged);
+		  $('#feedback_test__grouping_selector').change(groupingChanged);
+		  $('.feedback_test-answer-input').change(answerChanged);
+		  $('#feedback_test__alert_submit_success').hide();
 	  }
 	};
 

@@ -24,7 +24,7 @@
  */
 defined('MOODLE_INTERNAL') || die();
 
-$string['pluginname'] = 'Bloc per fer groups orientatas a tasques';
+$string['pluginname'] = 'Bloc per fer grups orientatas a tasques';
 $string['task_oriented_groups'] = 'Groups orientats a tasques';
 
 $string['settings:heading'] = 'Aquest bloc utilitza un servei extern per generar els grups per realitzar una tasca.';
@@ -396,7 +396,7 @@ $string['intelligences_go_to_test'] = 'Modificar la prova d\'intel·ligències';
 $string['composite_title'] = 'Grups compostos';
 $string['composite_heading'] = 'Grups compostos per tasca';
 $string['composite_alert_no_capability'] = 'No teniu la capacitat per a grups compostos. Demaneu a l\'administrador els privilegis necessaris per fer-ho.';
-$string['composite_grouping_name'] = 'Nom del conjunt de groups';
+$string['composite_grouping_name'] = 'Nom del conjunt de grups';
 $string['composite_grouping_name_placeholder'] = 'Escriu el nom d\'agrupació.';
 $string['composite_grouping_name_help'] = 'El nom associat al grup que es compondrà.';
 $string['composite_groups_pattern'] = 'Patró de grup';
@@ -497,3 +497,11 @@ $string['feedback_test_groups_error_title'] = 'Error';
 $string['feedback_test_groups_error_text'] = 'No es pot informar del rendiment del grup.';
 $string['feedback_test_groups_error_continue'] = 'D\'acord';
 $string['feedback_test_alert_no_capability'] = 'No teniu la capacitat per a informar del rendiment d\'un grup. Demaneu a l\'administrador els privilegis necessaris per fer-ho.';
+$string['feedback_test_alert_empty'] = 'No hi ha grups per informar del rendiment dels seus integrants.';
+$string['feedback_test_grouping_selector'] = 'Sel·leciona un conjunt de grups';
+$string['feedback_test_grouping_selector_help'] = 'Has de sel·lecionar el conjunt on està el grup que vols informar del rendiments dels seus integrants.';
+$string['feedback_test_group_selector'] = 'Sel·leciona un grup';
+$string['feedback_test_group_selector_help'] = 'Has de sel·lecionar el grup que vols informar del rendiments dels seus integrants.';
+$string['feedback_test_group'] = 'Grup';
+$string['feedback_test_group_help'] = 'Has de sel·lecionar el grup que vols informar del rendiments dels seus integrants.';
+$string['feedback_test_alert_submit_success'] = 'S\'ha emmagatzemat la vostra opinió.';
