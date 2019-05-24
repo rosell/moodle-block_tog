@@ -5,26 +5,15 @@ The formed groups has diversity in gender, personality and intelligence.
 
 This plugin is written by UDT-IA, as part of the IIIA-CSIC.
 
-## Installation ##
+If you are a developer, you have to take a look to the [development notes](DEVELOPMENT.md).
 
- To do
- 
-## Development
 
-You have to intall the **node.js** and its tool **npm**. After that you need to intall the dependencies and the the grunt command. For this go to the directory where you have the source code of this block and run:
+## Installation
 
-~~~
-npm install
-npm install -g grunt-cli
-~~~
+As administrator of the **Moodle**, you can install the **moodle-block_task_oriented_groups** going to the **Site administration**. Click on the tab **Plugins** and select the **Intall plugin** option. After that you have to select the zip file with the plugin (for example: *block_task_oriented_groups_moodle35_2019052421.zip*), and install it. If it is the first time you will see a form to configure the plugin. On this form you only have to specify the **Base API URL**. This is the URL where is the SAAS service that calculate the group formation. You can use theservices provided by the UDT-IA, IIIA-CSIC at  **https://eduteams.iiia.csic.es/saas/** or specify your own service.
 
-After that you can use grunt to compile the javascript files.
 
-~~~
-grunt amd
-~~~
- 
-## License ##
+## License
 
 2018 UDT-IA, IIIA-CSIC
 
