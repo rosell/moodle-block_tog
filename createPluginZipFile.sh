@@ -14,7 +14,7 @@ if [[ "$1" = "deploy" ]];
 then
 	VERSION=$CURRENT_VERSION
 	PREVIOUS_VERSION=$CURRENT_VERSION
-	grunt amd
+	npm run amd
 else
   PREVIOUS_VERSION=$CURRENT_VERSION
   PREVIOUS_VERSION_FILE=".previousPluginZipFileVersion"
@@ -27,20 +27,17 @@ else
    VERSION=$((VERSION+1))
   done
 
-  grunt amddebug
+  npm run amddebug
 fi
 if [ $? -ne 0 ];
 then
 	exit 1
 fi
 PLUGIN_FILE="block_task_oriented_groups_moodle35_$VERSION.zip"
-DOWNLOAD_DIR="$HOME/Downloads"
-if [ -d "$DOWNLOAD_DIR" ]; then
-  PLUGIN_DIR="$DOWNLOAD_DIR"
-else
- PLUGIN_DIR="/tmp"
+PLUGIN_DIR="$DIR/dist"
+if [ ! -d "$PLUGIN_DIR" ]; then
+  mkdir "$PLUGIN_DIR"
 fi
-
 PLUGIN_FILE="$PLUGIN_DIR/$PLUGIN_FILE"
 
 TMP_DIR=$(mktemp -d)
