@@ -14,7 +14,8 @@
   "scripts": {
     "postcss": "postcss --config postcss.js --output style/reboost.css style/reboost.css",
     "amd": "grunt amd",
-    "amddebug": "grunt amddebug"
+    "amddebug": "grunt amddebug",
+    "build":"./createPluginZipFile.sh"
   },
   "devDependencies": {
     "grunt": "^1.0.4",

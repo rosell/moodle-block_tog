@@ -16,4 +16,4 @@ jobs:
     - name: Create plugin zip file
       run: |
         npm install
-        sh ./createPluginZipFile.sh
+        npm run build

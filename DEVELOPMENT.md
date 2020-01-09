@@ -6,19 +6,18 @@ You have to intall the **node.js** and its tool **npm**. After that you need to 
 
 ~~~sh
 npm install
-npm install -g grunt-cli
 ~~~
 
 After that you can use grunt to compile the javascript files.
 
 ~~~sh
-grunt amd
+npm run amd
 ~~~
 
 To create the zip file to be deployed on a moodle you have to call the script
 
 ~~~sh
-createPluginZipFile.sh
+npm run build
 ~~~
 
 ## Create a testing moodle site
