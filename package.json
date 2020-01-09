@@ -12,13 +12,18 @@
     "url": "https://gitLab.iiia.csic.es/education/moodle-block_task_oriented_groups.git"
   },
   "scripts": {
-    "postcss": "postcss --config postcss.js --output style/reboost.css style/reboost.css"
+    "postcss": "postcss --config postcss.js --output style/reboost.css style/reboost.css",
+    "amd": "grunt amd",
+    "amddebug": "grunt amddebug"
   },
   "devDependencies": {
-    "grunt": "^1.0.3",
+    "grunt": "^1.0.4",
+    "grunt-cli": "^1.3.2",
     "grunt-contrib-clean": "^2.0.0",
-    "grunt-contrib-jshint": "^2.0.0",
-    "grunt-contrib-uglify": "^4.0.0"
+    "grunt-contrib-jshint": "^2.1.0",
+    "grunt-contrib-uglify": "^4.0.1",
+    "js-yaml": ">=3.13.1",
+    "lodash": ">=4.17.12"
   },
   "license": "GPL-3.0+"
 }
