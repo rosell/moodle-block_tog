@@ -126,10 +126,10 @@ class Intelligences {
             $record->logic_mathematics = $record->logic_mathematics / $total[1];
             $record->visual_spatial = $record->visual_spatial / $total[2];
             $record->kinestesica_corporal = $record->kinestesica_corporal / $total[3];
-            $record->musical_rhythmic = $record->verbal / $total[4];
-            $record->intrapersonal = $record->logic_mathematics / $total[5];
-            $record->interpersonal = $record->visual_spatial / $total[6];
-            $record->naturalist_environmental = $record->kinestesica_corporal / $total[7];
+            $record->musical_rhythmic = $record->musical_rhythmic / $total[4];
+            $record->intrapersonal = $record->intrapersonal / $total[5];
+            $record->interpersonal = $record->interpersonal / $total[6];
+            $record->naturalist_environmental = $record->naturalist_environmental / $total[7];
 
             $previousAnswer = self::getIntelligencesOf($userid);
             if ($previousAnswer !== false) {
