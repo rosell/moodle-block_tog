@@ -27,6 +27,7 @@ $PAGE->set_context(context_system::instance());
 $PAGE->set_title(get_string('composite_title', 'block_task_oriented_groups'));
 $PAGE->set_heading(get_string('composite_heading', 'block_task_oriented_groups'));
 $PAGE->set_url($CFG->wwwroot . '/blocks/task_oriented_groups/view/composite.php');
+$PAGE->add_body_class('block_task_oriented_group');
 
 $course = $DB->get_record('course', array('id' => $courseid
 ), '*', MUST_EXIST);

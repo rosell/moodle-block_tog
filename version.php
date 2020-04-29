@@ -24,7 +24,7 @@
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'block_task_oriented_groups';
-$plugin->release = '1.0.0';
-$plugin->version = 2019052400;
+$plugin->release = '1.0.1';
+$plugin->version = 2020042900;
 $plugin->requires = 2018051700;
 $plugin->maturity = MATURITY_RC;

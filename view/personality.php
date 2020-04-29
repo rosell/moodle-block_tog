@@ -21,6 +21,7 @@ $PAGE->set_context(context_system::instance());
 $PAGE->set_title(get_string('personality_title', 'block_task_oriented_groups'));
 $PAGE->set_heading(get_string('personality_heading', 'block_task_oriented_groups'));
 $PAGE->set_url($CFG->wwwroot . '/blocks/task_oriented_groups/view/personality.php');
+$PAGE->add_body_class('block_task_oriented_group');
 
 require_login();
 $personality = Personality::getPersonalityOfCurrentUser();
@@ -34,18 +35,18 @@ echo $OUTPUT->header();
 ?>
 <div class="container">
 	<div class="row">
-		<p><?=get_string('personality_msg','block_task_oriented_groups',$l10npersonality)?></p>
+		<p><?=get_string('personality_msg', 'block_task_oriented_groups', $l10npersonality)?></p>
 	</div>
 	<div class="row justify-content-md-center">
 		<a
 			class="btn btn-secondary"
-			href="<?=get_string('personality_' .$personality->type .'_more','block_task_oriented_groups')?>"
+			href="<?=get_string('personality_' . $personality->type . '_more', 'block_task_oriented_groups')?>"
 			role="button"
-		><?=get_string('personality_read_more','block_task_oriented_groups')?></a> <a
+		><?=get_string('personality_read_more', 'block_task_oriented_groups')?></a> <a
 			class="btn btn-primary"
-			href="<?=$CFG->wwwroot .'/blocks/task_oriented_groups/view/personality_test.php'?>"
+			href="<?=$CFG->wwwroot . '/blocks/task_oriented_groups/view/personality_test.php'?>"
 			role="button"
-		><?=get_string('personality_go_to_test','block_task_oriented_groups')?></a>
+		><?=get_string('personality_go_to_test', 'block_task_oriented_groups')?></a>
 	</div>
 </div>
 <?php

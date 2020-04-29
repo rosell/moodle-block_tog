@@ -22,6 +22,7 @@ $PAGE->set_context(context_system::instance());
 $PAGE->set_title(get_string('personality_test_title', 'block_task_oriented_groups'));
 $PAGE->set_heading(get_string('personality_test_heading', 'block_task_oriented_groups'));
 $PAGE->set_url($CFG->wwwroot . '/blocks/task_oriented_groups/view/personality_test.php');
+$PAGE->add_body_class('block_task_oriented_group');
 
 require_login();
 $answers = PersonalityQuestionnaire::getAnswersOfCurrentUser();
@@ -68,7 +69,7 @@ for ($i = 0; $i < PersonalityQuestionnaire::countQuestions(); $i++) {
 						type="radio"
 						id="answer_<?=$j?>_for_personality_question_<?=$i?>"
 						name="<?=$questionId?>"
-						value="<?=PersonalityQuestionnaire::getAnswerQuestionValueOf($i,$j)?>"
+						value="<?=PersonalityQuestionnaire::getAnswerQuestionValueOf($i, $j)?>"
 						<?php
 
         if ($selected == $j) {
@@ -78,7 +79,7 @@ for ($i = 0; $i < PersonalityQuestionnaire::countQuestions(); $i++) {
 					><label
 						class="form-check-label"
 						for="answer_<?=$j?>_for_personality_question_<?=$i?>"
-					><?=PersonalityQuestionnaire::getAnswerQuestionTextOf($i,$j)?></label>
+					><?=PersonalityQuestionnaire::getAnswerQuestionTextOf($i, $j)?></label>
 				</div>
   <?php
     }

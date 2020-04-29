@@ -21,6 +21,7 @@ $PAGE->set_context(context_system::instance());
 $PAGE->set_title(get_string('intelligences_title', 'block_task_oriented_groups'));
 $PAGE->set_heading(get_string('intelligences_heading', 'block_task_oriented_groups'));
 $PAGE->set_url($CFG->wwwroot . '/blocks/task_oriented_groups/view/intelligences.php');
+$PAGE->add_body_class('block_task_oriented_group');
 
 require_login();
 $intelligences = Intelligences::getIntelligencesOfCurrentUser();
@@ -28,26 +29,26 @@ echo $OUTPUT->header();
 ?>
 <div class="container">
 	<div class="row">
-		<p><?=get_string('intelligences_msg','block_task_oriented_groups')?></p>
+		<p><?=get_string('intelligences_msg', 'block_task_oriented_groups')?></p>
 	</div>
 	<div class="row">
 		<ul>
-			<li><b><?=get_string('intelligences_verbal_factor','block_task_oriented_groups')?>:</b>&nbsp;<?=Intelligences::valueToString($intelligences->verbal)?></li>
-			<li><b><?=get_string('intelligences_logic_mathematics_factor','block_task_oriented_groups')?>:</b>&nbsp;<?=Intelligences::valueToString($intelligences->logic_mathematics)?></li>
-			<li><b><?=get_string('intelligences_visual_spatial_factor','block_task_oriented_groups')?>:</b>&nbsp;<?=Intelligences::valueToString($intelligences->visual_spatial)?></li>
-			<li><b><?=get_string('intelligences_kinestesica_corporal_factor','block_task_oriented_groups')?>:</b>&nbsp;<?=Intelligences::valueToString($intelligences->kinestesica_corporal)?></li>
-			<li><b><?=get_string('intelligences_musical_rhythmic_factor','block_task_oriented_groups')?>:</b>&nbsp;<?=Intelligences::valueToString($intelligences->musical_rhythmic)?></li>
-			<li><b><?=get_string('intelligences_intrapersonal_factor','block_task_oriented_groups')?>:</b>&nbsp;<?=Intelligences::valueToString($intelligences->intrapersonal)?></li>
-			<li><b><?=get_string('intelligences_interpersonal_factor','block_task_oriented_groups')?>:</b>&nbsp;<?=Intelligences::valueToString($intelligences->interpersonal)?></li>
-			<li><b><?=get_string('intelligences_naturalist_environmental_factor','block_task_oriented_groups')?>:</b>&nbsp;<?=Intelligences::valueToString($intelligences->naturalist_environmental)?></li>
+			<li><b><?=get_string('intelligences_verbal_factor', 'block_task_oriented_groups')?>:</b>&nbsp;<?=Intelligences::valueToString($intelligences->verbal)?></li>
+			<li><b><?=get_string('intelligences_logic_mathematics_factor', 'block_task_oriented_groups')?>:</b>&nbsp;<?=Intelligences::valueToString($intelligences->logic_mathematics)?></li>
+			<li><b><?=get_string('intelligences_visual_spatial_factor', 'block_task_oriented_groups')?>:</b>&nbsp;<?=Intelligences::valueToString($intelligences->visual_spatial)?></li>
+			<li><b><?=get_string('intelligences_kinestesica_corporal_factor', 'block_task_oriented_groups')?>:</b>&nbsp;<?=Intelligences::valueToString($intelligences->kinestesica_corporal)?></li>
+			<li><b><?=get_string('intelligences_musical_rhythmic_factor', 'block_task_oriented_groups')?>:</b>&nbsp;<?=Intelligences::valueToString($intelligences->musical_rhythmic)?></li>
+			<li><b><?=get_string('intelligences_intrapersonal_factor', 'block_task_oriented_groups')?>:</b>&nbsp;<?=Intelligences::valueToString($intelligences->intrapersonal)?></li>
+			<li><b><?=get_string('intelligences_interpersonal_factor', 'block_task_oriented_groups')?>:</b>&nbsp;<?=Intelligences::valueToString($intelligences->interpersonal)?></li>
+			<li><b><?=get_string('intelligences_naturalist_environmental_factor', 'block_task_oriented_groups')?>:</b>&nbsp;<?=Intelligences::valueToString($intelligences->naturalist_environmental)?></li>
 		</ul>
 	</div>
 	<div class="row justify-content-md-center">
 		<a
 			class="btn btn-primary"
-			href="<?=$CFG->wwwroot .'/blocks/task_oriented_groups/view/intelligences_test.php'?>"
+			href="<?=$CFG->wwwroot . '/blocks/task_oriented_groups/view/intelligences_test.php'?>"
 			role="button"
-		><?=get_string('intelligences_go_to_test','block_task_oriented_groups')?></a>
+		><?=get_string('intelligences_go_to_test', 'block_task_oriented_groups')?></a>
 	</div>
 </div>
 <?php
