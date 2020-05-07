@@ -27,9 +27,9 @@ defined('MOODLE_INTERNAL') || die();
 $string['pluginname'] = 'Task oriented groups block';
 $string['task_oriented_groups'] = 'Task oriented groups';
 
-$string['settings:heading'] = 'This block uses an external service to generate the groups to realize a task.';
+$string['settings:heading'] = 'A Moodle block to groupings users depending on the task to do. The formed groups have diversity in gender, personality and intelligence.';
 $string['settings:base_api_url_title'] = 'Base API URL';
-$string['settings:base_api_url_description'] = 'The URL to the server that provide the services to generate the groups for a task.';
+$string['settings:base_api_url_description'] = 'The URL to the external service that will generate the groups for a task. We provided the service (https://eduteams.iiia.csic.es/saas/) free of charges without any limitation on the number of calls. Unfortunately, we have some physics limits on the server that only can process some thousand of request per second. When the service is called, it stores the information of the HTTP header as the remote address or port, the number of students per group, the request intelligence, the expected performance for the groups, and the list of students. For each student is stored an identifier and its associated personality and intelligence. The identifier is anonymized so the service does not known at with person on the Moodle is associated with the identifier. Also, it stored the formed groups for the students. On the other hand, it stored the feedback provided by the teachers that are used to evaluate the performance of the formed groups.';
 
 $string['main:composite'] = 'Create a new groups by task';
 $string['main:fill_personality_test'] = 'Fill in your personality test';

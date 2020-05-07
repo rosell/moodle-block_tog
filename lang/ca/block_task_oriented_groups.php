@@ -27,9 +27,9 @@ defined('MOODLE_INTERNAL') || die();
 $string['pluginname'] = 'Bloc per fer grups orientatas a tasques';
 $string['task_oriented_groups'] = 'Groups orientats a tasques';
 
-$string['settings:heading'] = 'Aquest bloc utilitza un servei extern per generar els grups per realitzar una tasca.';
+$string['settings:heading'] = 'Un bloc de Moodle per agrupar usuaris segons la tasca a realitzar. Els grups formats tenen diversitat de gènere, personalitat i intel·ligència.';
 $string['settings:base_api_url_title'] = 'Base API URL';
-$string['settings:base_api_url_description'] = 'L\'URL del servidor que proporciona els serveis per generar grups per a una tasca.';
+$string['settings:base_api_url_description'] = 'L\'URL al servei exterior que generarà els grups per a una tasca. El servei que proporcionem (https://eduteams.iiia.csic.es/saas/) és gratuït sense cap limitació. Malauradament, tenim alguns límits físics en el servidor que només pot processar milers de sol·licituds per segon. Quan s\'utilitza el servei, emmagatzema la informació de l\'encapçalament HTTP com l\'adreça o el port remot, el nombre d\'estudiants per grup, els requeriments d\'intel·ligències per la tasca, el rendiment esperat per als grups i la llista d\'estudiants. Per a cada estudiant s\'emmagatzema un identificador i la seva personalitat i intel·ligència associades. L\'identificador està anonimitzat per la qual cosa el servei no coneix informació de la persona definida a Moodle. A més, emmagatzema els grups formats per als estudiants. D\'altra banda, emmagatzema els comentaris aportats pels professors quan avalua el rendiment dels grups formats.';
 
 $string['main:composite'] = 'Creeu un grup nou per tasca';
 $string['main:fill_personality_test'] = 'Ompliu la vostra prova de personalitat';

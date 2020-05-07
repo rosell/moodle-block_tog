@@ -27,9 +27,9 @@ defined('MOODLE_INTERNAL') || die();
 $string['pluginname'] = 'Bloque para hacer grupos orientados a tareas';
 $string['task_oriented_groups'] = 'Grupos orientados a tareas';
 
-$string['settings:heading'] = 'Este bloque utiliza un servicio externo para generar los grupos para realizar una tarea.';
+$string['settings:heading'] = 'Un bloque de Moodle para agrupar usuarios dependiendo de la tarea a realizar. Los grupos formados tienen diversidad en género, personalidad e inteligencia.';
 $string['settings:base_api_url_title'] = 'Base API URL';
-$string['settings:base_api_url_description'] = 'La URL del servidor que proporciona los servicios para generar los grupos para una tarea.';
+$string['settings:base_api_url_description'] = 'La URL al servicio externo que generará los grupos para una tarea. El servicio que proporcionamos (https://eduteams.iiia.csic.es/saas/) es gratuito sin ninguna limitación en la cantidad de llamadas. Desafortunadamente, tenemos algunos límites físicos en el servidor que solo pueden procesar algunas miles de solicitudes por segundo. Cuando se llama al servicio, almacena la información del encabezado HTTP como la dirección remota o el puerto, el número de estudiantes por equipo, la inteligencia de la solicitud, el rendimiento esperado para los grupos y la lista de estudiantes. Para cada estudiante se almacena un identificador y su personalidad e inteligencia asociadas. El identificador es anónimo, por lo que el servicio que no puede conocer la persona en Moodle asociada con el identificador. Además, almacenó los grupos formados para los estudiantes. Por otro lado, almacenó los comentarios proporcionados por los maestros que se utilizan para evaluar el desempeño de los grupos formados.';
 
 $string['main:composite'] = 'Crea un nuevo grupo por tarea';
 $string['main:fill_personality_test'] = 'Completa tu test de personalidad';
