@@ -17,7 +17,7 @@
 /**
  * Plugin strings in Catalan are defined here.
  *
- * @package block_task_oriented_groups
+ * @package block_tog
  * @category string
  * @copyright 2018 UDT-IA, IIIA-CSIC
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -25,7 +25,7 @@
 defined('MOODLE_INTERNAL') || die();
 
 $string['pluginname'] = 'Bloc per fer grups orientatas a tasques';
-$string['task_oriented_groups'] = 'Groups orientats a tasques';
+$string['tog'] = 'Groups orientats a tasques';
 
 $string['settings:heading'] = 'Un bloc de Moodle per agrupar usuaris segons la tasca a realitzar. Els grups formats tenen diversitat de gènere, personalitat i intel·ligència.';
 $string['settings:base_api_url_title'] = 'Base API URL';

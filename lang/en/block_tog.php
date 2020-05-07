@@ -17,7 +17,7 @@
 /**
  * Plugin strings in English are defined here.
  *
- * @package block_task_oriented_groups
+ * @package block_tog
  * @category string
  * @copyright 2018 UDT-IA, IIIA-CSIC
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -25,7 +25,7 @@
 defined('MOODLE_INTERNAL') || die();
 
 $string['pluginname'] = 'Task oriented groups block';
-$string['task_oriented_groups'] = 'Task oriented groups';
+$string['tog'] = 'Task oriented groups';
 
 $string['settings:heading'] = 'A Moodle block to groupings users depending on the task to do. The formed groups have diversity in gender, personality and intelligence.';
 $string['settings:base_api_url_title'] = 'Base API URL';

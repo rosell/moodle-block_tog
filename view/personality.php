@@ -14,14 +14,14 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle. If not, see <http://www.gnu.org/licenses/>.
 require_once ('../../../config.php');
-use block_task_oriented_groups\Personality;
-use block_task_oriented_groups\Intelligences;
+use block_tog\Personality;
+use block_tog\Intelligences;
 
 $PAGE->set_pagelayout('standard');
 $PAGE->set_context(context_system::instance());
-$PAGE->set_title(get_string('personality_title', 'block_task_oriented_groups'));
-$PAGE->set_heading(get_string('personality_heading', 'block_task_oriented_groups'));
-$PAGE->set_url($CFG->wwwroot . '/blocks/task_oriented_groups/view/personality.php');
+$PAGE->set_title(get_string('personality_title', 'block_tog'));
+$PAGE->set_heading(get_string('personality_heading', 'block_tog'));
+$PAGE->set_url($CFG->wwwroot . '/blocks/tog/view/personality.php');
 $PAGE->add_body_class('block_task_oriented_group');
 
 $courseid = optional_param('courseid', 0, PARAM_INT);
@@ -47,21 +47,21 @@ if ($personality) {
     $l10npersonality = new \stdClass();
     $l10npersonality->type = $personality->type;
     $l10npersonality->name = get_string('personality_' . $personality->type . '_name',
-            'block_task_oriented_groups');
+            'block_tog');
     $l10npersonality->description = get_string('personality_' . $personality->type . '_description',
-            'block_task_oriented_groups');
+            'block_tog');
     ?>
 	<div class="row">
-		<p><?=get_string('personality_msg', 'block_task_oriented_groups', $l10npersonality)?></p>
+		<p><?=get_string('personality_msg', 'block_tog', $l10npersonality)?></p>
 	</div>
     <?php
 } else {
     echo html_writer::div(
-            get_string('personality_error_not_answered_all_questions', 'block_task_oriented_groups'),
+            get_string('personality_error_not_answered_all_questions', 'block_tog'),
             'alert alert-danger', array('role' => 'alert'
             ));
 }
-$personality_test_url = $CFG->wwwroot . '/blocks/task_oriented_groups/view/personality_test.php';
+$personality_test_url = $CFG->wwwroot . '/blocks/tog/view/personality_test.php';
 if ($courseid) {
     $personality_test_url .= '?courseid=' . $courseid;
 }
@@ -71,7 +71,7 @@ if ($courseid) {
 $intelligences = Intelligences::getIntelligencesOfCurrentUser();
 if (!$intelligences) {
     $intelligences_test_url = $CFG->wwwroot .
-            '/blocks/task_oriented_groups/view/intelligences_test.php';
+            '/blocks/tog/view/intelligences_test.php';
     if ($courseid) {
         $intelligences_test_url .= '?courseid=' . $courseid;
     }
@@ -82,7 +82,7 @@ if (!$intelligences) {
 			onclick="location.href='<?=$intelligences_test_url?>';"
 			role="button"
 		>
-			<?=get_string('personality_go_to_intelligences_test', 'block_task_oriented_groups')?>
+			<?=get_string('personality_go_to_intelligences_test', 'block_tog')?>
 		</button>
         <?php
 }
@@ -91,10 +91,10 @@ if ($personality) {
 		<button
 			type="button"
 			class="btn btn-secondary"
-			onclick="location.href='<?=get_string('personality_' . $personality->type . '_more','block_task_oriented_groups')?>';"
+			onclick="location.href='<?=get_string('personality_' . $personality->type . '_more','block_tog')?>';"
 			role="button"
 		>
-			<?=get_string('personality_read_more', 'block_task_oriented_groups')?>
+			<?=get_string('personality_read_more', 'block_tog')?>
 		</button>
 		<?php
 }
@@ -105,7 +105,7 @@ if ($personality) {
 			onclick="location.href='<?=$personality_test_url?>';"
 			role="button"
 		>
-			<?=get_string('personality_go_to_test', 'block_task_oriented_groups')?>
+			<?=get_string('personality_go_to_test', 'block_tog')?>
 		</button>
 		<?php
 if ($courseid) {
@@ -116,7 +116,7 @@ if ($courseid) {
 			onclick="location.href='<?=$CFG->wwwroot . '/course/view.php?id=' . $courseid?>';"
 			role="button"
 		>
-        	<?=get_string('personality_go_to_course', 'block_task_oriented_groups')?>
+        	<?=get_string('personality_go_to_course', 'block_tog')?>
         </button>
         <?php
 }

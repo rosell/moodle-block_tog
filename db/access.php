@@ -17,7 +17,7 @@
 /**
  * Capabilities.
  *
- * @package block_task_oriented_groups
+ * @package block_tog
  * @copyright 2018 UDT-IA, IIIA-CSIC
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -25,14 +25,14 @@ defined('MOODLE_INTERNAL') || die();
 
 $capabilities = array(
 
-    'block/task_oriented_groups:addinstance' => array('riskbitmask' => RISK_SPAM | RISK_XSS,
+    'block/tog:addinstance' => array('riskbitmask' => RISK_SPAM | RISK_XSS,
 
         'captype' => 'write', 'contextlevel' => CONTEXT_BLOCK,
         'archetypes' => array('editingteacher' => CAP_ALLOW, 'manager' => CAP_ALLOW
         ), 'clonepermissionsfrom' => 'moodle/site:manageblocks'
     ),
 
-    'block/task_oriented_groups:myaddinstance' => array('riskbitmask' => RISK_SPAM | RISK_XSS,
+    'block/tog:myaddinstance' => array('riskbitmask' => RISK_SPAM | RISK_XSS,
 
         'captype' => 'write', 'contextlevel' => CONTEXT_BLOCK,
         'archetypes' => array('editingteacher' => CAP_ALLOW, 'manager' => CAP_ALLOW

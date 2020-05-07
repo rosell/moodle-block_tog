@@ -13,7 +13,7 @@
 /**
  * Javascript components used to manage the personality questionnaire answers.
  *
- * @package block_task_oriented_groups
+ * @package block_tog
  * @copyright 2018 UDT-IA, IIIA-CSIC
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -37,7 +37,7 @@ define([ 'jquery', 'core/ajax', 'core/str', 'core/notification' ], function($, a
     start = inputId.lastIndexOf('_') + 1;
     var question = inputId.substring(start);
     var promises = ajax.call([ {
-      methodname : 'block_task_oriented_groups_store_personality_answer',
+      methodname : 'block_tog_store_personality_answer',
       args : {
         'answer' : answer,
         'question' : question
@@ -59,13 +59,13 @@ define([ 'jquery', 'core/ajax', 'core/str', 'core/notification' ], function($, a
 
       str.get_strings([ {
         key : 'store_personality_answer_error_title',
-        component : 'block_task_oriented_groups'
+        component : 'block_tog'
       }, {
         key : 'store_personality_answer_error_text',
-        component : 'block_task_oriented_groups'
+        component : 'block_tog'
       }, {
         key : 'store_personality_answer_error_continue',
-        component : 'block_task_oriented_groups'
+        component : 'block_tog'
       } ]).done(function(s) {
        notification.alert(s[0], s[1], s[2]);
       }).fail(notification.exception);

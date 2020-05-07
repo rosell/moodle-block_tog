@@ -17,14 +17,14 @@
 /**
  * Plugin version and other meta-data are defined here.
  *
- * @package block_task_oriented_groups
+ * @package block_tog
  * @copyright 2018 UDT-IA, IIIA-CSIC
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->component = 'block_task_oriented_groups';
-$plugin->release = '1.0.1';
-$plugin->version = 2020042900;
+$plugin->component = 'block_tog';
+$plugin->version = 2020043000;
 $plugin->requires = 2018051700;
-$plugin->maturity = MATURITY_RC;
+$plugin->maturity = MATURITY_STABLE;
+$plugin->release = '1.1.0';
