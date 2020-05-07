@@ -316,7 +316,7 @@ class block_task_oriented_groups_external extends external_api {
                 $data->requirements[] = $requirementData;
             }
             $payload = json_encode($data);
-            $config = get_config('task_oriented_groups');
+            $config = get_config('block_task_oriented_groups');
             $composite_url = str_replace('//composite', '/composite',
                     $config->base_api_url . '/composite');
             $options = array(CURLOPT_POST => 1, CURLOPT_HEADER => 0, CURLOPT_URL => $composite_url,
@@ -634,7 +634,7 @@ class block_task_oriented_groups_external extends external_api {
                 $data->answerValues = $answervalues;
 
                 $payload = json_encode($data);
-                $config = get_config('task_oriented_groups');
+                $config = get_config('block_task_oriented_groups');
                 $composite_url = str_replace('//composite', '/composite',
                         $config->base_api_url . '/composite/feedback');
                 $options = array(CURLOPT_POST => 1, CURLOPT_HEADER => 0,

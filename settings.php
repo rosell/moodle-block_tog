@@ -25,12 +25,12 @@ if ($ADMIN->fulltree) {
 
     // Introductory explanation.
     $settings->add(
-            new admin_setting_heading('task_oriented_groups/pluginname', '',
+            new admin_setting_heading('block_task_oriented_groups/pluginname', '',
                     new lang_string('settings:heading', 'block_task_oriented_groups')));
 
     // The URL to the SAAS
     $settings->add(
-            new admin_setting_configtext('task_oriented_groups/base_api_url',
+            new admin_setting_configtext('block_task_oriented_groups/base_api_url',
                     get_string('settings:base_api_url_title', 'block_task_oriented_groups'),
                     get_string('settings:base_api_url_description', 'block_task_oriented_groups'),
                     'https://eduteams.iiia.csic.es/saas/', PARAM_URL));
