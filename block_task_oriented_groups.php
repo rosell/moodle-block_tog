@@ -88,13 +88,17 @@ class block_task_oriented_groups extends block_base {
 
         if (Personality::isPersonalityCalculatedForCurrentUser()) {
 
-            $contenturl = new moodle_url('/blocks/task_oriented_groups/view/personality.php');
+            $contenturl = new moodle_url('/blocks/task_oriented_groups/view/personality.php',
+                    array('courseid' => $COURSE->id
+                    ));
             $contentlink = html_writer::link($contenturl,
                     get_string('main:my_personality', 'block_task_oriented_groups'));
             $contents[] = html_writer::tag('li', $contentlink);
         } else {
 
-            $contenturl = new moodle_url('/blocks/task_oriented_groups/view/personality_test.php');
+            $contenturl = new moodle_url('/blocks/task_oriented_groups/view/personality_test.php',
+                    array('courseid' => $COURSE->id
+                    ));
             $contentlink = html_writer::link($contenturl,
                     get_string('main:fill_personality_test', 'block_task_oriented_groups'));
             $contents[] = html_writer::tag('li', $contentlink);
@@ -102,13 +106,17 @@ class block_task_oriented_groups extends block_base {
 
         if (Intelligences::isIntelligencesCalculatedForCurrentUser()) {
 
-            $contenturl = new moodle_url('/blocks/task_oriented_groups/view/intelligences.php');
+            $contenturl = new moodle_url('/blocks/task_oriented_groups/view/intelligences.php',
+                    array('courseid' => $COURSE->id
+                    ));
             $contentlink = html_writer::link($contenturl,
                     get_string('main:my_intelligences', 'block_task_oriented_groups'));
             $contents[] = html_writer::tag('li', $contentlink);
         } else {
 
-            $contenturl = new moodle_url('/blocks/task_oriented_groups/view/intelligences_test.php');
+            $contenturl = new moodle_url('/blocks/task_oriented_groups/view/intelligences_test.php',
+                    array('courseid' => $COURSE->id
+                    ));
             $contentlink = html_writer::link($contenturl,
                     get_string('main:fill_intelligences_test', 'block_task_oriented_groups'));
             $contents[] = html_writer::tag('li', $contentlink);

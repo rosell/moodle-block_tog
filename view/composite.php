@@ -183,7 +183,7 @@ if (has_capability('moodle/course:managegroups', $context)) {
         $form .= html_writer::div(
                 html_writer::tag('ul', implode($pageItems),
                         array('class' => 'pagination flex-wrap'
-                        )), 'row justify-content-md-center');
+                        )), 'row justify-content-md-center actions-row');
         $form .= html_writer::div(
                 html_writer::tag('button',
                         get_string('composite_send_selected', 'block_task_oriented_groups'),
@@ -394,7 +394,7 @@ if (has_capability('moodle/course:managegroups', $context)) {
                 get_string('composite_performance_under', 'block_task_oriented_groups'), 'col-md-3');
         $form .= html_writer::end_div();
         $form .= html_writer::end_div();
-        $form .= html_writer::start_div('row justify-content-md-center');
+        $form .= html_writer::start_div('row justify-content-md-center actions-row');
         $form .= html_writer::tag('button',
                 get_string('composite_submit', 'block_task_oriented_groups'),
                 array('type' => 'button', 'class' => 'btn btn-primary', 'id' => 'composite__submit'

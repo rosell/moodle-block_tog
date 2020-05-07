@@ -53,7 +53,7 @@ if (has_capability('moodle/course:managegroups', $context)) {
         $groups = groups_get_all_groups($course->id, 0, $grouping->id);
         foreach ($groups as $group) {
 
-            $composed = $DB->get_record('btog_composed',
+            $composed = $DB->get_record('block_tog_composed',
                     array('groupingid' => $grouping->id, 'groupid' => $group->id
                     ), '*', IGNORE_MISSING);
             if ($composed !== false && isset($composed)) {

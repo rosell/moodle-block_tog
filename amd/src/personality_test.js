@@ -20,8 +20,16 @@
 define([ 'jquery', 'core/ajax', 'core/str', 'core/notification' ], function($, ajax, str, notification) {
  return {
   initialise : function($params) {
+   console.debug("Personality test initialize with:" + $params);
+   $('.actions-row').find('.alert').hide();
    $('input:radio').click(function(event) {
     event.stopPropagation();
+		var actions = $('.actions-row');
+		var updating = Math.max(0,actions.attr('data-updating') || 0);
+		updating++;
+		actions.attr('data-updating', updating);
+		actions.find('button').hide();
+		actions.find('.alert').show();
     var inputId = $(this).attr('id');
     var start = inputId.indexOf('_') + 1;
     var end = inputId.indexOf('_', start);
@@ -36,6 +44,16 @@ define([ 'jquery', 'core/ajax', 'core/str', 'core/notification' ], function($, a
       }
     } ]);
     promises[0].done(function(response) {
+
+			var actions = $('.actions-row');
+			var updating = Math.max(1,actions.attr('data-updating') || 1);
+			updating--;
+			actions.attr('data-updating', updating);
+			if (updating <= 0) {
+
+				actions.find('button').show();
+				actions.find('.alert').hide();
+			}
 
      if (!response || (typeof response === 'object' && response.success !== true)) {
 
