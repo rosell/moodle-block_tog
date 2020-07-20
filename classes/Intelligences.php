@@ -8,11 +8,20 @@
 //
 // Moodle is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle. If not, see <http://www.gnu.org/licenses/>.
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
+/**
+ * Data model for the intelligences of an user.
+ *
+ * @package block_tog
+ * @copyright 2018 - 2020 UDT-IA, IIIA-CSIC
+ * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+
 namespace block_tog;
 
 defined('MOODLE_INTERNAL') || die();
@@ -20,16 +29,18 @@ defined('MOODLE_INTERNAL') || die();
 use block_tog\IntelligencesQuestionnaire;
 
 /**
- * Class that represents the intelligences questionnaire.
+ * Class that represents the intelligences that an user can have.
  *
- * @package block_tog
- * @copyright 2018 UDT-IA, IIIA-CSIC
+ * @copyright 2018 - 2020 UDT-IA, IIIA-CSIC
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class Intelligences {
 
     /**
      * Return the coimpetences of teh current user.
+     * 
+     * @return stdObject|boolean the intelligences associated to the user or false if the user does
+     *         not have a intelligences.
      */
     public static function getIntelligencesOfCurrentUser() {
         global $USER;
@@ -40,7 +51,7 @@ class Intelligences {
      * Return the the intelligences of an user.
      *
      * @param int $userid
-     * @return stdObject/boolean the intelligences associated to the user or false if the user does
+     * @return stdObject|boolean the intelligences associated to the user or false if the user does
      *         not have a intelligences.
      */
     public static function getIntelligencesOf($userid) {
@@ -61,6 +72,7 @@ class Intelligences {
      * Calculate the intelligences of the specified user.
      *
      * @param int $userid
+     * 
      * @return boolean true if the intelligences has been calculated.
      */
     public static function calculateIntelligencesOf($userid) {
@@ -147,6 +159,8 @@ class Intelligences {
 
     /**
      * Check if it is calculated the intelligences for the current user.
+     * 
+     * @return boolean true if the intelligences are calculated for the current user.
      */
     public static function isIntelligencesCalculatedForCurrentUser() {
         global $USER;
@@ -155,6 +169,10 @@ class Intelligences {
 
     /**
      * Check if for an user has calculated its intelligences.
+     * 
+     * @param int $userId identifier of the user to check if it has fillen in the intelligences test.
+     * 
+     * @return boolean true if the intelligences are calculated for the user.
      */
     public static function isIntelligencesCalculatedFor($userid) {
         global $DB;
@@ -165,8 +183,9 @@ class Intelligences {
     /**
      * Convert a intelligence value to a human readable value.
      *
-     * @param number $value to obtain the
-     * @return string
+     * @param number $value to obtain the text.
+     * 
+     * @return string the human readable text associated to the value.
      */
     public static function valueToString($value) {
         $index = floor($value / 0.2);

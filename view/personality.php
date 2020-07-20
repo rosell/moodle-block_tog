@@ -13,6 +13,14 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle. If not, see <http://www.gnu.org/licenses/>.
+
+/**
+ * View to show the personality of an user.
+ *
+ * @package block_tog
+ * @copyright 2018 - 2020 UDT-IA, IIIA-CSIC
+ * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 require_once ('../../../config.php');
 use block_tog\Personality;
 use block_tog\Intelligences;
@@ -27,7 +35,8 @@ $PAGE->add_body_class('block_task_oriented_group');
 $courseid = optional_param('courseid', 0, PARAM_INT);
 if ($courseid) {
 
-    $course = $DB->get_record('course', array('id' => $courseid
+    $course = $DB->get_record('course', array(
+        'id' => $courseid
     ), '*', MUST_EXIST);
     require_login($course);
     context_helper::preload_course($course->id);
@@ -46,20 +55,17 @@ if ($personality) {
 
     $l10npersonality = new \stdClass();
     $l10npersonality->type = $personality->type;
-    $l10npersonality->name = get_string('personality_' . $personality->type . '_name',
-            'block_tog');
-    $l10npersonality->description = get_string('personality_' . $personality->type . '_description',
-            'block_tog');
+    $l10npersonality->name = get_string('personality_' . $personality->type . '_name', 'block_tog');
+    $l10npersonality->description = get_string('personality_' . $personality->type . '_description', 'block_tog');
     ?>
 	<div class="row">
 		<p><?=get_string('personality_msg', 'block_tog', $l10npersonality)?></p>
 	</div>
     <?php
 } else {
-    echo html_writer::div(
-            get_string('personality_error_not_answered_all_questions', 'block_tog'),
-            'alert alert-danger', array('role' => 'alert'
-            ));
+    echo html_writer::div(get_string('personality_error_not_answered_all_questions', 'block_tog'), 'alert alert-danger', array(
+        'role' => 'alert'
+    ));
 }
 $personality_test_url = $CFG->wwwroot . '/blocks/tog/view/personality_test.php';
 if ($courseid) {
@@ -69,53 +75,38 @@ if ($courseid) {
 	<div class="row justify-content-md-center actions-row">
 		<?php
 $intelligences = Intelligences::getIntelligencesOfCurrentUser();
-if (!$intelligences) {
-    $intelligences_test_url = $CFG->wwwroot .
-            '/blocks/tog/view/intelligences_test.php';
+if (! $intelligences) {
+    $intelligences_test_url = $CFG->wwwroot . '/blocks/tog/view/intelligences_test.php';
     if ($courseid) {
         $intelligences_test_url .= '?courseid=' . $courseid;
     }
     ?>
-		<button
-			type="button"
-			class="btn btn-secondary"
-			onclick="location.href='<?=$intelligences_test_url?>';"
-			role="button"
-		>
+		<button type="button" class="btn btn-secondary"
+			onclick="location.href='<?=$intelligences_test_url?>';" role="button">
 			<?=get_string('personality_go_to_intelligences_test', 'block_tog')?>
 		</button>
         <?php
 }
 if ($personality) {
     ?>
-		<button
-			type="button"
-			class="btn btn-secondary"
+		<button type="button" class="btn btn-secondary"
 			onclick="location.href='<?=get_string('personality_' . $personality->type . '_more','block_tog')?>';"
-			role="button"
-		>
+			role="button">
 			<?=get_string('personality_read_more', 'block_tog')?>
 		</button>
 		<?php
 }
 ?>
-		<button
-			type="button"
-			class="btn btn-primary"
-			onclick="location.href='<?=$personality_test_url?>';"
-			role="button"
-		>
+		<button type="button" class="btn btn-primary"
+			onclick="location.href='<?=$personality_test_url?>';" role="button">
 			<?=get_string('personality_go_to_test', 'block_tog')?>
 		</button>
 		<?php
 if ($courseid) {
     ?>
-		<button
-			type="button"
-			class="btn btn-secondary"
+		<button type="button" class="btn btn-secondary"
 			onclick="location.href='<?=$CFG->wwwroot . '/course/view.php?id=' . $courseid?>';"
-			role="button"
-		>
+			role="button">
         	<?=get_string('personality_go_to_course', 'block_tog')?>
         </button>
         <?php

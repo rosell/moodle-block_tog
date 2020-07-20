@@ -8,11 +8,20 @@
 //
 // Moodle is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle. If not, see <http://www.gnu.org/licenses/>.
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
+/**
+ * Data model for the intelligences questionnaire.
+ *
+ * @package block_tog
+ * @copyright 2018 - 2020 UDT-IA, IIIA-CSIC
+ * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+
 namespace block_tog;
 
 defined('MOODLE_INTERNAL') || die();
@@ -20,8 +29,7 @@ defined('MOODLE_INTERNAL') || die();
 /**
  * Class that represents the intelligence questionnaire.
  *
- * @package block_tog
- * @copyright 2018 UDT-IA, IIIA-CSIC
+ * @copyright 2018 - 2020 UDT-IA, IIIA-CSIC
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class IntelligencesQuestionnaire {
@@ -107,6 +115,8 @@ class IntelligencesQuestionnaire {
 
     /**
      * Return the number of questions that have the questionnaire.
+     * 
+     * @return int the nukmber of question in the questionnaire.
      */
     public static function countQuestions() {
         return count(self::QUESTION_FACTORS);
@@ -115,7 +125,8 @@ class IntelligencesQuestionnaire {
     /**
      * Return the facor associated to the question.
      *
-     * @param int $index
+     * @param int $index of the question to obtain the factor.
+     * 
      * @return int the factor associated to the question.
      */
     public static function getQuestionFactor($index) {
@@ -124,6 +135,10 @@ class IntelligencesQuestionnaire {
 
     /**
      * Return the text associated to the question.
+     * 
+     * @param int $index of the question to obtain the text.
+     * 
+     * @return string the localized text for the question.
      */
     public static function getQuestionTextOf($index) {
         return get_string('intelligence_question_' . $index, 'block_tog');
@@ -131,6 +146,10 @@ class IntelligencesQuestionnaire {
 
     /**
      * Check if the specified question has help.
+     * 
+     * @param int $index of the question to check.
+     * 
+     * @return boolean true if the question has help message.
      */
     public static function hasQuestionHelp($index) {
         return array_search($index, self::QUESTIONS_WITHOUT_HELP) === false;
@@ -138,6 +157,10 @@ class IntelligencesQuestionnaire {
 
     /**
      * Return the identifier of the help string associated to the question.
+     * 
+     * @param int $index of the question to obtain the help identifier.
+     * 
+     * @return string the identifier for the quesiton help.
      */
     public static function getQuestionHelpIdentifier($index) {
         return 'intelligence_question_' . $index;
@@ -145,6 +168,10 @@ class IntelligencesQuestionnaire {
 
     /**
      * Return the text associated to the specified answers in the question.
+     * 
+     * @param int $index of the answer to obtain the text.
+     * 
+     * @return string the localized text for the answer.
      */
     public static function getAnswerQuestionTextOf($index) {
         return get_string('intelligence_question_answer_' . $index, 'block_tog');
@@ -152,6 +179,10 @@ class IntelligencesQuestionnaire {
 
     /**
      * Return the value associated to the specified answers in the question.
+     * 
+     * @param int $index of the answer to obtain the value.
+     * 
+     * @return double the value associated to the answer.
      */
     public static function getAnswerQuestionValueOf($index) {
         switch ($index) {
@@ -170,6 +201,8 @@ class IntelligencesQuestionnaire {
 
     /**
      * Get the answers done by the current user for the intelligences questions.
+     * 
+     * @return stdObject[]|boolean the intelligences answers of the current user or false if cannot obtain the answers.
      */
     public static function getAnswersOfCurrentUser() {
         global $USER;
@@ -178,6 +211,10 @@ class IntelligencesQuestionnaire {
 
     /**
      * Get the answers done by spoecified user for the intelligences questions.
+     * 
+     * @param int $userid identifier of the user to obtain the number of answers.
+     * 
+     * @return stdObject[]|boolean the intelligences answers of a user  or false if cannot obtain the answers.
      */
     public static function getAnswersOf($userid) {
         global $DB;
@@ -188,9 +225,10 @@ class IntelligencesQuestionnaire {
     /**
      * Store the answer of an user to a intelligences question.
      *
-     * @param int $question
-     * @param int $answer
-     * @param int $userid
+     * @param int $question identifier of the question.
+     * @param int $answer identifier of the answer.
+     * @param int $userid identifier of the user.
+     * 
      * @return boolean true if the answer has been stored.
      */
     public static function setIntelligencesAnswerFor($question, $answer, $userid) {

@@ -17,7 +17,7 @@
  * General configurations of the block.
  *
  * @package block_tog
- * @copyright 2018 UDT-IA, IIIA-CSIC
+ * @copyright 2018 - 2020 UDT-IA, IIIA-CSIC
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 defined('MOODLE_INTERNAL') || die();

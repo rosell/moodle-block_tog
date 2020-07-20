@@ -8,15 +8,25 @@
 //
 // Moodle is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle. If not, see <http://www.gnu.org/licenses/>.
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
+/**
+ * External methods necessary to do ajax interaction.
+ *
+ * @package block_tog
+ * @copyright 2018 - 2020 UDT-IA, IIIA-CSIC
+ * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+
+
 defined('MOODLE_INTERNAL') || die();
 global $CFG;
-require_once ($CFG->libdir . "/externallib.php");
-require_once ($CFG->dirroot . '/group/lib.php');
+require_once($CFG->libdir . "/externallib.php");
+require_once($CFG->dirroot . '/group/lib.php');
 
 use block_tog\PersonalityQuestionnaire;
 use block_tog\Personality;
@@ -24,10 +34,9 @@ use block_tog\IntelligencesQuestionnaire;
 use block_tog\Intelligences;
 
 /**
- * External methods necessary to do ajax interaction.
+ * Define the interaction API.
  *
- * @package block_tog
- * @copyright 2018 UDT-IA, IIIA-CSIC
+ * @copyright 2018 - 2020 UDT-IA, IIIA-CSIC
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class block_tog_external extends external_api {
@@ -46,6 +55,9 @@ class block_tog_external extends external_api {
 
     /**
      * The function called to store an answer for a personality question.
+     * 
+     * @param int $question identifier of the question.
+     * @param int $answer identifier of the answer.
      */
     public static function store_personality_answer($question, $answer) {
         global $USER;
@@ -96,6 +108,9 @@ class block_tog_external extends external_api {
 
     /**
      * The function called to store an answer for a intelligences question.
+     * 
+     * @param int $question identifier of the question.
+     * @param int $answer identifier of the answer.
      */
     public static function store_intelligences_answer($question, $answer) {
         global $USER;
@@ -215,6 +230,15 @@ class block_tog_external extends external_api {
 
     /**
      * The function called to composite the new groups.
+     * 
+     * @param int $courseid identifier of the course.
+     * @param int $membersPerGroups number of members for each goup.
+     * @param boolean $atmost is true if the number of member of group is a maximum.
+     * @param string $groupingName name for the gtoupoing formation.
+     * @param string $namePattern pattern of the name to generate for each goup.
+     * @param double $performance expected for the group.
+     * @param stdObject[] $members members to group.
+     * @param stdObject[] $requirements fro the groups to create.
      */
     public static function composite_groups($courseid, $membersPerGroups, $atMost, $groupingName,
             $namePattern, $performance, $members, $requirements) {
@@ -482,6 +506,8 @@ class block_tog_external extends external_api {
 
     /**
      * The function called to auto fill in personality of an user.
+     * 
+     * @param int $userid identifier of the user.
      */
     public static function auto_fill_in_personality($userid) {
         $success = true;
@@ -545,6 +571,8 @@ class block_tog_external extends external_api {
 
     /**
      * The function called to auto fill in intelligences of an user.
+     * 
+     * @param int $userid identifier of the user.
      */
     public static function auto_fill_in_intelligences($userid) {
         $success = true;
@@ -611,6 +639,9 @@ class block_tog_external extends external_api {
 
     /**
      * The function called to composite the new groups.
+     * 
+     * @param int $feedbackid identifier of the group that provide feedback.
+     * @param int[] $answervalues identifier of the feedback answers.
      */
     public static function feedback_group($feedbackid, $answervalues) {
         // default return values

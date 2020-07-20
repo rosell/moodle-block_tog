@@ -8,21 +8,29 @@
 //
 // Moodle is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle. If not, see <http://www.gnu.org/licenses/>.
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
+/**
+ * Block for task oriented groups.
+ *
+ * @package block_tog
+ * @copyright 2018 - 2020 UDT-IA, IIIA-CSIC
+ * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+
 defined('MOODLE_INTERNAL') || die();
 
 use block_tog\Personality;
 use block_tog\Intelligences;
 
 /**
- * Block tog is defined here.
+ * Allow to create groups for do a task.
  *
- * @package block_tog
- * @copyright 2018 UDT-IA, IIIA-CSIC
+ * @copyright 2018 - 2020 UDT-IA, IIIA-CSIC
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class block_tog extends block_base {

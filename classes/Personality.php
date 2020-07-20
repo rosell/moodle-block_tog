@@ -8,11 +8,20 @@
 //
 // Moodle is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle. If not, see <http://www.gnu.org/licenses/>.
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
+/**
+ * Data model for the personality of a user.
+ *
+ * @package block_tog
+ * @copyright 2018 - 2020 UDT-IA, IIIA-CSIC
+ * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+
 namespace block_tog;
 
 defined('MOODLE_INTERNAL') || die();
@@ -22,8 +31,7 @@ use block_tog\PersonalityQuestionnaire;
 /**
  * Class used to manage the personality of an user.
  *
- * @package block_tog
- * @copyright 2018 UDT-IA, IIIA-CSIC
+ * @copyright 2018 - 2020 UDT-IA, IIIA-CSIC
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class Personality {
@@ -31,7 +39,8 @@ class Personality {
     /**
      * Calculate the personality of the specified user.
      *
-     * @param int $userid
+     * @param int $userid identifier of teh user.
+     * 
      * @return boolean true if the personality has been calculated.
      */
     public static function calculatePersonalityOf($userid) {
@@ -133,6 +142,9 @@ class Personality {
 
     /**
      * Return the coimpetences of teh current user.
+     * 
+     * @return stdObject|boolean the personality associated to the user or false if the user does
+     *         not have a personality.
      */
     public static function getPersonalityOfCurrentUser() {
         global $USER;
@@ -142,8 +154,9 @@ class Personality {
     /**
      * Return the the personality of an user.
      *
-     * @param int $userid
-     * @return stdObject/boolean the personality associated to the user or false if the user does
+     * @param int $userid identifier of the user to obtain the personality.
+     * 
+     * @return stdObject|boolean the personality associated to the user or false if the user does
      *         not have a personality.
      */
     public static function getPersonalityOf($userid) {
@@ -162,6 +175,8 @@ class Personality {
 
     /**
      * Check if it is calculated the personality for the current user.
+     * 
+     * @return boolean trus if the personalkity has been calculated for the current user.
      */
     public static function isPersonalityCalculatedForCurrentUser() {
         global $USER;
@@ -170,6 +185,10 @@ class Personality {
 
     /**
      * Check if for an user has calculated its personality.
+     * 
+     * @param int $userid identifier of the user to check if the perosnlaity has been calculated.
+     * 
+     * @return boolean trus if the personalkity has been calculated for a user.
      */
     public static function isPersonalityCalculatedFor($userid) {
         global $DB;

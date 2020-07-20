@@ -8,11 +8,21 @@
 //
 // Moodle is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle. If not, see <http://www.gnu.org/licenses/>.
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
+/**
+ * Privacity details.
+ *
+ * @package block_tog
+ * @category blocks
+ * @copyright 2018 - 2020 UDT-IA, IIIA-CSIC
+ * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+
 namespace block_tog\privacy;
 
 use core_privacy\local\metadata\collection;
@@ -30,11 +40,9 @@ use block_tog\Intelligences;
 defined('MOODLE_INTERNAL') || die();
 
 /**
- * Privacity details.
+ * Provider for the provacity details.
  *
- * @package block_tog
- * @category blocks
- * @copyright UDT-IA, IIIA-CSIC
+ * @copyright 2018 - 2020 UDT-IA, IIIA-CSIC
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class provider implements \core_privacy\local\metadata\provider,
@@ -45,6 +53,7 @@ class provider implements \core_privacy\local\metadata\provider,
      * Returns the metadata that describe the personal data stored by the block.
      *
      * @param collection $collection The initialised collection to add items to.
+     * 
      * @return collection A listing of user data stored through this system.
      */
     public static function get_metadata(collection $collection): collection {
@@ -174,7 +183,11 @@ class provider implements \core_privacy\local\metadata\provider,
     }
 
     /**
-     * Check if exist dat for the specified user.
+     * Check if exist data for the specified user.
+     * 
+     * @param int $userid identifier of the user.
+     * 
+     * @return boolean true if has data for the specified user.
      */
     protected static function has_data_for(int $userid): bool {
         global $DB;
@@ -236,7 +249,7 @@ class provider implements \core_privacy\local\metadata\provider,
     /**
      * Export the personality answers users data.
      *
-     * @param int $userid
+     * @param int $userid identfier of the user.
      */
     protected static function export_user_data_personality_answers(int $userid) {
         global $DB;
@@ -264,7 +277,7 @@ class provider implements \core_privacy\local\metadata\provider,
     /**
      * Export the intelligences answers users data.
      *
-     * @param int $userid
+     * @param int $userid identfier of the user.
      */
     protected static function export_user_data_intelligences_answers(int $userid) {
         global $DB;
@@ -292,7 +305,7 @@ class provider implements \core_privacy\local\metadata\provider,
     /**
      * Export the personality of an user.
      *
-     * @param int $userid
+     * @param int $userid identfier of the user.
      */
     protected static function export_user_data_personality(int $userid) {
         global $DB;
@@ -316,7 +329,7 @@ class provider implements \core_privacy\local\metadata\provider,
     /**
      * Export the intelligences of an user.
      *
-     * @param int $userid
+     * @param int $userid identfier of the user.
      */
     protected static function export_user_data_intelligences(int $userid) {
         global $DB;

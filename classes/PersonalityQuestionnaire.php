@@ -8,11 +8,20 @@
 //
 // Moodle is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle. If not, see <http://www.gnu.org/licenses/>.
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
+/**
+ * Data model for the perosnality questionnaire.
+ *
+ * @package block_tog
+ * @copyright 2018 - 2020 UDT-IA, IIIA-CSIC
+ * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+
 namespace block_tog;
 
 defined('MOODLE_INTERNAL') || die();
@@ -20,8 +29,7 @@ defined('MOODLE_INTERNAL') || die();
 /**
  * Class that represents the personality questionnaire.
  *
- * @package block_tog
- * @copyright 2018 UDT-IA, IIIA-CSIC
+ * @copyright 2018 - 2020 UDT-IA, IIIA-CSIC
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class PersonalityQuestionnaire {
@@ -90,6 +98,10 @@ class PersonalityQuestionnaire {
 
     /**
      * Return the text associated to the question.
+     * 
+     * @param int $index of the question to obtain the text.
+     * 
+     * @return string the localized text for the question.
      */
     public static function getQuestionTextOf($index) {
         return get_string('personality_question_' . $index, 'block_tog');
@@ -97,6 +109,10 @@ class PersonalityQuestionnaire {
 
     /**
      * Check if the specified question has help.
+     * 
+     * @param int $index of teh question to check if has help.
+     * 
+     * @return boolean trus if the question has help.
      */
     public static function hasQuestionHelp($index) {
         return array_search($index, self::QUESTIONS_WITHOUT_HELP) === false;
@@ -105,7 +121,8 @@ class PersonalityQuestionnaire {
     /**
      * Return the facor associated to the question.
      *
-     * @param int $index
+     * @param int $index of the question factor.
+     * 
      * @return int the factor associated to the question.
      */
     public static function getQuestionFactor($index) {
@@ -114,6 +131,10 @@ class PersonalityQuestionnaire {
 
     /**
      * Return the identifier of the help string associated to the question.
+     * 
+     * @param int $index of the question.
+     * 
+     * @return string the identifier of the question help.
      */
     public static function getQuestionHelpIdentifier($index) {
         return 'personality_question_' . $index;
@@ -121,6 +142,11 @@ class PersonalityQuestionnaire {
 
     /**
      * Return the text associated to the specified answers in the question.
+     * 
+     * @param int $question identifier of the question.
+     * @param int $index identifier of the question.
+     * 
+     * @return string the localized text for an answer in a question.
      */
     public static function getAnswerQuestionTextOf($question, $index) {
         return get_string('personality_question_' . $question . '_answer_' . $index,
@@ -129,6 +155,11 @@ class PersonalityQuestionnaire {
 
     /**
      * Return the value associated to the specified answers in the question.
+     * 
+     * @param int $question identifier of the question.
+     * @param int $index identifier of the question.
+     * 
+     * @return double the value of an answer in a question.
      */
     public static function getAnswerQuestionValueOf($question, $index) {
         switch ($index) {
@@ -143,6 +174,8 @@ class PersonalityQuestionnaire {
 
     /**
      * Get the answers done by the current user for the personality questions.
+     * 
+     * @return stdObject[]|boolean the personality answers to the current user or false if cannot obtain the answers.
      */
     public static function getAnswersOfCurrentUser() {
         global $USER;
@@ -151,6 +184,10 @@ class PersonalityQuestionnaire {
 
     /**
      * Get the answers done by spoecified user for the personality questions.
+     * 
+     * @param int $userid identifier of the user.$this
+     * 
+     * @return stdObject[]|boolean the personality answers to the user or false if cannot obtain the answers.
      */
     public static function getAnswersOf($userid) {
         global $DB;
@@ -161,9 +198,10 @@ class PersonalityQuestionnaire {
     /**
      * Store the answer of an user to a personality question.
      *
-     * @param int $question
-     * @param int $answer
-     * @param int $userid
+     * @param int $question identifier of the question.
+     * @param int $answer identifier of the answer.
+     * @param int $userid identifier of the user.
+     * 
      * @return boolean true if the answer has been stored.
      */
     public static function setPersonalityAnswerFor($question, $answer, $userid) {
