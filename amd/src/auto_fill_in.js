@@ -51,7 +51,7 @@ define(['jquery', 'core/ajax', 'core/notification'], function($, ajax,  notifica
             args: {
                 userid: cellElement.attr("data-user-id")
             }
-        }]);
+        });
         promises[0].done(function(response) {
 
             if (typeof response === 'object' && response.success !== true) {

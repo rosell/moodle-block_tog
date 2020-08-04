@@ -4,3 +4,4 @@ node_modules
 amd/build
 /.previousPluginZipFileVersion
 /dist
+/.DS_Store

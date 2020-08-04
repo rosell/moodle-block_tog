@@ -15,7 +15,7 @@ As administrator of the **Moodle**, you can install the **moodle-block_tog** goi
 
 ## License
 
-2018 UDT-IA, IIIA-CSIC
+2018 - 2020 UDT-IA, IIIA-CSIC
 
 This program is free software: you can redistribute it and/or modify it under
 the terms of the GNU General Public License as published by the Free Software

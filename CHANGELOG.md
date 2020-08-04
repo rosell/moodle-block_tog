@@ -1,3 +1,8 @@
+## V1.2.0 (July 20,2020)
+
+ - Fix check errors
+
+
 ## V1.1.0 (April 30,2020)
 
 - Fix https://github.com/rosell/moodle-block_tog/issues/3

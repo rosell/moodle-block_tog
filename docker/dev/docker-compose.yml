@@ -1,0 +1,71 @@
+version: '3.5'
+services:
+  mariadb:
+    container_name: moodle_block_tog_mariadb
+    image: 'docker.io/bitnami/mariadb:10.3-debian-10'
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+      - MARIADB_USER=bn_moodle
+      - MARIADB_DATABASE=bitnami_moodle
+    volumes:
+      - 'mariadb_data:/bitnami/mariadb'
+    networks:
+      - moodle_block_tog
+
+  moodle:
+    container_name: moodle_block_tog_moodle
+    image: 'docker.io/bitnami/moodle:3-debian-10'
+    ports:
+      - '80:8080'
+      - '443:8443'
+    environment:
+      - MOODLE_DATABASE_HOST=mariadb
+      - MOODLE_DATABASE_PORT_NUMBER=3306
+      - MOODLE_DATABASE_USER=bn_moodle
+      - MOODLE_DATABASE_NAME=bitnami_moodle
+      - ALLOW_EMPTY_PASSWORD=yes
+      - MOODLE_SMTP_HOST=mailhog
+      - MOODLE_SMTP_PORT=1025
+      - MOODLE_SMTP_USER=user@mailhog
+      - MOODLE_SMTP_PASSWORD=password
+      - MOODLE_SMTP_PROTOCOL=tls
+    volumes:
+      - 'moodle_data:/bitnami/moodle'
+      - 'moodledata_data:/bitnami/moodledata'
+    depends_on:
+      - mariadb
+      - mailhog
+    networks:
+      - moodle_block_tog
+
+  mailhog:
+    container_name: moodle_block_tog_mailhog
+    image: mailhog/mailhog:v1.0.0
+    ports:
+      - "${MAIL_PORT:-1025}:1025"
+      - "${MAIL_WEB:-8025}:8025"
+    networks:
+      - moodle_block_tog
+    restart: unless-stopped
+
+  phpmyadmin:
+    container_name: moodle_block_tog_phpmyadmin
+    image: bitnami/phpmyadmin:latest
+    ports:
+      - 8081:8080
+    depends_on:
+      - mariadb
+    networks:
+      - moodle_block_tog
+
+volumes:
+  mariadb_data:
+    driver: local
+  moodle_data:
+    driver: local
+  moodledata_data:
+    driver: local
+      
+networks:
+  moodle_block_tog:
+    driver: bridge

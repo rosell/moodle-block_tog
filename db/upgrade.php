@@ -15,16 +15,29 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Plugin version and other meta-data are defined here.
+ * Methods to update the database design between plugin versions.
  *
  * @package block_tog
  * @copyright 2018 - 2020 UDT-IA, IIIA-CSIC
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-defined('MOODLE_INTERNAL') || die();
 
-$plugin->component = 'block_tog';
-$plugin->version = 2020072000;
-$plugin->requires = 2018051700;
-$plugin->maturity = MATURITY_STABLE;
-$plugin->release = '1.1.0';
+
+/**
+ * Update the database.
+ * 
+ * @param unknown $oldversion version of the plugin to update.
+ * 
+ * @return boolean
+ */
+function xmldb_qtype_myqtype_upgrade($oldversion) {
+    global $DB;
+    $dbman = $DB->get_manager();
+    
+    /// Add a new column newcol to the mdl_myqtype_options
+    if ($oldversion < 2020072000) {
+        // Remove the table intelligences and create again
+    }
+    
+    return true;
+}
