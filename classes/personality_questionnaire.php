@@ -21,10 +21,9 @@
  * @copyright 2018 - 2020 UDT-IA, IIIA-CSIC
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-
 namespace block_tog;
 
-defined('MOODLE_INTERNAL') || die();
+defined( 'MOODLE_INTERNAL' ) || die();
 
 /**
  * Class that represents the personality questionnaire.
@@ -32,7 +31,7 @@ defined('MOODLE_INTERNAL') || die();
  * @copyright 2018 - 2020 UDT-IA, IIIA-CSIC
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class PersonalityQuestionnaire {
+class personality_questionnaire {
 
     /**
      * The number maximum of posible answers for each question.
@@ -69,18 +68,17 @@ class PersonalityQuestionnaire {
     /**
      * The types assocaited to each question.
      */
-    const QUESTION_FACTORS = [self::GENDER_FACTOR, self::JUDGMENT_FACTOR, self::ATTITUDE_FACTOR,
-        self::PERCEPTION_FACTOR, self::EXTROVERT_FACTOR, self::JUDGMENT_FACTOR, self::ATTITUDE_FACTOR,
-        self::ATTITUDE_FACTOR, self::PERCEPTION_FACTOR, self::EXTROVERT_FACTOR, self::JUDGMENT_FACTOR,
-        self::EXTROVERT_FACTOR, self::JUDGMENT_FACTOR, self::PERCEPTION_FACTOR,
-        self::EXTROVERT_FACTOR, self::EXTROVERT_FACTOR, self::PERCEPTION_FACTOR,
-        self::JUDGMENT_FACTOR, self::PERCEPTION_FACTOR, self::ATTITUDE_FACTOR, self::ATTITUDE_FACTOR
+    const QUESTION_FACTORS = [ self::GENDER_FACTOR, self::JUDGMENT_FACTOR, self::ATTITUDE_FACTOR, self::PERCEPTION_FACTOR,
+            self::EXTROVERT_FACTOR, self::JUDGMENT_FACTOR, self::ATTITUDE_FACTOR, self::ATTITUDE_FACTOR, self::PERCEPTION_FACTOR,
+            self::EXTROVERT_FACTOR, self::JUDGMENT_FACTOR, self::EXTROVERT_FACTOR, self::JUDGMENT_FACTOR, self::PERCEPTION_FACTOR,
+            self::EXTROVERT_FACTOR, self::EXTROVERT_FACTOR, self::PERCEPTION_FACTOR, self::JUDGMENT_FACTOR, self::PERCEPTION_FACTOR,
+            self::ATTITUDE_FACTOR, self::ATTITUDE_FACTOR
     ];
 
     /**
      * The index of the questions that does not have help.
      */
-    const QUESTIONS_WITHOUT_HELP = [0, 3, 4, 6, 11, 14, 15
+    const QUESTIONS_WITHOUT_HELP = [ 0, 3, 4, 6, 11, 14, 15
     ];
 
     /**
@@ -92,136 +90,144 @@ class PersonalityQuestionnaire {
     /**
      * Return the number of questions that have the questionnaire.
      */
-    public static function countQuestions() {
-        return count(self::QUESTION_FACTORS);
+    public static function count_questions() {
+        return count( self::QUESTION_FACTORS );
     }
 
     /**
      * Return the text associated to the question.
-     * 
-     * @param int $index of the question to obtain the text.
-     * 
+     *
+     * @param int $index
+     *            of the question to obtain the text.
+     *
      * @return string the localized text for the question.
      */
-    public static function getQuestionTextOf($index) {
-        return get_string('personality_question_' . $index, 'block_tog');
+    public static function get_question_text_of($index) {
+        return get_string( 'personality_question_' . $index, 'block_tog' );
     }
 
     /**
      * Check if the specified question has help.
-     * 
-     * @param int $index of teh question to check if has help.
-     * 
+     *
+     * @param int $index
+     *            of teh question to check if has help.
+     *
      * @return boolean trus if the question has help.
      */
-    public static function hasQuestionHelp($index) {
-        return array_search($index, self::QUESTIONS_WITHOUT_HELP) === false;
+    public static function has_question_help($index) {
+        return array_search( $index, self::QUESTIONS_WITHOUT_HELP ) === false;
     }
 
     /**
      * Return the facor associated to the question.
      *
-     * @param int $index of the question factor.
-     * 
+     * @param int $index
+     *            of the question factor.
+     *
      * @return int the factor associated to the question.
      */
-    public static function getQuestionFactor($index) {
-        return self::QUESTION_FACTORS[$index];
+    public static function get_question_factor($index) {
+        return self::QUESTION_FACTORS [$index];
     }
 
     /**
      * Return the identifier of the help string associated to the question.
-     * 
-     * @param int $index of the question.
-     * 
+     *
+     * @param int $index
+     *            of the question.
+     *
      * @return string the identifier of the question help.
      */
-    public static function getQuestionHelpIdentifier($index) {
+    public static function get_question_help_identifier($index) {
         return 'personality_question_' . $index;
     }
 
     /**
      * Return the text associated to the specified answers in the question.
-     * 
-     * @param int $question identifier of the question.
-     * @param int $index identifier of the question.
-     * 
+     *
+     * @param int $question
+     *            identifier of the question.
+     * @param int $index
+     *            identifier of the question.
+     *
      * @return string the localized text for an answer in a question.
      */
-    public static function getAnswerQuestionTextOf($question, $index) {
-        return get_string('personality_question_' . $question . '_answer_' . $index,
-                'block_tog');
+    public static function get_answer_question_text_of($question, $index) {
+        return get_string( 'personality_question_' . $question . '_answer_' . $index, 'block_tog' );
     }
 
     /**
      * Return the value associated to the specified answers in the question.
-     * 
-     * @param int $question identifier of the question.
-     * @param int $index identifier of the question.
-     * 
+     *
+     * @param int $question
+     *            identifier of the question.
+     * @param int $index
+     *            identifier of the question.
+     *
      * @return double the value of an answer in a question.
      */
-    public static function getAnswerQuestionValueOf($question, $index) {
+    public static function get_answer_question_value_of($question, $index) {
         switch ($index) {
-            case 0:
-                return -1;
-            case 1:
+            case 0 :
+                return - 1;
+            case 1 :
                 return 1;
-            default:
+            default :
                 return 0;
         }
     }
 
     /**
      * Get the answers done by the current user for the personality questions.
-     * 
+     *
      * @return stdObject[]|boolean the personality answers to the current user or false if cannot obtain the answers.
      */
-    public static function getAnswersOfCurrentUser() {
+    public static function get_answers_of_current_user() {
         global $USER;
-        return self::getAnswersOf($USER->id);
+        return self::get_answers_of( $USER->id );
     }
 
     /**
      * Get the answers done by spoecified user for the personality questions.
-     * 
-     * @param int $userid identifier of the user.$this
-     * 
+     *
+     * @param int $userid
+     *            identifier of the user.$this
+     *
      * @return stdObject[]|boolean the personality answers to the user or false if cannot obtain the answers.
      */
-    public static function getAnswersOf($userid) {
+    public static function get_answers_of($userid) {
         global $DB;
-        return $DB->get_records('block_tog_perso_answers', array('userid' => $userid
-        ), 'question', 'question,answer');
+        return $DB->get_records( 'block_tog_perso_answers', array ('userid' => $userid
+        ), 'question', 'question,answer' );
     }
 
     /**
      * Store the answer of an user to a personality question.
      *
-     * @param int $question identifier of the question.
-     * @param int $answer identifier of the answer.
-     * @param int $userid identifier of the user.
-     * 
+     * @param int $question
+     *            identifier of the question.
+     * @param int $answer
+     *            identifier of the answer.
+     * @param int $userid
+     *            identifier of the user.
+     *
      * @return boolean true if the answer has been stored.
      */
-    public static function setPersonalityAnswerFor($question, $answer, $userid) {
+    public static function set_personality_answer_for($question, $answer, $userid) {
         global $DB;
         $updated = false;
-        $previousAnswer = $DB->get_record('block_tog_perso_answers',
-                array('userid' => $userid, 'question' => $question
-                ), '*', IGNORE_MISSING);
+        $previousanswer = $DB->get_record( 'block_tog_perso_answers', array ('userid' => $userid, 'question' => $question
+        ), '*', IGNORE_MISSING );
 
-        if ($previousAnswer !== false && isset($previousAnswer)) {
-
-            $previousAnswer->answer = $answer;
-            $updated = $DB->update_record('block_tog_perso_answers', $previousAnswer);
+        if ($previousanswer !== false && isset( $previousanswer )) {
+            $previousanswer->answer = $answer;
+            $updated = $DB->update_record( 'block_tog_perso_answers', $previousanswer );
         } else {
-
             $record = new \stdClass();
             $record->userid = $userid;
             $record->question = $question;
             $record->answer = $answer;
-            $updated = $DB->insert_record('block_tog_perso_answers', $record, false) === true;
+            $updated = $DB->insert_record( 'block_tog_perso_answers', $record, false ) === true;
         }
 
         return $updated;

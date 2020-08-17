@@ -21,10 +21,9 @@
  * @copyright 2018 - 2020 UDT-IA, IIIA-CSIC
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-
 namespace block_tog;
 
-defined('MOODLE_INTERNAL') || die();
+defined( 'MOODLE_INTERNAL' ) || die();
 
 /**
  * Class that represents the feedback questionnaire.
@@ -32,7 +31,7 @@ defined('MOODLE_INTERNAL') || die();
  * @copyright 2018 - 2020 UDT-IA, IIIA-CSIC
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class FeedbackQuestionnaire {
+class feedback_questionnaire {
 
     /**
      * The number maximum of questions that form the questionnary.
@@ -56,40 +55,43 @@ class FeedbackQuestionnaire {
 
     /**
      * Return the text associated to the question.
-     * 
-     * @param int $index of the question to get the text.
-     * 
+     *
+     * @param int $index
+     *            of the question to get the text.
+     *
      * @return string the localized text for the question at the specified index.
      */
-    public static function getQuestionTextOf($index) {
-        return get_string('feedback_question_' . $index, 'block_tog');
+    public static function get_question_text_of($index) {
+        return get_string( 'feedback_question_' . $index, 'block_tog' );
     }
 
     /**
      * Return the text associated to the specified answers in the question.
-     * 
-     * @param int $index of the answer to get the text.
-     * 
+     *
+     * @param int $index
+     *            of the answer to get the text.
+     *
      * @return string the localized text for the answer at the specified index.
      */
-    public static function getAnswerQuestionTextOf($index) {
-        return get_string('feedback_question_answer_' . $index, 'block_tog');
+    public static function get_answer_question_text_of($index) {
+        return get_string( 'feedback_question_answer_' . $index, 'block_tog' );
     }
 
     /**
      * Return the value associated to the specified answers in the question.
-     * 
-     * @param int $index of the answer to get the value.
-     * 
+     *
+     * @param int $index
+     *            of the answer to get the value.
+     *
      * @return double the value associated to teh answer at the specified index.
      */
-    public static function getAnswerQuestionValueOf($index) {
+    public static function get_answer_question_value_of($index) {
         switch ($index) {
-            case 0:
-                return -1;
-            case 1:
+            case 0 :
+                return - 1;
+            case 1 :
                 return 0;
-            default:
+            default :
                 return 1;
         }
     }

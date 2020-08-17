@@ -303,19 +303,24 @@ define(['jquery', 'core/str', 'core_user/participants', 'core/ajax', 'core/confi
         var factor = Number(requirement.attr('data-factor'));
         switch (factor) {
             case 0:
+                // ... delete requirements.linguistic;
                 delete requirements.verbal;
                 break;
             case 1:
-                delete requirements.logic_mathematics;
+                // ... delete requirements.logical_mathematical;
+                delete requirements.logicmathematics;
                 break;
             case 2:
-                delete requirements.visual_spatial;
+                // ... delete requirements.spatial;
+                delete requirements.visualspatial;
                 break;
             case 3:
-                delete requirements.kinestesica_corporal;
+                // ... delete requirements.bodily_kinesthetic;
+                delete requirements.kinestesicacorporal;
                 break;
             case 4:
-                delete requirements.musical_rhythmic;
+                // ... delete requirements.musical;
+                delete requirements.musicalrhythmic;
                 break;
             case 5:
                 delete requirements.intrapersonal;
@@ -324,7 +329,8 @@ define(['jquery', 'core/str', 'core_user/participants', 'core/ajax', 'core/confi
                 delete requirements.interpersonal;
                 break;
             default:
-                delete requirements.naturalist_environmental;
+                // ... delete requirements.environmental;
+                delete requirements.naturalistenvironmental;
         }
         $('#composite__requirements_factor_' + factor).show();
         $('#composite__requirements_factor').val(factor);
@@ -357,19 +363,24 @@ define(['jquery', 'core/str', 'core_user/participants', 'core/ajax', 'core/confi
         };
         switch (factor) {
             case 0:
+                // ... requirements.linguistic = requirement;
                 requirements.verbal = requirement;
                 break;
             case 1:
-                requirements.logic_mathematics = requirement;
+                // ... requirements.logical_mathematical = requirement;
+                requirements.logicmathematics = requirement;
                 break;
             case 2:
-                requirements.visual_spatial = requirement;
+                // ... requirements.spatial = requirement;
+                requirements.visualspatial = requirement;
                 break;
             case 3:
-                requirements.kinestesica_corporal = requirement;
+                // ...     requirements.bodily_kinesthetic = requirement;
+                requirements.kinestesicacorporal = requirement;
                 break;
             case 4:
-                requirements.musical_rhythmic = requirement;
+                // ... requirements.musical = requirement;
+                requirements.musicalrhythmic = requirement;
                 break;
             case 5:
                 requirements.intrapersonal = requirement;
@@ -378,7 +389,8 @@ define(['jquery', 'core/str', 'core_user/participants', 'core/ajax', 'core/confi
                 requirements.interpersonal = requirement;
                 break;
             default:
-                requirements.naturalist_environmental = requirement;
+                // ... requirements.environmental = requirement;
+                requirements.naturalistenvironmental = requirement;
         }
 
         $('#composite__requirements_factor_' + factor).hide();
@@ -432,14 +444,14 @@ define(['jquery', 'core/str', 'core_user/participants', 'core/ajax', 'core/confi
         var promises = ajax.call([{
             methodname: 'block_tog_composite_groups',
             args: {
-                courseid: $('#composite__courseid').val(),
-                membersPerGroups: Number($('#composite__members_per_group').val()),
-                atMost: $('#composite__at_most').val() == 'true',
-                groupingName: $('#composite__grouping_name').val().trim(),
-                namePattern: $('#composite__groups_pattern').val().trim(),
-                performance: Number($('#composite__performance').val()),
-                members: JSON.parse($('#composite__members').val()),
-                requirements: JSON.parse($('#composite__requirements').val()),
+                'courseid': $('#composite__courseid').val(),
+                'memberspergroups': Number($('#composite__members_per_group').val()),
+                'atmost': $('#composite__at_most').val() == 'true',
+                'groupingname': $('#composite__grouping_name').val().trim(),
+                'namepattern': $('#composite__groups_pattern').val().trim(),
+                'performance': Number($('#composite__performance').val()),
+                'members': JSON.parse($('#composite__members').val()),
+                'requirements': JSON.parse($('#composite__requirements').val()),
             }
         }]);
         promises[0].done(function(response) {

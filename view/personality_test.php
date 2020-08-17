@@ -21,42 +21,40 @@
  * @copyright 2018 - 2020 UDT-IA, IIIA-CSIC
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-
 require_once ('../../../config.php');
-use block_tog\PersonalityQuestionnaire;
-use block_tog\Personality;
-use block_tog\Intelligences;
+use block_tog\personality_questionnaire;
+use block_tog\personality;
+use block_tog\intelligences;
 
-$PAGE->set_pagelayout('standard');
-$PAGE->set_context(context_system::instance());
-$courseid = optional_param('courseid', null, PARAM_INT);
-$PAGE->set_title(get_string('personality_test_title', 'block_tog'));
-$PAGE->set_heading(get_string('personality_test_heading', 'block_tog'));
-$PAGE->set_url($CFG->wwwroot . '/blocks/tog/view/personality_test.php');
-$PAGE->add_body_class('block_task_oriented_group');
+$PAGE->set_pagelayout( 'standard' );
+$PAGE->set_context( context_system::instance() );
+$courseid = optional_param( 'courseid', null, PARAM_INT );
+$PAGE->set_title( get_string( 'personality_test_title', 'block_tog' ) );
+$PAGE->set_heading( get_string( 'personality_test_heading', 'block_tog' ) );
+$PAGE->set_url( $CFG->wwwroot . '/blocks/tog/view/personality_test.php' );
+$PAGE->add_body_class( 'block_task_oriented_group' );
 
-$courseid = optional_param('courseid', 0, PARAM_INT);
+$courseid = optional_param( 'courseid', 0, PARAM_INT );
 if ($courseid) {
-
-    $course = $DB->get_record('course', array('id' => $courseid
-    ), '*', MUST_EXIST);
-    require_login($course);
-    context_helper::preload_course($course->id);
-    $context = context_course::instance($course->id, MUST_EXIST);
-    $PAGE->set_context($context);
+    $course = $DB->get_record( 'course', array ('id' => $courseid
+    ), '*', MUST_EXIST );
+    require_login( $course );
+    context_helper::preload_course( $course->id );
+    $context = context_course::instance( $course->id, MUST_EXIST );
+    $PAGE->set_context( $context );
 } else {
-
     require_login();
 }
-$answers = PersonalityQuestionnaire::getAnswersOfCurrentUser();
+$answers = personality_questionnaire::get_answers_of_current_user();
 echo $OUTPUT->header();
 ?>
 <div class="container personality-questions">
  <?php
-for ($i = 0; $i < PersonalityQuestionnaire::countQuestions(); $i++) {
-    $questionId = 'personalityQuestion_' . $i;
+for ($i = 0; $i < personality_questionnaire::count_questions(); $i ++) {
+    $questionid = 'personalityQuestion_' . $i;
     ?>
-  <div class="row<?php
+  <div
+		class="row<?php
 
     if ($i % 2 != 0) {
         echo ' bg-light';
@@ -64,45 +62,39 @@ for ($i = 0; $i < PersonalityQuestionnaire::countQuestions(); $i++) {
     ?> personality-question">
 		<div class="container">
 			<div class="row">
-				<h4><?=PersonalityQuestionnaire::getQuestionTextOf($i)?><?php
+				<h4><?=personality_questionnaire::get_question_text_of( $i )?><?php
 
-    if (PersonalityQuestionnaire::hasQuestionHelp($i)) {
+    if (personality_questionnaire::has_question_help( $i )) {
         echo '&nbsp;&nbsp;';
-        echo $OUTPUT->help_icon(PersonalityQuestionnaire::getQuestionHelpIdentifier($i),
-                'block_tog', '');
+        echo $OUTPUT->help_icon( personality_questionnaire::get_question_help_identifier( $i ), 'block_tog', '' );
     }
     ?></h4>
 			</div>
 			<div class="row justify-content-center">
   <?php
-    $selected = -1;
+    $selected = - 1;
     foreach ($answers as $k => $answer) {
         if ($answer->question == $i) {
             $selected = $answer->answer;
-            unset($answers[$k]);
+            unset( $answers [$k] );
             break;
         }
     }
 
-    for ($j = 0; $j < PersonalityQuestionnaire::MAX_QUESTION_ANSWERS; $j++) {
+    for ($j = 0; $j < personality_questionnaire::MAX_QUESTION_ANSWERS; $j ++) {
         ?>
    <div class="form-check-inline col-md">
-					<input
-						class="form-check-input"
-						type="radio"
+					<input class="form-check-input" type="radio"
 						id="answer_<?=$j?>_for_personality_question_<?=$i?>"
-						name="<?=$questionId?>"
-						value="<?=PersonalityQuestionnaire::getAnswerQuestionValueOf($i, $j)?>"
+						name="<?=$questionid?>"
+						value="<?=personality_questionnaire::get_answer_question_value_of( $i, $j )?>"
 						<?php
 
         if ($selected == $j) {
             echo 'checked="checked"';
         }
-        ?>
-					><label
-						class="form-check-label"
-						for="answer_<?=$j?>_for_personality_question_<?=$i?>"
-					><?=PersonalityQuestionnaire::getAnswerQuestionTextOf($i, $j)?></label>
+        ?>><label class="form-check-label"
+						for="answer_<?=$j?>_for_personality_question_<?=$i?>"><?=personality_questionnaire::get_answer_question_text_of( $i, $j )?></label>
 				</div>
   <?php
     }
@@ -118,56 +110,41 @@ if ($courseid) {
 }
 ?>
    	<div class="row justify-content-md-center actions-row">
-		<div
-			class="alert alert-warning blink"
-			role="alert"
-			style="display: none;"
-		>
-   			<?=get_string('personality_test_storing_msg', 'block_tog')?>
+		<div class="alert alert-warning blink" role="alert"
+			style="display: none;">
+   			<?=get_string( 'personality_test_storing_msg', 'block_tog' )?>
    		</div>
    		<?php
-    $intelligences = Intelligences::getIntelligencesOfCurrentUser();
-    if (!$intelligences) {
-        $intelligences_test_url = $CFG->wwwroot .
-                '/blocks/tog/view/intelligences_test.php';
+    $intelligences = intelligences::get_intelligences_of_current_user();
+    if (! $intelligences) {
+        $intelligences_test_url = $CFG->wwwroot . '/blocks/tog/view/intelligences_test.php';
         if ($courseid) {
             $intelligences_test_url .= '?courseid=' . $courseid;
         }
         ?>
-		<button
-			type="button"
-			class="btn btn-secondary"
-			onclick="location.href='<?=$intelligences_test_url?>';"
-			role="button"
-		>
-			<?=get_string('personality_test_go_to_intelligences_test', 'block_tog')?>
+		<button type="button" class="btn btn-secondary"
+			onclick="location.href='<?=$intelligences_test_url?>';" role="button">
+			<?=get_string( 'personality_test_go_to_intelligences_test', 'block_tog' )?>
 		</button>
         <?php
     }
     ?>
-		<button
-			type="button"
-			class="btn btn-primary"
-			onclick="location.href='<?=$personality_url?>';"
-			role="button"
-		>
-			<?=get_string('personality_test_go_to_personality', 'block_tog')?>
+		<button type="button" class="btn btn-primary"
+			onclick="location.href='<?=$personality_url?>';" role="button">
+			<?=get_string( 'personality_test_go_to_personality', 'block_tog' )?>
 		</button>
 		<?php
 if ($courseid) {
     ?>
-		<button
-			type="button"
-			class="btn btn-secondary"
+		<button type="button" class="btn btn-secondary"
 			onclick="location.href='<?=$CFG->wwwroot . '/course/view.php?id=' . $courseid?>';"
-			role="button"
-		>
-        	<?=get_string('personality_test_go_to_course', 'block_tog')?>
+			role="button">
+        	<?=get_string( 'personality_test_go_to_course', 'block_tog' )?>
         </button>
         <?php
 }
 ?>
 </div>
 <?php
-$PAGE->requires->js_call_amd('block_tog/personality_test', 'initialise');
+$PAGE->requires->js_call_amd( 'block_tog/personality_test', 'initialise' );
 echo $OUTPUT->footer();

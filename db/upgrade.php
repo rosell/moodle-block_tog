@@ -22,22 +22,22 @@
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-
 /**
  * Update the database.
- * 
- * @param unknown $oldversion version of the plugin to update.
- * 
+ *
+ * @param unknown $oldversion
+ *            version of the plugin to update.
+ *
  * @return boolean
  */
-function xmldb_qtype_myqtype_upgrade($oldversion) {
+function xmldb_block_tog_upgrade($oldversion) {
     global $DB;
     $dbman = $DB->get_manager();
-    
-    /// Add a new column newcol to the mdl_myqtype_options
+
     if ($oldversion < 2020072000) {
-        // Remove the table intelligences and create again
+        // Remove the table intelligences and create again.
+        $dbman->drop_table( 'block_tog_intelligences', $continue = true, $feedback = true );
     }
-    
+
     return true;
 }

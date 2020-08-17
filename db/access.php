@@ -8,11 +8,11 @@
 //
 // Moodle is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle. If not, see <http://www.gnu.org/licenses/>.
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Capabilities.
@@ -21,21 +21,19 @@
  * @copyright 2018 - 2020 UDT-IA, IIIA-CSIC
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-defined('MOODLE_INTERNAL') || die();
+defined( 'MOODLE_INTERNAL' ) || die();
 
-$capabilities = array(
+$capabilities = array (
 
-    'block/tog:addinstance' => array('riskbitmask' => RISK_SPAM | RISK_XSS,
-
+        'block/tog:addinstance' => array ('riskbitmask' => RISK_SPAM | RISK_XSS,
         'captype' => 'write', 'contextlevel' => CONTEXT_BLOCK,
-        'archetypes' => array('editingteacher' => CAP_ALLOW, 'manager' => CAP_ALLOW
-        ), 'clonepermissionsfrom' => 'moodle/site:manageblocks'
-    ),
+                'archetypes' => array ('editingteacher' => CAP_ALLOW, 'manager' => CAP_ALLOW
+                ), 'clonepermissionsfrom' => 'moodle/site:manageblocks'
+        ),
 
-    'block/tog:myaddinstance' => array('riskbitmask' => RISK_SPAM | RISK_XSS,
-
+        'block/tog:myaddinstance' => array ('riskbitmask' => RISK_SPAM | RISK_XSS,
         'captype' => 'write', 'contextlevel' => CONTEXT_BLOCK,
-        'archetypes' => array('editingteacher' => CAP_ALLOW, 'manager' => CAP_ALLOW
+                'archetypes' => array ('editingteacher' => CAP_ALLOW, 'manager' => CAP_ALLOW
+                )
         )
-    )
 );

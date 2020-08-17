@@ -21,11 +21,10 @@
  * @copyright 2018 - 2020 UDT-IA, IIIA-CSIC
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+defined( 'MOODLE_INTERNAL' ) || die();
 
-defined('MOODLE_INTERNAL') || die();
-
-use block_tog\Personality;
-use block_tog\Intelligences;
+use block_tog\personality;
+use block_tog\intelligences;
 
 /**
  * Allow to create groups for do a task.
@@ -39,7 +38,7 @@ class block_tog extends block_base {
      * Initializes the block, called by the constructor
      */
     public function init() {
-        $this->title = get_string('tog', 'block_tog');
+        $this->title = get_string( 'tog', 'block_tog' );
     }
 
     /**
@@ -48,7 +47,7 @@ class block_tog extends block_base {
      * @return array
      */
     public function applicable_formats() {
-        return array('site-index' => true, 'course-view-*' => true, 'all' => true
+        return array ('site-index' => true, 'course-view-*' => true, 'all' => true
         );
     }
 
@@ -60,78 +59,56 @@ class block_tog extends block_base {
     public function get_content() {
         global $COURSE;
 
-        if (!is_null($this->content)) {
+        if (! is_null( $this->content )) {
             return $this->content;
         }
 
-        // create the links to the option of the block
         $this->content = new stdClass();
-        $contents = array();
+        $contents = array ();
 
-        if (has_capability('moodle/site:config', $this->page->context)) {
-
-            $contenturl = new moodle_url('/blocks/tog/view/auto_fill_in.php',
-                    array('courseid' => $COURSE->id
-                    ));
-            $contentlink = html_writer::link($contenturl,
-                    get_string('main:auto_fill_in', 'block_tog'));
-            $contents[] = html_writer::tag('li', $contentlink);
+        if (has_capability( 'moodle/site:config', $this->page->context )) {
+            $contenturl = new moodle_url( '/blocks/tog/view/auto_fill_in.php', array ('courseid' => $COURSE->id
+            ) );
+            $contentlink = html_writer::link( $contenturl, get_string( 'main:auto_fill_in', 'block_tog' ) );
+            $contents [] = html_writer::tag( 'li', $contentlink );
         }
 
-        if (has_capability('moodle/course:managegroups', $this->page->context)) {
-
-            $contenturl = new moodle_url('/blocks/tog/view/composite.php',
-                    array('courseid' => $COURSE->id
-                    ));
-            $contentlink = html_writer::link($contenturl,
-                    get_string('main:composite', 'block_tog'));
-            $contents[] = html_writer::tag('li', $contentlink);
-            $contenturl = new moodle_url('/blocks/tog/view/feedback_test.php',
-                    array('courseid' => $COURSE->id
-                    ));
-            $contentlink = html_writer::link($contenturl,
-                    get_string('main:feedback_test', 'block_tog'));
-            $contents[] = html_writer::tag('li', $contentlink);
+        if (has_capability( 'moodle/course:managegroups', $this->page->context )) {
+            $contenturl = new moodle_url( '/blocks/tog/view/composite.php', array ('courseid' => $COURSE->id
+            ) );
+            $contentlink = html_writer::link( $contenturl, get_string( 'main:composite', 'block_tog' ) );
+            $contents [] = html_writer::tag( 'li', $contentlink );
+            $contenturl = new moodle_url( '/blocks/tog/view/feedback_test.php', array ('courseid' => $COURSE->id
+            ) );
+            $contentlink = html_writer::link( $contenturl, get_string( 'main:feedback_test', 'block_tog' ) );
+            $contents [] = html_writer::tag( 'li', $contentlink );
         }
 
-        if (Personality::isPersonalityCalculatedForCurrentUser()) {
-
-            $contenturl = new moodle_url('/blocks/tog/view/personality.php',
-                    array('courseid' => $COURSE->id
-                    ));
-            $contentlink = html_writer::link($contenturl,
-                    get_string('main:my_personality', 'block_tog'));
-            $contents[] = html_writer::tag('li', $contentlink);
+        if (personality::is_personality_calculated_for_current_user()) {
+            $contenturl = new moodle_url( '/blocks/tog/view/personality.php', array ('courseid' => $COURSE->id
+            ) );
+            $contentlink = html_writer::link( $contenturl, get_string( 'main:my_personality', 'block_tog' ) );
+            $contents [] = html_writer::tag( 'li', $contentlink );
         } else {
-
-            $contenturl = new moodle_url('/blocks/tog/view/personality_test.php',
-                    array('courseid' => $COURSE->id
-                    ));
-            $contentlink = html_writer::link($contenturl,
-                    get_string('main:fill_personality_test', 'block_tog'));
-            $contents[] = html_writer::tag('li', $contentlink);
+            $contenturl = new moodle_url( '/blocks/tog/view/personality_test.php', array ('courseid' => $COURSE->id
+            ) );
+            $contentlink = html_writer::link( $contenturl, get_string( 'main:fill_personality_test', 'block_tog' ) );
+            $contents [] = html_writer::tag( 'li', $contentlink );
         }
 
-        if (Intelligences::isIntelligencesCalculatedForCurrentUser()) {
-
-            $contenturl = new moodle_url('/blocks/tog/view/intelligences.php',
-                    array('courseid' => $COURSE->id
-                    ));
-            $contentlink = html_writer::link($contenturl,
-                    get_string('main:my_intelligences', 'block_tog'));
-            $contents[] = html_writer::tag('li', $contentlink);
+        if (intelligences::is_intelligences_calculated_for_current_user()) {
+            $contenturl = new moodle_url( '/blocks/tog/view/intelligences.php', array ('courseid' => $COURSE->id
+            ) );
+            $contentlink = html_writer::link( $contenturl, get_string( 'main:my_intelligences', 'block_tog' ) );
+            $contents [] = html_writer::tag( 'li', $contentlink );
         } else {
-
-            $contenturl = new moodle_url('/blocks/tog/view/intelligences_test.php',
-                    array('courseid' => $COURSE->id
-                    ));
-            $contentlink = html_writer::link($contenturl,
-                    get_string('main:fill_intelligences_test', 'block_tog'));
-            $contents[] = html_writer::tag('li', $contentlink);
+            $contenturl = new moodle_url( '/blocks/tog/view/intelligences_test.php', array ('courseid' => $COURSE->id
+            ) );
+            $contentlink = html_writer::link( $contenturl, get_string( 'main:fill_intelligences_test', 'block_tog' ) );
+            $contents [] = html_writer::tag( 'li', $contentlink );
         }
-        $this->content->text = html_writer::tag('ol', implode('', $contents),
-                array('class' => 'list'
-                ));
+        $this->content->text = html_writer::tag( 'ol', implode( '', $contents ), array ('class' => 'list'
+        ) );
 
         $this->content->footer = '';
 
@@ -143,7 +120,7 @@ class block_tog extends block_base {
      *
      * @return boolean return {@code true} in any case.
      */
-    function has_config() {
+    public function has_config() {
         return true;
     }
 }

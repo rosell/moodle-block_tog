@@ -21,41 +21,39 @@
  * @copyright 2018 - 2020 UDT-IA, IIIA-CSIC
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-
 require_once ('../../../config.php');
-use block_tog\IntelligencesQuestionnaire;
-use block_tog\Intelligences;
-use block_tog\Personality;
+use block_tog\intelligences_questionnaire;
+use block_tog\intelligences;
+use block_tog\personality;
 
-$PAGE->set_pagelayout('standard');
-$PAGE->set_context(context_system::instance());
-$PAGE->set_title(get_string('intelligences_test_title', 'block_tog'));
-$PAGE->set_heading(get_string('intelligences_test_heading', 'block_tog'));
-$PAGE->set_url($CFG->wwwroot . '/blocks/tog/view/intelligences_test.php');
-$PAGE->add_body_class('block_task_oriented_group');
+$PAGE->set_pagelayout( 'standard' );
+$PAGE->set_context( context_system::instance() );
+$PAGE->set_title( get_string( 'intelligences_test_title', 'block_tog' ) );
+$PAGE->set_heading( get_string( 'intelligences_test_heading', 'block_tog' ) );
+$PAGE->set_url( $CFG->wwwroot . '/blocks/tog/view/intelligences_test.php' );
+$PAGE->add_body_class( 'block_task_oriented_group' );
 
-$courseid = optional_param('courseid', 0, PARAM_INT);
+$courseid = optional_param( 'courseid', 0, PARAM_INT );
 if ($courseid) {
-
-    $course = $DB->get_record('course', array('id' => $courseid
-    ), '*', MUST_EXIST);
-    require_login($course);
-    context_helper::preload_course($course->id);
-    $context = context_course::instance($course->id, MUST_EXIST);
-    $PAGE->set_context($context);
+    $course = $DB->get_record( 'course', array ('id' => $courseid
+    ), '*', MUST_EXIST );
+    require_login( $course );
+    context_helper::preload_course( $course->id );
+    $context = context_course::instance( $course->id, MUST_EXIST );
+    $PAGE->set_context( $context );
 } else {
-
     require_login();
 }
-$answers = IntelligencesQuestionnaire::getAnswersOfCurrentUser();
+$answers = intelligences_questionnaire::get_answers_of_current_user();
 echo $OUTPUT->header();
 ?>
 <div class="container intelligences-questions">
  <?php
-for ($i = 0; $i < IntelligencesQuestionnaire::countQuestions(); $i++) {
-    $questionId = 'intelligencesQuestion_' . $i;
+for ($i = 0; $i < intelligences_questionnaire::count_questions(); $i ++) {
+    $questionid = 'intelligencesQuestion_' . $i;
     ?>
-  <div class="row<?php
+  <div
+		class="row<?php
 
     if ($i % 2 != 0) {
         echo ' bg-light';
@@ -63,45 +61,39 @@ for ($i = 0; $i < IntelligencesQuestionnaire::countQuestions(); $i++) {
     ?> intelligences-question">
 		<div class="container">
 			<div class="row">
-				<h4><?=IntelligencesQuestionnaire::getQuestionTextOf($i)?><?php
+				<h4><?=intelligences_questionnaire::get_question_text_of( $i )?><?php
 
-    if (IntelligencesQuestionnaire::hasQuestionHelp($i)) {
+    if (intelligences_questionnaire::has_question_help( $i )) {
         echo '&nbsp;&nbsp;';
-        echo $OUTPUT->help_icon(IntelligencesQuestionnaire::getQuestionHelpIdentifier($i),
-                'block_tog', '');
+        echo $OUTPUT->help_icon( intelligences_questionnaire::get_question_help_identifier( $i ), 'block_tog', '' );
     }
     ?></h4>
 			</div>
 			<div class="row justify-content-center">
   <?php
-    $selected = -1;
+    $selected = - 1;
     foreach ($answers as $k => $answer) {
         if ($answer->question == $i) {
             $selected = $answer->answer;
-            unset($answers[$k]);
+            unset( $answers [$k] );
             break;
         }
     }
 
-    for ($j = 0; $j < IntelligencesQuestionnaire::MAX_QUESTION_ANSWERS; $j++) {
+    for ($j = 0; $j < intelligences_questionnaire::MAX_QUESTION_ANSWERS; $j ++) {
         ?>
    <div class="form-check-inline col-md">
-					<input
-						class="form-check-input"
-						type="radio"
+					<input class="form-check-input" type="radio"
 						id="answer_<?=$j?>_for_intelligences_question_<?=$i?>"
-						name="<?=$questionId?>"
-						value="<?=IntelligencesQuestionnaire::getAnswerQuestionValueOf($j)?>"
+						name="<?=$questionid?>"
+						value="<?=intelligences_questionnaire::get_answer_question_value_of( $j )?>"
 						<?php
 
         if ($selected == $j) {
             echo 'checked="checked"';
         }
-        ?>
-					><label
-						class="form-check-label"
-						for="answer_<?=$j?>_for_intelligences_question_<?=$i?>"
-					><?=IntelligencesQuestionnaire::getAnswerQuestionTextOf($j)?></label>
+        ?>><label class="form-check-label"
+						for="answer_<?=$j?>_for_intelligences_question_<?=$i?>"><?=intelligences_questionnaire::get_answer_question_text_of( $j )?></label>
 				</div>
   <?php
     }
@@ -117,50 +109,36 @@ if ($courseid) {
 }
 ?>
    	<div class="row justify-content-md-center actions-row">
-		<div
-			class="alert alert-warning blink"
-			role="alert"
-			style="display: none;"
-		>
-   			<?=get_string('intelligences_test_storing_msg', 'block_tog')?>
+		<div class="alert alert-warning blink" role="alert"
+			style="display: none;">
+   			<?=get_string( 'intelligences_test_storing_msg', 'block_tog' )?>
    		</div>
 		<?php
-$personality = Personality::getPersonalityOfCurrentUser();
-if (!$personality) {
+$personality = personality::get_personality_of_current_user();
+if (! $personality) {
     $personality_test_url = $CFG->wwwroot . '/blocks/tog/view/personality_test.php';
     if ($courseid) {
         $personality_test_url .= '?courseid=' . $courseid;
     }
     ?>
-		<button
-			type="button"
-			class="btn btn-secondary"
-			onclick="location.href='<?=$personality_test_url?>';"
-			role="button"
-		>
-			<?=get_string('intelligences_test_go_to_personality_test', 'block_tog')?>
+		<button type="button" class="btn btn-secondary"
+			onclick="location.href='<?=$personality_test_url?>';" role="button">
+			<?=get_string( 'intelligences_test_go_to_personality_test', 'block_tog' )?>
 		</button>
         <?php
 }
 ?>
-		<button
-			type="button"
-			class="btn btn-primary"
-			onclick="location.href='<?=$intelligences_url?>';"
-			role="button"
-		>
-			<?=get_string('intelligences_test_go_to_intelligences', 'block_tog')?>
+		<button type="button" class="btn btn-primary"
+			onclick="location.href='<?=$intelligences_url?>';" role="button">
+			<?=get_string( 'intelligences_test_go_to_intelligences', 'block_tog' )?>
 		</button>
 		<?php
 if ($courseid) {
     ?>
-	    <button
-			type="button"
-			class="btn btn-secondary"
+	    <button type="button" class="btn btn-secondary"
 			onclick="location.href='<?=$CFG->wwwroot . '/course/view.php?id=' . $courseid?>';"
-			role="button"
-		>
-        	<?=get_string('intelligences_test_go_to_course', 'block_tog')?>
+			role="button">
+        	<?=get_string( 'intelligences_test_go_to_course', 'block_tog' )?>
         </button>
         <?php
 }
@@ -168,5 +146,5 @@ if ($courseid) {
 	</div>
 </div>
 <?php
-$PAGE->requires->js_call_amd('block_tog/intelligences_test', 'initialise');
+$PAGE->requires->js_call_amd( 'block_tog/intelligences_test', 'initialise' );
 echo $OUTPUT->footer();

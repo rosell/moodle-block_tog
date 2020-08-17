@@ -47,6 +47,7 @@ for file in *.md *.php *.css;
 do
 	cp $file $TMP_DIR/moodle-block_tog/.
 done
+
 sed -i '' -e "s/version = $CURRENT_VERSION/version = $VERSION/g" $TMP_DIR/moodle-block_tog/version.php
 
 for dir in amd classes db lang templates view;

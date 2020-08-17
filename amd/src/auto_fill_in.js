@@ -20,11 +20,11 @@
  * @copyright 2018 - 2020 UDT-IA, IIIA-CSIC
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-define(['jquery', 'core/ajax', 'core/notification'], function($, ajax,  notification) {
+define(['jquery', 'core/ajax', 'core/notification'], function($, ajax, notification) {
 
     /**
      * Called when a page item has been clicked.
-     *
+     * 
      * @param event
      *          with the clicked information.
      */
@@ -46,12 +46,12 @@ define(['jquery', 'core/ajax', 'core/notification'], function($, ajax,  notifica
 
         event.stopPropagation();
         var cellElement = $(event.target).parent().parent();
-        var promises = ajax.call({
+        var promises = ajax.call([{
             methodname: 'block_tog_auto_fill_in_personality',
             args: {
-                userid: cellElement.attr("data-user-id")
+                'userid': cellElement.attr("data-user-id")
             }
-        });
+        }]);
         promises[0].done(function(response) {
 
             if (typeof response === 'object' && response.success !== true) {
@@ -80,9 +80,9 @@ define(['jquery', 'core/ajax', 'core/notification'], function($, ajax,  notifica
         event.stopPropagation();
         var cellElement = $(event.target).parent().parent();
         var promises = ajax.call([{
-            methodnam: 'block_tog_auto_fill_in_intelligences',
+            methodname: 'block_tog_auto_fill_in_intelligences',
             args: {
-                userid: cellElement.attr("data-user-id")
+                'userid': cellElement.attr("data-user-id")
             }
         }]);
         promises[0].done(function(response) {
@@ -95,10 +95,10 @@ define(['jquery', 'core/ajax', 'core/notification'], function($, ajax,  notifica
 
                 cellElement.children(".intelligences-cell-success").show();
                 cellElement.children(".intelligences-cell-submit").hide();
+
             }
 
         }).fail(function(error) { notification.exception(error); });
-
 
     }
 
