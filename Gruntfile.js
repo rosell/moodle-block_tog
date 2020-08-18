@@ -2,9 +2,6 @@
 
 module.exports = function(grunt) {
 
-	var path = require("path");
-	var PWD = process.cwd();
-
 	grunt.initConfig({
 	  jshint : {
 	    options : {
