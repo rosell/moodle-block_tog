@@ -56,16 +56,16 @@ for ($i = 0; $i < intelligences_questionnaire::count_questions(); $i ++) {
     $rowclasses = 'row';
     if ($i % 2 != 0) {
 
-        $rowclasses += ' bg-light';
+        $rowclasses .= ' bg-light';
     }
-    $rowclasses += ' intelligences-question';
+    $rowclasses .= ' intelligences-question';
     echo html_writer::start_div( $rowclasses );
     echo html_writer::start_div( 'container' );
     echo html_writer::start_div( 'row' );
     $rowtitle = intelligences_questionnaire::get_question_text_of( $i );
     if (intelligences_questionnaire::has_question_help( $i )) {
-        $rowtitle += '&nbsp;&nbsp;';
-        $rowtitle += $OUTPUT->help_icon( intelligences_questionnaire::get_question_help_identifier( $i ), 'block_tog',
+        $rowtitle .= '&nbsp;&nbsp;';
+        $rowtitle .= $OUTPUT->help_icon( intelligences_questionnaire::get_question_help_identifier( $i ), 'block_tog',
                 '' );
     }
     echo html_writer::tag( 'h4', $rowtitle );
@@ -119,20 +119,20 @@ if (! $personality) {
 
     echo html_writer::tag( 'button', get_string( 'intelligences_test_go_to_personality_test', 'block_tog' ),
             array ('type' => 'button', 'class' => 'btn btn-secondary', 'role' => 'button',
-                    'onclick' => 'location.href=' . $personalitytesturl . ';'
+                    'onclick' => 'location.href="' . $personalitytesturl . '";'
             ) );
 }
 
 echo html_writer::tag( 'button', get_string( 'intelligences_test_go_to_intelligences', 'block_tog' ),
         array ('type' => 'button', 'class' => 'btn btn-primary', 'role' => 'button',
-                'onclick' => 'location.href=' . $intelligencesurl . ';'
+                'onclick' => 'location.href="' . $intelligencesurl . '";'
         ) );
 
 if ($courseid) {
 
     echo html_writer::tag( 'button', get_string( 'intelligences_test_go_to_course', 'block_tog' ),
             array ('type' => 'button', 'class' => 'btn btn-secondary', 'role' => 'button',
-                    'onclick' => 'location.href=' . $CFG->wwwroot . '/course/view.php?id=' . $courseid . ';'
+                    'onclick' => 'location.href="' . $CFG->wwwroot . '/course/view.php?id=' . $courseid . '";'
             ) );
 }
 echo html_writer::end_div();

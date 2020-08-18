@@ -92,13 +92,13 @@ if (has_capability( 'moodle/course:managegroups', $context )) {
                     ) );
             $groupselector .= html_writer::start_div( 'form-group' );
             $groupselector .= html_writer::tag( 'label',
-                    get_string( 'feedback_test_groupselector', 'block_tog' ) . '&nbsp;&nbsp' .
-                    $OUTPUT->help_icon( 'feedback_test_groupselector', 'block_tog', '' ),
-                    array ('for' => 'feedback_test__groupselector_for_' . $grouping->id
+                    get_string( 'feedback_test_group_selector', 'block_tog' ) . '&nbsp;&nbsp' .
+                    $OUTPUT->help_icon( 'feedback_test_group_selector', 'block_tog', '' ),
+                    array ('for' => 'feedback_test__group_selector_for_' . $grouping->id
                     ) );
             $groupselector .= html_writer::tag( 'select', $groupselectoroptions,
-                    array ('class' => 'form-control feedback_test__groupselector',
-                            'id' => 'feedback_test__groupselector_for_' . $grouping->id,
+                    array ('class' => 'form-control feedback_test__group_selector',
+                            'id' => 'feedback_test__group_selector_for_' . $grouping->id,
                             'value' => $defaultgroupfeedbackid
                     ) );
             $groupselector .= html_writer::end_div();
@@ -109,12 +109,12 @@ if (has_capability( 'moodle/course:managegroups', $context )) {
     $groupingselector = html_writer::start_div( 'form-row' );
     $groupingselector .= html_writer::start_div( 'form-group' );
     $groupingselector .= html_writer::tag( 'label',
-            get_string( 'feedback_test_groupingselector', 'block_tog' ) . '&nbsp;&nbsp' .
-            $OUTPUT->help_icon( 'feedback_test_groupingselector', 'block_tog', '' ),
-            array ('for' => 'feedback_test__groupingselector'
+            get_string( 'feedback_test_grouping_selector', 'block_tog' ) . '&nbsp;&nbsp' .
+            $OUTPUT->help_icon( 'feedback_test_grouping_selector', 'block_tog', '' ),
+            array ('for' => 'feedback_test__grouping_selector'
             ) );
     $groupingselector .= html_writer::start_tag( 'select',
-            array ('class' => 'form-control', 'id' => 'feedback_test__groupingselector', 'value' => $defaultgroupingid
+            array ('class' => 'form-control', 'id' => 'feedback_test__grouping_selector', 'value' => $defaultgroupingid
             ) );
     $groupingselector .= $groupingoptions;
     $groupingselector .= html_writer::end_tag( 'select' );

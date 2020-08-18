@@ -100,19 +100,19 @@ if (! $personality) {
     }
     echo html_writer::tag( 'button', get_string( 'intelligences_go_to_personality_test', 'block_tog' ),
             array ('type' => 'button', 'class' => 'btn btn-secondary', 'role' => 'button',
-                    'onclick' => 'location.href=' . $personalitytesturl . ';'
+                    'onclick' => 'location.href="' . $personalitytesturl . '";'
             ) );
 }
 
 echo html_writer::tag( 'button', get_string( 'intelligences_go_to_test', 'block_tog' ),
         array ('type' => 'button', 'class' => 'btn btn-primary', 'role' => 'button',
-                'onclick' => 'location.href=' . $intelligencestesturl . ';'
+                'onclick' => 'location.href="' . $intelligencestesturl . '";'
         ) );
 
 if ($courseid) {
     echo html_writer::tag( 'button', get_string( 'intelligences_go_to_course', 'block_tog' ),
             array ('type' => 'button', 'class' => 'btn btn-secondary', 'role' => 'button',
-                    'onclick' => 'location.href=' . $CFG->wwwroot . '/course/view.php?id=' . $courseid . ';'
+                    'onclick' => 'location.href="' . $CFG->wwwroot . '/course/view.php?id=' . $courseid . '";'
             ) );
 }
 echo html_writer::end_div();

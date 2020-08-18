@@ -79,28 +79,28 @@ if (! $intelligences) {
 
     echo html_writer::tag( 'button', get_string( 'personality_go_to_intelligences_test', 'block_tog' ),
             array ('type' => 'button', 'class' => 'btn btn-secondary', 'role' => 'button',
-                    'onclick' => 'location.href=' . $intelligencestesturl . ';'
+                    'onclick' => 'location.href="' . $intelligencestesturl . '";'
             ) );
 }
 if ($personality) {
 
     echo html_writer::tag( 'button', get_string( 'personality_read_more', 'block_tog' ),
             array ('type' => 'button', 'class' => 'btn btn-secondary', 'role' => 'button',
-                    'onclick' => 'location.href=' .
-                    get_string( 'personality_' . $personality->type . '_more', 'block_tog' ) . ';'
+                    'onclick' => 'location.href="' .
+                    get_string( 'personality_' . $personality->type . '_more', 'block_tog' ) . '";'
             ) );
 }
 
 echo html_writer::tag( 'button', get_string( 'personality_go_to_test', 'block_tog' ),
         array ('type' => 'button', 'class' => 'btn btn-primary', 'role' => 'button',
-                'onclick' => 'location.href=' . $personalitytesturl . ';'
+                'onclick' => 'location.href="' . $personalitytesturl . '";'
         ) );
 
 if ($courseid) {
 
     echo html_writer::tag( 'button', get_string( 'personality_go_to_course', 'block_tog' ),
             array ('type' => 'button', 'class' => 'btn btn-secondary', 'role' => 'button',
-                    'onclick' => 'location.href=' . $CFG->wwwroot . '/course/view.php?id=' . $courseid . ';'
+                    'onclick' => 'location.href="' . $CFG->wwwroot . '/course/view.php?id=' . $courseid . '";'
             ) );
 }
 echo html_writer::end_div();
