@@ -21,7 +21,9 @@
  * @copyright 2018 - 2020 UDT-IA, IIIA-CSIC
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-require_once ('../../../config.php');
+// Disable format @formatter:off.
+require_once('../../../config.php');
+// Enable format @formatter:off.
 use block_tog\intelligences;
 use block_tog\personality;
 
@@ -45,6 +47,7 @@ if ($courseid) {
 }
 $intelligences = intelligences::get_intelligences_of_current_user();
 echo $OUTPUT->header();
+
 echo html_writer::start_div( 'container-fluid' );
 if ($intelligences) {
     echo html_writer::start_div( 'row' );
@@ -56,16 +59,16 @@ if ($intelligences) {
             html_writer::tag( 'b', get_string( 'intelligences_verbal_factor', 'block_tog' ) ) .
             intelligences::value_to_string( $intelligences->verbal ) );
     echo html_writer::tag( 'li',
-            html_writer::tag( 'b', get_string( 'intelligences_logicmathematics_factor', 'block_tog' ) ) .
+            html_writer::tag( 'b', get_string( 'intelligences_LOGIC_MATHEMATICS_FACTOR', 'block_tog' ) ) .
             intelligences::value_to_string( $intelligences->logicmathematics ) );
     echo html_writer::tag( 'li',
-            html_writer::tag( 'b', get_string( 'intelligences_visualspatial_factor', 'block_tog' ) ) .
+            html_writer::tag( 'b', get_string( 'intelligences_VISUAL_SPATIAL_FACTOR', 'block_tog' ) ) .
             intelligences::value_to_string( $intelligences->visualspatial ) );
     echo html_writer::tag( 'li',
-            html_writer::tag( 'b', get_string( 'intelligences_kinestesicacorporal_factor', 'block_tog' ) ) .
+            html_writer::tag( 'b', get_string( 'intelligences_KINESTESICA_CORPORAL_FACTOR', 'block_tog' ) ) .
             intelligences::value_to_string( $intelligences->kinestesicacorporal ) );
     echo html_writer::tag( 'li',
-            html_writer::tag( 'b', get_string( 'intelligences_musicalrhythmic_factor', 'block_tog' ) ) .
+            html_writer::tag( 'b', get_string( 'intelligences_MUSICAL_RHYTHMIC_FACTOR', 'block_tog' ) ) .
             intelligences::value_to_string( $intelligences->musicalrhythmic ) );
     echo html_writer::tag( 'li',
             html_writer::tag( 'b', get_string( 'intelligences_intrapersonal_factor', 'block_tog' ) ) .
@@ -74,7 +77,7 @@ if ($intelligences) {
             html_writer::tag( 'b', get_string( 'intelligences_interpersonal_factor', 'block_tog' ) ) .
             intelligences::value_to_string( $intelligences->interpersonal ) );
     echo html_writer::tag( 'li',
-            html_writer::tag( 'b', get_string( 'intelligences_naturalistenvironmental_factor', 'block_tog' ) ) .
+            html_writer::tag( 'b', get_string( 'intelligences_NATURALIST_ENVIRONMENTAL_FACTOR', 'block_tog' ) ) .
             intelligences::value_to_string( $intelligences->naturalistenvironmental ) );
     echo html_writer::end_tag( 'ul' );
     echo html_writer::end_div();
@@ -100,6 +103,7 @@ if (! $personality) {
                     'onclick' => 'location.href=' . $personalitytesturl . ';'
             ) );
 }
+
 echo html_writer::tag( 'button', get_string( 'intelligences_go_to_test', 'block_tog' ),
         array ('type' => 'button', 'class' => 'btn btn-primary', 'role' => 'button',
                 'onclick' => 'location.href=' . $intelligencestesturl . ';'

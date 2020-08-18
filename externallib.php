@@ -23,8 +23,10 @@
  */
 defined( 'MOODLE_INTERNAL' ) || die();
 global $CFG;
-require_once ($CFG->libdir . '/externallib.php');
-require_once ($CFG->dirroot . '/group/lib.php');
+// Disable format @formatter:off.
+require_once($CFG->libdir . '/externallib.php');
+require_once($CFG->dirroot . '/group/lib.php');
+// Enable format @formatter:on.
 
 use block_tog\personality;
 use block_tog\intelligences;
@@ -44,7 +46,8 @@ class block_tog_external extends external_api {
      */
     public static function store_personality_answer_parameters() {
         return new external_function_parameters(
-                array ('question' => new external_value( PARAM_INT, 'Contains the question that the user is answering' ),
+                array (
+                        'question' => new external_value( PARAM_INT, 'Contains the question that the user is answering' ),
                         'answer' => new external_value( PARAM_INT, 'Contains the answers of the user' )
                 ) );
     }
@@ -83,7 +86,8 @@ class block_tog_external extends external_api {
     public static function store_personality_answer_returns() {
         return new external_single_structure(
                 array ('success' => new external_value( PARAM_BOOL, 'This is true if the answers has been stored' ),
-                        'calculated' => new external_value( PARAM_BOOL, 'This is true if it is calculated the user personality' )
+                        'calculated' => new external_value( PARAM_BOOL,
+                                'This is true if it is calculated the user personality' )
                 ) );
     }
 
@@ -93,7 +97,8 @@ class block_tog_external extends external_api {
      */
     public static function store_intelligences_answer_parameters() {
         return new external_function_parameters(
-                array ('question' => new external_value( PARAM_INT, 'Contains the question that the user is answering' ),
+                array (
+                        'question' => new external_value( PARAM_INT, 'Contains the question that the user is answering' ),
                         'answer' => new external_value( PARAM_INT, 'Contains the answers of the user' )
                 ) );
     }
@@ -134,7 +139,8 @@ class block_tog_external extends external_api {
     public static function store_intelligences_answer_returns() {
         return new external_single_structure(
                 array ('success' => new external_value( PARAM_BOOL, 'This is true if the answers has been stored' ),
-                        'calculated' => new external_value( PARAM_BOOL, 'This is true if it is calculated the user intelligences' )
+                        'calculated' => new external_value( PARAM_BOOL,
+                                'This is true if it is calculated the user intelligences' )
                 ) );
     }
 
@@ -157,7 +163,9 @@ class block_tog_external extends external_api {
                                 'Value that indicates if the groups are under or over performance' ),
                         'members' => new external_multiple_structure(
                                 new external_single_structure(
-                                        [ 'id' => new external_value( core_user::get_property_type( 'id' ), 'ID of the member' ),
+                                        [
+                                                'id' => new external_value( core_user::get_property_type( 'id' ),
+                                                        'ID of the member' ),
                                                 'gender' => new external_value( PARAM_TEXT, 'The gender of the member' ),
                                                 'personality' => new external_single_structure(
                                                         [
@@ -178,7 +186,8 @@ class block_tog_external extends external_api {
                                                                         'The value for the intelligences logic mathematics' ),
                                                                 'visualspatial' => new external_value( PARAM_FLOAT,
                                                                         'The value for the intelligences visualspatial' ),
-                                                                'kinestesicacorporal' => new external_value( PARAM_FLOAT,
+                                                                'kinestesicacorporal' => new external_value(
+                                                                        PARAM_FLOAT,
                                                                         'The value for the intelligences kinestesica corporal' ),
                                                                 'musicalrhythmic' => new external_value( PARAM_FLOAT,
                                                                         'The value for the intelligences musical rhythmic' ),
@@ -186,15 +195,16 @@ class block_tog_external extends external_api {
                                                                         'The value for the intelligences intrapersonal' ),
                                                                 'interpersonal' => new external_value( PARAM_FLOAT,
                                                                         'The value for the intelligences interpersonal' ),
-                                                                'naturalistenvironmental' => new external_value( PARAM_FLOAT,
+                                                                'naturalistenvironmental' => new external_value(
+                                                                        PARAM_FLOAT,
                                                                         'The value for the intelligences naturalist environmental' )
                                                         ], 'Contains the member personality' )
                                         ] ), 'The members that can be form part of a group' ),
                         'requirements' => new external_single_structure(
-                                [ 'verbal' => $requirement, 'logicmathematics' => $requirement, 'visualspatial' => $requirement,
-                                        'kinestesicacorporal' => $requirement, 'musicalrhythmic' => $requirement,
-                                        'intrapersonal' => $requirement, 'interpersonal' => $requirement,
-                                        'naturalistenvironmental' => $requirement
+                                [ 'verbal' => $requirement, 'logicmathematics' => $requirement,
+                                        'visualspatial' => $requirement, 'kinestesicacorporal' => $requirement,
+                                        'musicalrhythmic' => $requirement, 'intrapersonal' => $requirement,
+                                        'interpersonal' => $requirement, 'naturalistenvironmental' => $requirement
                                 ], 'The requirements for the groups' )
                 ) );
     }
@@ -219,8 +229,8 @@ class block_tog_external extends external_api {
      * @param stdObject[] $requirements
      *            fro the groups to create.
      */
-    public static function composite_groups($courseid, $memberspergroups, $atmost, $groupingname, $namepattern, $performance,
-            $members, $requirements) {
+    public static function composite_groups($courseid, $memberspergroups, $atmost, $groupingname, $namepattern,
+            $performance, $members, $requirements) {
         global $DB;
         $updated = false;
         $calculated = false;
@@ -229,8 +239,8 @@ class block_tog_external extends external_api {
         try {
             $params = self::validate_parameters( self::composite_groups_parameters(),
                     array ('courseid' => $courseid, 'memberspergroups' => $memberspergroups, 'atmost' => $atmost,
-                            'groupingname' => $groupingname, 'namepattern' => $namepattern, 'performance' => $performance,
-                            'members' => $members, 'requirements' => $requirements
+                            'groupingname' => $groupingname, 'namepattern' => $namepattern,
+                            'performance' => $performance, 'members' => $members, 'requirements' => $requirements
                     ) );
 
             $courseid = $params ['courseid'];
@@ -270,27 +280,27 @@ class block_tog_external extends external_api {
                 $person->personality [] = $attitude;
                 $person->intelligences = array ();
                 $verbal = new \stdClass();
-                // ... $verbal->factor = 'LINGUISTIC';
+                // TODO: replace below with $verbal->factor = 'LINGUISTIC'; .
                 $verbal->factor = 'VERBAL';
                 $verbal->value = floatval( $member [intelligences] [verbal] );
                 $person->intelligences [] = $verbal;
                 $logicmathematics = new \stdClass();
-                // ... $logicmathematics->factor = 'LOGICAL_MATHEMATICAL';
+                // TODO: replace below with $logicmathematics->factor = 'LOGICAL_MATHEMATICAL'; .
                 $logicmathematics->factor = 'LOGIC_MATHEMATICS';
                 $logicmathematics->value = floatval( $member [intelligences] [logicmathematics] );
                 $person->intelligences [] = $logicmathematics;
                 $visualspatial = new \stdClass();
-                // ... $visualspatial->factor = 'SPATIAL';
+                // TODO: replace below with $visualspatial->factor = 'SPATIAL'; .
                 $visualspatial->factor = 'VISUAL_SPATIAL';
                 $visualspatial->value = floatval( $member [intelligences] [visualspatial] );
                 $person->intelligences [] = $visualspatial;
                 $kinestesicacorporal = new \stdClass();
-                // ... $kinestesicacorporal->factor = 'BODILY_KINESTHETIC';
+                // TODO: replace below with $kinestesicacorporal->factor = 'BODILY_KINESTHETIC'; .
                 $kinestesicacorporal->factor = 'KINESTESICA_CORPORAL';
                 $kinestesicacorporal->value = floatval( $member [intelligences] [kinestesicacorporal] );
                 $person->intelligences [] = $kinestesicacorporal;
                 $musicalrhythmic = new \stdClass();
-                // ... $musicalrhythmic->factor = 'MUSICAL';
+                // TODO: replace below with $musicalrhythmic->factor = 'MUSICAL'; .
                 $musicalrhythmic->factor = 'MUSICAL_RHYTHMIC';
                 $musicalrhythmic->value = floatval( $member [intelligences] [musicalrhythmic] );
                 $person->intelligences [] = $musicalrhythmic;
@@ -303,7 +313,7 @@ class block_tog_external extends external_api {
                 $interpersonal->value = floatval( $member [intelligences] [interpersonal] );
                 $person->intelligences [] = $interpersonal;
                 $naturalistenvironmental = new \stdClass();
-                // ... $naturalistenvironmental->factor = 'ENVIRONMENTAL';
+                // TODO: replace below with $naturalistenvironmental->factor = 'ENVIRONMENTAL'; .
                 $naturalistenvironmental->factor = 'NATURALIST_ENVIRONMENTAL';
                 $naturalistenvironmental->value = floatval( $member [intelligences] [naturalistenvironmental] );
                 $person->intelligences [] = $naturalistenvironmental;
@@ -315,13 +325,13 @@ class block_tog_external extends external_api {
                 $requirementdata = new \stdClass();
                 if ($factor == 'logicmathematics') {
                     $requirementdata->factor = 'LOGIC_MATHEMATICS';
-                } elseif ($factor == 'visualspatial') {
+                } else if ($factor == 'visualspatial') {
                     $requirementdata->factor = 'VISUAL_SPATIAL';
-                } elseif ($factor == 'kinestesicacorporal') {
+                } else if ($factor == 'kinestesicacorporal') {
                     $requirementdata->factor = 'KINESTESICA_CORPORAL';
-                } elseif ($factor == 'musicalrhythmic') {
+                } else if ($factor == 'musicalrhythmic') {
                     $requirementdata->factor = 'MUSICAL_RHYTHMIC';
-                } elseif ($factor == 'naturalistenvironmental') {
+                } else if ($factor == 'naturalistenvironmental') {
                     $requirementdata->factor = 'NATURALIST_ENVIRONMENTAL';
                 } else {
                     $requirementdata->factor = strtoupper( $factor );
@@ -333,10 +343,11 @@ class block_tog_external extends external_api {
             $payload = json_encode( $data );
             $config = get_config( 'block_tog' );
             $compositeurl = str_replace( '//composite', '/composite', $config->base_api_url . '/composite' );
-            $options = array (CURLOPT_POST => 1, CURLOPT_HEADER => 0, CURLOPT_URL => $compositeurl, CURLOPT_FRESH_CONNECT => 1,
-                    CURLOPT_RETURNTRANSFER => 1, CURLOPT_FORBID_REUSE => 1, CURLOPT_TIMEOUT => 3600, CURLOPT_POSTFIELDS => $payload,
-                    CURLOPT_HTTPHEADER => array ('Content-Type: application/json', 'Content-Length: ' . strlen( $payload ),
-                            'Accept: application/json'
+            $options = array (CURLOPT_POST => 1, CURLOPT_HEADER => 0, CURLOPT_URL => $compositeurl,
+                    CURLOPT_FRESH_CONNECT => 1, CURLOPT_RETURNTRANSFER => 1, CURLOPT_FORBID_REUSE => 1,
+                    CURLOPT_TIMEOUT => 3600, CURLOPT_POSTFIELDS => $payload,
+                    CURLOPT_HTTPHEADER => array ('Content-Type: application/json',
+                            'Content-Length: ' . strlen( $payload ), 'Accept: application/json'
                     ), CURLOPT_FAILONERROR => true
             );
 
@@ -374,17 +385,17 @@ class block_tog_external extends external_api {
                                     foreach ($person->intelligences as $intelligence) {
                                         if ($intelligenceindex == 1) {
                                             $groupdata->description .= ' ';
-                                        } elseif ($intelligenceindex == $maxintelligences) {
+                                        } else if ($intelligenceindex == $maxintelligences) {
                                             $groupdata->description .= ' ' .
-                                                    get_string( 'externallib:group_description_last_intelligence_and', 'block_tog' ) .
-                                                    ' ';
+                                                    get_string( 'externallib:group_description_last_intelligence_and',
+                                                            'block_tog' ) . ' ';
                                         } else {
                                             $groupdata->description .= ', ';
                                         }
 
                                         $groupdata->description .= get_string(
-                                                'externallib:group_description_intelligence_' . strtolower( $intelligence ),
-                                                'block_tog' );
+                                                'externallib:group_description_intelligence_' .
+                                                strtolower( $intelligence ), 'block_tog' );
                                         $intelligenceindex ++;
                                     }
                                 } else {
@@ -400,11 +411,13 @@ class block_tog_external extends external_api {
                                 $message .= "Could not create the group with " . json_encode( $groupdata );
                             } else {
                                 if (! groups_assign_grouping( $groupingid, $groupid )) {
-                                    $message .= "Could not assign the group " . $groupid . " to the grouping " . $groupingid;
+                                    $message .= "Could not assign the group " . $groupid . " to the grouping " .
+                                            $groupingid;
                                 }
                                 foreach ($team->people as $person) {
                                     if (! groups_add_member( $groupid, $person->id )) {
-                                        $message .= "\nCould not add the user " . $person->id . " to the group " . $groupid;
+                                        $message .= "\nCould not add the user " . $person->id . " to the group " .
+                                                $groupid;
                                     }
                                 }
                                 $feedbackrecord = new \stdClass();
@@ -468,8 +481,9 @@ class block_tog_external extends external_api {
         $success = true;
         $message = '';
         try {
-            $params = self::validate_parameters( self::auto_fill_in_personality_parameters(), array ('userid' => $userid
-            ) );
+            $params = self::validate_parameters( self::auto_fill_in_personality_parameters(),
+                    array ('userid' => $userid
+                    ) );
 
             $userid = $params ['userid'];
             $maxquestions = personality_questionnaire::count_questions();
@@ -499,7 +513,9 @@ class block_tog_external extends external_api {
      */
     public static function auto_fill_in_personality_returns() {
         return new external_single_structure(
-                array ('success' => new external_value( PARAM_BOOL, 'This is true if the personality test has been filled in' ),
+                array (
+                        'success' => new external_value( PARAM_BOOL,
+                                'This is true if the personality test has been filled in' ),
                         'message' => new external_value( PARAM_TEXT,
                                 'This contains a message that explains why is not filled in the personality test' )
                 ) );
@@ -524,8 +540,9 @@ class block_tog_external extends external_api {
         $success = true;
         $message = '';
         try {
-            $params = self::validate_parameters( self::auto_fill_in_intelligences_parameters(), array ('userid' => $userid
-            ) );
+            $params = self::validate_parameters( self::auto_fill_in_intelligences_parameters(),
+                    array ('userid' => $userid
+                    ) );
 
             $userid = $params ['userid'];
             $maxquestions = intelligences_questionnaire::count_questions();
@@ -555,7 +572,9 @@ class block_tog_external extends external_api {
      */
     public static function auto_fill_in_intelligences_returns() {
         return new external_single_structure(
-                array ('success' => new external_value( PARAM_BOOL, 'This is true if the intelligences test has been filled in' ),
+                array (
+                        'success' => new external_value( PARAM_BOOL,
+                                'This is true if the intelligences test has been filled in' ),
                         'message' => new external_value( PARAM_TEXT,
                                 'This contains a message that explains why is not filled in the intelligences test' )
                 ) );
@@ -566,7 +585,9 @@ class block_tog_external extends external_api {
      */
     public static function feedback_group_parameters() {
         return new external_function_parameters(
-                array ('feedbackid' => new external_value( PARAM_TEXT, 'Contains the identifier of the feedback to provide' ),
+                array (
+                        'feedbackid' => new external_value( PARAM_TEXT,
+                                'Contains the identifier of the feedback to provide' ),
                         'answervalues' => new external_multiple_structure(
                                 new external_value( PARAM_INT, 'Contains the answers of the user' ) )
                 ) );
@@ -602,11 +623,11 @@ class block_tog_external extends external_api {
                 $payload = json_encode( $data );
                 $config = get_config( 'block_tog' );
                 $compositeurl = str_replace( '//composite', '/composite', $config->base_api_url . '/composite/feedback' );
-                $options = array (CURLOPT_POST => 1, CURLOPT_HEADER => 0, CURLOPT_URL => $compositeurl, CURLOPT_FRESH_CONNECT => 1,
-                        CURLOPT_RETURNTRANSFER => 0, CURLOPT_FORBID_REUSE => 1, CURLOPT_TIMEOUT => 3600,
-                        CURLOPT_POSTFIELDS => $payload,
-                        CURLOPT_HTTPHEADER => array ('Content-Type: application/json', 'Content-Length: ' . strlen( $payload ),
-                                'Accept: application/json'
+                $options = array (CURLOPT_POST => 1, CURLOPT_HEADER => 0, CURLOPT_URL => $compositeurl,
+                        CURLOPT_FRESH_CONNECT => 1, CURLOPT_RETURNTRANSFER => 0, CURLOPT_FORBID_REUSE => 1,
+                        CURLOPT_TIMEOUT => 3600, CURLOPT_POSTFIELDS => $payload,
+                        CURLOPT_HTTPHEADER => array ('Content-Type: application/json',
+                                'Content-Length: ' . strlen( $payload ), 'Accept: application/json'
                         ), CURLOPT_FAILONERROR => true
                 );
 

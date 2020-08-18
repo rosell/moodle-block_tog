@@ -21,9 +21,11 @@
  * @copyright 2018 - 2020 UDT-IA, IIIA-CSIC
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-require_once ('../../../config.php');
-require_once ($CFG->dirroot . '/group/lib.php');
-require_once ($CFG->libdir . '/tablelib.php');
+// Disable format @formatter:off.
+require_once('../../../config.php');
+require_once($CFG->dirroot . '/group/lib.php');
+require_once($CFG->libdir . '/tablelib.php');
+// Enable format @formatter:on.
 
 use block_tog\personality;
 use block_tog\intelligences;
@@ -58,16 +60,19 @@ if (has_capability( 'moodle/course:managegroups', $context )) {
     }
     $roles = role_fix_names( $profileroles, $context, ROLENAME_ALIAS, true );
     $form = html_writer::start_tag( 'form' );
-    $form .= html_writer::start_tag( 'input', array ('id' => 'composite__courseid', 'type' => 'hidden', 'value' => $courseid
-    ) );
+    $form .= html_writer::empty_tag( 'input',
+            array ('id' => 'composite__courseid', 'type' => 'hidden', 'value' => $courseid
+            ) );
     // Select role input.
     $form .= html_writer::start_div( 'form-group' );
     $form .= html_writer::tag( 'label',
             get_string( 'composite_select_role_for_users', 'block_tog' ) . '&nbsp;&nbsp' .
-            $OUTPUT->help_icon( 'composite_select_role_for_users', 'block_tog', '' ), array ('for' => 'selectedRoleForUsers'
+            $OUTPUT->help_icon( 'composite_select_role_for_users', 'block_tog', '' ),
+            array ('for' => 'selectedRoleForUsers'
             ) );
-    $form .= html_writer::start_tag( 'select', array ('class' => 'form-control', 'id' => 'composite__selected_role_for_users'
-    ) );
+    $form .= html_writer::start_tag( 'select',
+            array ('class' => 'form-control', 'id' => 'composite__selected_role_for_users'
+            ) );
     foreach ($roles as $fixedroleid => $fixedrolename) {
         $attributes = array ('value' => $fixedroleid
         );
@@ -137,13 +142,16 @@ if (has_capability( 'moodle/course:managegroups', $context )) {
             }
             $rowpage = floor( (count( $table->data )) / 5 ) + 1;
             $send = html_writer::empty_tag( 'input',
-                    array ('class' => 'form-check-input send-select', 'type' => 'checkbox', 'data-userid' => $enrolleduser->id
+                    array ('class' => 'form-check-input send-select', 'type' => 'checkbox',
+                            'data-userid' => $enrolleduser->id
                     ) ) .
-                    html_writer::span( $OUTPUT->pix_icon( 't/message', get_string( 'composite_column_send_alt', 'block_tog' ) ),
+                    html_writer::span(
+                            $OUTPUT->pix_icon( 't/message', get_string( 'composite_column_send_alt', 'block_tog' ) ),
                             'send-icon', array ('data-userid' => $enrolleduser->id
                             ) );
-            $row = new html_table_row( array (fullname( $enrolleduser ), $personalityfilled, $intelligencesfilled, $send
-            ) );
+            $row = new html_table_row(
+                    array (fullname( $enrolleduser ), $personalityfilled, $intelligencesfilled, $send
+                    ) );
             $row->cells [0]->attributes ['class'] = 'col-6';
             $row->cells [1]->attributes ['class'] = 'col-2 text-center';
             $row->cells [2]->attributes ['class'] = 'col-2 text-center';
@@ -151,9 +159,10 @@ if (has_capability( 'moodle/course:managegroups', $context )) {
             $row->attributes ['class'] = 'page-' . $rowpage . ' fill-in-row';
             $table->data [] = $row;
             if ($pageindex != $rowpage) {
-                $pageitems [] = html_writer::tag( 'li', html_writer::link( '#', $pageindex, array ('class' => 'page-link'
-                ) ), array ('class' => 'page-item'
-                ) );
+                $pageitems [] = html_writer::tag( 'li',
+                        html_writer::link( '#', $pageindex, array ('class' => 'page-link'
+                        ) ), array ('class' => 'page-item'
+                        ) );
                 $pageindex = $rowpage;
             }
         }
@@ -164,8 +173,9 @@ if (has_capability( 'moodle/course:managegroups', $context )) {
         ) );
         $form .= html_writer::div( get_string( 'composite_unfilled_msg', 'block_tog', $unfilled ), 'row' );
         $form .= html_writer::div( html_writer::table( $table ), 'row' );
-        $form .= html_writer::div( html_writer::tag( 'ul', implode( $pageitems ), array ('class' => 'pagination flex-wrap'
-        ) ), 'row justify-content-md-center actions-row' );
+        $form .= html_writer::div(
+                html_writer::tag( 'ul', implode( $pageitems ), array ('class' => 'pagination flex-wrap'
+                ) ), 'row justify-content-md-center actions-row' );
         $form .= html_writer::div(
                 html_writer::tag( 'button', get_string( 'composite_send_selected', 'block_tog' ),
                         array ('type' => 'button', 'class' => 'btn btn-primary', 'id' => 'composite__send_selected'
@@ -183,7 +193,8 @@ if (has_capability( 'moodle/course:managegroups', $context )) {
     } else {
         $form .= html_writer::div(
                 html_writer::tag( 'textarea', json_encode( $members ), array ('id' => 'composite__members'
-                ) ) . html_writer::empty_tag( 'input', array ('id' => 'composite__members_size', 'value' => $memberssize
+                ) ) .
+                html_writer::empty_tag( 'input', array ('id' => 'composite__members_size', 'value' => $memberssize
                 ) ) . html_writer::empty_tag( 'input', array ('id' => 'composite__at_most', 'value' => 'false'
                 ) ) . html_writer::tag( 'textarea', '{}', array ('id' => 'composite__requirements'
                 ) ), '', array ('hidden' => 'hidden'
@@ -202,8 +213,9 @@ if (has_capability( 'moodle/course:managegroups', $context )) {
                 $OUTPUT->help_icon( 'composite_requirements_factor', 'block_tog', '' ),
                 array ('for' => 'composite__requirements_factor'
                 ) );
-        $form .= html_writer::start_tag( 'select', array ('class' => 'form-control', 'id' => 'composite__requirements_factor'
-        ) );
+        $form .= html_writer::start_tag( 'select',
+                array ('class' => 'form-control', 'id' => 'composite__requirements_factor'
+                ) );
         for ($i = 0; $i < 8; $i ++) {
             $form .= html_writer::tag( 'option', get_string( 'composite_requirements_factor_' . $i, 'block_tog' ),
                     array ('value' => $i, 'id' => 'composite__requirements_factor_' . $i
@@ -217,8 +229,9 @@ if (has_capability( 'moodle/course:managegroups', $context )) {
                 $OUTPUT->help_icon( 'composite_requirements_level', 'block_tog', '' ),
                 array ('for' => 'composite__requirements_level'
                 ) );
-        $form .= html_writer::start_tag( 'select', array ('class' => 'form-control', 'id' => 'composite__requirements_level'
-        ) );
+        $form .= html_writer::start_tag( 'select',
+                array ('class' => 'form-control', 'id' => 'composite__requirements_level'
+                ) );
         for ($i = 0; $i < 5; $i ++) {
             $form .= html_writer::tag( 'option', get_string( 'composite_requirements_level_' . $i, 'block_tog' ),
                     array ('value' => $i, 'id' => 'composite__requirements_level_' . $i
@@ -232,8 +245,9 @@ if (has_capability( 'moodle/course:managegroups', $context )) {
                 $OUTPUT->help_icon( 'composite_requirements_importance', 'block_tog', '' ),
                 array ('for' => 'composite__requirements_importance'
                 ) );
-        $form .= html_writer::start_tag( 'select', array ('class' => 'form-control', 'id' => 'composite__requirements_importance'
-        ) );
+        $form .= html_writer::start_tag( 'select',
+                array ('class' => 'form-control', 'id' => 'composite__requirements_importance'
+                ) );
         for ($i = 0; $i < 5; $i ++) {
             $form .= html_writer::tag( 'option', get_string( 'composite_requirements_importance_' . $i, 'block_tog' ),
                     array ('value' => $i, 'id' => 'composite__requirements_importance_' . $i
@@ -256,7 +270,8 @@ if (has_capability( 'moodle/course:managegroups', $context )) {
         $form .= html_writer::start_div( 'form-group' );
         $form .= html_writer::tag( 'label',
                 get_string( 'composite_grouping_name', 'block_tog' ) . '&nbsp;&nbsp' .
-                $OUTPUT->help_icon( 'composite_grouping_name', 'block_tog', '' ), array ('for' => 'composite__grouping_name'
+                $OUTPUT->help_icon( 'composite_grouping_name', 'block_tog', '' ),
+                array ('for' => 'composite__grouping_name'
                 ) );
         $form .= html_writer::empty_tag( 'input',
                 array ('id' => 'composite__grouping_name', 'type' => 'text', 'class' => 'form-control',
@@ -267,7 +282,8 @@ if (has_capability( 'moodle/course:managegroups', $context )) {
         $form .= html_writer::start_div( 'form-group' );
         $form .= html_writer::tag( 'label',
                 get_string( 'composite_groups_pattern', 'block_tog' ) . '&nbsp;&nbsp' .
-                $OUTPUT->help_icon( 'composite_groups_pattern', 'block_tog', '' ), array ('for' => 'composite__groups_pattern'
+                $OUTPUT->help_icon( 'composite_groups_pattern', 'block_tog', '' ),
+                array ('for' => 'composite__groups_pattern'
                 ) );
         $form .= html_writer::empty_tag( 'input',
                 array ('id' => 'composite__groups_pattern', 'type' => 'text', 'class' => 'form-control',
@@ -282,8 +298,8 @@ if (has_capability( 'moodle/course:managegroups', $context )) {
                 array ('for' => 'composite__members_per_group'
                 ) );
         $form .= html_writer::empty_tag( 'input',
-                array ('id' => 'composite__members_per_group', 'type' => 'number', 'class' => 'form-control', 'value' => '2',
-                        'min' => '2', 'max' => ceil( $memberssize / 2 )
+                array ('id' => 'composite__members_per_group', 'type' => 'number', 'class' => 'form-control',
+                        'value' => '2', 'min' => '2', 'max' => ceil( $memberssize / 2 )
                 ) );
         $form .= html_writer::tag( 'small', '',
                 array ('class' => 'form-text text-muted', 'id' => 'composite__members_per_group_help'
@@ -294,8 +310,9 @@ if (has_capability( 'moodle/course:managegroups', $context )) {
 
         $form .= html_writer::start_div( 'form-check' );
         $form .= html_writer::empty_tag( 'input',
-                array ('id' => 'composite__members_per_group_at_most_true', 'type' => 'radio', 'class' => 'form-check-input',
-                        'value' => 'true', 'name' => 'composite_members_per_group_at_most'
+                array ('id' => 'composite__members_per_group_at_most_true', 'type' => 'radio',
+                        'class' => 'form-check-input', 'value' => 'true',
+                        'name' => 'composite_members_per_group_at_most'
                 ) );
         $form .= html_writer::tag( 'label', '',
                 array ('class' => 'form-check-label', 'for' => 'composite__members_per_group_at_most_true'
@@ -303,8 +320,9 @@ if (has_capability( 'moodle/course:managegroups', $context )) {
         $form .= html_writer::end_div();
         $form .= html_writer::start_div( 'form-check' );
         $form .= html_writer::empty_tag( 'input',
-                array ('id' => 'composite__members_per_group_at_most_false', 'type' => 'radio', 'class' => 'form-check-input',
-                        'value' => 'false', 'name' => 'composite_members_per_group_at_most'
+                array ('id' => 'composite__members_per_group_at_most_false', 'type' => 'radio',
+                        'class' => 'form-check-input', 'value' => 'false',
+                        'name' => 'composite_members_per_group_at_most'
                 ) );
         $form .= html_writer::tag( 'label', '',
                 array ('class' => 'form-check-label', 'for' => 'composite__members_per_group_at_most_false'
@@ -315,15 +333,16 @@ if (has_capability( 'moodle/course:managegroups', $context )) {
         $form .= html_writer::start_div( 'form-group' );
         $form .= html_writer::tag( 'label',
                 get_string( 'composite_performance', 'block_tog' ) . '&nbsp;&nbsp' .
-                $OUTPUT->help_icon( 'composite_performance', 'block_tog', '' ), array ('for' => 'composite__performance'
+                $OUTPUT->help_icon( 'composite_performance', 'block_tog', '' ),
+                array ('for' => 'composite__performance'
                 ) );
         $form .= html_writer::start_div( 'row' );
         $form .= html_writer::div( get_string( 'composite_performance_over', 'block_tog' ), 'col-md-3' );
         $form .= html_writer::div(
                 html_writer::empty_tag( 'input',
                         array ('id' => 'composite__performance', 'type' => 'range', 'class' => 'form-control-range',
-                                'value' => 'false', 'name' => 'composite_members_per_group_at_most', 'min' => '0', 'max' => '1',
-                                'step' => '0.01'
+                                'value' => 'false', 'name' => 'composite_members_per_group_at_most', 'min' => '0',
+                                'max' => '1', 'step' => '0.01'
                         ) ), 'col' );
         $form .= html_writer::div( get_string( 'composite_performance_under', 'block_tog' ), 'col-md-3' );
         $form .= html_writer::end_div();
@@ -335,9 +354,11 @@ if (has_capability( 'moodle/course:managegroups', $context )) {
         $form .= html_writer::end_div();
         $form .= html_writer::div(
                 html_writer::div(
-                        html_writer::span( get_string( 'composite_progress', 'block_tog' ) . html_writer::span( '', 'dotdotdot' ) ),
+                        html_writer::span(
+                                get_string( 'composite_progress', 'block_tog' ) . html_writer::span( '', 'dotdotdot' ) ),
                         'progress-bar progress-bar-striped progress-bar-animated',
-                        array ('role' => 'progressbar', 'aria-valuenow' => '75', 'aria-valuemin' => '0', 'aria-valuemax' => '100'
+                        array ('role' => 'progressbar', 'aria-valuenow' => '75', 'aria-valuemin' => '0',
+                                'aria-valuemax' => '100'
                         ) ), 'progress composite-progress', array ('id' => 'composite__progress'
                 ) );
     }

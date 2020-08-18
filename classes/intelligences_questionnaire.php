@@ -48,22 +48,22 @@ class intelligences_questionnaire {
     /**
      * Factor used to evaluate the logic/mathematics intelligence.
      */
-    const logicmathematics_FACTOR = 1;
+    const LOGIC_MATHEMATICS_FACTOR = 1;
 
     /**
      * Factor used to evaluate the visual/spatial intelligence.
      */
-    const visualspatial_FACTOR = 2;
+    const VISUAL_SPATIAL_FACTOR = 2;
 
     /**
      * Factor used to evaluate the kinestesica/corporal intelligence.
      */
-    const kinestesicacorporal_FACTOR = 3;
+    const KINESTESICA_CORPORAL_FACTOR = 3;
 
     /**
      * Factor used to evaluate the musical/rhythmic intelligence.
      */
-    const musicalrhythmic_FACTOR = 4;
+    const MUSICAL_RHYTHMIC_FACTOR = 4;
 
     /**
      * Factor used to evaluate the intrapersonal intelligence.
@@ -78,22 +78,25 @@ class intelligences_questionnaire {
     /**
      * Factor used to evaluate the naturalist/environmental intelligence.
      */
-    const naturalistenvironmental_FACTOR = 7;
+    const NATURALIST_ENVIRONMENTAL_FACTOR = 7;
 
     /**
      * The types assocaited to each question.
      */
-    const QUESTION_FACTORS = [ self::VERBAL_FACTOR, self::visualspatial_FACTOR, self::INTRAPERSONAL_FACTOR,
-            self::musicalrhythmic_FACTOR, self::musicalrhythmic_FACTOR, self::logicmathematics_FACTOR, self::INTRAPERSONAL_FACTOR,
-            self::logicmathematics_FACTOR, self::kinestesicacorporal_FACTOR, self::VERBAL_FACTOR, self::visualspatial_FACTOR,
-            self::INTERPERSONAL_FACTOR, self::naturalistenvironmental_FACTOR, self::musicalrhythmic_FACTOR,
-            self::visualspatial_FACTOR, self::logicmathematics_FACTOR, self::kinestesicacorporal_FACTOR, self::VERBAL_FACTOR,
-            self::INTERPERSONAL_FACTOR, self::kinestesicacorporal_FACTOR, self::logicmathematics_FACTOR,
-            self::kinestesicacorporal_FACTOR, self::VERBAL_FACTOR, self::visualspatial_FACTOR, self::naturalistenvironmental_FACTOR,
-            self::musicalrhythmic_FACTOR, self::logicmathematics_FACTOR, self::INTRAPERSONAL_FACTOR, self::visualspatial_FACTOR,
-            self::musicalrhythmic_FACTOR, self::naturalistenvironmental_FACTOR, self::kinestesicacorporal_FACTOR,
-            self::VERBAL_FACTOR, self::INTRAPERSONAL_FACTOR, self::INTERPERSONAL_FACTOR, self::naturalistenvironmental_FACTOR,
-            self::INTRAPERSONAL_FACTOR, self::INTERPERSONAL_FACTOR, self::INTERPERSONAL_FACTOR, self::naturalistenvironmental_FACTOR
+    const QUESTION_FACTORS = [ self::VERBAL_FACTOR, self::VISUAL_SPATIAL_FACTOR, self::INTRAPERSONAL_FACTOR,
+            self::MUSICAL_RHYTHMIC_FACTOR, self::MUSICAL_RHYTHMIC_FACTOR, self::LOGIC_MATHEMATICS_FACTOR,
+            self::INTRAPERSONAL_FACTOR, self::LOGIC_MATHEMATICS_FACTOR, self::KINESTESICA_CORPORAL_FACTOR,
+            self::VERBAL_FACTOR, self::VISUAL_SPATIAL_FACTOR, self::INTERPERSONAL_FACTOR,
+            self::NATURALIST_ENVIRONMENTAL_FACTOR, self::MUSICAL_RHYTHMIC_FACTOR, self::VISUAL_SPATIAL_FACTOR,
+            self::LOGIC_MATHEMATICS_FACTOR, self::KINESTESICA_CORPORAL_FACTOR, self::VERBAL_FACTOR,
+            self::INTERPERSONAL_FACTOR, self::KINESTESICA_CORPORAL_FACTOR, self::LOGIC_MATHEMATICS_FACTOR,
+            self::KINESTESICA_CORPORAL_FACTOR, self::VERBAL_FACTOR, self::VISUAL_SPATIAL_FACTOR,
+            self::NATURALIST_ENVIRONMENTAL_FACTOR, self::MUSICAL_RHYTHMIC_FACTOR, self::LOGIC_MATHEMATICS_FACTOR,
+            self::INTRAPERSONAL_FACTOR, self::VISUAL_SPATIAL_FACTOR, self::MUSICAL_RHYTHMIC_FACTOR,
+            self::NATURALIST_ENVIRONMENTAL_FACTOR, self::KINESTESICA_CORPORAL_FACTOR, self::VERBAL_FACTOR,
+            self::INTRAPERSONAL_FACTOR, self::INTERPERSONAL_FACTOR, self::NATURALIST_ENVIRONMENTAL_FACTOR,
+            self::INTRAPERSONAL_FACTOR, self::INTERPERSONAL_FACTOR, self::INTERPERSONAL_FACTOR,
+            self::NATURALIST_ENVIRONMENTAL_FACTOR
     ];
 
     /**
@@ -239,8 +242,9 @@ class intelligences_questionnaire {
     public static function set_intelligences_answer_for($question, $answer, $userid) {
         global $DB;
         $updated = false;
-        $previousanswer = $DB->get_record( 'block_tog_intel_answers', array ('userid' => $userid, 'question' => $question
-        ), '*', IGNORE_MISSING );
+        $previousanswer = $DB->get_record( 'block_tog_intel_answers',
+                array ('userid' => $userid, 'question' => $question
+                ), '*', IGNORE_MISSING );
 
         if ($previousanswer !== false && isset( $previousanswer )) {
             $previousanswer->answer = $answer;

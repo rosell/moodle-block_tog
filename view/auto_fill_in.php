@@ -21,9 +21,11 @@
  * @copyright 2018 - 2020 UDT-IA, IIIA-CSIC
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-require_once ('../../../config.php');
-require_once ($CFG->dirroot . '/group/lib.php');
-require_once ($CFG->libdir . '/tablelib.php');
+// Disable format @formatter:off.
+require_once('../../../config.php');
+require_once($CFG->dirroot . '/group/lib.php');
+require_once($CFG->libdir . '/tablelib.php');
+// Enable format @formatter:on.
 
 use block_tog\personality;
 use block_tog\intelligences;
@@ -64,7 +66,8 @@ foreach (groups_get_potential_members( $course->id ) as $enrolleduser) {
         $personalityfilled = html_writer::start_div( 'personality-cell', array ('data-user-id' => $enrolleduser->id
         ) );
         $personalityfilled .= html_writer::div(
-                $OUTPUT->pix_icon( 'i/grade_correct', get_string( 'auto_fill_in_column_personality_filled', 'block_tog' ) ),
+                $OUTPUT->pix_icon( 'i/grade_correct',
+                        get_string( 'auto_fill_in_column_personality_filled', 'block_tog' ) ),
                 'personality-cell-success' );
         $personalityfilled .= html_writer::div(
                 html_writer::tag( 'button', get_string( 'auto_fill_in_submit_personality', 'block_tog' ),
@@ -72,14 +75,17 @@ foreach (groups_get_potential_members( $course->id ) as $enrolleduser) {
                         ) ), 'personality-cell-submit' );
         $personalityfilled .= html_writer::end_div();
     } else {
-        $personalityfilled = $OUTPUT->pix_icon( 'i/grade_correct', get_string( 'auto_fill_in_column_personality_filled', 'block_tog' ) );
+        $personalityfilled = $OUTPUT->pix_icon( 'i/grade_correct',
+                get_string( 'auto_fill_in_column_personality_filled', 'block_tog' ) );
     }
     $intelligencesfilled = null;
     if ($intelligences == false) {
-        $intelligencesfilled = html_writer::start_div( 'intelligences-cell', array ('data-user-id' => $enrolleduser->id
-        ) );
+        $intelligencesfilled = html_writer::start_div( 'intelligences-cell',
+                array ('data-user-id' => $enrolleduser->id
+                ) );
         $intelligencesfilled .= html_writer::div(
-                $OUTPUT->pix_icon( 'i/grade_correct', get_string( 'auto_fill_in_column_intelligences_filled', 'block_tog' ) ),
+                $OUTPUT->pix_icon( 'i/grade_correct',
+                        get_string( 'auto_fill_in_column_intelligences_filled', 'block_tog' ) ),
                 'intelligences-cell-success' );
         $intelligencesfilled .= html_writer::div(
                 html_writer::tag( 'button', get_string( 'auto_fill_in_submit_intelligences', 'block_tog' ),

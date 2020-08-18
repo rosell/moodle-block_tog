@@ -21,7 +21,9 @@
  * @copyright 2018 - 2020 UDT-IA, IIIA-CSIC
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-require_once ('../../../config.php');
+// Disable format @formatter:off.
+require_once('../../../config.php');
+// Enable format @formatter:on.
 use block_tog\intelligences_questionnaire;
 use block_tog\intelligences;
 use block_tog\personality;
@@ -46,31 +48,30 @@ if ($courseid) {
 }
 $answers = intelligences_questionnaire::get_answers_of_current_user();
 echo $OUTPUT->header();
-?>
-<div class="container intelligences-questions">
- <?php
+
+echo html_writer::start_div( 'container intelligences-questions' );
 for ($i = 0; $i < intelligences_questionnaire::count_questions(); $i ++) {
+
     $questionid = 'intelligencesQuestion_' . $i;
-    ?>
-  <div
-		class="row<?php
-
+    $rowclasses = 'row';
     if ($i % 2 != 0) {
-        echo ' bg-light';
-    }
-    ?> intelligences-question">
-		<div class="container">
-			<div class="row">
-				<h4><?=intelligences_questionnaire::get_question_text_of( $i )?><?php
 
-    if (intelligences_questionnaire::has_question_help( $i )) {
-        echo '&nbsp;&nbsp;';
-        echo $OUTPUT->help_icon( intelligences_questionnaire::get_question_help_identifier( $i ), 'block_tog', '' );
+        $rowclasses += ' bg-light';
     }
-    ?></h4>
-			</div>
-			<div class="row justify-content-center">
-  <?php
+    $rowclasses += ' intelligences-question';
+    echo html_writer::start_div( $rowclasses );
+    echo html_writer::start_div( 'container' );
+    echo html_writer::start_div( 'row' );
+    $rowtitle = intelligences_questionnaire::get_question_text_of( $i );
+    if (intelligences_questionnaire::has_question_help( $i )) {
+        $rowtitle += '&nbsp;&nbsp;';
+        $rowtitle += $OUTPUT->help_icon( intelligences_questionnaire::get_question_help_identifier( $i ), 'block_tog',
+                '' );
+    }
+    echo html_writer::tag( 'h4', $rowtitle );
+    echo html_writer::end_div();
+
+    echo html_writer::start_div( 'row justify-content-center' );
     $selected = - 1;
     foreach ($answers as $k => $answer) {
         if ($answer->question == $i) {
@@ -81,70 +82,61 @@ for ($i = 0; $i < intelligences_questionnaire::count_questions(); $i ++) {
     }
 
     for ($j = 0; $j < intelligences_questionnaire::MAX_QUESTION_ANSWERS; $j ++) {
-        ?>
-   <div class="form-check-inline col-md">
-					<input class="form-check-input" type="radio"
-						id="answer_<?=$j?>_for_intelligences_question_<?=$i?>"
-						name="<?=$questionid?>"
-						value="<?=intelligences_questionnaire::get_answer_question_value_of( $j )?>"
-						<?php
 
+        echo html_writer::start_div( 'form-check-inline col-md' );
+        $inputatt = array ('class' => 'form-check-input', 'type' => 'radio',
+                'id' => 'answer_' . $j . '_for_intelligences_question_' . $i, 'name' => $questionid,
+                'value' => intelligences_questionnaire::get_answer_question_value_of( $j )
+        );
         if ($selected == $j) {
-            echo 'checked="checked"';
+            $inputatt ['checked'] = 'checked';
         }
-        ?>><label class="form-check-label"
-						for="answer_<?=$j?>_for_intelligences_question_<?=$i?>"><?=intelligences_questionnaire::get_answer_question_text_of( $j )?></label>
-				</div>
-  <?php
+        echo html_writer::empty_tag( 'input', $inputatt );
+        echo html_writer::tag( 'label', intelligences_questionnaire::get_answer_question_text_of( $j ),
+                array ('class' => 'form-check-label', 'for' => 'answer_' . $j . '_for_intelligences_question_' . $i
+                ) );
+        echo html_writer::end_div();
     }
-    ?>
-   </div>
-		</div>
-	</div>
-  <?php
+    echo html_writer::end_div();
+    echo html_writer::end_div();
+    echo html_writer::end_div();
 }
-$intelligences_url = $CFG->wwwroot . '/blocks/tog/view/intelligences.php';
+
+$intelligencesurl = $CFG->wwwroot . '/blocks/tog/view/intelligences.php';
 if ($courseid) {
-    $intelligences_url .= '?courseid=' . $courseid;
+    $intelligencesurl .= '?courseid=' . $courseid;
 }
-?>
-   	<div class="row justify-content-md-center actions-row">
-		<div class="alert alert-warning blink" role="alert"
-			style="display: none;">
-   			<?=get_string( 'intelligences_test_storing_msg', 'block_tog' )?>
-   		</div>
-		<?php
+echo html_writer::start_div( 'row justify-content-md-center actions-row' );
+echo html_writer::div( get_string( 'intelligences_test_storing_msg', 'block_tog' ), 'alert alert-warning blink',
+        array ('role' => 'alert', 'style' => 'display: none;'
+        ) );
 $personality = personality::get_personality_of_current_user();
 if (! $personality) {
-    $personality_test_url = $CFG->wwwroot . '/blocks/tog/view/personality_test.php';
+    $personalitytesturl = $CFG->wwwroot . '/blocks/tog/view/personality_test.php';
     if ($courseid) {
-        $personality_test_url .= '?courseid=' . $courseid;
+        $personalitytesturl .= '?courseid=' . $courseid;
     }
-    ?>
-		<button type="button" class="btn btn-secondary"
-			onclick="location.href='<?=$personality_test_url?>';" role="button">
-			<?=get_string( 'intelligences_test_go_to_personality_test', 'block_tog' )?>
-		</button>
-        <?php
+
+    echo html_writer::tag( 'button', get_string( 'intelligences_test_go_to_personality_test', 'block_tog' ),
+            array ('type' => 'button', 'class' => 'btn btn-secondary', 'role' => 'button',
+                    'onclick' => 'location.href=' . $personalitytesturl . ';'
+            ) );
 }
-?>
-		<button type="button" class="btn btn-primary"
-			onclick="location.href='<?=$intelligences_url?>';" role="button">
-			<?=get_string( 'intelligences_test_go_to_intelligences', 'block_tog' )?>
-		</button>
-		<?php
+
+echo html_writer::tag( 'button', get_string( 'intelligences_test_go_to_intelligences', 'block_tog' ),
+        array ('type' => 'button', 'class' => 'btn btn-primary', 'role' => 'button',
+                'onclick' => 'location.href=' . $intelligencesurl . ';'
+        ) );
+
 if ($courseid) {
-    ?>
-	    <button type="button" class="btn btn-secondary"
-			onclick="location.href='<?=$CFG->wwwroot . '/course/view.php?id=' . $courseid?>';"
-			role="button">
-        	<?=get_string( 'intelligences_test_go_to_course', 'block_tog' )?>
-        </button>
-        <?php
+
+    echo html_writer::tag( 'button', get_string( 'intelligences_test_go_to_course', 'block_tog' ),
+            array ('type' => 'button', 'class' => 'btn btn-secondary', 'role' => 'button',
+                    'onclick' => 'location.href=' . $CFG->wwwroot . '/course/view.php?id=' . $courseid . ';'
+            ) );
 }
-?>
-	</div>
-</div>
-<?php
+echo html_writer::end_div();
+echo html_writer::end_div();
+
 $PAGE->requires->js_call_amd( 'block_tog/intelligences_test', 'initialise' );
 echo $OUTPUT->footer();

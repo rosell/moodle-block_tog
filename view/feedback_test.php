@@ -21,12 +21,16 @@
  * @copyright 2018 - 2020 UDT-IA, IIIA-CSIC
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-require_once ('../../../config.php');
+// Disable format @formatter:off.
+require_once('../../../config.php');
+// Enable format @formatter:on.
 global $CFG;
 global $PAGE;
 global $DB;
 global $OUTPUT;
-require_once ($CFG->dirroot . '/group/lib.php');
+// Disable format @formatter:off.
+require_once($CFG->dirroot . '/group/lib.php');
+// Enable format @formatter:on.
 use block_tog\feedback_questionnaire;
 
 $courseid = optional_param( 'courseid', 0, PARAM_INT );
@@ -59,8 +63,9 @@ if (has_capability( 'moodle/course:managegroups', $context )) {
         $groupselectoroptions = '';
         $groups = groups_get_all_groups( $course->id, 0, $grouping->id );
         foreach ($groups as $group) {
-            $composed = $DB->get_record( 'block_tog_composed', array ('groupingid' => $grouping->id, 'groupid' => $group->id
-            ), '*', IGNORE_MISSING );
+            $composed = $DB->get_record( 'block_tog_composed',
+                    array ('groupingid' => $grouping->id, 'groupid' => $group->id
+                    ), '*', IGNORE_MISSING );
             if ($composed !== false && isset( $composed )) {
                 $groupselectoroptions .= html_writer::tag( 'option', $group->name,
                         array ('value' => $composed->feedbackid, 'class' => 'feedback_test-group_option'
@@ -82,7 +87,8 @@ if (has_capability( 'moodle/course:managegroups', $context )) {
                     array ('value' => $grouping->id, 'class' => 'feedback_test-grouping_option'
                     ) );
             $groupselector = html_writer::start_div( 'form-row',
-                    array ('id' => 'feedback_test__group_row_for_' . $grouping->id, 'class' => 'feedback_test__group_row'
+                    array ('id' => 'feedback_test__group_row_for_' . $grouping->id,
+                            'class' => 'feedback_test__group_row'
                     ) );
             $groupselector .= html_writer::start_div( 'form-group' );
             $groupselector .= html_writer::tag( 'label',
@@ -92,7 +98,8 @@ if (has_capability( 'moodle/course:managegroups', $context )) {
                     ) );
             $groupselector .= html_writer::tag( 'select', $groupselectoroptions,
                     array ('class' => 'form-control feedback_test__groupselector',
-                            'id' => 'feedback_test__groupselector_for_' . $grouping->id, 'value' => $defaultgroupfeedbackid
+                            'id' => 'feedback_test__groupselector_for_' . $grouping->id,
+                            'value' => $defaultgroupfeedbackid
                     ) );
             $groupselector .= html_writer::end_div();
             $groupselector .= html_writer::end_div();
@@ -122,7 +129,7 @@ if (has_capability( 'moodle/course:managegroups', $context )) {
     } else {
         $content .= html_writer::start_tag( 'form', array ('id' => 'feedback_test__form'
         ) );
-        $content .= html_writer::start_tag( 'input',
+        $content .= html_writer::empty_tag( 'input',
                 array ('id' => 'feedback_test__feedbackid', 'type' => 'hidden', 'value' => $defaultfeedbackid
                 ) );
         $content .= html_writer::start_tag( 'fieldset', array ('class' => 'border p-2'
@@ -137,8 +144,9 @@ if (has_capability( 'moodle/course:managegroups', $context )) {
 
         // Add the questionaire.
         $content .= html_writer::start_div( 'container feedback-questions' );
-        $content .= html_writer::start_tag( 'input',
-                array ('id' => 'feedback_test__max_questions', 'type' => 'hidden', 'value' => feedback_questionnaire::MAX_QUESTIONS
+        $content .= html_writer::empty_tag( 'input',
+                array ('id' => 'feedback_test__max_questions', 'type' => 'hidden',
+                        'value' => feedback_questionnaire::MAX_QUESTIONS
                 ) );
         for ($i = 0; $i < feedback_questionnaire::MAX_QUESTIONS; $i ++) {
             $questionid = 'feedback_test__question_' . $i;
@@ -147,8 +155,9 @@ if (has_capability( 'moodle/course:managegroups', $context )) {
             } else {
                 $content .= html_writer::start_div( 'row feedback-question' );
             }
-            $content .= html_writer::start_tag( 'input', array ('id' => $questionid, 'type' => 'hidden', 'value' => '-2'
-            ) );
+            $content .= html_writer::empty_tag( 'input',
+                    array ('id' => $questionid, 'type' => 'hidden', 'value' => '-2'
+                    ) );
             $content .= html_writer::start_div( 'container' );
 
             $content .= html_writer::start_div( 'row' );
@@ -185,16 +194,19 @@ if (has_capability( 'moodle/course:managegroups', $context )) {
         $content .= html_writer::end_div();
         $content .= html_writer::div(
                 html_writer::div(
-                        html_writer::span( get_string( 'feedback_test_progress', 'block_tog' ) . html_writer::span( '', 'dotdotdot' ) ),
+                        html_writer::span(
+                                get_string( 'feedback_test_progress', 'block_tog' ) .
+                                html_writer::span( '', 'dotdotdot' ) ),
                         'progress-bar progress-bar-striped progress-bar-animated',
-                        array ('role' => 'progressbar', 'aria-valuenow' => '75', 'aria-valuemin' => '0', 'aria-valuemax' => '100'
+                        array ('role' => 'progressbar', 'aria-valuenow' => '75', 'aria-valuemin' => '0',
+                                'aria-valuemax' => '100'
                         ) ), 'progress feedback_test-progress', array ('id' => 'feedback_test__progress'
                 ) );
 
         // FINISh the content.
         $content .= html_writer::end_tag( 'form' );
-        $content .= html_writer::div( get_string( 'feedback_test_alert_submit_success', 'block_tog' ), 'alert alert-success',
-                array ('role' => 'alert', 'id' => 'feedback_test__alert_submit_success'
+        $content .= html_writer::div( get_string( 'feedback_test_alert_submit_success', 'block_tog' ),
+                'alert alert-success', array ('role' => 'alert', 'id' => 'feedback_test__alert_submit_success'
                 ) );
 
         echo $content;

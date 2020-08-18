@@ -99,19 +99,19 @@ class intelligences {
                         $record->verbal += $value;
                         $total [0] ++;
                         break;
-                    case intelligences_questionnaire::logicmathematics_FACTOR :
+                    case intelligences_questionnaire::LOGIC_MATHEMATICS_FACTOR :
                         $record->logicmathematics += $value;
                         $total [1] ++;
                         break;
-                    case intelligences_questionnaire::visualspatial_FACTOR :
+                    case intelligences_questionnaire::VISUAL_SPATIAL_FACTOR :
                         $record->visualspatial += $value;
                         $total [2] ++;
                         break;
-                    case intelligences_questionnaire::kinestesicacorporal_FACTOR :
+                    case intelligences_questionnaire::KINESTESICA_CORPORAL_FACTOR :
                         $record->kinestesicacorporal += $value;
                         $total [3] ++;
                         break;
-                    case intelligences_questionnaire::musicalrhythmic_FACTOR :
+                    case intelligences_questionnaire::MUSICAL_RHYTHMIC_FACTOR :
                         $record->musicalrhythmic += $value;
                         $total [4] ++;
                         break;
@@ -124,7 +124,7 @@ class intelligences {
                         $total [6] ++;
                         break;
                     default :
-                        // intelligences_questionnaire::naturalistenvironmental_FACTOR.
+                        // It has to be intelligences_questionnaire::NATURALIST_ENVIRONMENTAL_FACTOR.
                         $record->naturalistenvironmental += $value;
                         $total [7] ++;
                 }
