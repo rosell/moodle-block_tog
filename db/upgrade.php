@@ -34,9 +34,39 @@ function xmldb_block_tog_upgrade($oldversion) {
     global $DB;
     $dbman = $DB->get_manager();
 
-    if ($oldversion < 2020072000) {
+    if ($oldversion < 2020081800) {
         // Remove the table intelligences and create again.
-        $dbman->drop_table( 'block_tog_intelligences', $continue = true, $feedback = true );
+        $table = new xmldb_table( 'block_tog_intelligences' );
+        if ($dbman->table_exists( $table )) {
+
+            $dbman->drop_table( $table );
+        }
+        // Define table block_tog_intelligences to be created.
+        $table = new xmldb_table( 'block_tog_intelligences' );
+
+        // Adding fields to table block_tog_intelligences.
+        $table->add_field( 'id', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, XMLDB_SEQUENCE, null );
+        $table->add_field( 'userid', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, null );
+        $table->add_field( 'verbal', XMLDB_TYPE_NUMBER, '15, 14', null, XMLDB_NOTNULL, null, null );
+        $table->add_field( 'logicmathematics', XMLDB_TYPE_NUMBER, '15, 14', null, XMLDB_NOTNULL, null, null );
+        $table->add_field( 'visualspatial', XMLDB_TYPE_NUMBER, '15, 14', null, XMLDB_NOTNULL, null, null );
+        $table->add_field( 'kinestesicacorporal', XMLDB_TYPE_NUMBER, '15, 14', null, XMLDB_NOTNULL, null, null );
+        $table->add_field( 'musicalrhythmic', XMLDB_TYPE_NUMBER, '15, 14', null, XMLDB_NOTNULL, null, null );
+        $table->add_field( 'intrapersonal', XMLDB_TYPE_NUMBER, '15, 14', null, XMLDB_NOTNULL, null, null );
+        $table->add_field( 'interpersonal', XMLDB_TYPE_NUMBER, '15, 14', null, XMLDB_NOTNULL, null, null );
+        $table->add_field( 'naturalistenvironmental', XMLDB_TYPE_NUMBER, '15, 14', null, XMLDB_NOTNULL, null, null );
+
+        // Adding keys to table block_tog_intelligences.
+        $table->add_key( 'primary', XMLDB_KEY_PRIMARY, [ 'id'
+        ] );
+
+        // Conditionally launch create table for block_tog_intelligences.
+        if (! $dbman->table_exists( $table )) {
+            $dbman->create_table( $table );
+        }
+
+        // Tog savepoint reached.
+        upgrade_block_savepoint( true, 2020081800, 'tog' );
     }
 
     return true;
