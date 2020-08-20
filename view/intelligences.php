@@ -56,36 +56,36 @@ if ($intelligences) {
     echo html_writer::start_div( 'row' );
     echo html_writer::start_tag( 'ul' );
     echo html_writer::tag( 'li',
-            html_writer::tag( 'b', get_string( 'intelligences_linguistic_factor', 'block_tog' ) ) .
-            $OUTPUT->help_icon( 'intelligences_linguistic_help', 'block_tog','' ).
+            html_writer::tag( 'b', get_string( 'intelligences_linguistic', 'block_tog' ) ) .
+            $OUTPUT->help_icon( 'intelligences_linguistic', 'block_tog', '' ).
             intelligences::value_to_string( $intelligences->linguistic ) );
     echo html_writer::tag( 'li',
-            html_writer::tag( 'b', get_string( 'intelligences_logicalmathematical_factor', 'block_tog' ) ) .
-            $OUTPUT->help_icon( 'intelligences_logicalmathematical_help', 'block_tog','' ).
+            html_writer::tag( 'b', get_string( 'intelligences_logicalmathematical', 'block_tog' ) ) .
+            $OUTPUT->help_icon( 'intelligences_logicalmathematical', 'block_tog', '' ).
             intelligences::value_to_string( $intelligences->logicalmathematical ) );
     echo html_writer::tag( 'li',
-            html_writer::tag( 'b', get_string( 'intelligences_spatial_factor', 'block_tog' ) ) .
-            $OUTPUT->help_icon( 'intelligences_spatial_help', 'block_tog','' ).
+            html_writer::tag( 'b', get_string( 'intelligences_spatial', 'block_tog' ) ) .
+            $OUTPUT->help_icon( 'intelligences_spatial', 'block_tog', '' ).
             intelligences::value_to_string( $intelligences->spatial ) );
     echo html_writer::tag( 'li',
-            html_writer::tag( 'b', get_string( 'intelligences_bodilykinesthetic_factor', 'block_tog' ) ) .
-            $OUTPUT->help_icon( 'intelligences_bodilykinesthetic_help', 'block_tog','' ).
+            html_writer::tag( 'b', get_string( 'intelligences_bodilykinesthetic', 'block_tog' ) ) .
+            $OUTPUT->help_icon( 'intelligences_bodilykinesthetic', 'block_tog', '' ).
             intelligences::value_to_string( $intelligences->bodilykinesthetic ) );
     echo html_writer::tag( 'li',
-            html_writer::tag( 'b', get_string( 'intelligences_musical_factor', 'block_tog' ) ) .
-            $OUTPUT->help_icon( 'intelligences_musical_help', 'block_tog','' ).
+            html_writer::tag( 'b', get_string( 'intelligences_musical', 'block_tog' ) ) .
+            $OUTPUT->help_icon( 'intelligences_musical', 'block_tog', '' ).
             intelligences::value_to_string( $intelligences->musical ) );
     echo html_writer::tag( 'li',
-            html_writer::tag( 'b', get_string( 'intelligences_intrapersonal_factor', 'block_tog' ) ) .
-            $OUTPUT->help_icon( 'intelligences_intrapersonal_help', 'block_tog','' ).
+            html_writer::tag( 'b', get_string( 'intelligences_intrapersonal', 'block_tog' ) ) .
+            $OUTPUT->help_icon( 'intelligences_intrapersonal', 'block_tog', '' ).
             intelligences::value_to_string( $intelligences->intrapersonal ) );
     echo html_writer::tag( 'li',
-            html_writer::tag( 'b', get_string( 'intelligences_interpersonal_factor', 'block_tog' ) ) .
-            $OUTPUT->help_icon( 'intelligences_interpersonal_help', 'block_tog','' ).
+            html_writer::tag( 'b', get_string( 'intelligences_interpersonal', 'block_tog' ) ) .
+            $OUTPUT->help_icon( 'intelligences_interpersonal', 'block_tog', '' ).
             intelligences::value_to_string( $intelligences->interpersonal ) );
     echo html_writer::tag( 'li',
-            html_writer::tag( 'b', get_string( 'intelligences_environmental_factor', 'block_tog' ) ) .
-            $OUTPUT->help_icon( 'intelligences_environmental_help', 'block_tog','' ).
+            html_writer::tag( 'b', get_string( 'intelligences_environmental', 'block_tog' ) ) .
+            $OUTPUT->help_icon( 'intelligences_environmental', 'block_tog', '' ).
             intelligences::value_to_string( $intelligences->environmental ) );
     echo html_writer::end_tag( 'ul' );
     echo html_writer::end_div();
