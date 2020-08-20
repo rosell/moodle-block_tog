@@ -263,15 +263,17 @@ class provider implements \core_privacy\local\metadata\provider, \core_privacy\l
         $answers = $DB->get_recordset_select( 'block_tog_perso_answers', 'userid = ?', [ $userid
         ], 'question ASC' );
         foreach ($answers as $personalityanswer) {
-            $data = ( object ) [ 'question' => personality_questionnaire::get_question_text_of( $personalityanswer->question ),
+            $data = ( object ) [
+                    'question' => personality_questionnaire::get_question_text_of( $personalityanswer->question ),
                     'answer' => personality_questionnaire::get_answer_question_text_of( $personalityanswer->question,
                             $personalityanswer->answer )
             ];
             $answersdata [] = $data;
         }
         $answers->close();
-        writer::with_context( $context )->export_data( [ get_string( 'privacy:export:block_tog_perso_answers', 'block_tog' )
-        ], ( object ) $answersdata );
+        writer::with_context( $context )->export_data(
+                [ get_string( 'privacy:export:block_tog_perso_answers', 'block_tog' )
+                ], ( object ) $answersdata );
     }
 
     /**
@@ -287,14 +289,16 @@ class provider implements \core_privacy\local\metadata\provider, \core_privacy\l
         $answers = $DB->get_recordset_select( 'block_tog_intel_answers', 'userid = ?', [ $userid
         ], 'question ASC' );
         foreach ($answers as $intelligencesanswer) {
-            $data = ( object ) [ 'question' => intelligences_questionnaire::get_question_text_of( $intelligencesanswer->question ),
+            $data = ( object ) [
+                    'question' => intelligences_questionnaire::get_question_text_of( $intelligencesanswer->question ),
                     'answer' => intelligences_questionnaire::get_answer_question_text_of( $intelligencesanswer->answer )
             ];
             $answersdata [] = $data;
         }
         $answers->close();
-        writer::with_context( $context )->export_data( [ get_string( 'privacy:export:block_tog_intel_answers', 'block_tog' )
-        ], ( object ) $answersdata );
+        writer::with_context( $context )->export_data(
+                [ get_string( 'privacy:export:block_tog_intel_answers', 'block_tog' )
+                ], ( object ) $answersdata );
     }
 
     /**
@@ -315,8 +319,9 @@ class provider implements \core_privacy\local\metadata\provider, \core_privacy\l
                     'perception' => $personality->perception, 'extrovert' => $personality->extrovert
             ];
         }
-        writer::with_context( $context )->export_data( [ get_string( 'privacy:export:block_tog_personality', 'block_tog' )
-        ], ( object ) $personalitydata );
+        writer::with_context( $context )->export_data(
+                [ get_string( 'privacy:export:block_tog_personality', 'block_tog' )
+                ], ( object ) $personalitydata );
     }
 
     /**
@@ -331,14 +336,15 @@ class provider implements \core_privacy\local\metadata\provider, \core_privacy\l
         $intelligencesdata = [ ];
         $intelligences = intelligences::get_intelligences_of( $userid );
         if ($intelligences !== false) {
-            $intelligencesdata = [ 'linguistic' => $intelligences->linguistic, 'logicalmathematical' => $intelligences->logicalmathematical,
-                    'spatial' => $intelligences->spatial, 'bodilykinesthetic' => $intelligences->bodilykinesthetic,
-                    'musical' => $intelligences->musical, 'intrapersonal' => $intelligences->intrapersonal,
-                    'interpersonal' => $intelligences->interpersonal,
+            $intelligencesdata = [ 'linguistic' => $intelligences->linguistic,
+                    'logicalmathematical' => $intelligences->logicalmathematical, 'spatial' => $intelligences->spatial,
+                    'bodilykinesthetic' => $intelligences->bodilykinesthetic, 'musical' => $intelligences->musical,
+                    'intrapersonal' => $intelligences->intrapersonal, 'interpersonal' => $intelligences->interpersonal,
                     'environmental' => $intelligences->environmental
             ];
         }
-        writer::with_context( $context )->export_data( [ get_string( 'privacy:export:block_tog_intelligences', 'block_tog' )
-        ], ( object ) $intelligencesdata );
+        writer::with_context( $context )->export_data(
+                [ get_string( 'privacy:export:block_tog_intelligences', 'block_tog' )
+                ], ( object ) $intelligencesdata );
     }
 }

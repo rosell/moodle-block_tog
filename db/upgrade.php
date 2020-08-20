@@ -59,7 +59,7 @@ function xmldb_block_tog_upgrade($oldversion) {
             $dbman->create_table( $table );
         }
 
-        // Rename intelligences fields
+        // Rename intelligences fields.
         $table = new xmldb_table( 'block_tog_intelligences' );
 
         // Rename field verbal on table block_tog_intelligences to linguistic.

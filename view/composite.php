@@ -209,12 +209,12 @@ if (has_capability( 'moodle/course:managegroups', $context )) {
         $form .= html_writer::start_div( 'form-row' );
         $form .= html_writer::start_div( 'form-group col-md-4 composite-requirements-select-max' );
         $form .= html_writer::tag( 'label',
-                get_string( 'composite_requirements_factor', 'block_tog' ) . '&nbsp;&nbsp' .
-                $OUTPUT->help_icon( 'composite_requirements_factor', 'block_tog', '' ),
-                array ('for' => 'composite__requirements_factor'
+                get_string( 'composite_requirements', 'block_tog' ) . '&nbsp;&nbsp' .
+                $OUTPUT->help_icon( 'composite_requirements', 'block_tog', '' ),
+                array ('for' => 'composite__requirements'
                 ) );
         $form .= html_writer::start_tag( 'select',
-                array ('class' => 'form-control', 'id' => 'composite__requirements_factor'
+                array ('class' => 'form-control', 'id' => 'composite__requirements'
                 ) );
         for ($i = 0; $i < 8; $i ++) {
             $form .= html_writer::tag( 'option', get_string( 'composite_requirements_factor_' . $i, 'block_tog' ),
