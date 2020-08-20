@@ -41,29 +41,29 @@ class intelligences_questionnaire {
     const MAX_QUESTION_ANSWERS = 5;
 
     /**
-     * Factor used to evaluate the verbal intelligence.
+     * Factor used to evaluate the linguistic intelligence.
      */
-    const VERBAL_FACTOR = 0;
+    const LINGUISTIC_FACTOR = 0;
 
     /**
      * Factor used to evaluate the logic/mathematics intelligence.
      */
-    const LOGIC_MATHEMATICS_FACTOR = 1;
+    const LOGICAL_MATHEMATICAL_FACTOR = 1;
 
     /**
      * Factor used to evaluate the visual/spatial intelligence.
      */
-    const VISUAL_SPATIAL_FACTOR = 2;
+    const SPATIAL_FACTOR = 2;
 
     /**
      * Factor used to evaluate the kinestesica/corporal intelligence.
      */
-    const KINESTESICA_CORPORAL_FACTOR = 3;
+    const BODILY_KINESTHETIC_FACTOR = 3;
 
     /**
      * Factor used to evaluate the musical/rhythmic intelligence.
      */
-    const MUSICAL_RHYTHMIC_FACTOR = 4;
+    const MUSICAL_FACTOR = 4;
 
     /**
      * Factor used to evaluate the intrapersonal intelligence.
@@ -78,32 +78,27 @@ class intelligences_questionnaire {
     /**
      * Factor used to evaluate the naturalist/environmental intelligence.
      */
-    const NATURALIST_ENVIRONMENTAL_FACTOR = 7;
+    const ENVIRONMENTAL_FACTOR = 7;
 
     /**
      * The types assocaited to each question.
      */
-    const QUESTION_FACTORS = [ self::VERBAL_FACTOR, self::VISUAL_SPATIAL_FACTOR, self::INTRAPERSONAL_FACTOR,
-            self::MUSICAL_RHYTHMIC_FACTOR, self::MUSICAL_RHYTHMIC_FACTOR, self::LOGIC_MATHEMATICS_FACTOR,
-            self::INTRAPERSONAL_FACTOR, self::LOGIC_MATHEMATICS_FACTOR, self::KINESTESICA_CORPORAL_FACTOR,
-            self::VERBAL_FACTOR, self::VISUAL_SPATIAL_FACTOR, self::INTERPERSONAL_FACTOR,
-            self::NATURALIST_ENVIRONMENTAL_FACTOR, self::MUSICAL_RHYTHMIC_FACTOR, self::VISUAL_SPATIAL_FACTOR,
-            self::LOGIC_MATHEMATICS_FACTOR, self::KINESTESICA_CORPORAL_FACTOR, self::VERBAL_FACTOR,
-            self::INTERPERSONAL_FACTOR, self::KINESTESICA_CORPORAL_FACTOR, self::LOGIC_MATHEMATICS_FACTOR,
-            self::KINESTESICA_CORPORAL_FACTOR, self::VERBAL_FACTOR, self::VISUAL_SPATIAL_FACTOR,
-            self::NATURALIST_ENVIRONMENTAL_FACTOR, self::MUSICAL_RHYTHMIC_FACTOR, self::LOGIC_MATHEMATICS_FACTOR,
-            self::INTRAPERSONAL_FACTOR, self::VISUAL_SPATIAL_FACTOR, self::MUSICAL_RHYTHMIC_FACTOR,
-            self::NATURALIST_ENVIRONMENTAL_FACTOR, self::KINESTESICA_CORPORAL_FACTOR, self::VERBAL_FACTOR,
-            self::INTRAPERSONAL_FACTOR, self::INTERPERSONAL_FACTOR, self::NATURALIST_ENVIRONMENTAL_FACTOR,
+    const QUESTION_FACTORS = [ self::LINGUISTIC_FACTOR, self::LINGUISTIC_FACTOR, self::LINGUISTIC_FACTOR,
+            self::LINGUISTIC_FACTOR, self::LOGICAL_MATHEMATICAL_FACTOR, self::LOGICAL_MATHEMATICAL_FACTOR,
+            self::LOGICAL_MATHEMATICAL_FACTOR, self::LOGICAL_MATHEMATICAL_FACTOR, self::SPATIAL_FACTOR,
+            self::SPATIAL_FACTOR, self::SPATIAL_FACTOR, self::SPATIAL_FACTOR, self::BODILY_KINESTHETIC_FACTOR,
+            self::BODILY_KINESTHETIC_FACTOR, self::BODILY_KINESTHETIC_FACTOR, self::BODILY_KINESTHETIC_FACTOR,
+            self::MUSICAL_FACTOR, self::MUSICAL_FACTOR, self::MUSICAL_FACTOR, self::MUSICAL_FACTOR,
+            self::INTRAPERSONAL_FACTOR, self::INTRAPERSONAL_FACTOR, self::INTRAPERSONAL_FACTOR,
             self::INTRAPERSONAL_FACTOR, self::INTERPERSONAL_FACTOR, self::INTERPERSONAL_FACTOR,
-            self::NATURALIST_ENVIRONMENTAL_FACTOR
+            self::INTERPERSONAL_FACTOR, self::INTERPERSONAL_FACTOR, self::ENVIRONMENTAL_FACTOR,
+            self::ENVIRONMENTAL_FACTOR, self::ENVIRONMENTAL_FACTOR
     ];
 
     /**
      * The index of the questions that does not have help.
      */
-    const QUESTIONS_WITHOUT_HELP = [ 2, 5, 9, 12, 16, 24, 29, 30, 31, 35, 38, 39
-    ];
+    const QUESTIONS_WITH_HELP = [ ];
 
     /**
      * Load user answers.
@@ -153,7 +148,7 @@ class intelligences_questionnaire {
      * @return boolean true if the question has help message.
      */
     public static function has_question_help($index) {
-        return array_search( $index, self::QUESTIONS_WITHOUT_HELP ) === false;
+        return array_search( $index, self::QUESTIONS_WITH_HELP ) !== false;
     }
 
     /**
@@ -190,15 +185,15 @@ class intelligences_questionnaire {
      */
     public static function get_answer_question_value_of($index) {
         switch ($index) {
-            case 0 :
+            case 0:
                 return 0.0;
-            case 1 :
+            case 1:
                 return 0.25;
-            case 2 :
+            case 2:
                 return 0.5;
-            case 3 :
+            case 3:
                 return 0.75;
-            default :
+            default:
                 return 1.0;
         }
     }

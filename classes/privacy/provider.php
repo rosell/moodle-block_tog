@@ -76,14 +76,14 @@ class provider implements \core_privacy\local\metadata\provider, \core_privacy\l
                 ], 'privacy:metadata:block_tog_intel_answers' );
         $collection->add_database_table( 'block_tog_intelligences',
                 [ 'userid' => 'privacy:metadata:block_tog_intelligences:userid',
-                        'verbal' => 'privacy:metadata:block_tog_intelligences:verbal',
-                        'logicmathematics' => 'privacy:metadata:block_tog_intelligences:logicmathematics',
-                        'visualspatial' => 'privacy:metadata:block_tog_intelligences:visualspatial',
-                        'kinestesicacorporal' => 'privacy:metadata:block_tog_intelligences:kinestesicacorporal',
-                        'musicalrhythmic' => 'privacy:metadata:block_tog_intelligences:musicalrhythmic',
+                        'linguistic' => 'privacy:metadata:block_tog_intelligences:linguistic',
+                        'logicalmathematical' => 'privacy:metadata:block_tog_intelligences:logicalmathematical',
+                        'spatial' => 'privacy:metadata:block_tog_intelligences:spatial',
+                        'bodilykinesthetic' => 'privacy:metadata:block_tog_intelligences:bodilykinesthetic',
+                        'musical' => 'privacy:metadata:block_tog_intelligences:musical',
                         'intrapersonal' => 'privacy:metadata:block_tog_intelligences:intrapersonal',
                         'interpersonal' => 'privacy:metadata:block_tog_intelligences:interpersonal',
-                        'naturalistenvironmental' => 'privacy:metadata:block_tog_intelligences:naturalistenvironmental'
+                        'environmental' => 'privacy:metadata:block_tog_intelligences:environmental'
                 ], 'privacy:metadata:block_tog_intel_answers' );
 
         return $collection;
@@ -331,11 +331,11 @@ class provider implements \core_privacy\local\metadata\provider, \core_privacy\l
         $intelligencesdata = [ ];
         $intelligences = intelligences::get_intelligences_of( $userid );
         if ($intelligences !== false) {
-            $intelligencesdata = [ 'verbal' => $intelligences->verbal, 'logicmathematics' => $intelligences->logicmathematics,
-                    'visualspatial' => $intelligences->visualspatial, 'kinestesicacorporal' => $intelligences->kinestesicacorporal,
-                    'musicalrhythmic' => $intelligences->musicalrhythmic, 'intrapersonal' => $intelligences->intrapersonal,
+            $intelligencesdata = [ 'linguistic' => $intelligences->linguistic, 'logicalmathematical' => $intelligences->logicalmathematical,
+                    'spatial' => $intelligences->spatial, 'bodilykinesthetic' => $intelligences->bodilykinesthetic,
+                    'musical' => $intelligences->musical, 'intrapersonal' => $intelligences->intrapersonal,
                     'interpersonal' => $intelligences->interpersonal,
-                    'naturalistenvironmental' => $intelligences->naturalistenvironmental
+                    'environmental' => $intelligences->environmental
             ];
         }
         writer::with_context( $context )->export_data( [ get_string( 'privacy:export:block_tog_intelligences', 'block_tog' )

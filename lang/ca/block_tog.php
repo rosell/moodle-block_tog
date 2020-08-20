@@ -172,118 +172,72 @@ $string ['intelligences_test_go_to_course'] = 'Tornar al curs';
 $string ['intelligences_test_go_to_personality_test'] = 'Omplir prova de personalitat';
 $string ['intelligences_test_storing_msg'] = 'Guardando respuesta';
 
-$string ['intelligence_question_0'] = 'No m\'és difícil dir el que penso en una discusió o debat.';
-$string ['intelligence_question_0_help'] = 'Exemple: quan es discuteix sobre la independència de Catalunya, m\'agrada expressar la meva opinió.';
+$string ['intelligence_question_0'] = 'Escriure és una manera natural per a que jo m\' expressi';
 $string ['intelligence_question_answer_0'] = 'Totalment en desacord';
 $string ['intelligence_question_answer_1'] = 'En desacord';
 $string ['intelligence_question_answer_2'] = 'Ni d\'acord ni en desacord';
 $string ['intelligence_question_answer_3'] = 'D\'acord';
 $string ['intelligence_question_answer_4'] = 'Totalment d\'acord';
 
-$string ['intelligence_question_1'] = 'Prefereixo fer un mapa a explicar a algú com ha d\'arribar';
-$string ['intelligence_question_1_help'] = 'Exemple: Si em pregunten per un camí, prefereixo dibuixar-que explicar-ho amb les meves paraules.';
+$string ['intelligence_question_1'] = 'En els estudis escolars en llengua materna o estudis socials foren més fàcils per a mi que les matemàtiques, la física i la química.';
 
-$string ['intelligence_question_2'] = 'Si estic enfadat(da) o content(a) generalment sé exactamanet perquè';
+$string ['intelligence_question_2'] = 'Recentment he escrit alguna cosa d\'allò que estic especialment orgullós, o pel que he rebut reconeixement.';
 
-$string ['intelligence_question_3'] = 'Sé tocar (o abans sabia tocar) un intrument musical';
-$string ['intelligence_question_3_help'] = 'Exemple: sé tocar la guitarra.';
+$string ['intelligence_question_3'] = 'Les metàfores i les expressions verbals viscudes m\' ajuden a aprendre eficientment.';
 
-$string ['intelligence_question_4'] = 'Associo música amb els meus estats d\'ànim';
-$string ['intelligence_question_4_help'] = 'Exemple: quan escolto reguetón em sento molt alegre i escolto hip-hop quan estic enfadat.';
+$string ['intelligence_question_4'] = 'A l\'escola era bo en matemàtiques, física o química.';
 
-$string ['intelligence_question_5'] = 'Puc sumar o multiplicar mentalment amb molta rapidesa';
+$string ['intelligence_question_5'] = 'Puc treballar amb i resoldre problemes complexos.';
 
-$string ['intelligence_question_6'] = 'Puc ajudar un(a) amic(ga) a afrontar els seus sentiments perquè jo ho vaig poder fer abans amb sentiments semblants';
-$string ['intelligence_question_6_help'] = 'Exemple: Puc recomanar a un amic què fer quan es troba trist perquè hi ha vegades que jo mateix m\'he sentit trist i he sabut com animar-me. Cada vegada que em sento trist, vaig a jugar amb els meus millors amics :)';
+$string ['intelligence_question_6'] = 'L\'aritmètica mental és fàcil per a mi.';
 
-$string ['intelligence_question_7'] = 'M\'agrada treballar amb calculadores i ordinadors';
-$string ['intelligence_question_7_help'] = 'Exemple: M\'agradaria aprendre programar.';
+$string ['intelligence_question_7'] = 'Sóc bo en jocs i resolució de problemes, que requereixen de pensament lògic.';
 
-$string ['intelligence_question_8'] = 'Aprenc ràpidament a ballar un nou ritme';
-$string ['intelligence_question_8_help'] = 'Exemple: Quan escolto una cançó nova que no conec, sóc capaç de seguir el ritme i ballar.';
+$string ['intelligence_question_8'] = 'A l\'escola, la geometria i diversos tipus de tasques que involucren la percepció espacial van ser més fàcils per a mi que resoldre equacions.';
 
-$string ['intelligence_question_9'] = 'Gaudeixo amb una bona xerrada, discurs o sermó';
+$string ['intelligence_question_9'] = 'És fàcil per a mi conceptualitzar patrons complexos i multidimensionals.';
 
-$string ['intelligence_question_10'] = 'Sempre distingeixo el nord del sud, allà on estigui';
-$string ['intelligence_question_10_help'] = 'Exemple: Ara mateix sé on està el nord.';
+$string ['intelligence_question_10'] = 'Puc imaginar fàcilment com un paisatge mira des d\'una vista d\'ocell.';
 
-$string ['intelligence_question_11'] = 'M\'agrada reunir grups de persones en una festa o esdeveniment especial';
-$string ['intelligence_question_11_help'] = 'Exemple: M\'agrada organitzar la meva festa d\'aniversari.';
+$string ['intelligence_question_11'] = 'Quan llego, formo imatges o dissenys il·lustratius a la meva ment.';
 
-$string ['intelligence_question_12'] = 'Sóc sensible a les vistes, els sons i la sensació de coses que m\'envolten';
+$string ['intelligence_question_12'] = 'Sóc molt pràctic.';
 
-$string ['intelligence_question_13'] = 'La vida em sembla buida sense música';
-$string ['intelligence_question_13_help'] = 'Exemple: Escolto música al tren.';
+$string ['intelligence_question_13'] = 'Puc fàcilment fer alguna cosa concreta amb les meves mans (per exemple, teixir i treballar en fusta).';
 
-$string ['intelligence_question_14'] = 'Sempre entenc els gràfics que vénen en les intruccions d\'equips o instruments';
-$string ['intelligence_question_14_help'] = 'Exemple: Sóc capaç de muntar un moble d\'Ikea.';
+$string ['intelligence_question_14'] = 'Sóc bo en mostrar com fer alguna cosa a la pràctica.';
 
-$string ['intelligence_question_15'] = 'M\'agrada resoldre trencaclosques i entretenir-me amb jocs electrònics';
-$string ['intelligence_question_15_help'] = 'Exemple: M\'agrada jugar al Monopoly amb amics i família.';
+$string ['intelligence_question_15'] = 'Jo era bo a l\'artesania a l\'escola.';
 
-$string ['intelligence_question_16'] = 'Em va ser fàcil aprendre a anar amb bicicleta (o amb patins)';
+$string ['intelligence_question_16'] = 'Després d\'escoltar una melodia una o dues vegades sóc capaç de cantar o silbar amb prou precisió.';
 
-$string ['intelligence_question_17'] = 'Em poso nerviós(osa) quan escolto una discució o afirmació que em sembla il·lògica';
-$string ['intelligence_question_17_help'] = 'Exemple: Em poso nerviós quan els meus pares no em deixa aixecar de la taula sense haver menjat tot encara que no tingui gana.';
+$string ['intelligence_question_17'] = 'En escoltar música, sóc capaç de discernir instruments o reconèixer melodies.';
 
-$string ['intelligence_question_18'] = 'Soc capaç de convéncer d\'altres a seguir els meus plans';
-$string ['intelligence_question_18_help'] = 'Exemple: quan estic amb amics, sóc capaç de convèncer per fer junts el que a mi més m\'agrada.';
+$string ['intelligence_question_18'] = 'Puc mantenir fàcilment el ritme en tocar una melodia.';
 
-$string ['intelligence_question_19'] = 'Tinc bon sentit d\'equilibri i cordinació';
-$string ['intelligence_question_19_help'] = 'Exemple: Es em donen bé esports com el patinatge, la natació, l\'esquí.';
+$string ['intelligence_question_19'] = 'Em dono compte d\'immediat si una melodia està desafinada.';
 
-$string ['intelligence_question_20'] = 'Sovint veig configuracions i relacions entre nombres amb més rapidesa i facilitat que altres';
-$string ['intelligence_question_20_help'] = 'Exemple: De seguida veig el següent número d\'una sèrie com 3, 6, 9, ...';
+$string ['intelligence_question_20'] = 'Fins i tot en companyia estranya, fàcilment trobo a algú amb qui parlar.';
 
-$string ['intelligence_question_21'] = 'M\'agrada construir models ( o escultures)';
-$string ['intelligence_question_21_help'] = 'Exemple: M\'encanta construir figures de Lego.';
+$string ['intelligence_question_21'] = 'Em aconsegueixo sola fàcilment amb diferents tipus de persones.';
 
-$string ['intelligence_question_22'] = 'Tinc facilitat per trobar el significat de les paraules';
-$string ['intelligence_question_22_help'] = 'Exemple: Quan veig una paraula nova, sóc capaç d\'endevinar el seu significat.';
+$string ['intelligence_question_22'] = 'Faig contacte fàcilment amb altres persones.';
 
-$string ['intelligence_question_23'] = 'Puc distingir un objecte des de diferents punts de vista';
-$string ['intelligence_question_23_help'] = 'Exemple: Encara que estigui treballant amb el monitor davant, sóc capaç d\'imaginar-me la part posterior.';
+$string ['intelligence_question_23'] = 'En les negociacions i el treball en grup, sóc capaç de recolzar el grup per trobar un consens.';
 
-$string ['intelligence_question_24'] = 'Em refereixo als animals i tinc la responsabilitat de cuidar-los';
+$string ['intelligence_question_24'] = 'Sóc capaç d\'analitzar els meus propis motius i formes d\'acció.';
 
-$string ['intelligence_question_25'] = 'Sovint faig la connexió entre una peça de música i algun esdeveniment de la meva vida';
-$string ['intelligence_question_25_help'] = 'Exemple: Quan sento "A poc a poc" de Luís Fonsi recordo la festa d\'aniversari de la meva millor amiga';
+$string ['intelligence_question_25'] = 'Sovint penso en els meus propis sentiments i sentiments i busco raons per a ells.';
 
-$string ['intelligence_question_26'] = 'M\'agrada treballar amb nombres i figures';
-$string ['intelligence_question_26_help'] = 'Exemple: M\'agrada fer operacions matemàtiques.';
+$string ['intelligence_question_26'] = 'Dedico temps a reflexionar regularment sobre els temes importants de la vida.';
 
-$string ['intelligence_question_27'] = 'M\'agrada seure silenciosament i reflexionar sobre els meus sentiments íntims';
-$string ['intelligence_question_27_help'] = 'Exemple: M\'agrada reflexionar sobre les activitats que m\'agraden com patinar.';
+$string ['intelligence_question_27'] = 'M\'agrada llegir literatura psicològica o filosòfica per augmentar el meu autoconeixement.';
 
-$string ['intelligence_question_28'] = 'Amb només mirar la forma de construccions i estructures em sento a gust';
-$string ['intelligence_question_28_help'] = 'Exemple: M\'agrada observar la Torre Eiffel.';
+$string ['intelligence_question_28'] = 'Gaudiu de la bellesa i les experiències relacionades amb la natura.';
 
-$string ['intelligence_question_29'] = 'M\'agrada taral·lejar, xiular i cantar a la dutxa o quan estic sol(a)';
+$string ['intelligence_question_29'] = 'Protegir la natura és important per a mi.';
 
-$string ['intelligence_question_30'] = 'La informació sobre estudis fets i estudis socials em dóna un temps de gaudi de qualitat';
-
-$string ['intelligence_question_31'] = 'Sóc bo(na) per l\'atletisme';
-
-$string ['intelligence_question_32'] = 'M\'agrada escriure cartes detallades als meus amics';
-$string ['intelligence_question_32_help'] = 'Exemple: Quan envio un WhatsApp, m\'agrada explicar molts detalls.';
-
-$string ['intelligence_question_33'] = 'Generalment m\'adono de l\'expressió que tinc a la cara';
-$string ['intelligence_question_33_help'] = 'Exemple: Quan sento vergonya sé que em poso molt vermell, quan estic alegre meus ulls estan oberts com plats i quan em sento trist sé que els meus parpelles baixen.';
-
-$string ['intelligence_question_34'] = 'M\'adono de les expressions a la cara d\'altres persones';
-$string ['intelligence_question_34_help'] = 'Exemple: M\'adono si algú està enfadat o trist per l\'expressió de la seva cara.';
-
-$string ['intelligence_question_35'] = 'La cura del medi ambient és una prioritat elevada';
-
-$string ['intelligence_question_36'] = 'Em mantinc "en contacte" amb els meus estats d\'ànim. No em costa identificar-los';
-$string ['intelligence_question_36_help'] = 'Exemple: M\'adono si estic enfadat, alegre o trist.';
-
-$string ['intelligence_question_37'] = 'M\'adono dels estats d\'ànim d\'altres';
-$string ['intelligence_question_37_help'] = 'Exemple: M\'adono quan la meva mare està enfadada.';
-
-$string ['intelligence_question_38'] = 'M\'adono força bé del que altres pensen de mi';
-
-$string ['intelligence_question_39'] = 'Em sento a casa a l\'aire lliure i en un entorn natural';
+$string ['intelligence_question_30'] = 'Presto atenció als meus hàbits de consum amb la finalitat de protegir el medi ambient.';
 
 $string ['store_personality_answer_error_title'] = 'Error';
 $string ['store_personality_answer_error_text'] = 'No puc emmagatzemar la teva resposta personal.';
@@ -317,14 +271,14 @@ $string ['privacy:export:block_tog_personality'] = 'Personalitat';
 
 $string ['privacy:metadata:block_tog_intelligences'] = 'Informació sobre les intel·ligències d\'un usuari.';
 $string ['privacy:metadata:block_tog_intelligences:userid'] = 'Identificador de l\'usuari que les intel·ligències refereixen.';
-$string ['privacy:metadata:block_tog_intelligences:verbal'] = 'El factor d\'intel·ligència verbal de l\'usuari.';
-$string ['privacy:metadata:block_tog_intelligences:logicmathematics'] = 'El factor d\'intel·ligència lògica/matemàtica de l\'usuari.';
-$string ['privacy:metadata:block_tog_intelligences:visualspatial'] = 'El factor d\'intel·ligència visual/espacial de l\'usuari.';
-$string ['privacy:metadata:block_tog_intelligences:kinestesicacorporal'] = 'El factor d\'intel·ligència corporal/kinestesica de l\'usuari.';
-$string ['privacy:metadata:block_tog_intelligences:musicalrhythmic'] = 'El factor d\'intel·ligència musical/rítmica de l\'usuari.';
+$string ['privacy:metadata:block_tog_intelligences:linguistic'] = 'El factor d\'intel·ligència linguistic de l\'usuari.';
+$string ['privacy:metadata:block_tog_intelligences:logicalmathematical'] = 'El factor d\'intel·ligència lògica/matemàtica de l\'usuari.';
+$string ['privacy:metadata:block_tog_intelligences:spatial'] = 'El factor d\'intel·ligència visual/espacial de l\'usuari.';
+$string ['privacy:metadata:block_tog_intelligences:bodilykinesthetic'] = 'El factor d\'intel·ligència corporal/kinestesica de l\'usuari.';
+$string ['privacy:metadata:block_tog_intelligences:musical'] = 'El factor d\'intel·ligència musical/rítmica de l\'usuari.';
 $string ['privacy:metadata:block_tog_intelligences:intrapersonal'] = 'El factor d\'intel·ligència intrapersonal de l\'usuari.';
 $string ['privacy:metadata:block_tog_intelligences:interpersonal'] = 'El factor d\'intel·ligència interpersonal de l\'usuari.';
-$string ['privacy:metadata:block_tog_intelligences:naturalistenvironmental'] = 'El factor d\'intel·ligència naturalista/mediambiental de l\'usuari.';
+$string ['privacy:metadata:block_tog_intelligences:environmental'] = 'El factor d\'intel·ligència naturalista/mediambiental de l\'usuari.';
 $string ['privacy:export:block_tog_intelligences'] = 'Intel·ligències';
 
 $string ['personality_title'] = 'Personalitat';
@@ -393,13 +347,21 @@ $string ['intelligences_value_2'] = 'Intermig';
 $string ['intelligences_value_3'] = 'Avançat';
 $string ['intelligences_value_4'] = 'Expert';
 $string ['intelligences_interpersonal_factor'] = 'Intel·ligència interpersonal';
+$string ['intelligences_interpersonal_help'] = 'La intel·ligència interpersonal mesura la percepció de les persones de les seves capacitats en relació amb les relacions socials.';
 $string ['intelligences_intrapersonal_factor'] = 'Intel·ligència intrapersonal';
-$string ['intelligences_KINESTESICA_CORPORAL_FACTOR'] = 'Intel·ligència corporal cinestèsica';
-$string ['intelligences_LOGIC_MATHEMATICS_FACTOR'] = 'Intel·ligència lògica i matemàtica';
-$string ['intelligences_MUSICAL_RHYTHMIC_FACTOR'] = 'Intel·ligència musical';
-$string ['intelligences_NATURALIST_ENVIRONMENTAL_FACTOR'] = 'Intel·ligència naturalista-mediambiental';
-$string ['intelligences_verbal_factor'] = 'Intel·ligència lingüística';
-$string ['intelligences_VISUAL_SPATIAL_FACTOR'] = 'Intel·ligència visual-espacial';
+$string ['intelligences_intrapersonal_help'] = 'La intel·ligència intrapersonal constava de dos components. El component “Autoreflexió” mesura les opinions de les persones sobre la seva capacitat de reflexionar sobre temes importants de la vida, i temes psicològics i filosòfics profunds.';
+$string ['intelligences_bodilykinesthetic_factor'] = 'Intel·ligència corporal cinestèsica';
+$string ['intelligences_bodilykinesthetic_help'] = 'La intel·ligència corporal cinestèsica mesura les opinions de les persones sobre les seves habilitats relacionades amb el treball amb les mans i la coordinació del cos.';
+$string ['intelligences_logicalmathematical_factor'] = 'Intel·ligència lògica i matemàtica';
+$string ['intelligences_logicalmathematical_help'] = 'La intel·ligència lògico-matemàtica s’utilitza per mesurar les habilitats d’una persona sobre la capacitat matemàtica i el pensament lògic.';
+$string ['intelligences_musical_factor'] = 'Intel·ligència musical';
+$string ['intelligences_musical_help'] = 'La intel·ligència musical s’utilitza per mesurar la capacitat d’una persona per escoltar o produir música.';
+$string ['intelligences_environmental_factor'] = 'Intel·ligència naturalista-mediambiental';
+$string ['intelligences_environmental_help'] = 'La intel·ligència ambiental té tres categories següents: 1) Amor per la natura; 2) Conservació de la natura; 3) Hàbits de consum ecològic';
+$string ['intelligences_linguistic_factor'] = 'Intel·ligència lingüística';
+$string ['intelligences_linguistic_help'] = 'La intel·ligència lingüística s’utilitza per mesurar les habilitats d’una persona en expressions verbals i escrites.';
+$string ['intelligences_spatial_factor'] = 'Intel·ligència visual-espacial';
+$string ['intelligences_spatial_help'] = 'La intel·ligència espacial mesura les competències de les persones per visualitzar i treballar amb objectes multidimensionals.';
 $string ['intelligences_go_to_test'] = 'Modificar la prova d\'intel·ligències';
 $string ['intelligences_error_not_answered_all_questions'] = 'Has de respondre totes les preguntes del qüestionari per poder saber les teves intelligencies';
 $string ['intelligences_go_to_course'] = 'Tornar al curs';
@@ -477,12 +439,12 @@ $string ['externallib:group_description_no_responsibility'] = 'no té reponmsabi
 $string ['externallib:group_description_last_intelligence_and'] = 'i';
 $string ['externallib:group_description_intelligence_interpersonal'] = 'Intel·ligència interpersonal';
 $string ['externallib:group_description_intelligence_intrapersonal'] = 'Intel·ligència intrapersonal';
-$string ['externallib:group_description_intelligence_kinestesicacorporal'] = 'Intel·ligència corporal cinestèsica';
-$string ['externallib:group_description_intelligence_logicmathematics'] = 'Intel·ligència lògica i matemàtica';
-$string ['externallib:group_description_intelligence_musicalrhythmic'] = 'Intel·ligència musical';
-$string ['externallib:group_description_intelligence_naturalistenvironmental'] = 'Intel·ligència naturalista-mediambiental';
-$string ['externallib:group_description_intelligence_verbal'] = 'Intel·ligència lingüística';
-$string ['externallib:group_description_intelligence_visualspatial'] = 'Intel·ligència visual-espacial';
+$string ['externallib:group_description_intelligence_bodilykinesthetic'] = 'Intel·ligència corporal cinestèsica';
+$string ['externallib:group_description_intelligence_logicalmathematical'] = 'Intel·ligència lògica i matemàtica';
+$string ['externallib:group_description_intelligence_musical'] = 'Intel·ligència musical';
+$string ['externallib:group_description_intelligence_environmental'] = 'Intel·ligència naturalista-mediambiental';
+$string ['externallib:group_description_intelligence_linguistic'] = 'Intel·ligència lingüística';
+$string ['externallib:group_description_intelligence_spatial'] = 'Intel·ligència visual-espacial';
 
 $string ['auto_fill_in_title'] = 'Omplir automàticament els qüestionaris';
 $string ['auto_fill_in_heading'] = 'Omplir automàticament els qüestionaris dels usuaris';

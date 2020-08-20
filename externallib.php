@@ -180,31 +180,30 @@ class block_tog_external extends external_api {
                                                         ], 'Contains the member personality' ),
                                                 'intelligences' => new external_single_structure(
                                                         [
-                                                                'verbal' => new external_value( PARAM_FLOAT,
-                                                                        'The value for the intelligences verbal' ),
-                                                                'logicmathematics' => new external_value( PARAM_FLOAT,
-                                                                        'The value for the intelligences logic mathematics' ),
-                                                                'visualspatial' => new external_value( PARAM_FLOAT,
-                                                                        'The value for the intelligences visualspatial' ),
-                                                                'kinestesicacorporal' => new external_value(
+                                                                'linguistic' => new external_value( PARAM_FLOAT,
+                                                                        'The value for the intelligences linguistic' ),
+                                                                'logicalmathematical' => new external_value(
                                                                         PARAM_FLOAT,
+                                                                        'The value for the intelligences logic mathematics' ),
+                                                                'spatial' => new external_value( PARAM_FLOAT,
+                                                                        'The value for the intelligences spatial' ),
+                                                                'bodilykinesthetic' => new external_value( PARAM_FLOAT,
                                                                         'The value for the intelligences kinestesica corporal' ),
-                                                                'musicalrhythmic' => new external_value( PARAM_FLOAT,
+                                                                'musical' => new external_value( PARAM_FLOAT,
                                                                         'The value for the intelligences musical rhythmic' ),
                                                                 'intrapersonal' => new external_value( PARAM_FLOAT,
                                                                         'The value for the intelligences intrapersonal' ),
                                                                 'interpersonal' => new external_value( PARAM_FLOAT,
                                                                         'The value for the intelligences interpersonal' ),
-                                                                'naturalistenvironmental' => new external_value(
-                                                                        PARAM_FLOAT,
+                                                                'environmental' => new external_value( PARAM_FLOAT,
                                                                         'The value for the intelligences naturalist environmental' )
                                                         ], 'Contains the member personality' )
                                         ] ), 'The members that can be form part of a group' ),
                         'requirements' => new external_single_structure(
-                                [ 'verbal' => $requirement, 'logicmathematics' => $requirement,
-                                        'visualspatial' => $requirement, 'kinestesicacorporal' => $requirement,
-                                        'musicalrhythmic' => $requirement, 'intrapersonal' => $requirement,
-                                        'interpersonal' => $requirement, 'naturalistenvironmental' => $requirement
+                                [ 'linguistic' => $requirement, 'logicalmathematical' => $requirement,
+                                        'spatial' => $requirement, 'bodilykinesthetic' => $requirement,
+                                        'musical' => $requirement, 'intrapersonal' => $requirement,
+                                        'interpersonal' => $requirement, 'environmental' => $requirement
                                 ], 'The requirements for the groups' )
                 ) );
     }
@@ -279,31 +278,26 @@ class block_tog_external extends external_api {
                 $attitude->value = floatval( $member [personality] [attitude] );
                 $person->personality [] = $attitude;
                 $person->intelligences = array ();
-                $verbal = new \stdClass();
-                // TODO: replace below with $verbal->factor = 'LINGUISTIC'; .
-                $verbal->factor = 'VERBAL';
-                $verbal->value = floatval( $member [intelligences] [verbal] );
-                $person->intelligences [] = $verbal;
-                $logicmathematics = new \stdClass();
-                // TODO: replace below with $logicmathematics->factor = 'LOGICAL_MATHEMATICAL'; .
-                $logicmathematics->factor = 'LOGIC_MATHEMATICS';
-                $logicmathematics->value = floatval( $member [intelligences] [logicmathematics] );
-                $person->intelligences [] = $logicmathematics;
-                $visualspatial = new \stdClass();
-                // TODO: replace below with $visualspatial->factor = 'SPATIAL'; .
-                $visualspatial->factor = 'VISUAL_SPATIAL';
-                $visualspatial->value = floatval( $member [intelligences] [visualspatial] );
-                $person->intelligences [] = $visualspatial;
-                $kinestesicacorporal = new \stdClass();
-                // TODO: replace below with $kinestesicacorporal->factor = 'BODILY_KINESTHETIC'; .
-                $kinestesicacorporal->factor = 'KINESTESICA_CORPORAL';
-                $kinestesicacorporal->value = floatval( $member [intelligences] [kinestesicacorporal] );
-                $person->intelligences [] = $kinestesicacorporal;
-                $musicalrhythmic = new \stdClass();
-                // TODO: replace below with $musicalrhythmic->factor = 'MUSICAL'; .
-                $musicalrhythmic->factor = 'MUSICAL_RHYTHMIC';
-                $musicalrhythmic->value = floatval( $member [intelligences] [musicalrhythmic] );
-                $person->intelligences [] = $musicalrhythmic;
+                $linguistic = new \stdClass();
+                $linguistic->factor = 'LINGUISTIC';
+                $linguistic->value = floatval( $member [intelligences] [linguistic] );
+                $person->intelligences [] = $linguistic;
+                $logicalmathematical = new \stdClass();
+                $logicalmathematical->factor = 'LOGICAL_MATHEMATICAL';
+                $logicalmathematical->value = floatval( $member [intelligences] [logicalmathematical] );
+                $person->intelligences [] = $logicalmathematical;
+                $spatial = new \stdClass();
+                $spatial->factor = 'SPATIAL';
+                $spatial->value = floatval( $member [intelligences] [spatial] );
+                $person->intelligences [] = $spatial;
+                $bodilykinesthetic = new \stdClass();
+                $bodilykinesthetic->factor = 'BODILY_KINESTHETIC';
+                $bodilykinesthetic->value = floatval( $member [intelligences] [bodilykinesthetic] );
+                $person->intelligences [] = $bodilykinesthetic;
+                $musical = new \stdClass();
+                $musical->factor = 'MUSICAL';
+                $musical->value = floatval( $member [intelligences] [musical] );
+                $person->intelligences [] = $musical;
                 $intrapersonal = new \stdClass();
                 $intrapersonal->factor = 'INTERPERSONAL';
                 $intrapersonal->value = floatval( $member [intelligences] [intrapersonal] );
@@ -312,28 +306,24 @@ class block_tog_external extends external_api {
                 $interpersonal->factor = 'INTRAPERSONAL';
                 $interpersonal->value = floatval( $member [intelligences] [interpersonal] );
                 $person->intelligences [] = $interpersonal;
-                $naturalistenvironmental = new \stdClass();
-                // TODO: replace below with $naturalistenvironmental->factor = 'ENVIRONMENTAL'; .
-                $naturalistenvironmental->factor = 'NATURALIST_ENVIRONMENTAL';
-                $naturalistenvironmental->value = floatval( $member [intelligences] [naturalistenvironmental] );
-                $person->intelligences [] = $naturalistenvironmental;
+                $environmental = new \stdClass();
+                $environmental->factor = 'ENVIRONMENTAL';
+                $environmental->value = floatval( $member [intelligences] [environmental] );
+                $person->intelligences [] = $environmental;
                 $data->people [] = $person;
             }
 
             $data->requirements = array ();
             foreach ($requirements as $factor => $requirement) {
                 $requirementdata = new \stdClass();
-                if ($factor == 'logicmathematics') {
-                    $requirementdata->factor = 'LOGIC_MATHEMATICS';
-                } else if ($factor == 'visualspatial') {
-                    $requirementdata->factor = 'VISUAL_SPATIAL';
-                } else if ($factor == 'kinestesicacorporal') {
-                    $requirementdata->factor = 'KINESTESICA_CORPORAL';
-                } else if ($factor == 'musicalrhythmic') {
-                    $requirementdata->factor = 'MUSICAL_RHYTHMIC';
-                } else if ($factor == 'naturalistenvironmental') {
-                    $requirementdata->factor = 'NATURALIST_ENVIRONMENTAL';
+                if ($factor == 'logicalmathematical') {
+
+                    $requirementdata->factor = 'LOGICAL_MATHEMATICAL';
+                } else if ($factor == 'bodilykinesthetic') {
+
+                    $requirementdata->factor = 'BODILY_KINESTHETIC';
                 } else {
+
                     $requirementdata->factor = strtoupper( $factor );
                 }
                 $requirementdata->level = floatval( $requirement [level] );

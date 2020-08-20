@@ -24,7 +24,7 @@
 defined( 'MOODLE_INTERNAL' ) || die();
 
 $plugin->component = 'block_tog';
-$plugin->version = 2020081800;
+$plugin->version = 2020082000;
 $plugin->requires = 2018051700;
 $plugin->maturity = MATURITY_STABLE;
 $plugin->release = '1.2.0';

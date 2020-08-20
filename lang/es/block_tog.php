@@ -172,118 +172,72 @@ $string ['intelligences_test_go_to_course'] = 'Volver al curso';
 $string ['intelligences_test_go_to_personality_test'] = 'Completa test de personalidad';
 $string ['intelligences_test_storing_msg'] = 'Desant reposta';
 
-$string ['intelligence_question_0'] = 'No me es difícil decir lo que pienso en el curso de una discusión o debate';
-$string ['intelligence_question_0_help'] = 'Ejemplo: cuando se discute sobre la independencia de Catalunya, me gusta expresar mi opinión.';
+$string ['intelligence_question_0'] = 'Escribir es una manera natural para que yo me exprese';
 $string ['intelligence_question_answer_0'] = 'Totalmente en desacuerdo';
 $string ['intelligence_question_answer_1'] = 'En desacuerdo';
 $string ['intelligence_question_answer_2'] = 'Ni de acuerdo ni en desacuerdo';
 $string ['intelligence_question_answer_3'] = 'De acuerdo';
 $string ['intelligence_question_answer_4'] = 'Totalmente de acuerdo';
 
-$string ['intelligence_question_1'] = 'Prefiero hacer un mapa a explicar a alguien como llegar a un sitio';
-$string ['intelligence_question_1_help'] = 'Ejemplo: Si me preguntan por un camino, prefiero dibujarlo que explicarlo con mis palabras.';
+$string ['intelligence_question_1'] = 'En los estudios escolares en lengua materna o estudios sociales fueron más fáciles para mí que las matemáticas, la física y la química.';
 
-$string ['intelligence_question_2'] = 'Si estoy enfadado(a) o contento(a) generalmente sé exactamente porqué';
+$string ['intelligence_question_2'] = 'Recientemente he escrito algo de lo que estoy especialmente orgulloso, o por el que he recibido reconocimiento.';
 
-$string ['intelligence_question_3'] = 'Sé tocar (o antes sabía tocar) un instrumento musical';
-$string ['intelligence_question_3_help'] = 'Ejemplo: sé tocar la guitarra.';
+$string ['intelligence_question_3'] = 'Las metáforas y las expresiones verbales vívidas me ayudan a aprender eficientemente.';
 
-$string ['intelligence_question_4'] = 'Asocio música con mis estados de ánimo';
-$string ['intelligence_question_4_help'] = 'Ejemplo: cuando escucho reguetón me siento muy alegre y escucho hip-hop cuando estoy enfadado.';
+$string ['intelligence_question_4'] = 'En la escuela era bueno en matemáticas, física o química.';
 
-$string ['intelligence_question_5'] = 'Puedo sumar o multiplicar mentalmente con mucha rapidez';
+$string ['intelligence_question_5'] = 'Puedo trabajar con y resolver problemas complejos.';
 
-$string ['intelligence_question_6'] = 'Puedo ayudar a un(a) amigo(a) a manejar sus sentimientos porque yo lo pude hacer antes con sentimientos parecidos';
-$string ['intelligence_question_6_help'] = 'Ejemplo: Puedo recomendar a un amigo qué hacer cuando se encuentra triste porque hay veces que yo mismo me he sentido triste y he sabido cómo animarme. Cada vez que me siento triste, voy a jugar con mis mejores amigos :)';
+$string ['intelligence_question_6'] = 'La aritmética mental es fácil para mí.';
 
-$string ['intelligence_question_7'] = 'Me gusta trabajar con calculadoras y computadores';
-$string ['intelligence_question_7_help'] = 'Ejemplo: Me gustaría aprender programar.';
+$string ['intelligence_question_7'] = 'Soy bueno en juegos y resolución de problemas, que requieren de pensamiento lógico.';
 
-$string ['intelligence_question_8'] = 'Aprendo rápido a bailar un ritmo nuevo';
-$string ['intelligence_question_8_help'] = 'Ejemplo: Cuando escucho una canción nueva que no conozco, soy capaz de seguir el ritmo y bailar.';
+$string ['intelligence_question_8'] = 'En la escuela, la geometría y varios tipos de tareas que involucran la percepción espacial fueron más fáciles para mí que resolver ecuaciones.';
 
-$string ['intelligence_question_9'] = 'Disfruto de una buena charla, discurso o sermón';
+$string ['intelligence_question_9'] = 'Es fácil para mí conceptualizar patrones complejos y multidimensionales.';
 
-$string ['intelligence_question_10'] = 'Siempre distingo el norte del sur, esté donde esté';
-$string ['intelligence_question_10_help'] = 'Ejemplo: Ahora mismo sé donde está el norte.';
+$string ['intelligence_question_10'] = 'Puedo imaginar fácilmente cómo un paisaje mira desde una vista de pájaro.';
 
-$string ['intelligence_question_11'] = 'Me gusta reunir grupos de personas en una fiesta o en un evento especial';
-$string ['intelligence_question_11_help'] = 'Ejemplo: Me gusta organizar mi fiesta de cumpleaños.';
+$string ['intelligence_question_11'] = 'Cuando leo, formo imágenes o diseños ilustrativos en mi mente.';
 
-$string ['intelligence_question_12'] = 'Soy sensible a las vistas, los sonidos y la sensación de las cosas que me rodean';
+$string ['intelligence_question_12'] = 'Soy muy práctico.';
 
-$string ['intelligence_question_13'] = 'La vida me parece vacía sin música';
-$string ['intelligence_question_13_help'] = 'Ejemplo: Escucho música en el tren.';
+$string ['intelligence_question_13'] = 'Puedo fácilmente hacer algo concreto con mis manos (por ejemplo, tejer y trabajar en madera).';
 
-$string ['intelligence_question_14'] = 'Siempre entiendo los gráficos que vienen en las instrucciones de equipos o instrumentos';
-$string ['intelligence_question_14_help'] = 'Ejemplo: Soy capaz de montar un mueble de Ikea.';
+$string ['intelligence_question_14'] = 'Soy bueno en mostrar cómo hacer algo en la práctica.';
 
-$string ['intelligence_question_15'] = 'Me gusta resolver rompecabezas y entretenerme con juegos electrónicos';
-$string ['intelligence_question_15_help'] = 'Ejemplo: Me gusta jugar al Monopoly con amigos y familia.';
+$string ['intelligence_question_15'] = 'Yo era bueno en la artesanía en la escuela.';
 
-$string ['intelligence_question_16'] = 'Me fue fácil aprender a ir en bicicleta (o a patinar)';
+$string ['intelligence_question_16'] = 'Después de escuchar una melodía una o dos veces soy capaz de cantar o silbar con bastante precisión.';
 
-$string ['intelligence_question_17'] = 'Me pongo nervioso(a) cuando oigo una discusión o una afirmación que parece ilógica';
-$string ['intelligence_question_17_help'] = 'Ejemplo: Me pongo nervioso cuando mis padres no me deja levantar de la mesa sin haber comido todo aunque no tenga hambre.';
+$string ['intelligence_question_17'] = 'Al escuchar música, soy capaz de discernir instrumentos o reconocer melodías.';
 
-$string ['intelligence_question_18'] = 'Soy capaz de convencer a otros para que sigan mis planes';
-$string ['intelligence_question_18_help'] = 'Ejemplo: cuando estoy con amigos, soy capaz de convencerlos para hacer juntos lo que a mí más me gusta.';
+$string ['intelligence_question_18'] = 'Puedo mantener fácilmente el ritmo al tocar una melodía.';
 
-$string ['intelligence_question_19'] = 'Tengo buen sentido del equilibrio y coordinación';
-$string ['intelligence_question_19_help'] = 'Ejemplo: Se me dan bien deportes como el skate, la natación, el esquí.';
+$string ['intelligence_question_19'] = 'Me doy cuenta de inmediato si una melodía está desafinada.';
 
-$string ['intelligence_question_20'] = 'Con frecuencia veo configuraciones y relaciones entre números con más rapidez y facilidad que otros';
-$string ['intelligence_question_20_help'] = 'Ejemplo: Enseguida veo el siguiente número de una serie como 3, 6, 9, ...';
+$string ['intelligence_question_20'] = 'Incluso en compañía extraña, fácilmente encuentro a alguien con quien hablar.';
 
-$string ['intelligence_question_21'] = 'Me gusta construir modelos ( o hacer esculturas)';
-$string ['intelligence_question_21_help'] = 'Ejemplo: Me encanta construir figuras de Lego.';
+$string ['intelligence_question_21'] = 'Me consigo sola fácilmente con diferentes tipos de personas.';
 
-$string ['intelligence_question_22'] = 'Tengo agudeza para encontrar el significado de las palabras';
-$string ['intelligence_question_22_help'] = 'Ejemplo: Cuando veo una palabra nueva, soy capaz de adivinar su significado.';
+$string ['intelligence_question_22'] = 'Hago contacto fácilmente con otras personas.';
 
-$string ['intelligence_question_23'] = 'Puedo distinguir un objeto desde diferentes puntos de vista';
-$string ['intelligence_question_23_help'] = 'Ejemplo: Aunque esté trabajando con el monitor delante, soy capaz de imaginarme la parte trasera.';
+$string ['intelligence_question_23'] = 'En las negociaciones y el trabajo en grupo, soy capaz de apoyar al grupo para encontrar un consenso.';
 
-$string ['intelligence_question_24'] = 'Me relaciono bien con los animales y disfruto de la responsabilidad de cuidarlos';
+$string ['intelligence_question_24'] = 'Soy capaz de analizar mis propios motivos y formas de acción.';
 
-$string ['intelligence_question_25'] = 'Con frecuencia hago la conexión entre una pieza de música y algún evento de mi vida';
-$string ['intelligence_question_25_help'] = 'Ejemplo: Cuando oigo "Despacito" de Luís Fonsi recuerdo la fiesta de cumpleaños de mi mejor amiga';
+$string ['intelligence_question_25'] = 'A menudo pienso en mis propios sentimientos y sentimientos y busco razones para ellos.';
 
-$string ['intelligence_question_26'] = 'Me gusta trabajar con números y figuras';
-$string ['intelligence_question_26_help'] = 'Ejemplo: Me gusta hacer operaciones matemáticas.';
+$string ['intelligence_question_26'] = 'Dedico tiempo a reflexionar regularmente sobre los temas importantes de la vida.';
 
-$string ['intelligence_question_27'] = 'Me gusta sentarme silenciosamente y reflexionar sobre mis sentimientos íntimos';
-$string ['intelligence_question_27_help'] = 'Ejemplo: Me gusta reflexionar sobre las actividades que me gustan como patinar.';
+$string ['intelligence_question_27'] = 'Me gusta leer literatura psicológica o filosófica para aumentar mi autoconocimiento.';
 
-$string ['intelligence_question_28'] = 'Con sólo mirar la forma de construcciones y estructuras me siento a gusto';
-$string ['intelligence_question_28_help'] = 'Ejemplo: Me gusta observar la Torre Eiffel.';
+$string ['intelligence_question_28'] = 'Disfruto de la belleza y las experiencias relacionadas con la naturaleza.';
 
-$string ['intelligence_question_29'] = 'Me gusta tararear, silbar y cantar en la ducha o cuando estoy solo(a)';
+$string ['intelligence_question_29'] = 'Proteger la naturaleza es importante para mí.';
 
-$string ['intelligence_question_30'] = 'La información de estudios reales y estudios sociales me da un tiempo de disfrute de la calidad';
-
-$string ['intelligence_question_31'] = 'Soy bueno(a) para el atletismo';
-
-$string ['intelligence_question_32'] = 'Me gusta escribir cartas detalladas a mis amigos';
-$string ['intelligence_question_32_help'] = 'Ejemplo: Cuando envio un Whatsapp, me gusta contar muchos detalles.';
-
-$string ['intelligence_question_33'] = 'Generalmente me doy cuenta de la expresión que tengo en la cara';
-$string ['intelligence_question_33_help'] = 'Ejemplo: Cuando siento vergüenza sé que me pongo muy rojo, cuando estoy alegre mis ojos están abiertos como platos y cuando me siento triste sé que mis párpados bajan.';
-
-$string ['intelligence_question_34'] = 'Me doy cuenta de las expresiones en la cara de otras personas';
-$string ['intelligence_question_34_help'] = 'Ejemplo: Me doy cuenta de si alguien está enfadado o triste por la expresión de su cara.';
-
-$string ['intelligence_question_35'] = 'Cuidar el medioambiente es una prioridad';
-
-$string ['intelligence_question_36'] = 'Me mantengo "en contacto" con mis estados de ánimo. No me cuesta identificarlos';
-$string ['intelligence_question_36_help'] = 'Ejemplo: Me doy cuenta de si estoy enfadado, alegre o triste.';
-
-$string ['intelligence_question_37'] = 'Me doy cuenta de los estados de ánimo de otros';
-$string ['intelligence_question_37_help'] = 'Ejemplo: Me doy cuenta cuando mi madre está enfadada.';
-
-$string ['intelligence_question_38'] = 'Me doy cuenta bastante bien de lo que otros piensan de mí';
-
-$string ['intelligence_question_39'] = 'Me siento en casa al aire libre y en un entorno natural';
+$string ['intelligence_question_30'] = 'Presto atención a mis hábitos de consumo con el fin de proteger el medio ambiente.';
 
 $string ['store_personality_answer_error_title'] = 'Error';
 $string ['store_personality_answer_error_text'] = 'No se pudo almacenar la respuesta de tu personalidad.';
@@ -317,14 +271,14 @@ $string ['privacy:export:block_tog_personality'] = 'Personalidad';
 
 $string ['privacy:metadata:block_tog_intelligences'] = 'Información sobre las inteligencias de un usuario.';
 $string ['privacy:metadata:block_tog_intelligences:userid'] = 'El ID del usuario al que se refieren las inteligencias.';
-$string ['privacy:metadata:block_tog_intelligences:verbal'] = 'El factor de inteligencia verbal del usuario.';
-$string ['privacy:metadata:block_tog_intelligences:logicmathematics'] = 'El factor de inteligencia lógico / matemático del usuario.';
-$string ['privacy:metadata:block_tog_intelligences:visualspatial'] = 'El factor de inteligencia visual / espacial del usuario.';
-$string ['privacy:metadata:block_tog_intelligences:kinestesicacorporal'] = 'El factor de inteligencia cinestésica / corporal del usuario.';
-$string ['privacy:metadata:block_tog_intelligences:musicalrhythmic'] = 'El factor de inteligencia musical / rítmica del usuario.';
+$string ['privacy:metadata:block_tog_intelligences:linguistic'] = 'El factor de inteligencia linguistic del usuario.';
+$string ['privacy:metadata:block_tog_intelligences:logicalmathematical'] = 'El factor de inteligencia lógico / matemático del usuario.';
+$string ['privacy:metadata:block_tog_intelligences:spatial'] = 'El factor de inteligencia visual / espacial del usuario.';
+$string ['privacy:metadata:block_tog_intelligences:bodilykinesthetic'] = 'El factor de inteligencia cinestésica / corporal del usuario.';
+$string ['privacy:metadata:block_tog_intelligences:musical'] = 'El factor de inteligencia musical / rítmica del usuario.';
 $string ['privacy:metadata:block_tog_intelligences:intrapersonal'] = 'El factor de inteligencia intrapersonal del usuario.';
 $string ['privacy:metadata:block_tog_intelligences:interpersonal'] = 'El factor de inteligencia interpersonal del usuario.';
-$string ['privacy:metadata:block_tog_intelligences:naturalistenvironmental'] = 'El factor naturalista / inteligencia ambiental del usuario.';
+$string ['privacy:metadata:block_tog_intelligences:environmental'] = 'El factor naturalista / inteligencia ambiental del usuario.';
 $string ['privacy:export:block_tog_intelligences'] = 'Inteligencias';
 
 $string ['personality_title'] = 'Personalidad';
@@ -393,13 +347,21 @@ $string ['intelligences_value_2'] = 'Intermedio';
 $string ['intelligences_value_3'] = 'Avanzado';
 $string ['intelligences_value_4'] = 'Experto';
 $string ['intelligences_interpersonal_factor'] = 'Inteligencia interpersonal';
+$string ['intelligences_interpersonal_help'] = 'La inteligencia interpersonal mide las percepciones de las personas sobre sus habilidades para las relaciones sociales.';
 $string ['intelligences_intrapersonal_factor'] = 'Inteligencia intrapersonal';
-$string ['intelligences_KINESTESICA_CORPORAL_FACTOR'] = 'Inteligencia corporal-cinestésica';
-$string ['intelligences_LOGIC_MATHEMATICS_FACTOR'] = 'Inteligencia logico-matematica';
-$string ['intelligences_MUSICAL_RHYTHMIC_FACTOR'] = 'Inteligencia musical';
-$string ['intelligences_NATURALIST_ENVIRONMENTAL_FACTOR'] = 'Inteligencia naturalista-ambiental.';
-$string ['intelligences_verbal_factor'] = 'Inteligencia lingüística';
-$string ['intelligences_VISUAL_SPATIAL_FACTOR'] = 'Inteligencia visual-espacial';
+$string ['intelligences_intrapersonal_help'] = 'La inteligencia intrapersonal constaba de dos componentes. El componente "Autorreflexión" mide los puntos de vista de las personas sobre su capacidad para reflexionar sobre cuestiones importantes de la vida, y cuestiones psicológicas y filosóficas profundas.';
+$string ['intelligences_bodilykinesthetic_factor'] = 'Inteligencia corporal-cinestésica';
+$string ['intelligences_bodilykinesthetic_help'] = 'La inteligencia corporal-cinestésica se utiliza para medir las opiniones de las personas sobre sus habilidades relacionadas con el trabajo con las manos y la coordinación de sus cuerpos.';
+$string ['intelligences_logicalmathematical_factor'] = 'Inteligencia logico-matematica';
+$string ['intelligences_logicalmathematical_help'] = 'La inteligencia lógico-matemática se utiliza para medir las habilidades de una persona sobre la habilidad matemática y el pensamiento lógico.';
+$string ['intelligences_musical_factor'] = 'Inteligencia musical';
+$string ['intelligences_musical_help'] = 'La inteligencia musical se utiliza para medir la capacidad de una persona para escuchar o producir música.';
+$string ['intelligences_environmental_factor'] = 'Inteligencia naturalista-ambiental.';
+$string ['intelligences_environmental_help'] = 'La inteligencia ambiental tiene las siguientes tres categorías: 1) Amor por la naturaleza; 2) conservación de la naturaleza; 3) Hábitos de consumo favorables al medio ambiente';
+$string ['intelligences_linguistic_factor'] = 'Inteligencia lingüística';
+$string ['intelligences_linguistic_help'] = 'La inteligencia lingüística se utiliza para medir las habilidades de una persona en expresiones verbales y escritas.';
+$string ['intelligences_spatial_factor'] = 'Inteligencia visual-espacial';
+$string ['intelligences_spatial_help'] = 'La inteligencia espacial mide las habilidades de una persona para visualizar y trabajar con objetos multidimensionales.';
 $string ['intelligences_go_to_test'] = 'Modificar la prueba de inteligencias.';
 $string ['intelligences_error_not_answered_all_questions'] = 'Tienes que responder todas las preguntas del cuestionario para poder saber tus inteligencias';
 $string ['intelligences_go_to_course'] = 'Volver al curso';
@@ -477,12 +439,12 @@ $string ['externallib:group_description_no_responsibility'] = 'no tiene responsa
 $string ['externallib:group_description_last_intelligence_and'] = 'y';
 $string ['externallib:group_description_intelligence_interpersonal'] = 'Inteligencia interpersonal';
 $string ['externallib:group_description_intelligence_intrapersonal'] = 'Inteligencia intrapersonal';
-$string ['externallib:group_description_intelligence_kinestesicacorporal'] = 'Inteligencia corporal-cinestésica';
-$string ['externallib:group_description_intelligence_logicmathematics'] = 'Inteligencia logico-matematica';
-$string ['externallib:group_description_intelligence_musicalrhythmic'] = 'Inteligencia musical';
-$string ['externallib:group_description_intelligence_naturalistenvironmental'] = 'Inteligencia naturalista-ambiental.';
-$string ['externallib:group_description_intelligence_verbal'] = 'Inteligencia lingüística';
-$string ['externallib:group_description_intelligence_visualspatial'] = 'Inteligencia visual-espacial';
+$string ['externallib:group_description_intelligence_bodilykinesthetic'] = 'Inteligencia corporal-cinestésica';
+$string ['externallib:group_description_intelligence_logicalmathematical'] = 'Inteligencia logico-matematica';
+$string ['externallib:group_description_intelligence_musical'] = 'Inteligencia musical';
+$string ['externallib:group_description_intelligence_environmental'] = 'Inteligencia naturalista-ambiental.';
+$string ['externallib:group_description_intelligence_linguistic'] = 'Inteligencia lingüística';
+$string ['externallib:group_description_intelligence_spatial'] = 'Inteligencia visual-espacial';
 
 $string ['auto_fill_in_title'] = 'Auto rellenar los questionarios';
 $string ['auto_fill_in_heading'] = 'Auto rellenar los questionarios de los usuarios';

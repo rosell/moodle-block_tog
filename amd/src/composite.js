@@ -288,23 +288,23 @@ define([
     switch (factor) {
       case 0:
         // ... delete requirements.linguistic;
-        delete requirements.verbal;
+        delete requirements.linguistic;
         break;
       case 1:
         // ... delete requirements.logical_mathematical;
-        delete requirements.logicmathematics;
+        delete requirements.logicalmathematical;
         break;
       case 2:
         // ... delete requirements.spatial;
-        delete requirements.visualspatial;
+        delete requirements.spatial;
         break;
       case 3:
         // ... delete requirements.bodily_kinesthetic;
-        delete requirements.kinestesicacorporal;
+        delete requirements.bodilykinesthetic;
         break;
       case 4:
         // ... delete requirements.musical;
-        delete requirements.musicalrhythmic;
+        delete requirements.musical;
         break;
       case 5:
         delete requirements.intrapersonal;
@@ -314,7 +314,7 @@ define([
         break;
       default:
         // ... delete requirements.environmental;
-        delete requirements.naturalistenvironmental;
+        delete requirements.environmental;
     }
     $("#composite__requirements_factor_" + factor).show();
     $("#composite__requirements_factor").val(factor);
@@ -345,24 +345,19 @@ define([
     };
     switch (factor) {
       case 0:
-        // ... requirements.linguistic = requirement;
-        requirements.verbal = requirement;
+        requirements.linguistic = requirement;
         break;
       case 1:
-        // ... requirements.logical_mathematical = requirement;
-        requirements.logicmathematics = requirement;
+        requirements.logicalmathematical = requirement;
         break;
       case 2:
-        // ... requirements.spatial = requirement;
-        requirements.visualspatial = requirement;
+        requirements.spatial = requirement;
         break;
       case 3:
-        // ...     requirements.bodily_kinesthetic = requirement;
-        requirements.kinestesicacorporal = requirement;
+        requirements.bodilykinesthetic = requirement;
         break;
       case 4:
-        // ... requirements.musical = requirement;
-        requirements.musicalrhythmic = requirement;
+        requirements.musical = requirement;
         break;
       case 5:
         requirements.intrapersonal = requirement;
@@ -371,8 +366,7 @@ define([
         requirements.interpersonal = requirement;
         break;
       default:
-        // ... requirements.environmental = requirement;
-        requirements.naturalistenvironmental = requirement;
+        requirements.environmental = requirement;
     }
 
     $("#composite__requirements_factor_" + factor).hide();

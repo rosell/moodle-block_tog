@@ -34,39 +34,65 @@ function xmldb_block_tog_upgrade($oldversion) {
     global $DB;
     $dbman = $DB->get_manager();
 
-    if ($oldversion < 2020081800) {
-        // Remove the table intelligences and create again.
-        $table = new xmldb_table( 'block_tog_intelligences' );
+    if ($oldversion < 2020082000) {
+        // Remove the previous intelligences answers because does not mathc the new questionnaire.
+        $table = new xmldb_table( 'block_tog_intel_answers' );
         if ($dbman->table_exists( $table )) {
 
             $dbman->drop_table( $table );
         }
-        // Define table block_tog_intelligences to be created.
-        $table = new xmldb_table( 'block_tog_intelligences' );
+        // Define table block_tog_intel_answers to be created.
+        $table = new xmldb_table( 'block_tog_intel_answers' );
 
-        // Adding fields to table block_tog_intelligences.
+        // Adding fields to table block_tog_intel_answers.
         $table->add_field( 'id', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, XMLDB_SEQUENCE, null );
         $table->add_field( 'userid', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, null );
-        $table->add_field( 'verbal', XMLDB_TYPE_NUMBER, '15, 14', null, XMLDB_NOTNULL, null, null );
-        $table->add_field( 'logicmathematics', XMLDB_TYPE_NUMBER, '15, 14', null, XMLDB_NOTNULL, null, null );
-        $table->add_field( 'visualspatial', XMLDB_TYPE_NUMBER, '15, 14', null, XMLDB_NOTNULL, null, null );
-        $table->add_field( 'kinestesicacorporal', XMLDB_TYPE_NUMBER, '15, 14', null, XMLDB_NOTNULL, null, null );
-        $table->add_field( 'musicalrhythmic', XMLDB_TYPE_NUMBER, '15, 14', null, XMLDB_NOTNULL, null, null );
-        $table->add_field( 'intrapersonal', XMLDB_TYPE_NUMBER, '15, 14', null, XMLDB_NOTNULL, null, null );
-        $table->add_field( 'interpersonal', XMLDB_TYPE_NUMBER, '15, 14', null, XMLDB_NOTNULL, null, null );
-        $table->add_field( 'naturalistenvironmental', XMLDB_TYPE_NUMBER, '15, 14', null, XMLDB_NOTNULL, null, null );
+        $table->add_field( 'question', XMLDB_TYPE_INTEGER, '2', null, XMLDB_NOTNULL, null, null );
+        $table->add_field( 'answer', XMLDB_TYPE_INTEGER, '1', null, XMLDB_NOTNULL, null, null );
 
-        // Adding keys to table block_tog_intelligences.
+        // Adding keys to table block_tog_intel_answers.
         $table->add_key( 'primary', XMLDB_KEY_PRIMARY, [ 'id'
         ] );
 
-        // Conditionally launch create table for block_tog_intelligences.
+        // Conditionally launch create table for block_tog_intel_answers.
         if (! $dbman->table_exists( $table )) {
             $dbman->create_table( $table );
         }
 
+        // Rename intelligences fields
+        $table = new xmldb_table( 'block_tog_intelligences' );
+
+        // Rename field verbal on table block_tog_intelligences to linguistic.
+        $field = new xmldb_field( 'verbal', XMLDB_TYPE_NUMBER, '15, 14', null, XMLDB_NOTNULL, null, null, 'userid' );
+        $dbman->rename_field( $table, $field, 'linguistic' );
+
+        // Rename field logic_mathematics on table block_tog_intelligences to logicalmathematical.
+        $field = new xmldb_field( 'logic_mathematics', XMLDB_TYPE_NUMBER, '15, 14', null, XMLDB_NOTNULL, null, null,
+                'linguistic' );
+        $dbman->rename_field( $table, $field, 'logicalmathematical' );
+
+        // Rename field visual_spatial on table block_tog_intelligences to spatial.
+        $field = new xmldb_field( 'visual_spatial', XMLDB_TYPE_NUMBER, '15, 14', null, XMLDB_NOTNULL, null, null,
+                'logicalmathematical' );
+        $dbman->rename_field( $table, $field, 'spatial' );
+
+        // Rename field kinestesica_corporal on table block_tog_intelligences to bodilykinesthetic.
+        $field = new xmldb_field( 'kinestesica_corporal', XMLDB_TYPE_NUMBER, '15, 14', null, XMLDB_NOTNULL, null, null,
+                'spatial' );
+        $dbman->rename_field( $table, $field, 'bodilykinesthetic' );
+
+        // Rename field musical_rhythmic on table block_tog_intelligences to musical.
+        $field = new xmldb_field( 'musical_rhythmic', XMLDB_TYPE_NUMBER, '15, 14', null, XMLDB_NOTNULL, null, null,
+                'bodilykinesthetic' );
+        $dbman->rename_field( $table, $field, 'musical' );
+
+        // Rename field naturalist_environmental on table block_tog_intelligences to environmental.
+        $field = new xmldb_field( 'naturalist_environmental', XMLDB_TYPE_NUMBER, '15, 14', null, XMLDB_NOTNULL, null,
+                null, 'interpersonal' );
+        $dbman->rename_field( $table, $field, 'environmental' );
+
         // Tog savepoint reached.
-        upgrade_block_savepoint( true, 2020081800, 'tog' );
+        upgrade_block_savepoint( true, 2020082000, 'tog' );
     }
 
     return true;

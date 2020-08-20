@@ -81,62 +81,62 @@ class intelligences {
         if (count( $answers ) == intelligences_questionnaire::count_questions()) {
             $record = new \stdClass();
             $record->userid = $userid;
-            $record->verbal = 0.0;
-            $record->logicmathematics = 0.0;
-            $record->visualspatial = 0.0;
-            $record->kinestesicacorporal = 0.0;
-            $record->musicalrhythmic = 0.0;
+            $record->linguistic = 0.0;
+            $record->logicalmathematical = 0.0;
+            $record->spatial = 0.0;
+            $record->bodilykinesthetic = 0.0;
+            $record->musical = 0.0;
             $record->intrapersonal = 0.0;
             $record->interpersonal = 0.0;
-            $record->naturalistenvironmental = 0.0;
+            $record->environmental = 0.0;
             $total = [ 0, 0, 0, 0, 0, 0, 0, 0
             ];
             foreach ($answers as $answer) {
                 $factor = intelligences_questionnaire::get_question_factor( $answer->question );
                 $value = intelligences_questionnaire::get_answer_question_value_of( $answer->answer );
                 switch ($factor) {
-                    case intelligences_questionnaire::VERBAL_FACTOR :
-                        $record->verbal += $value;
+                    case intelligences_questionnaire::LINGUISTIC_FACTOR:
+                        $record->linguistic += $value;
                         $total [0] ++;
                         break;
-                    case intelligences_questionnaire::LOGIC_MATHEMATICS_FACTOR :
-                        $record->logicmathematics += $value;
+                    case intelligences_questionnaire::LOGICAL_MATHEMATICAL_FACTOR:
+                        $record->logicalmathematical += $value;
                         $total [1] ++;
                         break;
-                    case intelligences_questionnaire::VISUAL_SPATIAL_FACTOR :
-                        $record->visualspatial += $value;
+                    case intelligences_questionnaire::SPATIAL_FACTOR:
+                        $record->spatial += $value;
                         $total [2] ++;
                         break;
-                    case intelligences_questionnaire::KINESTESICA_CORPORAL_FACTOR :
-                        $record->kinestesicacorporal += $value;
+                    case intelligences_questionnaire::BODILY_KINESTHETIC_FACTOR:
+                        $record->bodilykinesthetic += $value;
                         $total [3] ++;
                         break;
-                    case intelligences_questionnaire::MUSICAL_RHYTHMIC_FACTOR :
-                        $record->musicalrhythmic += $value;
+                    case intelligences_questionnaire::MUSICAL_FACTOR:
+                        $record->musical += $value;
                         $total [4] ++;
                         break;
-                    case intelligences_questionnaire::INTRAPERSONAL_FACTOR :
+                    case intelligences_questionnaire::INTRAPERSONAL_FACTOR:
                         $record->intrapersonal += $value;
                         $total [5] ++;
                         break;
-                    case intelligences_questionnaire::INTERPERSONAL_FACTOR :
+                    case intelligences_questionnaire::INTERPERSONAL_FACTOR:
                         $record->interpersonal += $value;
                         $total [6] ++;
                         break;
-                    default :
-                        // It has to be intelligences_questionnaire::NATURALIST_ENVIRONMENTAL_FACTOR.
-                        $record->naturalistenvironmental += $value;
+                    default:
+                        // It has to be intelligences_questionnaire::ENVIRONMENTAL_FACTOR.
+                        $record->environmental += $value;
                         $total [7] ++;
                 }
             }
-            $record->verbal = $record->verbal / $total [0];
-            $record->logicmathematics = $record->logicmathematics / $total [1];
-            $record->visualspatial = $record->visualspatial / $total [2];
-            $record->kinestesicacorporal = $record->kinestesicacorporal / $total [3];
-            $record->musicalrhythmic = $record->musicalrhythmic / $total [4];
+            $record->linguistic = $record->linguistic / $total [0];
+            $record->logicalmathematical = $record->logicalmathematical / $total [1];
+            $record->spatial = $record->spatial / $total [2];
+            $record->bodilykinesthetic = $record->bodilykinesthetic / $total [3];
+            $record->musical = $record->musical / $total [4];
             $record->intrapersonal = $record->intrapersonal / $total [5];
             $record->interpersonal = $record->interpersonal / $total [6];
-            $record->naturalistenvironmental = $record->naturalistenvironmental / $total [7];
+            $record->environmental = $record->environmental / $total [7];
 
             $previousanswer = self::get_intelligences_of( $userid );
             if ($previousanswer !== false) {

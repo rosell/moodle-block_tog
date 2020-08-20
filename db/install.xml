@@ -41,15 +41,15 @@
       <TABLE NAME="block_tog_intelligences" COMMENT="Stores the intelligences of an user.">
          <FIELDS>
             <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true" NEXT="userid" />
-            <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" PREVIOUS="id"  NEXT="verbal" />
-            <FIELD NAME="verbal" TYPE="number" LENGTH="15" NOTNULL="true" SEQUENCE="false" DECIMALS="14" UNSIGNED="true" PREVIOUS="userid"  NEXT="logicmathematics" />
-            <FIELD NAME="logicmathematics" TYPE="number" LENGTH="15" NOTNULL="true" SEQUENCE="false" DECIMALS="14" UNSIGNED="true" PREVIOUS="verbal"  NEXT="visualspatial"/>
-            <FIELD NAME="visualspatial" TYPE="number" LENGTH="15" NOTNULL="true" SEQUENCE="false" DECIMALS="14" UNSIGNED="true" PREVIOUS="logicmathematics"  NEXT="kinestesicacorporal"/>
-            <FIELD NAME="kinestesicacorporal" TYPE="number" LENGTH="15" NOTNULL="true" SEQUENCE="false" DECIMALS="14" UNSIGNED="true" PREVIOUS="visualspatial" NEXT="musicalrhythmic"/>
-            <FIELD NAME="musicalrhythmic" TYPE="number" LENGTH="15" NOTNULL="true" SEQUENCE="false" DECIMALS="14" UNSIGNED="true" PREVIOUS="kinestesicacorporal"  NEXT="intrapersonal"/>
-            <FIELD NAME="intrapersonal" TYPE="number" LENGTH="15" NOTNULL="true" SEQUENCE="false" DECIMALS="14" UNSIGNED="true" PREVIOUS="musicalrhythmic"  NEXT="interpersonal"/>
-            <FIELD NAME="interpersonal" TYPE="number" LENGTH="15" NOTNULL="true" SEQUENCE="false" DECIMALS="14" UNSIGNED="true" PREVIOUS="intrapersonal" NEXT="naturalistenvironmental"/>
-            <FIELD NAME="naturalistenvironmental" TYPE="number" LENGTH="15" NOTNULL="true" SEQUENCE="false" DECIMALS="14" UNSIGNED="true" PREVIOUS="interpersonal" />
+            <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" PREVIOUS="id"  NEXT="linguistic" />
+            <FIELD NAME="linguistic" TYPE="number" LENGTH="15" NOTNULL="true" SEQUENCE="false" DECIMALS="14" UNSIGNED="true" PREVIOUS="userid"  NEXT="logicalmathematical" />
+            <FIELD NAME="logicalmathematical" TYPE="number" LENGTH="15" NOTNULL="true" SEQUENCE="false" DECIMALS="14" UNSIGNED="true" PREVIOUS="linguistic"  NEXT="spatial"/>
+            <FIELD NAME="spatial" TYPE="number" LENGTH="15" NOTNULL="true" SEQUENCE="false" DECIMALS="14" UNSIGNED="true" PREVIOUS="logicalmathematical"  NEXT="bodilykinesthetic"/>
+            <FIELD NAME="bodilykinesthetic" TYPE="number" LENGTH="15" NOTNULL="true" SEQUENCE="false" DECIMALS="14" UNSIGNED="true" PREVIOUS="spatial" NEXT="musical"/>
+            <FIELD NAME="musical" TYPE="number" LENGTH="15" NOTNULL="true" SEQUENCE="false" DECIMALS="14" UNSIGNED="true" PREVIOUS="bodilykinesthetic"  NEXT="interpersonal"/>
+            <FIELD NAME="interpersonal" TYPE="number" LENGTH="15" NOTNULL="true" SEQUENCE="false" DECIMALS="14" UNSIGNED="true" PREVIOUS="musical" NEXT="intrapersonal"/>
+            <FIELD NAME="intrapersonal" TYPE="number" LENGTH="15" NOTNULL="true" SEQUENCE="false" DECIMALS="14" UNSIGNED="true" PREVIOUS="interpersonal"  NEXT="environmental"/>
+            <FIELD NAME="environmental" TYPE="number" LENGTH="15" NOTNULL="true" SEQUENCE="false" DECIMALS="14" UNSIGNED="true" PREVIOUS="intrapersonal" />
          </FIELDS>
          <KEYS>
             <KEY NAME="primary" TYPE="primary" FIELDS="id" />

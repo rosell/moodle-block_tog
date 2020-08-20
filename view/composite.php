@@ -114,14 +114,14 @@ if (has_capability( 'moodle/course:managegroups', $context )) {
             $member->personality->perception = $personality->perception;
             $member->personality->extrovert = $personality->extrovert;
             $member->intelligences = new \stdClass();
-            $member->intelligences->verbal = $intelligences->verbal;
-            $member->intelligences->logicmathematics = $intelligences->logicmathematics;
-            $member->intelligences->visualspatial = $intelligences->visualspatial;
-            $member->intelligences->kinestesicacorporal = $intelligences->kinestesicacorporal;
-            $member->intelligences->musicalrhythmic = $intelligences->musicalrhythmic;
+            $member->intelligences->linguistic = $intelligences->linguistic;
+            $member->intelligences->logicalmathematical = $intelligences->logicalmathematical;
+            $member->intelligences->spatial = $intelligences->spatial;
+            $member->intelligences->bodilykinesthetic = $intelligences->bodilykinesthetic;
+            $member->intelligences->musical = $intelligences->musical;
             $member->intelligences->intrapersonal = $intelligences->intrapersonal;
             $member->intelligences->interpersonal = $intelligences->interpersonal;
-            $member->intelligences->naturalistenvironmental = $intelligences->naturalistenvironmental;
+            $member->intelligences->environmental = $intelligences->environmental;
             $members [] = $member;
         } else {
             $personalityfilled = null;
