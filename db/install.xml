@@ -43,9 +43,10 @@
             <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true" NEXT="userid" />
             <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" PREVIOUS="id"  NEXT="linguistic" />
             <FIELD NAME="linguistic" TYPE="number" LENGTH="15" NOTNULL="true" SEQUENCE="false" DECIMALS="14" UNSIGNED="true" PREVIOUS="userid"  NEXT="logicalmathematical" />
-            <FIELD NAME="logicalmathematical" TYPE="number" LENGTH="15" NOTNULL="true" SEQUENCE="false" DECIMALS="14" UNSIGNED="true" PREVIOUS="linguistic"  NEXT="spatial"/>
-            <FIELD NAME="spatial" TYPE="number" LENGTH="15" NOTNULL="true" SEQUENCE="false" DECIMALS="14" UNSIGNED="true" PREVIOUS="logicalmathematical"  NEXT="bodilykinesthetic"/>
-            <FIELD NAME="bodilykinesthetic" TYPE="number" LENGTH="15" NOTNULL="true" SEQUENCE="false" DECIMALS="14" UNSIGNED="true" PREVIOUS="spatial" NEXT="musical"/>
+            <FIELD NAME="logicalmathematical" TYPE="number" LENGTH="15" NOTNULL="true" SEQUENCE="false" DECIMALS="14" UNSIGNED="true" PREVIOUS="linguistic"  NEXT="spacial"/>
+            <!-- CAN NOT USE spatial BECUASE IS A RESERVED WORD. So we use 'spacial' instead. -->
+            <FIELD NAME="spacial" TYPE="number" LENGTH="15" NOTNULL="true" SEQUENCE="false" DECIMALS="14" UNSIGNED="true" PREVIOUS="logicalmathematical"  NEXT="bodilykinesthetic"/>
+            <FIELD NAME="bodilykinesthetic" TYPE="number" LENGTH="15" NOTNULL="true" SEQUENCE="false" DECIMALS="14" UNSIGNED="true" PREVIOUS="spacial" NEXT="musical"/>
             <FIELD NAME="musical" TYPE="number" LENGTH="15" NOTNULL="true" SEQUENCE="false" DECIMALS="14" UNSIGNED="true" PREVIOUS="bodilykinesthetic"  NEXT="interpersonal"/>
             <FIELD NAME="interpersonal" TYPE="number" LENGTH="15" NOTNULL="true" SEQUENCE="false" DECIMALS="14" UNSIGNED="true" PREVIOUS="musical" NEXT="intrapersonal"/>
             <FIELD NAME="intrapersonal" TYPE="number" LENGTH="15" NOTNULL="true" SEQUENCE="false" DECIMALS="14" UNSIGNED="true" PREVIOUS="interpersonal"  NEXT="environmental"/>

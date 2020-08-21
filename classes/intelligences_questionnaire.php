@@ -51,9 +51,10 @@ class intelligences_questionnaire {
     const LOGICAL_MATHEMATICAL_FACTOR = 1;
 
     /**
-     * Factor used to evaluate the visual/spatial intelligence.
+     * Factor used to evaluate the spatial intelligence.
+     * ATTENTION: We can not use 'spatial' because is a reserved word for this we use 'spacial'.
      */
-    const SPATIAL_FACTOR = 2;
+    const SPACIAL_FACTOR = 2;
 
     /**
      * Factor used to evaluate the kinestesica/corporal intelligence.
@@ -85,8 +86,8 @@ class intelligences_questionnaire {
      */
     const QUESTION_FACTORS = [ self::LINGUISTIC_FACTOR, self::LINGUISTIC_FACTOR, self::LINGUISTIC_FACTOR,
             self::LINGUISTIC_FACTOR, self::LOGICAL_MATHEMATICAL_FACTOR, self::LOGICAL_MATHEMATICAL_FACTOR,
-            self::LOGICAL_MATHEMATICAL_FACTOR, self::LOGICAL_MATHEMATICAL_FACTOR, self::SPATIAL_FACTOR,
-            self::SPATIAL_FACTOR, self::SPATIAL_FACTOR, self::SPATIAL_FACTOR, self::BODILY_KINESTHETIC_FACTOR,
+            self::LOGICAL_MATHEMATICAL_FACTOR, self::LOGICAL_MATHEMATICAL_FACTOR, self::SPACIAL_FACTOR,
+            self::SPACIAL_FACTOR, self::SPACIAL_FACTOR, self::SPACIAL_FACTOR, self::BODILY_KINESTHETIC_FACTOR,
             self::BODILY_KINESTHETIC_FACTOR, self::BODILY_KINESTHETIC_FACTOR, self::BODILY_KINESTHETIC_FACTOR,
             self::MUSICAL_FACTOR, self::MUSICAL_FACTOR, self::MUSICAL_FACTOR, self::MUSICAL_FACTOR,
             self::INTRAPERSONAL_FACTOR, self::INTRAPERSONAL_FACTOR, self::INTRAPERSONAL_FACTOR,

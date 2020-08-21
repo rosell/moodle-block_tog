@@ -71,14 +71,15 @@ function xmldb_block_tog_upgrade($oldversion) {
                 'linguistic' );
         $dbman->rename_field( $table, $field, 'logicalmathematical' );
 
-        // Rename field visual_spatial on table block_tog_intelligences to spatial.
+        // Rename field visual_spatial on table block_tog_intelligences to spacial.
+        // ATTENTION: we use 'spacial' instead of 'spatial' because this second one is a reserved word.
         $field = new xmldb_field( 'visual_spatial', XMLDB_TYPE_NUMBER, '15, 14', null, XMLDB_NOTNULL, null, null,
                 'logicalmathematical' );
-        $dbman->rename_field( $table, $field, 'spatial' );
+        $dbman->rename_field( $table, $field, 'spacial' );
 
         // Rename field kinestesica_corporal on table block_tog_intelligences to bodilykinesthetic.
         $field = new xmldb_field( 'kinestesica_corporal', XMLDB_TYPE_NUMBER, '15, 14', null, XMLDB_NOTNULL, null, null,
-                'spatial' );
+                'spacial' );
         $dbman->rename_field( $table, $field, 'bodilykinesthetic' );
 
         // Rename field musical_rhythmic on table block_tog_intelligences to musical.

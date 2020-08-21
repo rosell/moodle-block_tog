@@ -116,7 +116,7 @@ if (has_capability( 'moodle/course:managegroups', $context )) {
             $member->intelligences = new \stdClass();
             $member->intelligences->linguistic = $intelligences->linguistic;
             $member->intelligences->logicalmathematical = $intelligences->logicalmathematical;
-            $member->intelligences->spatial = $intelligences->spatial;
+            $member->intelligences->spacial = $intelligences->spacial;
             $member->intelligences->bodilykinesthetic = $intelligences->bodilykinesthetic;
             $member->intelligences->musical = $intelligences->musical;
             $member->intelligences->intrapersonal = $intelligences->intrapersonal;

@@ -64,9 +64,9 @@ if ($intelligences) {
             $OUTPUT->help_icon( 'intelligences_logicalmathematical', 'block_tog', '' ).
             intelligences::value_to_string( $intelligences->logicalmathematical ) );
     echo html_writer::tag( 'li',
-            html_writer::tag( 'b', get_string( 'intelligences_spatial', 'block_tog' ) ) .
-            $OUTPUT->help_icon( 'intelligences_spatial', 'block_tog', '' ).
-            intelligences::value_to_string( $intelligences->spatial ) );
+            html_writer::tag( 'b', get_string( 'intelligences_spacial', 'block_tog' ) ) .
+            $OUTPUT->help_icon( 'intelligences_spacial', 'block_tog', '' ).
+            intelligences::value_to_string( $intelligences->spacial ) );
     echo html_writer::tag( 'li',
             html_writer::tag( 'b', get_string( 'intelligences_bodilykinesthetic', 'block_tog' ) ) .
             $OUTPUT->help_icon( 'intelligences_bodilykinesthetic', 'block_tog', '' ).

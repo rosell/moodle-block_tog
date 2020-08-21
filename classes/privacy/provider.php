@@ -78,7 +78,7 @@ class provider implements \core_privacy\local\metadata\provider, \core_privacy\l
                 [ 'userid' => 'privacy:metadata:block_tog_intelligences:userid',
                         'linguistic' => 'privacy:metadata:block_tog_intelligences:linguistic',
                         'logicalmathematical' => 'privacy:metadata:block_tog_intelligences:logicalmathematical',
-                        'spatial' => 'privacy:metadata:block_tog_intelligences:spatial',
+                        'spacial' => 'privacy:metadata:block_tog_intelligences:spacial',
                         'bodilykinesthetic' => 'privacy:metadata:block_tog_intelligences:bodilykinesthetic',
                         'musical' => 'privacy:metadata:block_tog_intelligences:musical',
                         'intrapersonal' => 'privacy:metadata:block_tog_intelligences:intrapersonal',
@@ -337,7 +337,7 @@ class provider implements \core_privacy\local\metadata\provider, \core_privacy\l
         $intelligences = intelligences::get_intelligences_of( $userid );
         if ($intelligences !== false) {
             $intelligencesdata = [ 'linguistic' => $intelligences->linguistic,
-                    'logicalmathematical' => $intelligences->logicalmathematical, 'spatial' => $intelligences->spatial,
+                    'logicalmathematical' => $intelligences->logicalmathematical, 'spacial' => $intelligences->spacial,
                     'bodilykinesthetic' => $intelligences->bodilykinesthetic, 'musical' => $intelligences->musical,
                     'intrapersonal' => $intelligences->intrapersonal, 'interpersonal' => $intelligences->interpersonal,
                     'environmental' => $intelligences->environmental

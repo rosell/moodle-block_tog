@@ -287,23 +287,18 @@ define([
     var factor = Number(requirement.attr("data-factor"));
     switch (factor) {
       case 0:
-        // ... delete requirements.linguistic;
         delete requirements.linguistic;
         break;
       case 1:
-        // ... delete requirements.logical_mathematical;
         delete requirements.logicalmathematical;
         break;
       case 2:
-        // ... delete requirements.spatial;
-        delete requirements.spatial;
+        delete requirements.spacial;
         break;
       case 3:
-        // ... delete requirements.bodily_kinesthetic;
         delete requirements.bodilykinesthetic;
         break;
       case 4:
-        // ... delete requirements.musical;
         delete requirements.musical;
         break;
       case 5:
@@ -313,7 +308,6 @@ define([
         delete requirements.interpersonal;
         break;
       default:
-        // ... delete requirements.environmental;
         delete requirements.environmental;
     }
     $("#composite__requirements_factor_" + factor).show();
@@ -351,7 +345,7 @@ define([
         requirements.logicalmathematical = requirement;
         break;
       case 2:
-        requirements.spatial = requirement;
+        requirements.spacial = requirement;
         break;
       case 3:
         requirements.bodilykinesthetic = requirement;

@@ -193,7 +193,7 @@ $string ['intelligence_question_6'] = 'Mental arithmetic is easy for me.';
 
 $string ['intelligence_question_7'] = 'I am good at games and problem solving, which require logical thinking.';
 
-$string ['intelligence_question_8'] = 'At school, geometry and various kinds of assignments involving spatial perception were easier for me than solving equations.';
+$string ['intelligence_question_8'] = 'At school, geometry and various kinds of assignments involving spacial perception were easier for me than solving equations.';
 
 $string ['intelligence_question_9'] = 'It is easy for me to conceptualize complex and multidimensional patterns.';
 
@@ -273,7 +273,7 @@ $string ['privacy:metadata:block_tog_intelligences'] = 'Information about the in
 $string ['privacy:metadata:block_tog_intelligences:userid'] = 'The ID of the user that the intelligences refers.';
 $string ['privacy:metadata:block_tog_intelligences:linguistic'] = 'The linguistic intelligence factor of the user.';
 $string ['privacy:metadata:block_tog_intelligences:logicalmathematical'] = 'The logical/mathematical intelligence factor of the user.';
-$string ['privacy:metadata:block_tog_intelligences:spatial'] = 'The visual/spatial intelligence factor of the user.';
+$string ['privacy:metadata:block_tog_intelligences:spacial'] = 'The visual/spacial intelligence factor of the user.';
 $string ['privacy:metadata:block_tog_intelligences:bodilykinesthetic'] = 'The kinestesica/corporal intelligence factor of the user.';
 $string ['privacy:metadata:block_tog_intelligences:musical'] = 'The musical/rhythmic intelligence factor of the user.';
 $string ['privacy:metadata:block_tog_intelligences:intrapersonal'] = 'The intrapersonal intelligence factor of the user.';
@@ -360,8 +360,8 @@ $string ['intelligences_environmental'] = 'Environmental intelligence';
 $string ['intelligences_environmental_help'] = 'The environmental intelligence has following three categories: 1) Love for nature; 2) Nature conservation; 3) Environment-friendly consumer habits';
 $string ['intelligences_linguistic'] = 'Linguistic intelligence';
 $string ['intelligences_linguistic_help'] = 'The linguistic intelligence is used to measure the skills of a person on verbal and written expressions.';
-$string ['intelligences_spatial'] = 'Spatial intelligence';
-$string ['intelligences_spatial_help'] = 'The spatial intelligence measured persons’ vies on his/her abilities to visualize and work with multidimensional objects.';
+$string ['intelligences_spacial'] = 'Spacial intelligence';
+$string ['intelligences_spacial_help'] = 'The spacial intelligence measured persons’ vies on his/her abilities to visualize and work with multidimensional objects.';
 $string ['intelligences_go_to_test'] = 'Modify intelligences test';
 $string ['intelligences_error_not_answered_all_questions'] = 'You have to answer all the questions to be able to know your intelligences';
 $string ['intelligences_go_to_course'] = 'Back to the course';
@@ -402,7 +402,7 @@ $string ['composite_requirements'] = 'Factor';
 $string ['composite_requirements_factor_help'] = 'The intelligences required from member groups to perform the task in question';
 $string ['composite_requirements_factor_0'] = 'Linguistic';
 $string ['composite_requirements_factor_1'] = 'Logical-Mathematics';
-$string ['composite_requirements_factor_2'] = 'Visual-Spatial';
+$string ['composite_requirements_factor_2'] = 'Visual-Spacial';
 $string ['composite_requirements_factor_3'] = 'Bodily-Kinesthetic';
 $string ['composite_requirements_factor_4'] = 'Musical';
 $string ['composite_requirements_factor_5'] = 'Intrapersonal';
@@ -444,7 +444,7 @@ $string ['externallib:group_description_intelligence_logicalmathematical'] = 'Lo
 $string ['externallib:group_description_intelligence_musical'] = 'Musical intelligence';
 $string ['externallib:group_description_intelligence_environmental'] = 'Naturalist-environmental intelligence';
 $string ['externallib:group_description_intelligence_linguistic'] = 'Linguistic intelligence';
-$string ['externallib:group_description_intelligence_spatial'] = 'Visual-Spatial intelligence';
+$string ['externallib:group_description_intelligence_spacial'] = 'Visual-Spacial intelligence';
 
 $string ['auto_fill_in_title'] = 'Auto fill in tests';
 $string ['auto_fill_in_heading'] = 'Auto fill in the test of the users';

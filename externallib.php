@@ -185,8 +185,8 @@ class block_tog_external extends external_api {
                                                                 'logicalmathematical' => new external_value(
                                                                         PARAM_FLOAT,
                                                                         'The value for the intelligences logic mathematics' ),
-                                                                'spatial' => new external_value( PARAM_FLOAT,
-                                                                        'The value for the intelligences spatial' ),
+                                                                'spacial' => new external_value( PARAM_FLOAT,
+                                                                        'The value for the intelligences spacial' ),
                                                                 'bodilykinesthetic' => new external_value( PARAM_FLOAT,
                                                                         'The value for the intelligences kinestesica corporal' ),
                                                                 'musical' => new external_value( PARAM_FLOAT,
@@ -201,7 +201,7 @@ class block_tog_external extends external_api {
                                         ] ), 'The members that can be form part of a group' ),
                         'requirements' => new external_single_structure(
                                 [ 'linguistic' => $requirement, 'logicalmathematical' => $requirement,
-                                        'spatial' => $requirement, 'bodilykinesthetic' => $requirement,
+                                        'spacial' => $requirement, 'bodilykinesthetic' => $requirement,
                                         'musical' => $requirement, 'intrapersonal' => $requirement,
                                         'interpersonal' => $requirement, 'environmental' => $requirement
                                 ], 'The requirements for the groups' )
@@ -286,10 +286,10 @@ class block_tog_external extends external_api {
                 $logicalmathematical->factor = 'LOGICAL_MATHEMATICAL';
                 $logicalmathematical->value = floatval( $member [intelligences] [logicalmathematical] );
                 $person->intelligences [] = $logicalmathematical;
-                $spatial = new \stdClass();
-                $spatial->factor = 'SPATIAL';
-                $spatial->value = floatval( $member [intelligences] [spatial] );
-                $person->intelligences [] = $spatial;
+                $spacial = new \stdClass();
+                $spacial->factor = 'SPACIAL';
+                $spacial->value = floatval( $member [intelligences] [spacial] );
+                $person->intelligences [] = $spacial;
                 $bodilykinesthetic = new \stdClass();
                 $bodilykinesthetic->factor = 'BODILY_KINESTHETIC';
                 $bodilykinesthetic->value = floatval( $member [intelligences] [bodilykinesthetic] );
@@ -298,14 +298,14 @@ class block_tog_external extends external_api {
                 $musical->factor = 'MUSICAL';
                 $musical->value = floatval( $member [intelligences] [musical] );
                 $person->intelligences [] = $musical;
-                $intrapersonal = new \stdClass();
-                $intrapersonal->factor = 'INTERPERSONAL';
-                $intrapersonal->value = floatval( $member [intelligences] [intrapersonal] );
-                $person->intelligences [] = $intrapersonal;
                 $interpersonal = new \stdClass();
                 $interpersonal->factor = 'INTRAPERSONAL';
                 $interpersonal->value = floatval( $member [intelligences] [interpersonal] );
                 $person->intelligences [] = $interpersonal;
+                $intrapersonal = new \stdClass();
+                $intrapersonal->factor = 'INTERPERSONAL';
+                $intrapersonal->value = floatval( $member [intelligences] [intrapersonal] );
+                $person->intelligences [] = $intrapersonal;
                 $environmental = new \stdClass();
                 $environmental->factor = 'ENVIRONMENTAL';
                 $environmental->value = floatval( $member [intelligences] [environmental] );
@@ -322,6 +322,9 @@ class block_tog_external extends external_api {
                 } else if ($factor == 'bodilykinesthetic') {
 
                     $requirementdata->factor = 'BODILY_KINESTHETIC';
+                } else if ($factor == 'spacial') {
+
+                    $requirementdata->factor = 'SPATIAL';
                 } else {
 
                     $requirementdata->factor = strtoupper( $factor );

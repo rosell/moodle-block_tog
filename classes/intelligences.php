@@ -83,7 +83,7 @@ class intelligences {
             $record->userid = $userid;
             $record->linguistic = 0.0;
             $record->logicalmathematical = 0.0;
-            $record->spatial = 0.0;
+            $record->spacial = 0.0;
             $record->bodilykinesthetic = 0.0;
             $record->musical = 0.0;
             $record->intrapersonal = 0.0;
@@ -103,8 +103,8 @@ class intelligences {
                         $record->logicalmathematical += $value;
                         $total [1] ++;
                         break;
-                    case intelligences_questionnaire::SPATIAL_FACTOR:
-                        $record->spatial += $value;
+                    case intelligences_questionnaire::SPACIAL_FACTOR:
+                        $record->spacial += $value;
                         $total [2] ++;
                         break;
                     case intelligences_questionnaire::BODILY_KINESTHETIC_FACTOR:
@@ -115,12 +115,12 @@ class intelligences {
                         $record->musical += $value;
                         $total [4] ++;
                         break;
-                    case intelligences_questionnaire::INTRAPERSONAL_FACTOR:
-                        $record->intrapersonal += $value;
-                        $total [5] ++;
-                        break;
                     case intelligences_questionnaire::INTERPERSONAL_FACTOR:
                         $record->interpersonal += $value;
+                        $total [5] ++;
+                        break;
+                    case intelligences_questionnaire::INTRAPERSONAL_FACTOR:
+                        $record->intrapersonal += $value;
                         $total [6] ++;
                         break;
                     default:
@@ -131,18 +131,20 @@ class intelligences {
             }
             $record->linguistic = $record->linguistic / $total [0];
             $record->logicalmathematical = $record->logicalmathematical / $total [1];
-            $record->spatial = $record->spatial / $total [2];
+            $record->spacial = $record->spacial / $total [2];
             $record->bodilykinesthetic = $record->bodilykinesthetic / $total [3];
             $record->musical = $record->musical / $total [4];
-            $record->intrapersonal = $record->intrapersonal / $total [5];
-            $record->interpersonal = $record->interpersonal / $total [6];
+            $record->interpersonal = $record->interpersonal / $total [5];
+            $record->intrapersonal = $record->intrapersonal / $total [6];
             $record->environmental = $record->environmental / $total [7];
 
             $previousanswer = self::get_intelligences_of( $userid );
             if ($previousanswer !== false) {
+
                 $record->id = $previousanswer->id;
                 $calculated = $DB->update_record( 'block_tog_intelligences', $record );
             } else {
+
                 $calculated = $DB->insert_record( 'block_tog_intelligences', $record, false ) === true;
             }
         }
